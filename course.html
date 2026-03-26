@@ -4,89 +4,103 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beginner's Guide to Investing — Real Life Money</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0f1a14;
-    --rlm: #eef8eb;
-    --purple: #8c52ff;
-    --green: #71c558;
-    --orange: #ff914d;
-    --forest: #1a3328;
-    --forest-mid: #2c4a3e;
-    --moss: #3d6b5c;
-    --gold: #c8a84b;
-    --gold-pale: #f0e4c0;
-    --cream: #faf7f0;
-    --off-white: #f4f1ea;
-    --rule: #ddd8cc;
-    --text: #2a2a2a;
-    --muted: #6b6b6b;
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --orange:  #ff914d;
+    --yellow:  #ffde59;
+    --green:   #71c558;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
   }
-
+ 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
+ 
   body {
-    background: var(--cream);
+    background: var(--mint);
     color: var(--text);
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
     line-height: 1.7;
     overflow-x: hidden;
   }
-
-  /* ─── NAV ─── */
+ 
+  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
+    height: 66px;
     padding: 0 40px;
-    height: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(250, 247, 240, 0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(238,248,235,0.93);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--rule);
   }
-
+ 
   .nav-logo {
-    font-family: 'Lexend', sans-serif;
-    font-size: 18px;
-    color: var(--forest);
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
-    letter-spacing: 0.3px;
   }
-
-  .nav-logo span { color: var(--gold); }
-
+ 
+  .nav-dots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    width: 20px;
+  }
+ 
+  .nd {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+ 
+  .nd:nth-child(1) { background: var(--yellow); }
+  .nd:nth-child(2) { background: var(--purple); }
+  .nd:nth-child(3) { background: var(--green); }
+  .nd:nth-child(4) { background: var(--orange); }
+ 
+  .nav-wordmark {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+  }
+ 
   .nav-cta {
-    background: #71c558;
+    background: var(--purple);
     color: #fff;
     font-family: 'Lexend', sans-serif;
     font-size: 13px;
     font-weight: 500;
-    padding: 10px 22px;
+    padding: 10px 24px;
     border-radius: 100px;
     text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: background 0.2s, transform 0.15s;
+    transition: opacity 0.2s, transform 0.15s;
   }
-
-  .nav-cta:hover { background: var(--moss); transform: translateY(-1px); }
-
-  /* ─── HERO ─── */
+ 
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+ 
+  /* HERO */
   .hero {
     min-height: 100vh;
+    padding-top: 66px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 64px;
+    grid-template-columns: 55% 45%;
   }
-
+ 
   .hero-left {
-    background: var(--rlm);
+    background: var(--ink);
     padding: 80px 56px 80px 60px;
     display: flex;
     flex-direction: column;
@@ -94,933 +108,700 @@
     position: relative;
     overflow: hidden;
   }
-
+ 
   .hero-left::before {
-    content: '£';
+    content: '';
     position: absolute;
-    bottom: -40px;
-    right: -20px;
-    font-family: 'Lexend', sans-serif;
-    font-size: 280px;
-    color: black;
-    line-height: 1;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(140,82,255,0.18), transparent 70%);
+    top: -100px; right: -80px;
     pointer-events: none;
   }
-
+ 
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(113,197,88,0.14), transparent 70%);
+    bottom: 30px; left: -50px;
+    pointer-events: none;
+  }
+ 
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 28px;
+    color: var(--green);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
   }
-
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1px;
-    background: var(--gold);
+ 
+  .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
   }
-
+ 
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%      { opacity:0.4; transform:scale(0.65); }
+  }
+ 
   .hero-title {
-    font-family: 'Lexend', sans-serif;
-    font-size: clamp(38px, 4.5vw, 62px);
-    line-height: 1.08;
+    font-size: clamp(38px, 4.2vw, 60px);
+    font-weight: 700;
+    line-height: 1.06;
     color: #fff;
-    margin-bottom: 28px;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.2s both;
   }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
+ 
   .hero-body {
     font-size: 16px;
     line-height: 1.75;
-    color: rgba(255,255,255,0.72);
-    max-width: 440px;
-    margin-bottom: 44px;
+    color: rgba(255,255,255,0.6);
+    max-width: 420px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.6s ease 0.3s both;
   }
-
+ 
   .hero-actions {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 18px;
     flex-wrap: wrap;
+    margin-bottom: 56px;
+    animation: fadeUp 0.6s ease 0.4s both;
   }
-
+ 
   .btn-primary {
-    background: var(--gold);
-    color: var(--forest);
+    background: var(--yellow);
+    color: var(--ink);
     font-family: 'Lexend', sans-serif;
     font-size: 14px;
     font-weight: 600;
     padding: 14px 32px;
     border-radius: 100px;
     text-decoration: none;
-    letter-spacing: 0.3px;
+    letter-spacing: -0.2px;
     transition: transform 0.15s, box-shadow 0.15s;
     display: inline-block;
   }
-
+ 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(200,168,75,0.35);
+    box-shadow: 0 8px 28px rgba(255,222,89,0.45);
   }
-
+ 
   .hero-note {
     font-size: 13px;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.2px;
+    color: rgba(255,255,255,0.3);
   }
-
+ 
   .hero-stats {
     display: flex;
-    gap: 32px;
-    margin-top: 56px;
-    padding-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    gap: 36px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    animation: fadeUp 0.6s ease 0.5s both;
+    flex-wrap: wrap;
   }
-
-  .stat-item { text-align: left; }
-
-  .stat-number {
-    font-family: 'Lexend', sans-serif;
-    font-size: 36px;
-    color: #fff;
+ 
+  .stat-val {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -1px;
     line-height: 1;
     margin-bottom: 4px;
   }
-
-  .stat-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.5px;
-  }
-
+ 
+  .stat-lbl { font-size: 11px; color: rgba(255,255,255,0.38); font-weight: 400; }
+ 
+  /* Hero right */
   .hero-right {
-    background: var(--off-white);
-    padding: 80px 56px;
+    background: var(--mint);
+    padding: 72px 44px 72px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
+    gap: 12px;
   }
-
-  /* Testimonial card on hero right */
-  .hero-testimonial-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .testimonial-card {
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 24px 26px;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .testimonial-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-  }
-
-  .testimonial-card.featured {
-    background: var(--forest);
-    border-color: var(--forest);
-  }
-
-  .testimonial-quote {
-    font-family: 'Lexend', sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink);
-    margin-bottom: 14px;
-  }
-
-  .testimonial-card.featured .testimonial-quote {
-    color: rgba(255,255,255,0.92);
-  }
-
-  .testimonial-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .testimonial-stars {
-    color: var(--gold);
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-
-  .testimonial-author {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.3px;
-  }
-
-  .testimonial-card.featured .testimonial-author {
-    color: rgba(255,255,255,0.5);
-  }
-
-  .confidence-badge {
-    background: var(--gold-pale);
-    border: 1px solid var(--gold);
-    border-radius: 10px;
+ 
+  .conf-badge {
+    background: var(--white);
+    border: 1.5px solid var(--green);
+    border-radius: 12px;
     padding: 16px 20px;
     display: flex;
     align-items: center;
     gap: 14px;
   }
-
-  .confidence-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-
-  .confidence-text {
-    font-size: 13px;
-    color: #5a4020;
-    line-height: 1.5;
-  }
-
-  .confidence-text strong {
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
-  /* ─── SECTION SHARED ─── */
-  section { padding: 96px 0; }
-
-  .container {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--gold);
-  }
-
-  .section-title {
-    font-family: 'Lexend', sans-serif;
-    font-size: clamp(30px, 3.5vw, 46px);
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 16px;
-  }
-
-  .section-intro {
-    font-size: 16px;
-    color: var(--muted);
-    max-width: 560px;
-    line-height: 1.7;
-  }
-
-  /* ─── WHO IS IT FOR ─── */
-  .who-section { background: #fff; }
-
-  .who-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
-    background: var(--rule);
+ 
+  .conf-icon { font-size: 26px; flex-shrink: 0; }
+ 
+  .conf-text { font-size: 13px; color: #2d5228; line-height: 1.5; font-weight: 300; }
+  .conf-text strong { display: block; font-weight: 600; font-size: 13px; margin-bottom: 2px; color: #1a3a16; }
+ 
+  .hero-tcard {
+    background: var(--white);
     border: 1px solid var(--rule);
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 48px;
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-
-  .who-card {
-    background: #fff;
-    padding: 36px 32px;
+ 
+  .hero-tcard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
   }
-
-  .who-icon {
-    font-size: 32px;
-    margin-bottom: 16px;
-    display: block;
+ 
+  .hero-tcard.pop {
+    background: var(--purple);
+    border-color: var(--purple);
   }
-
-  .who-title {
-    font-family: 'Lexend', sans-serif;
-    font-size: 20px;
+ 
+  .hero-tcard .hq {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
     color: var(--ink);
     margin-bottom: 10px;
   }
-
-  .who-body {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ─── SESSIONS ─── */
-  .sessions-section { background: var(--cream); }
-
-  .sessions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 56px;
-  }
-
-  .session-card {
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
-  .session-card-header {
-    padding: 32px 36px 28px;
-    background: var(--forest);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .session-card:nth-child(2) .session-card-header {
-    background: var(--moss);
-  }
-
-  .session-card-header::after {
-    content: attr(data-num);
-    position: absolute;
-    right: 24px;
-    top: 16px;
-    font-family: 'Lexend', sans-serif;
-    font-size: 80px;
-    color: rgba(255,255,255,0.07);
-    line-height: 1;
-  }
-
-  .session-number {
+ 
+  .hero-tcard.pop .hq { color: rgba(255,255,255,0.92); }
+ 
+  .hstars { color: var(--orange); font-size: 12px; letter-spacing: 1px; }
+  .hero-tcard.pop .hstars { color: var(--yellow); }
+ 
+  /* SHARED */
+  section { padding: 88px 0; }
+ 
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+ 
+  .stag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--gold);
+    margin-bottom: 16px;
+  }
+ 
+  .stag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+ 
+  .sec-title {
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+  }
+ 
+  .sec-intro {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+ 
+  /* WHO */
+  .who-sec { background: var(--white); }
+ 
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 48px;
+  }
+ 
+  .who-card {
+    border-radius: 16px;
+    padding: 32px 28px;
+    border: 1.5px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+ 
+  .who-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+  .who-card.c1 { background: #f3eeff; border-color: #d9c8ff; }
+  .who-card.c2 { background: #fff4ee; border-color: #ffd4b8; }
+  .who-card.c3 { background: #f0faed; border-color: #c2e8b8; }
+ 
+  .who-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .who-title { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.3px; }
+  .who-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+ 
+  /* SESSIONS */
+  .sessions-sec { background: var(--mint); }
+ 
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 52px;
+  }
+ 
+  .sess-card { border-radius: 16px; overflow: hidden; }
+ 
+  .sess-head {
+    padding: 32px 32px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .sess-card:nth-child(1) .sess-head { background: var(--purple); }
+  .sess-card:nth-child(2) .sess-head { background: var(--ink); }
+ 
+  .sess-head::after {
+    content: attr(data-n);
+    position: absolute;
+    right: 20px; top: 8px;
+    font-size: 96px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    letter-spacing: -4px;
+  }
+ 
+  .sess-num {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
     margin-bottom: 10px;
   }
-
-  .session-title {
-    font-family: 'Lexend', sans-serif;
-    font-size: 24px;
-    color: #fff;
-    line-height: 1.2;
-    margin-bottom: 8px;
+ 
+  .sess-card:nth-child(1) .sess-num { color: var(--yellow); }
+  .sess-card:nth-child(2) .sess-num { color: var(--green); }
+ 
+  .sess-title {
+    font-size: 22px; font-weight: 700;
+    color: #fff; line-height: 1.2;
+    letter-spacing: -0.5px; margin-bottom: 6px;
   }
-
-  .session-duration {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .session-card-body {
-    background: #fff;
-    padding: 28px 36px 32px;
+ 
+  .sess-sub { font-size: 13px; color: rgba(255,255,255,0.42); }
+ 
+  .sess-body {
+    background: var(--white);
+    padding: 26px 32px 30px;
     border: 1px solid var(--rule);
     border-top: none;
     border-radius: 0 0 16px 16px;
   }
-
-  .session-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+ 
+  .sess-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+ 
+  .sess-list li {
+    display: flex; align-items: flex-start;
+    gap: 12px; font-size: 14px;
+    color: var(--text); line-height: 1.55; font-weight: 300;
   }
-
-  .session-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.5;
+ 
+  .sbullet {
+    width: 20px; height: 20px;
+    border-radius: 50%; flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--ink);
   }
-
-  .session-list li::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    flex-shrink: 0;
-    margin-top: 6px;
-  }
-
-  /* ─── ABOUT ─── */
-  .about-section { background: #eef8eb; }
-
+ 
+  .sess-card:nth-child(1) .sbullet { background: var(--yellow); }
+  .sess-card:nth-child(2) .sbullet { background: var(--green); }
+ 
+  /* ABOUT */
+  .about-sec { background: var(--ink); }
+ 
   .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center;
   }
-
-  .about-section .section-label { color: var(--gold); }
-  .about-section .section-label::before { background: var(--gold); }
-  .about-section .section-title { color: #fff; }
-  .about-section .section-intro { color: rgba(255,255,255,0.65); max-width: 100%; }
-
+ 
+  .about-sec .sec-title { color: #fff; }
+  .about-sec .sec-intro { color: rgba(255,255,255,0.5); max-width: 100%; }
+ 
   .about-body {
-    font-size: 15px;
-    line-height: 1.85;
-    color: rgba(255,255,255,0.65);
-    margin-top: 20px;
+    font-size: 15px; line-height: 1.85;
+    color: rgba(255,255,255,0.58);
+    margin-top: 20px; font-weight: 300;
   }
-
-  .about-body p + p { margin-top: 16px; }
-
-  .about-credentials {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+ 
+  .about-body p + p { margin-top: 14px; }
+ 
+  .creds { display: flex; flex-direction: column; gap: 12px; }
+ 
+  .cred {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px; padding: 18px 20px;
+    display: flex; align-items: center; gap: 16px;
+    transition: background 0.2s;
   }
-
-  .credential {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
+ 
+  .cred:hover { background: rgba(255,255,255,0.08); }
+ 
+  .cred-ico {
+    width: 40px; height: 40px;
     border-radius: 10px;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
   }
-
-  .credential-icon {
-    font-size: 24px;
-    flex-shrink: 0;
-  }
-
-  .credential-text {
-    font-size: 14px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.4;
-  }
-
-  .credential-text strong {
-    display: block;
-    color: #fff;
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-
-  /* ─── DETAILS ─── */
-  .details-section { background: var(--off-white); }
-
+ 
+  .cred-ico.p { background: rgba(140,82,255,0.28); }
+  .cred-ico.o { background: rgba(255,145,77,0.28); }
+  .cred-ico.y { background: rgba(255,222,89,0.22); }
+  .cred-ico.g { background: rgba(113,197,88,0.22); }
+ 
+  .cred-txt strong { display: block; font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 2px; }
+  .cred-txt span { font-size: 13px; color: rgba(255,255,255,0.42); font-weight: 300; }
+ 
+  /* DETAILS */
+  .details-sec { background: var(--white); }
+ 
   .details-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    overflow: hidden;
-    margin-top: 48px;
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 16px; margin-top: 48px;
   }
-
-  .detail-item {
-    background: #fff;
-    padding: 32px 28px;
+ 
+  .det-card {
+    border-radius: 14px; padding: 28px 24px;
     text-align: center;
+    border: 1.5px solid var(--rule);
+    transition: transform 0.2s;
   }
-
-  .detail-icon { font-size: 28px; margin-bottom: 12px; }
-
-  .detail-value {
-    font-family: 'Lexend', sans-serif;
-    font-size: 28px;
-    color: var(--forest);
-    line-height: 1;
-    margin-bottom: 6px;
+ 
+  .det-card:hover { transform: translateY(-3px); }
+  .det-card:nth-child(1) { background: #f3eeff; border-color: var(--purple); }
+  .det-card:nth-child(2) { background: #fff4ee; border-color: var(--orange); }
+  .det-card:nth-child(3) { background: #fffbe8; border-color: var(--yellow); }
+  .det-card:nth-child(4) { background: #f0faed; border-color: var(--green); }
+ 
+  .det-icon { font-size: 28px; margin-bottom: 12px; }
+  .det-val { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+  .det-lbl { font-size: 12px; color: var(--muted); font-weight: 400; }
+ 
+  /* TESTIMONIALS */
+  .testi-sec { background: var(--mint); }
+ 
+  .testi-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-top: 52px;
   }
-
-  .detail-label {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+ 
+  .tc {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 14px; padding: 26px 26px 22px;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-
-  /* ─── TESTIMONIALS ─── */
-  .testimonials-section { background: #fff; }
-
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    margin-top: 56px;
+ 
+  .tc:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+  .tc.feat { background: var(--purple); border-color: var(--purple); }
+ 
+  .tc-stars { font-size: 13px; letter-spacing: 2px; color: var(--orange); margin-bottom: 14px; }
+  .tc.feat .tc-stars { color: var(--yellow); }
+ 
+  .tc-q { font-size: 15px; font-weight: 400; line-height: 1.65; color: var(--ink); flex: 1; margin-bottom: 16px; }
+  .tc.feat .tc-q { color: rgba(255,255,255,0.92); }
+ 
+  .tc-by { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .tc.feat .tc-by { color: rgba(255,255,255,0.38); }
+ 
+  /* CTA */
+  .cta-sec {
+    background: var(--yellow);
+    padding: 80px 0; text-align: center;
   }
-
-  .t-card {
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 28px 28px 24px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .t-card.dark {
-    background: var(--forest);
-    border-color: var(--forest);
-  }
-
-  .t-stars {
-    color: var(--gold);
-    font-size: 14px;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-  }
-
-  .t-quote {
-    font-family: 'Lexend', sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink);
-    flex: 1;
-    margin-bottom: 18px;
-  }
-
-  .t-card.dark .t-quote { color: rgba(255,255,255,0.9); }
-
-  .t-attribution {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  .t-card.dark .t-attribution { color: rgba(255,255,255,0.4); }
-
-  /* ─── CTA ─── */
-  .cta-section {
-    background: var(--gold-pale);
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 80px 0;
-    text-align: center;
-  }
-
-  .cta-section .section-title {
-    font-size: clamp(28px, 3vw, 42px);
-    margin-bottom: 16px;
-  }
-
-  .cta-section .section-intro {
-    margin: 0 auto 40px;
-    text-align: center;
-  }
-
-  .cta-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
+ 
+  .cta-sec .sec-title { color: var(--ink); margin-bottom: 14px; }
+  .cta-sec .sec-intro { color: rgba(0,0,0,0.5); margin: 0 auto 36px; text-align: center; }
+ 
   .btn-dark {
-    background: var(--forest);
-    color: #fff;
+    background: var(--ink); color: #fff;
     font-family: 'Lexend', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 16px 40px;
-    border-radius: 100px;
-    text-decoration: none;
+    font-size: 15px; font-weight: 600;
+    padding: 16px 44px; border-radius: 100px;
+    text-decoration: none; display: inline-block;
+    letter-spacing: -0.3px;
     transition: transform 0.15s, box-shadow 0.15s;
-    display: inline-block;
   }
-
-  .btn-dark:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(26,51,40,0.3);
-  }
-
-  .cta-subtext {
-    font-size: 13px;
-    color: #7a6030;
-    margin-top: 20px;
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--ink);
-    padding: 40px;
-    text-align: center;
-  }
-
-  footer p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.3);
-    line-height: 1.6;
-  }
-
+ 
+  .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+ 
+  .cta-sub { font-size: 13px; color: rgba(0,0,0,0.38); margin-top: 18px; font-weight: 400; }
+ 
+  /* FOOTER */
+  footer { background: var(--ink); padding: 36px 40px; text-align: center; }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.7; font-weight: 300; }
   footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
-
-  /* ─── ANIMATIONS ─── */
+  footer a:hover { color: rgba(255,255,255,0.8); }
+ 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
   }
-
-  .hero-left > * {
-    animation: fadeUp 0.7s ease both;
-  }
-
-  .hero-eyebrow { animation-delay: 0.1s; }
-  .hero-title { animation-delay: 0.2s; }
-  .hero-body { animation-delay: 0.3s; }
-  .hero-actions { animation-delay: 0.4s; }
-  .hero-stats { animation-delay: 0.5s; }
-
-  /* ─── RESPONSIVE ─── */
+ 
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 0 20px; }
-
-    .hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-
+    .hero { grid-template-columns: 1fr; }
     .hero-left { padding: 64px 28px 56px; }
-    .hero-right { padding: 48px 28px; }
-
-    .hero-stats { gap: 20px; }
-
-    .who-grid,
-    .sessions-grid,
-    .about-grid,
-    .testimonials-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .details-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .container { padding: 0 24px; }
-
-    section { padding: 64px 0; }
-
-    .about-grid { gap: 48px; }
-  }
-
-  @media (max-width: 560px) {
+    .hero-right { padding: 44px 28px; }
+    .who-grid, .sessions-grid, .about-grid, .testi-grid { grid-template-columns: 1fr; }
     .details-grid { grid-template-columns: 1fr 1fr; }
-    .hero-stats { flex-wrap: wrap; gap: 16px; }
-    nav .nav-cta { display: none; }
+    .container { padding: 0 24px; }
+    section { padding: 64px 0; }
+    .about-grid { gap: 44px; }
+  }
+ 
+  @media (max-width: 480px) {
+    .nav-cta { display: none; }
+    .hero-title { font-size: 36px; letter-spacing: -1px; }
+    .details-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
-
+ 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">Real Life <span>Money</span></a>
+  <a class="nav-logo" href="#">
+    <div class="nav-dots">
+      <span class="nd"></span><span class="nd"></span>
+      <span class="nd"></span><span class="nd"></span>
+    </div>
+    <span class="nav-wordmark">Real Life Money</span>
+  </a>
   <a class="nav-cta" href="#book">Book Your Place →</a>
 </nav>
-
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Bristol · Two Evening Course</div>
-    <h1 class="hero-title">Finally understand<br><em>investing.</em></h1>
-    <p class="hero-body">A practical, jargon-free investing course for complete beginners. Two evenings. Small groups. No products to sell — just honest, straightforward financial education.</p>
-    <div class="hero-actions">
+    <div class="hero-eyebrow"><span class="pulse"></span>Bristol · Two Evening Course</div>
+    <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
+      Finally<br>
+      <span style="color:var(--yellow)">understand</span><br>
+      investing.
+    </h1>
+    <p class="hero-body" style="animation:fadeUp 0.6s ease 0.3s both">A practical, jargon-free investing course for complete beginners. Two evenings. Small groups. No products to sell — just honest, straightforward financial education.</p>
+    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
       <a href="#book" class="btn-primary">Book Your Place — £59</a>
       <span class="hero-note">Max 12 people per course</span>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number">5★</div>
-        <div class="stat-label">Average rating</div>
+    <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
+      <div>
+        <div class="stat-val" style="color:var(--yellow)">5★</div>
+        <div class="stat-lbl">Average rating</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Would recommend</div>
+      <div>
+        <div class="stat-val" style="color:var(--green)">100%</div>
+        <div class="stat-lbl">Would recommend</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-number">2×</div>
-        <div class="stat-label">Confidence increase</div>
+      <div>
+        <div class="stat-val" style="color:var(--purple)">2×</div>
+        <div class="stat-lbl">Confidence increase</div>
       </div>
     </div>
   </div>
-
   <div class="hero-right">
-    <div class="hero-testimonial-stack">
-      <div class="confidence-badge">
-        <span class="confidence-icon">📈</span>
-        <div class="confidence-text">
-          <strong>Attendees' confidence in investing more than doubled</strong>
-          Average confidence before: 1.3/5 · After: 3.7/5
-        </div>
+    <div class="conf-badge">
+      <span class="conf-icon">📈</span>
+      <div class="conf-text">
+        <strong>Attendees' confidence more than doubled</strong>
+        Average before: 1.3/5 · Average after: 3.7/5
       </div>
-      <div class="testimonial-card featured">
-        <p class="testimonial-quote">"I'm so glad I did this — although wish I'd done it 20 years ago!!"</p>
-        <div class="testimonial-meta">
-          <span class="testimonial-stars">★★★★★</span>
-          <span class="testimonial-author">Course attendee, Bristol</span>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
-        <div class="testimonial-meta">
-          <span class="testimonial-stars">★★★★★</span>
-          <span class="testimonial-author">Course attendee, Bristol</span>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"Your explanation was really clear and in layman's terms. The visuals and games made it even more engaging."</p>
-        <div class="testimonial-meta">
-          <span class="testimonial-stars">★★★★★</span>
-          <span class="testimonial-author">Course attendee, Bristol</span>
-        </div>
-      </div>
+    </div>
+    <div class="hero-tcard pop">
+      <p class="hq">"I'm so glad I did this — although wish I'd done it 20 years ago!!"</p>
+      <div class="hstars">★★★★★</div>
+    </div>
+    <div class="hero-tcard">
+      <p class="hq">"I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
+      <div class="hstars">★★★★★</div>
+    </div>
+    <div class="hero-tcard">
+      <p class="hq">"Leo made learning about this topic really enjoyable and engaging — I'm really grateful for his expertise and clarity."</p>
+      <div class="hstars">★★★★★</div>
     </div>
   </div>
 </section>
-
-<!-- WHO IS IT FOR -->
-<section class="who-section">
+ 
+<!-- WHO -->
+<section class="who-sec">
   <div class="container">
-    <div class="section-label">Who it's for</div>
-    <h2 class="section-title">Made for people who feel<br>left behind by money</h2>
-    <p class="section-intro">Most of us were never taught how investing works. This course is built for exactly that.</p>
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Who it's for</div>
+    <h2 class="sec-title">Made for people who feel<br>left behind by money</h2>
+    <p class="sec-intro">Most of us were never taught how investing works. This course is built for exactly that.</p>
     <div class="who-grid">
-      <div class="who-card">
+      <div class="who-card c1">
         <span class="who-icon">🌱</span>
         <h3 class="who-title">Complete beginners</h3>
         <p class="who-body">You've heard about ISAs and investments but never known where to start. This course is built for you — no prior knowledge needed, no stupid questions.</p>
       </div>
-      <div class="who-card">
+      <div class="who-card c2">
         <span class="who-icon">💸</span>
         <h3 class="who-title">Cash savers</h3>
         <p class="who-body">You've got money sitting in a savings account and a vague sense you should be doing more with it. We'll show you why that instinct is right — and what to do about it.</p>
       </div>
-      <div class="who-card">
+      <div class="who-card c3">
         <span class="who-icon">🧩</span>
         <h3 class="who-title">Confused by the noise</h3>
-        <p class="who-body">You've tried YouTube, Reddit, financial podcasts — and come away more confused than before. This cuts through all of it with a clear, structured path from zero to confident.</p>
+        <p class="who-body">You've tried YouTube, Reddit, financial podcasts — and come away more confused. This gives you a clear, structured path from zero to confident.</p>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- SESSIONS -->
-<section class="sessions-section">
+<section class="sessions-sec">
   <div class="container">
-    <div class="section-label">The course</div>
-    <h2 class="section-title">Two evenings.<br>A lifetime of clarity.</h2>
-    <p class="section-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.</p>
+    <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>The course</div>
+    <h2 class="sec-title">Two evenings.<br>A lifetime of clarity.</h2>
+    <p class="sec-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.</p>
     <div class="sessions-grid">
-      <div class="session-card">
-        <div class="session-card-header" data-num="1">
-          <div class="session-number">Session One · 90 mins</div>
-          <h3 class="session-title">Types of investment<br>and managing risk</h3>
-          <p class="session-duration">The foundations of investing</p>
+      <div class="sess-card">
+        <div class="sess-head" data-n="1">
+          <div class="sess-num">Session One · 90 mins</div>
+          <h3 class="sess-title">Types of investment<br>and managing risk</h3>
+          <p class="sess-sub">The foundations of investing</p>
         </div>
-        <div class="session-card-body">
-          <ul class="session-list">
-            <li>Why we invest — and what inflation is quietly doing to your savings right now</li>
-            <li>The main asset classes explained simply: cash, bonds, equities and more</li>
-            <li>Monopoly money simulation — watch how different investments behave over time</li>
-            <li>Understanding risk: what it really means and how to manage it for your situation</li>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Why we invest — and what inflation is quietly doing to your savings right now</li>
+            <li><span class="sbullet">2</span>The main asset classes explained simply: cash, bonds, equities and more</li>
+            <li><span class="sbullet">3</span>Monopoly money simulation — watch how different investments behave over time</li>
+            <li><span class="sbullet">4</span>Understanding risk: what it really means and how to manage it for your situation</li>
           </ul>
         </div>
       </div>
-      <div class="session-card">
-        <div class="session-card-header" data-num="2">
-          <div class="session-number">Session Two · 90 mins</div>
-          <h3 class="session-title">Picking your portfolio<br>and clicking invest</h3>
-          <p class="session-duration">Putting it into practice</p>
+      <div class="sess-card">
+        <div class="sess-head" data-n="2">
+          <div class="sess-num">Session Two · 90 mins</div>
+          <h3 class="sess-title">Picking your portfolio<br>and clicking invest</h3>
+          <p class="sess-sub">Putting it into practice</p>
         </div>
-        <div class="session-card-body">
-          <ul class="session-list">
-            <li>Get to know real funds using a card game — compare, rank and discuss</li>
-            <li>ISAs, pensions and investment accounts: which wrapper is right for you</li>
-            <li>Finding investments that suit your goals and risk appetite</li>
-            <li>Hands-on platform exploration — and actually clicking that invest button</li>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Get to know real funds using a card game — compare, rank and discuss</li>
+            <li><span class="sbullet">2</span>ISAs, pensions and investment accounts: which wrapper is right for you</li>
+            <li><span class="sbullet">3</span>Finding investments that suit your goals and risk appetite</li>
+            <li><span class="sbullet">4</span>Hands-on platform exploration — and actually clicking that invest button</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- ABOUT -->
-<section class="about-section">
+<section class="about-sec">
   <div class="container">
     <div class="about-grid">
       <div>
-        <div class="section-label">Your teacher</div>
-        <h2 class="section-title">I've seen the advice gap up close</h2>
+        <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>Your teacher</div>
+        <h2 class="sec-title">I've seen the advice gap up close</h2>
         <div class="about-body">
           <p>Before becoming a maths teacher, I spent several years working as a qualified financial adviser. What I witnessed over and over again was people making costly, avoidable mistakes — not because they were careless, but because nobody had ever taught them the basics.</p>
           <p>Financial literacy isn't taught in schools. Proper financial advice is expensive and inaccessible for most people. That gap bothered me — so I built Real Life Money to do something about it.</p>
           <p>There's nothing to sell you here. No products, no follow-up calls, no referral fees. Just two evenings of honest, practical education from someone who has seen both sides.</p>
         </div>
       </div>
-      <div class="about-credentials">
-        <div class="credential">
-          <span class="credential-icon">🎓</span>
-          <div class="credential-text">
-            <strong>Qualified Financial Adviser</strong>
-            Several years in financial services, working directly with clients
-          </div>
-        </div>
-        <div class="credential">
-          <span class="credential-icon">📐</span>
-          <div class="credential-text">
-            <strong>Secondary School Maths Teacher</strong>
-            Experienced at explaining complex ideas in plain, accessible language
-          </div>
-        </div>
-        <div class="credential">
-          <span class="credential-icon">🚫</span>
-          <div class="credential-text">
-            <strong>Nothing to sell you</strong>
-            No products, no commissions, no upsells — ever
-          </div>
-        </div>
-        <div class="credential">
-          <span class="credential-icon">📍</span>
-          <div class="credential-text">
-            <strong>Based in Bristol</strong>
-            Local, in-person courses in a small, friendly group setting
-          </div>
-        </div>
+      <div class="creds">
+        <div class="cred"><div class="cred-ico p">🎓</div><div class="cred-txt"><strong>Qualified Financial Adviser</strong><span>Several years in financial services, working directly with clients</span></div></div>
+        <div class="cred"><div class="cred-ico o">📐</div><div class="cred-txt"><strong>Secondary School Maths Teacher</strong><span>Experienced at explaining complex ideas in plain, accessible language</span></div></div>
+        <div class="cred"><div class="cred-ico y">🚫</div><div class="cred-txt"><strong>Nothing to sell you</strong><span>No products, no commissions, no upsells — ever</span></div></div>
+        <div class="cred"><div class="cred-ico g">📍</div><div class="cred-txt"><strong>Based in Bristol</strong><span>Local, in-person courses in a small, friendly group setting</span></div></div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- DETAILS -->
-<section class="details-section">
+<section class="details-sec">
   <div class="container">
-    <div class="section-label">Course details</div>
-    <h2 class="section-title">Simple, transparent,<br>no surprises</h2>
+    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>Course details</div>
+    <h2 class="sec-title">Simple, transparent,<br>no surprises</h2>
     <div class="details-grid">
-      <div class="detail-item">
-        <div class="detail-icon">💷</div>
-        <div class="detail-value">£59</div>
-        <div class="detail-label">Per person, both sessions</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-icon">👥</div>
-        <div class="detail-value">Max 12</div>
-        <div class="detail-label">Small group, personal</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-icon">🕐</div>
-        <div class="detail-value">2 × 90</div>
-        <div class="detail-label">Minutes per session</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-icon">📍</div>
-        <div class="detail-value">Bristol</div>
-        <div class="detail-label">In-person evening course</div>
-      </div>
+      <div class="det-card"><div class="det-icon">💷</div><div class="det-val">£59</div><div class="det-lbl">Per person, both sessions</div></div>
+      <div class="det-card"><div class="det-icon">👥</div><div class="det-val">Max 12</div><div class="det-lbl">Small group, personal</div></div>
+      <div class="det-card"><div class="det-icon">🕐</div><div class="det-val">2 × 90</div><div class="det-lbl">Minutes per session</div></div>
+      <div class="det-card"><div class="det-icon">📍</div><div class="det-val">Bristol</div><div class="det-lbl">In-person evening course</div></div>
     </div>
   </div>
 </section>
-
+ 
 <!-- TESTIMONIALS -->
-<section class="testimonials-section">
+<section class="testi-sec">
   <div class="container">
-    <div class="section-label">What people say</div>
-    <h2 class="section-title">Real feedback from<br>real attendees</h2>
-    <div class="testimonials-grid">
-      <div class="t-card dark">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"I knew nothing going into this course but Leo was clear and informative and I felt much more well informed and confident about how to invest by the end."</p>
-        <div class="t-attribution">Bristol teacher</div>
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>What people say</div>
+    <h2 class="sec-title">Real feedback from<br>real attendees</h2>
+    <div class="testi-grid">
+      <div class="tc feat">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"I knew nothing going into this course but Leo was clear and informative and I felt much more well informed and confident about how to invest by the end."</p>
+        <div class="tc-by">Bristol teacher</div>
       </div>
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"This course was well delivered and clear for anyone wishing to understand more about their personal finances. I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
-        <div class="t-attribution">Course attendee</div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"This course was well delivered and clear for anyone wishing to understand more about their personal finances. I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
+        <div class="tc-by">Course attendee</div>
       </div>
-      <div class="t-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-quote">"The clarity and simplicity of explanation was really good and very much appreciated. Anything that I was unsure about was answered clearly."</p>
-        <div class="t-attribution">Course attendee</div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"The clarity and simplicity of explanation was really good and very much appreciated. Anything that I was unsure about was answered clearly."</p>
+        <div class="tc-by">Course attendee</div>
       </div>
     </div>
   </div>
 </section>
-
+ 
 <!-- CTA -->
-<section class="cta-section" id="book">
+<section class="cta-sec" id="book">
   <div class="container">
-    <div class="section-label" style="justify-content:center;">Reserve your place</div>
-    <h2 class="section-title">Stop putting it off.<br>Two evenings could change everything.</h2>
-    <p class="section-intro">£59. Max 12 people. Bristol. No jargon. No sales pitch. Just the knowledge you should have had years ago.</p>
-    <div class="cta-actions">
-      <a href="#" class="btn-dark">Book on Eventbrite →</a>
-    </div>
-    <p class="cta-subtext">Places fill quickly. Previous courses sold out within hours of opening.</p>
+    <div class="stag" style="color:rgba(0,0,0,0.35);justify-content:center"><span class="stag-dot" style="background:rgba(0,0,0,0.25)"></span>Reserve your place</div>
+    <h2 class="sec-title">Stop putting it off.<br>Two evenings could change everything.</h2>
+    <p class="sec-intro">£59. Max 12 people. Bristol. No jargon. No sales pitch. Just the knowledge you should have had years ago.</p>
+    <a href="#" class="btn-dark">Book on Eventbrite →</a>
+    <p class="cta-sub">Places fill quickly. Previous courses sold out within hours of opening.</p>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <p>
-    <strong style="color:rgba(255,255,255,0.6)">Real Life Money</strong> · Bristol · 
+    <strong style="color:rgba(255,255,255,0.55)">Real Life Money</strong> · Bristol ·
     Financial education, not regulated financial advice. All content is general and educational in nature.<br>
     <a href="#">Contact</a> · <a href="#">Privacy</a>
   </p>
 </footer>
-
-<!-- Scroll animations -->
+ 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.who-card, .session-card, .t-card, .credential, .detail-item').forEach(el => {
+ 
+  document.querySelectorAll('.who-card,.sess-card,.tc,.cred,.det-card').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    obs.observe(el);
   });
-
   // Log activity into google sheet
   const scriptURL = 'https://script.google.com/macros/s/AKfycbwzIg-KjHwg3-cdJOoLa46OPU3MYAbFxiWCEzA4U_UOP0Iei78gNJ9pyd3ic1CpDunqRQ/exec';
   
