@@ -8,6 +8,10 @@
 <style>
   :root {
     --ink: #0f1a14;
+    --rlm: #eef8eb;
+    --purple: #8c52ff;
+    --green: #71c558;
+    --orange: #ff914d;
     --forest: #1a3328;
     --forest-mid: #2c4a3e;
     --moss: #3d6b5c;
@@ -82,7 +86,7 @@
   }
 
   .hero-left {
-    background: #eef8eb
+    background: var(--rlm);
     padding: 80px 56px 80px 60px;
     display: flex;
     flex-direction: column;
@@ -98,7 +102,7 @@
     right: -20px;
     font-family: 'Lexend', sans-serif;
     font-size: 280px;
-    color: rgba(200,168,75,0.07);
+    color: black;
     line-height: 1;
     pointer-events: none;
   }
@@ -1016,6 +1020,13 @@
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
+
+  // Log activity into google sheet
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwzIg-KjHwg3-cdJOoLa46OPU3MYAbFxiWCEzA4U_UOP0Iei78gNJ9pyd3ic1CpDunqRQ/exec';
+  
+  // This sends the page name (e.g., 'Home' or 'Course') to your sheet
+  fetch(`${scriptURL}?page=${encodeURIComponent(document.title)}`)
+    .catch(error => console.log('Analytics error: ', error));
 </script>
 
 </body>
