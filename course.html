@@ -49,32 +49,7 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
     text-decoration: none;
-  }
- 
-  .nav-dots {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-    width: 20px;
-  }
- 
-  .nd {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
- 
-  .nd:nth-child(1) { background: var(--yellow); }
-  .nd:nth-child(2) { background: var(--purple); }
-  .nd:nth-child(3) { background: var(--green); }
-  .nd:nth-child(4) { background: var(--orange); }
- 
-  .nav-wordmark {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: -0.3px;
   }
  
   .nav-cta {
@@ -576,11 +551,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <div class="nav-dots">
-      <span class="nd"></span><span class="nd"></span>
-      <span class="nd"></span><span class="nd"></span>
-    </div>
-    <span class="nav-wordmark">Real Life Money</span>
+    <img src="/logo.webp" alt="Real Life Money" style="height: 38px; width: auto;">
   </a>
   <a class="nav-cta" href="#book">Book Your Place →</a>
 </nav>
