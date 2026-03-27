@@ -774,11 +774,14 @@
     obs.observe(el);
   });
   // Log activity into google sheet
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwzIg-KjHwg3-cdJOoLa46OPU3MYAbFxiWCEzA4U_UOP0Iei78gNJ9pyd3ic1CpDunqRQ/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_WttCyj32TF5Ly5GSPz_hyc1-qBpqfpzh39FRo7uULQCjxvQIyhg/exec';
   
-  // This sends the page name (e.g., 'Home' or 'Course') to your sheet
-  fetch(`${scriptURL}?page=${encodeURIComponent(document.title)}`)
-    .catch(error => console.log('Analytics error: ', error));
+  // This grabs the exact URL in the browser bar
+  const currentURL = window.location.href;
+  const currentTitle = document.title;
+
+  fetch(`${scriptURL}?url=${encodeURIComponent(currentURL)}&title=${encodeURIComponent(currentTitle)}`)
+    .catch(err => console.log('Ping failed', err));
 </script>
 
 </body>
