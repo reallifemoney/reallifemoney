@@ -41,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(238,248,235,0.93);
+    background: var(--mint);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--rule);
   }
@@ -540,7 +540,6 @@
   }
  
   @media (max-width: 480px) {
-    .nav-cta { display: none; }
     .hero-title { font-size: 36px; letter-spacing: -1px; }
     .details-grid { grid-template-columns: 1fr 1fr; }
   }
@@ -551,7 +550,7 @@
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">
-    <img src="/logo.webp" alt="Real Life Money" style="height: 38px; width: auto;">
+    <img src="/logo.webp" alt="Real Life Money" style="height: 52px; width: auto;">
   </a>
   <a class="nav-cta" href="#book">Book Your Place →</a>
 </nav>
