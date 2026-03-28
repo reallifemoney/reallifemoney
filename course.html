@@ -516,6 +516,144 @@
   .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
  
   .cta-sub { font-size: 13px; color: rgba(0,0,0,0.38); margin-top: 18px; font-weight: 400; }
+
+  /* FAQ */
+  .faq-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+ 
+  .faq-header h2 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+ 
+  .faq-header p {
+    font-size: 15px;
+    color: #666;
+    font-weight: 300;
+  }
+ 
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+ 
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+ 
+  .faq-item:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+ 
+  .faq-item.open {
+    border-color: #1a1a1a;
+  }
+ 
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    gap: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+ 
+  .faq-question-text {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.4;
+    flex: 1;
+  }
+ 
+  .faq-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.3s;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+  }
+ 
+  .faq-item.open .faq-icon {
+    background: #1a1a1a;
+    color: #fff;
+    transform: rotate(45deg);
+  }
+ 
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+ 
+  .faq-answer-inner {
+    padding: 16px 20px 20px 20px;
+    border-top: 1px solid #eeeeee;
+  }
+ 
+  .faq-answer-inner p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 300;
+  }
+ 
+  .faq-answer-inner p + p {
+    margin-top: 10px;
+  }
+ 
+  .highlight {
+    color: #1a1a1a;
+    font-weight: 400;
+  }
+ 
+  .faq-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 18px 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .faq-footer p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+ 
+  .faq-footer a {
+    color: #1a1a1a;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+  }
  
   /* FOOTER */
   footer { background: var(--ink); padding: 36px 40px; text-align: center; }
@@ -760,6 +898,137 @@
     <p class="cta-sub">Places fill quickly. Previous courses sold out within hours of opening.</p>
   </div>
 </section>
+
+<!-- FAQ -->
+<div class="faq-header">
+  <h2>Your questions, answered</h2>
+  <p>No jargon. No silly questions. Just honest answers.</p>
+</div>
+<div class="faq-list">
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Is this suitable for complete beginners?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Absolutely — in fact, this course is <span class="highlight">designed specifically for people who feel like they know nothing</span>. Most attendees arrive feeling uncertain or even a little embarrassed about how little they know. That's completely normal, and it's exactly why this course exists.</p>
+        <p>By the end of session two, you'll have a clear picture of how investing works, what your options are, and how to take your first steps with confidence. No prior knowledge needed whatsoever.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How much money do I need to get started with investing?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Less than you probably think. Many investment platforms let you start with <span class="highlight">as little as £1 a month</span>, and some of the most effective long-term strategies involve small, regular contributions rather than large lump sums.</p>
+        <p>The course will walk you through realistic options at every budget level — whether you have £20 a month or £20,000 sitting in a savings account. The most important thing is understanding how it works, not how much you have to start with.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Will you tell me what to invest in?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>This course is financial <span class="highlight">education</span>, not financial advice — and that's an important distinction. I won't tell you exactly what to buy, because everyone's situation is different, and recommending specific products is regulated activity that requires an FCA licence.</p>
+        <p>What I will do is give you the knowledge and tools to make those decisions yourself — confidently and independently. By the end you'll understand what to look for, how to compare options, and how to build a simple strategy that suits you. That's worth far more than being told what to do.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Is investing risky? Could I lose my money?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Yes — all investing carries some risk, and anyone who tells you otherwise isn't being straight with you. But <span class="highlight">risk is something you can understand, manage and plan around</span> — and that's a big part of what this course covers.</p>
+        <p>We'll look at how risk and potential return are linked, why time in the market matters so much, and how to build a simple portfolio that matches your own comfort level. Most people leave realising that doing nothing — keeping all your money in cash — carries its own very real risk too.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What will I actually walk away knowing how to do?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>By the end of the two sessions you'll understand <span class="highlight">why investing matters, how the main asset classes work, what ISAs and pensions are actually doing for you</span>, and how to explore and compare real investment funds.</p>
+        <p>More importantly, you'll feel confident enough to open an investment account, make a decision, and actually get started — rather than putting it off for another year. One of our recent attendees said they wished they'd done it 20 years ago. You don't have to feel that way.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Who are you and why should I trust you?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Fair question. I'm Leo — a secondary school maths teacher and <span class="highlight">qualified ex-financial adviser</span>. I spent years in financial services watching people make avoidable mistakes simply because nobody had ever explained how money works. That gap bothered me, so I built Real Life Money to do something about it.</p>
+        <p>I'm not trying to sell you anything. There are no products, no referral fees, no follow-up sales calls. Just two evenings of practical, honest financial education from someone who has seen both sides — the advice industry and the classroom.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How is this different from just watching YouTube videos?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>YouTube is great, but it's also overwhelming — thousands of videos, conflicting advice, no way to ask questions, and no guarantee the person talking actually knows what they're doing.</p>
+        <p>This course gives you <span class="highlight">a structured, sequenced learning experience in a small group</span> where you can ask any question you like without feeling judged. Every attendee so far has said that being able to ask questions as we went was one of the most valuable parts. That's something no video can give you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What does the course actually involve — is it just a lecture?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Not at all. The sessions are deliberately <span class="highlight">interactive and practical</span> — think investment simulations, group activities, and hands-on exploration of real platforms and funds, not someone reading off slides at you.</p>
+        <p>Groups are kept small (maximum 12 people) so there's plenty of time for discussion and questions. The aim is for it to feel more like a conversation than a classroom — approachable, engaging, and genuinely useful.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What if I have questions after the course?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>It's completely natural to have more questions once you start putting things into practice — that's a good sign it's all clicking into place. You're welcome to <span class="highlight">get in touch by email</span> with general questions after the course.</p>
+        <p>If you'd like more personalised support, I also offer one-to-one financial education sessions where we can go deeper on your specific situation at your own pace.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How much does it cost and what's included?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>The course is <span class="highlight">£59 per person</span> for both sessions — that's two evenings of 90 minutes each, in a small group of no more than 12 people.</p>
+        <p>There are no hidden costs, no upsells, and nothing to buy afterwards. Just straightforward financial education at a price that reflects the fact that this stuff should be accessible to everyone — not just people who can afford a financial adviser.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="faq-footer">
+  <p>Still got a question that's not answered here? Feel free to get in touch — no question is too basic and there's genuinely no such thing as a silly question when it comes to your money.</p>
+</div>
  
 <!-- FOOTER -->
 <footer>
@@ -786,6 +1055,44 @@
     el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
     obs.observe(el);
   });
+
+  // FAQ script
+    function sendHeight() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: height }, '*');
+  }
+ 
+  function toggle(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+ 
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+ 
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+ 
+    // Notify parent of new height after animation
+    setTimeout(sendHeight, 420);
+  }
+ 
+  // Send height on load and on any resize
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+ 
+  // Enable touch scrolling inside Google Sites iframe on mobile
+  document.addEventListener('touchstart', function() {}, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    e.stopPropagation();
+  }, { passive: true });
+  
   // Log activity into google sheet
 const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_WttCyj32TF5Ly5GSPz_hyc1-qBpqfpzh39FRo7uULQCjxvQIyhg/exec';
   
