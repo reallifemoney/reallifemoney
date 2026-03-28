@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Leo — Real Life Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mint:    #eef8eb;
+            --purple:  #8c52ff;
+            --orange:  #ff914d;
+            --yellow:  #ffde59;
+            --green:   #71c558;
+            --ink:     #1a1a1a;
+            --text:    #2e2e2e;
+            --muted:   #6b6b6b;
+            --rule:    #daecd6;
+            --white:   #ffffff;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--mint);
+            color: var(--text);
+            font-family: 'Lexend', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAV (Matches your main site) */
+        nav {
+            height: 80px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--mint);
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .nav-logo img { height: 70px; width: auto; }
+
+        .back-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--purple);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* CONTACT CONTENT */
+        .contact-hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 24px;
+            padding: 48px;
+            border: 1px solid var(--rule);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            text-align: center;
+            animation: fadeUp 0.6s ease;
+        }
+
+        .stag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 24px;
+        }
+
+        .stag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple); }
+
+        .contact-title {
+            font-size: clamp(32px, 5vw, 42px);
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .contact-intro {
+            color: var(--muted);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* CONTACT METHODS */
+        .methods {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .method-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--mint);
+            border-radius: 16px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+            border: 1px solid transparent;
+        }
+
+        .method-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border-color: var(--purple);
+        }
+
+        .method-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .method-info strong {
+            display: block;
+            font-size: 13px;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .method-info span {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .friendly-note {
+            font-size: 14px;
+            color: var(--muted);
+            padding: 20px;
+            border-top: 1px solid var(--rule);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .contact-card { padding: 32px 24px; }
+            .method-info span { font-size: 15px; }
+            nav { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a class="nav-logo" href="index.html">
+            <img src="/logo.webp" alt="Real Life Money">
+        </a>
+        <a href="index.html" class="back-link">← Back to Course</a>
+    </nav>
+
+    <div class="contact-hero">
+        <div class="contact-card">
+            <div class="stag"><span class="stag-dot"></span>Get in touch</div>
+            <h1 class="contact-title">Have a question?</h1>
+            <p class="contact-intro">Whether you're unsure if the course is right for you, or you're a past attendee with a follow-up—just drop me a message.</p>
+
+            <div class="methods">
+                <a href="mailto:leo@reallifemoney.co.uk" class="method-item">
+                    <div class="method-icon">✉️</div>
+                    <div class="method-info">
+                        <strong>Email</strong>
+                        <span>leo@reallifemoney.co.uk</span>
+                    </div>
+                </a>
+
+                <a href="tel:07123456789" class="method-item">
+                    <div class="method-icon">📱</div>
+                    <div class="method-info">
+                        <strong>WhatsApp / Call</strong>
+                        <span>07939 887950</span> </div>
+                </a>
+            </div>
+
+            <div class="friendly-note">
+                <p>✨ <strong>Note:</strong> As I'm often teaching during the day, a <strong>WhatsApp or Email</strong> is usually the quickest way to reach me!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Real Life Money. Built in Bristol.</p>
+    </footer>
+
+</body>
+</html>
