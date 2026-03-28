@@ -76,36 +76,44 @@
     grid-template-columns: 55% 45%;
   }
  
-  .hero-left {
-    background: var(--ink);
-    padding: 80px 56px 80px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .hero-left::before {
-    content: '';
-    position: absolute;
-    width: 350px; height: 350px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(140,82,255,0.18), transparent 70%);
-    top: -100px; right: -80px;
-    pointer-events: none;
-  }
- 
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    width: 220px; height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(113,197,88,0.14), transparent 70%);
-    bottom: 30px; left: -50px;
-    pointer-events: none;
-  }
- 
+ .hero-left {
+  /* A deep, soft charcoal-green instead of black */
+  background: #232d26; 
+  padding: 80px 56px 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Softer, "sunny" glows instead of neon purple */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  width: 450px; height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 222, 89, 0.08), transparent 70%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+
+.hero-left::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(113, 197, 88, 0.1), transparent 70%);
+  bottom: -50px; left: -50px;
+  pointer-events: none;
+}
+
+/* Make the body text a bit warmer/softer white */
+.hero-body {
+  color: rgba(245, 250, 245, 0.75);
+  font-weight: 300;
+}
+
   .hero-eyebrow {
     display: inline-flex;
     align-items: center;
