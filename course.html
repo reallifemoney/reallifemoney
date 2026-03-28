@@ -1162,9 +1162,9 @@
           📍 Brooklands Park Community Centre
           <div class="venue-popover" id="venuePopover-may" role="tooltip">
             <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">Brooklands Park<br>Bristol, BS4 2AY</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
             <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">📍 Open in Maps</a>
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
               <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
             </div>
           </div>
@@ -1185,9 +1185,9 @@
           📍 Brooklands Park Community Centre
           <div class="venue-popover" id="venuePopover-june" role="tooltip">
             <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">Brooklands Park<br>Bristol, BS4 2AY</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
             <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">📍 Open in Maps</a>
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
               <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
             </div>
           </div>
@@ -1209,7 +1209,7 @@
       </div>
     </div>
 
-    <p class="cta-sub" style="margin-top: 40px;">Questions? Small groups ensure plenty of time for 1-on-1 help.</p>
+    <p class="cta-sub" href="/contact" style="margin-top: 40px;">Questions? Get in touch</p>
   </div>
 </section>
 
@@ -1426,7 +1426,7 @@
   selectedCard.querySelector('.select-btn').innerText = 'Selected ✓';
 
   // 4. Update the heading and scroll down smoothly
-  document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
+  document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1);
   
   container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -1456,7 +1456,7 @@ document.querySelectorAll('[data-copy-btn]').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    navigator.clipboard.writeText('Brooklands Park Community Centre, Brooklands Park, Bristol, BS4 2AY');
+    navigator.clipboard.writeText('Brooklands Park Community Centre, 2 Clover Wy, Bristol, BS34 8AZ');
     btn.textContent = '✓ Copied!';
     btn.classList.add('copied');
     setTimeout(() => {
