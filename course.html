@@ -67,35 +67,6 @@
  
   .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 
-  /* NAV UPDATE NEW CONTAINER */
-
-  /* Update the nav to be a flex container that centers its child */
-nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    height: 80px;
-    background: var(--mint);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    justify-content: center; /* This centers the inner-nav */
-}
-
-/* This new class matches your .container width */
-.nav-inner {
-    width: 100%;
-    max-width: 1080px; /* Matches your main content width */
-    padding: 0 40px;   /* Matches your main content padding */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Ensure the nav-cta doesn't stretch or shrink weirdly */
-.nav-cta {
-    flex-shrink: 0;
-}
  
   /* HERO */
   .hero {
@@ -813,12 +784,10 @@ nav {
  
 <!-- NAV -->
 <nav>
-  <div class="nav-inner">
     <a class="nav-logo" href="/course">
       <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
     <a class="nav-cta" href="#book">Book Your Place →</a>
-  </div>
 </nav>
  
 <!-- HERO -->
