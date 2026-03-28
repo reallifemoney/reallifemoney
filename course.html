@@ -551,6 +551,22 @@
     font-size: 16px;
     flex-shrink: 0;
   }
+  
+  .date-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 16px;
+}
+
+.date-meta-row {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 
   /* The popover card */
   .venue-popover {
@@ -1148,21 +1164,53 @@
     , 6:30pm to 7:30pm.
   </p>
 
-    <div class="booking-grid">
-      <div class="date-card" onclick="selectDate('may')">
-        <span class="badge">Next Intake</span>
-        <div class="date-title">May 2026</div>
-        <div class="date-subtitle">Thursday May 7th, 14th & 21st at Brooklands Park Community Centre</div>
-        <button class="select-btn" id="btn-may">Select these dates</button>
-      </div>
-
-      <div class="date-card" onclick="selectDate('june')">
-        <span class="badge">Limited Spaces</span>
-        <div class="date-title">June 2026</div>
-        <div class="date-subtitle">June 9th, 16th & 23rd</div>
-        <button class="select-btn" id="btn-june">Select these dates</button>
+  <div class="booking-grid">
+  <div class="date-card" onclick="selectDate('may')">
+    <span class="badge">Next Intake</span>
+    <div class="date-title">May 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 7th, 14th &amp; 21st May</div>
+      <div class="date-meta-row">🕡 6:30pm – 7:30pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">Brooklands Park<br>Bristol, BS4 2AY</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">📍 Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
       </div>
     </div>
+    <button class="select-btn" id="btn-may">Select these dates</button>
+  </div>
+
+  <div class="date-card" onclick="selectDate('june')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">June 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Mon 9th, 16th &amp; 23rd June</div>
+      <div class="date-meta-row">🕡 6:30pm – 7:30pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">Brooklands Park<br>Bristol, BS4 2AY</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">📍 Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-june">Select these dates</button>
+  </div>
+</div>
 
     <div id="booking-widget-container">
       <div class="widget-header">
@@ -1399,33 +1447,39 @@
 
 // Brooklands park location
 
- const trigger = document.getElementById('venueTrigger');
-  const popover = document.getElementById('venuePopover');
-  const copyBtn = document.getElementById('copyBtn');
+// Venue popovers
+document.querySelectorAll('.venue-trigger').forEach(trigger => {
+  const popover = trigger.querySelector('.venue-popover');
 
   trigger.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent card's onclick firing
     const isOpen = popover.classList.toggle('open');
     trigger.setAttribute('aria-expanded', isOpen);
   });
+});
 
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!trigger.contains(e.target)) {
-      popover.classList.remove('open');
-      trigger.setAttribute('aria-expanded', false);
-    }
+document.addEventListener('click', () => {
+  document.querySelectorAll('.venue-popover.open').forEach(p => {
+    p.classList.remove('open');
+    p.closest('.venue-trigger').setAttribute('aria-expanded', false);
   });
+});
 
-  copyBtn.addEventListener('click', (e) => {
+// Copy buttons
+document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText('Brooklands Park Community Centre, 2 Clover Wy, Stoke Gifford, Bristol BS34 8AZ');
-    copyBtn.textContent = '✓ Copied!';
-    copyBtn.classList.add('copied');
+    e.stopPropagation();
+    navigator.clipboard.writeText('Brooklands Park Community Centre, Brooklands Park, Bristol, BS4 2AY');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
     setTimeout(() => {
-      copyBtn.textContent = 'Copy address';
-      copyBtn.classList.remove('copied');
+      btn.textContent = 'Copy address';
+      btn.classList.remove('copied');
     }, 2000);
   });
+});
+
   
   // Log activity into google sheet
 const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_WttCyj32TF5Ly5GSPz_hyc1-qBpqfpzh39FRo7uULQCjxvQIyhg/exec';
