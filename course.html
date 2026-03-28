@@ -609,6 +609,32 @@
   text-align: center;
   margin-bottom: 30px;
 }
+/* MOBILE WIDGET OPTIMIZATION */
+@media (max-width: 600px) {
+  /* 1. Reduce the main section horizontal padding */
+  .cta-sec .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* 2. Make the widget container "Edge-to-Edge" */
+  #booking-widget-container {
+    margin-top: 30px;
+    padding: 20px 0; /* Top/Bottom padding only, 0 on sides */
+    background: transparent; /* Remove white box background on mobile for more space */
+    border: none; /* Remove border to prevent "double-boxing" look */
+  }
+
+  .widget-header h3 {
+    font-size: 18px; /* Slightly smaller text so it doesn't wrap awkwardly */
+  }
+  
+  /* 3. Ensure the Tixtree wrapper itself has no hidden margins */
+  #tixtree-wrapper {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
 
   /* FAQ */
   .faq-header {
