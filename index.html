@@ -3,61 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Investment Simulation</title>
+    <title>Real Life Money — Financial Education in Bristol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* This section controls the look of your page */
+        :root {
+            --mint:    #eef8eb;
+            --purple:  #8c52ff;
+            --ink:     #1a1a1a;
+            --white:   #ffffff;
+            --rule:    #daecd6;
+            --yellow:  #ffde59;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #eef8eb; /* Your requested color */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 600px;
-            text-align: center;
-        }
-
-        h1 {
-            color: #2d5a27; /* A darker green to match the background */
-        }
-
-        p {
+            background: var(--mint);
+            color: var(--ink);
+            font-family: 'Lexend', sans-serif;
+            font-weight: 300;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background-color: #2d5a27;
-            color: white;
+        /* HERO HEADER */
+        .home-hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 24px;
+        }
+
+        .logo-main {
+            height: 120px;
+            width: auto;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .home-title {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+
+        .home-subtitle {
+            font-size: clamp(18px, 3vw, 22px);
+            color: #4a4a4a;
+            max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        /* THE MAIN CALL TO ACTION */
+        .course-card {
+            background: var(--white);
+            border: 1px solid var(--rule);
+            padding: 40px;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            color: inherit;
+            display: block;
         }
 
-        .btn:hover {
-            background-color: #1e3d1a;
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(140, 82, 255, 0.1);
+            border-color: var(--purple);
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--ink);
+        }
+
+        .card-meta {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .btn-go {
+            background: var(--ink);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            display: block;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .course-card:hover .btn-go {
+            background: var(--purple);
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(0,0,0,0.3);
+            border-top: 1px solid var(--rule);
+        }
+
+        .contact-link {
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Welcome to the Simulation</h1>
-        <p>This page is ready for your investment game code. The background is set to your custom soft green (#eef8eb).</p>
+    <section class="home-hero">
+        <img src="/logo.webp" alt="Real Life Money Logo" class="logo-main">
         
-        <a href="#" class="btn">Start Game</a>
-    </div>
+        <h1 class="home-title">Money doesn't have to be <span style="color: var(--purple)">complicated.</span></h1>
+        <p class="home-subtitle">Straightforward financial education for real people. No jargon, no sales pitches, just clarity.</p>
+
+        <a href="/course" class="course-card">
+            <span class="tag">Flagship Course</span>
+            <h2 class="card-title">Beginner’s Guide to Investing</h2>
+            <p class="card-meta">📍 Bristol &nbsp;•&nbsp; 🗓️ 3 Evenings &nbsp;•&nbsp; 👥 Small Groups</p>
+            <div class="btn-go">View Course Details →</div>
+        </a>
+
+        <a href="/contact" class="contact-link">Have a question? Contact Leo</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Real Life Money. Built with ❤️ in Bristol.</p>
+    </footer>
 
 </body>
 </html>
