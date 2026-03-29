@@ -929,6 +929,27 @@
     .hero-title { font-size: 36px; letter-spacing: -1px; }
     .details-grid { grid-template-columns: 1fr 1fr; }
   }
+  
+  /* FIX FOR WRAPPING STATS ON MOBILE */
+@media (max-width: 480px) {
+  .hero-stats-moss, .hero-stats-new {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* Forces 3 equal columns */
+    gap: 10px; /* Reduces the gap between them */
+    justify-items: center;
+  }
+
+  .stat-item-moss strong, .stat-item-new strong {
+    font-size: 24px; /* Shrinks the '2x' and '100%' slightly */
+  }
+
+  .stat-item-moss small, .stat-item-new small {
+    font-size: 10px; /* Shrinks the label text */
+    text-align: center;
+    white-space: nowrap; /* Prevents labels from breaking weirdly */
+  }
+}
+
 </style>
 </head>
 <body>
