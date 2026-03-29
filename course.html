@@ -315,7 +315,66 @@ body {
     line-height: 1.7;
     font-weight: 300;
   }
- 
+
+/* TRUST BAR */
+.trust-bar {
+  background: var(--white);
+  padding: 60px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.trust-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.trust-item {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.trust-item:hover {
+  transform: translateY(-3px);
+}
+
+.trust-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.trust-logo {
+  height: 50px; /* Adjust this depending on your logo shapes */
+  width: auto;
+  filter: grayscale(100%); /* Optional: makes them look more 'corporate' and clean */
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.trust-item:hover .trust-logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .trust-grid {
+    gap: 50px;
+  }
+}
+
+  
   /* WHO */
   .who-sec { background: var(--white); }
  
@@ -1068,7 +1127,30 @@ body {
 
   </div>
 </section>
- 
+
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      
+      <a href="https://www.cset.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label">In partnership with</span>
+        <img src="cset.webp" alt="CSET Logo" class="trust-logo">
+      </a>
+
+      <a href="https://www.cii.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label">Qualification from</span>
+        <img src="cii.webp" alt="CII Logo" class="trust-logo">
+      </a>
+
+      <a href="https://maps.app.goo.gl/HdFMCXXdQW5TEw8s9?g_st=ic" target="_blank" class="trust-item">
+        <span class="trust-label">Rated 5 stars on</span>
+        <img src="google.webp" alt="Google Reviews" class="trust-logo">
+      </a>
+
+    </div>
+  </div>
+</section>
+  
 <!-- WHO -->
 <section class="who-sec">
   <div class="container">
