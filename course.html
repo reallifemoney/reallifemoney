@@ -1639,8 +1639,16 @@ function selectDate(month) {
 
   document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
   
-  // 6. Smooth Scroll
-  container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // 6. Smooth Scroll (with a tiny delay to allow the widget to load)
+  setTimeout(() => {
+    const yOffset = -100; // This leaves a 100px gap at the top so it's not "squashed"
+    const y = container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    
+    window.scrollTo({
+      top: y,
+      behavior: 'smooth'
+    });
+  }, 100);
 }
 
 // Brooklands park location
