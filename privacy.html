@@ -19,218 +19,275 @@
     --white:   #ffffff;
   }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-body {
-  background: var(--mint);
-  color: var(--text);
-  font-family: 'Lexend', sans-serif;
-  font-weight: 300;
-  line-height: 1.7;
-  overflow-x: hidden;
-}
+  body {
+    background: var(--mint);
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  height: 66px;
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--mint);
-  border-bottom: 1px solid var(--rule);
-  transition: box-shadow 0.2s;
-}
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 66px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--mint);
+    border-bottom: 1px solid var(--rule);
+    transition: box-shadow 0.2s;
+  }
 
-nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
 
-.nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
 
-.nav-back {
-  background: var(--white);
-  color: var(--ink);
-  font-family: 'Lexend', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 22px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 1px solid var(--rule);
-  transition: background 0.2s, transform 0.15s;
-}
+  .nav-back {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 100px;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    transition: background 0.2s, transform 0.15s;
+  }
 
-.nav-back:hover { background: var(--mint); transform: translateY(-1px); }
+  .nav-back:hover { background: var(--mint); transform: translateY(-1px); }
 
-/* PAGE HEADER */
-.page-header {
-  padding: 120px 0 64px;
-  background: var(--ink);
-  position: relative;
-  overflow: hidden;
-}
+  /* PAGE HEADER */
+  .page-header {
+    padding: 120px 0 64px;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
 
-.page-header::before {
-  content: '';
-  position: absolute;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(140,82,255,0.15), transparent 70%);
-  top: -100px; right: -80px;
-  pointer-events: none;
-}
+  .page-header::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(140,82,255,0.15), transparent 70%);
+    top: -100px; right: -80px;
+    pointer-events: none;
+  }
 
-.page-header::after {
-  content: '';
-  position: absolute;
-  width: 250px; height: 250px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(113,197,88,0.12), transparent 70%);
-  bottom: -60px; left: 60px;
-  pointer-events: none;
-}
+  .page-header::after {
+    content: '';
+    position: absolute;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(113,197,88,0.12), transparent 70%);
+    bottom: -60px; left: 60px;
+    pointer-events: none;
+  }
 
-.container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 32px;
-}
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-.page-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--green);
-  margin-bottom: 16px;
-}
+  .page-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
 
-.tag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+  .tag-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+  }
 
-.page-title {
-  font-size: clamp(32px, 5vw, 52px);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -1px;
-  line-height: 1.08;
-  margin-bottom: 16px;
-}
+  .page-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.08;
+    margin-bottom: 16px;
+  }
 
-.page-subtitle {
-  font-size: 15px;
-  color: rgba(255,255,255,0.5);
-  font-weight: 300;
-}
+  .page-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
 
-/* CONTENT */
-.content { padding: 64px 0 96px; }
+  /* CONTENT */
+  .content {
+    padding: 64px 0 96px;
+  }
 
-.section-block {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 14px;
-  padding: 36px 40px;
-  margin-bottom: 20px;
-}
+  .section-block {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 36px 40px;
+    margin-bottom: 20px;
+  }
 
-.block-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--purple);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
+  .section-block:last-child { margin-bottom: 0; }
 
-.block-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: -0.3px;
-  margin-bottom: 14px;
-}
+  .block-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--purple);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
 
-.block-body { font-size: 14px; color: var(--text); line-height: 1.8; font-weight: 300; }
-.block-body p + p { margin-top: 12px; }
-.block-body ul { margin: 12px 0 12px 4px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .block-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.3px;
+    margin-bottom: 14px;
+  }
 
-.block-body ul li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--text);
-}
+  .block-body {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    font-weight: 300;
+  }
 
-.block-body ul li::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  flex-shrink: 0;
-  margin-top: 7px;
-}
+  .block-body p + p { margin-top: 12px; }
 
-.block-body a {
-  color: var(--purple);
-  text-decoration: none;
-  font-weight: 400;
-  border-bottom: 1px solid rgba(140,82,255,0.3);
-}
+  .block-body ul {
+    margin: 12px 0 12px 4px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.highlight-box {
-  background: var(--mint);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--green);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px;
-  margin-top: 16px;
-  font-size: 13px;
-  color: #2d5228;
-}
+  .block-body ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text);
+  }
 
-.meta-bar {
-  background: var(--white);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  padding: 16px 24px;
-  margin-bottom: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .block-body ul li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
 
-footer { background: var(--ink); padding: 36px 40px; text-align: center; }
-footer p { font-size: 13px; color: rgba(255,255,255,0.3); font-weight: 300; }
-footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  .block-body a {
+    color: var(--purple);
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(140,82,255,0.3);
+  }
 
-@media (max-width: 600px) {
-  nav { padding: 0 20px; }
-  .section-block { padding: 24px 22px; }
-}
+  .block-body a:hover { border-bottom-color: var(--purple); }
+
+  .highlight-box {
+    background: var(--mint);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #2d5228;
+    line-height: 1.6;
+  }
+
+  /* LAST UPDATED BAR */
+  .meta-bar {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .meta-bar span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .meta-bar strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 36px 40px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .container { padding: 0 20px; }
+    .section-block { padding: 24px 22px; }
+    .page-header { padding: 100px 0 48px; }
+  }
 </style>
 </head>
-
-
 <body>
 
+<!-- NAV -->
 <nav>
   <a class="nav-logo" href="/index.html">
-    <img src="/logo.webp" alt="Real Life Money" style="height: 52px; width: auto;">
+    <img src="/logo.png" alt="Real Life Money" style="height: 52px; width: auto;">
   </a>
   <a class="nav-back" href="/course">← Back to site</a>
 </nav>
 
+<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="container">
     <div class="page-tag"><span class="tag-dot"></span>Legal</div>
@@ -239,30 +296,155 @@ footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
   </div>
 </div>
 
+<!-- CONTENT -->
 <div class="content">
   <div class="container">
+
     <div class="meta-bar">
-      <span>Last updated: <strong>March 2026</strong></span>
+      <span>Last updated: <strong>April 2026</strong></span>
       <span>Real Life Money · Bristol</span>
     </div>
 
+    <!-- 1 -->
     <div class="section-block">
       <div class="block-number">1</div>
       <h2 class="block-title">Who we are</h2>
       <div class="block-body">
         <p>Real Life Money is a financial education business based in Bristol, UK, run by Leo Dennis. We deliver in-person investing courses for individuals and organisations.</p>
-        <p>If you have any questions about this privacy policy or how we handle your data, you can contact us at: <a href="mailto:leo@reallifemoney.co.uk">leo@reallifemoney.co.uk</a></p>
+        <p>If you have any questions about this privacy policy or how we handle your data, you can contact us at: <a href="mailto:hello@reallifemoney.co.uk">hello@reallifemoney.co.uk</a></p>
       </div>
     </div>
 
+    <!-- 2 -->
+    <div class="section-block">
+      <div class="block-number">2</div>
+      <h2 class="block-title">What information we collect</h2>
+      <div class="block-body">
+        <p>We only collect information that is necessary to deliver our courses and communicate with you. This may include:</p>
+        <ul>
+          <li>Your name and email address when you book a course through Eventbrite or TixTree</li>
+          <li>Your responses to post-course surveys (via Google Forms)</li>
+          <li>Any information you share when you contact us directly by email</li>
+          <li>Testimonials you provide, where you have given permission for us to use them</li>
+        </ul>
+        <p>We do not collect any financial information, payment details, or sensitive personal data. All payments are handled directly by Eventbrite or TixTree depending on which platform the course is listed on.</p>
+      </div>
     </div>
+
+    <!-- 3 -->
+    <div class="section-block">
+      <div class="block-number">3</div>
+      <h2 class="block-title">How we use your information</h2>
+      <div class="block-body">
+        <p>We use the information we collect solely to:</p>
+        <ul>
+          <li>Confirm your course booking and send you joining information</li>
+          <li>Send course reminders and follow-up materials</li>
+          <li>Improve our courses based on your survey feedback</li>
+          <li>Respond to your enquiries</li>
+          <li>Let you know about future courses, if you have agreed to this</li>
+        </ul>
+        <div class="highlight-box">
+          We will never sell your personal data to third parties, use it for advertising purposes, or share it with anyone outside of Real Life Money without your explicit consent.
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="section-block">
+      <div class="block-number">4</div>
+      <h2 class="block-title">Legal basis for processing</h2>
+      <div class="block-body">
+        <p>Under UK GDPR, we process your personal data on the following legal bases:</p>
+        <ul>
+          <li><strong style="font-weight:500">Contract</strong> — to fulfil your course booking and deliver the service you have paid for</li>
+          <li><strong style="font-weight:500">Legitimate interests</strong> — to improve our courses and communicate relevant updates to past attendees</li>
+          <li><strong style="font-weight:500">Consent</strong> — where you have explicitly agreed to receive marketing communications or for your testimonial to be used publicly</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="section-block">
+      <div class="block-number">5</div>
+      <h2 class="block-title">Third-party services</h2>
+      <div class="block-body">
+        <p>We use the following third-party services to operate our business. Each has its own privacy policy:</p>
+        <ul>
+          <li><strong style="font-weight:500">Eventbrite</strong> — for course bookings and payment processing. <a href="https://www.eventbrite.co.uk/support/articles/en_US/Troubleshooting/eventbrite-privacy-policy" target="_blank">Eventbrite Privacy Policy</a></li>
+          <li><strong style="font-weight:500">TixTree</strong> — for course bookings and payment processing. Attendee data is used solely to deliver the service and is never sold or transferred to third parties. <a href="https://www.tixtree.com/legal/terms-and-conditions/" target="_blank">TixTree Terms &amp; Privacy</a></li>
+          <li><strong style="font-weight:500">Google Forms</strong> — for post-course surveys. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></li>
+          <li><strong style="font-weight:500">Mailchimp</strong> — if you join our mailing list. <a href="https://mailchimp.com/legal/privacy/" target="_blank">Mailchimp Privacy Policy</a></li>
+        </ul>
+        <p>This website is hosted on GitHub Pages. GitHub may collect standard server log data (such as IP addresses). <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank">GitHub Privacy Policy</a></p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="section-block">
+      <div class="block-number">6</div>
+      <h2 class="block-title">How long we keep your data</h2>
+      <div class="block-body">
+        <p>We retain your personal data only for as long as necessary:</p>
+        <ul>
+          <li>Booking records are kept for up to 2 years for administrative purposes</li>
+          <li>Survey responses are kept for up to 3 years to track course improvement over time</li>
+          <li>Email correspondence is kept for up to 1 year</li>
+          <li>If you ask to be removed from our mailing list, we will action this within 5 working days</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="section-block">
+      <div class="block-number">7</div>
+      <h2 class="block-title">Your rights</h2>
+      <div class="block-body">
+        <p>Under UK GDPR you have the right to:</p>
+        <ul>
+          <li>Access the personal data we hold about you</li>
+          <li>Ask us to correct inaccurate or incomplete data</li>
+          <li>Ask us to delete your data (the "right to be forgotten")</li>
+          <li>Object to or restrict how we process your data</li>
+          <li>Withdraw consent at any time where consent is the basis for processing</li>
+          <li>Complain to the Information Commissioner's Office (ICO) if you believe your rights have been violated</li>
+        </ul>
+        <p>To exercise any of these rights, please contact us at <a href="mailto:hello@reallifemoney.co.uk">hello@reallifemoney.co.uk</a>. We will respond within 30 days.</p>
+        <div class="highlight-box">
+          You can also contact the ICO directly at <a href="https://ico.org.uk" target="_blank" style="color:#2d5228;border-bottom-color:rgba(45,82,40,0.4)">ico.org.uk</a> or by calling 0303 123 1113.
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="section-block">
+      <div class="block-number">8</div>
+      <h2 class="block-title">Cookies</h2>
+      <div class="block-body">
+        <p>This website does not use any tracking cookies or analytics tools. We do not track your behaviour on this site.</p>
+        <p>If you book through Eventbrite or TixTree, those platforms may set cookies in accordance with their own cookie policies.</p>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="section-block">
+      <div class="block-number">9</div>
+      <h2 class="block-title">Changes to this policy</h2>
+      <div class="block-body">
+        <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date at the top. We recommend checking back periodically if you are a regular attendee.</p>
+        <p>This policy was last reviewed in March 2026.</p>
+      </div>
+    </div>
+
+  </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <p>
     <strong style="color:rgba(255,255,255,0.55)">Real Life Money</strong> · Bristol ·
-    Financial education, not regulated financial advice.<br>
-    <a href="/index.html">Home</a> · <a href="mailto:leo@reallifemoney.co.uk">Contact</a> · <a href="/privacy.html">Privacy</a>
+    Financial education, not regulated financial advice. All content is general and educational in nature.<br>
+    <a href="/index.html">Home</a> · <a href="mailto:hello@reallifemoney.co.uk">Contact</a> · <a href="/privacy.html">Privacy</a>
   </p>
 </footer>
 
@@ -275,4 +457,3 @@ footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
 
 </body>
 </html>
-
