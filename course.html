@@ -1391,16 +1391,14 @@ body {
   </div>
 </div>
 
-    <div id="booking-widget-container">
-      <div class="widget-header">
-        <h3 id="selected-date-display">Finalise your booking</h3>
-        <p style="font-size: 14px; color: var(--muted)">Safe & secure checkout via Tixtree</p>
-      </div>
-      
-      <div id="tixtree-wrapper">
-        <script id="tixtree-script" src="https://www.tixtree.com/widgets/tixtree.js" data-type="event" data-id="posters-beginners-guide-to-investing-0d1850321bea"></script>
-      </div>
-    </div>
+  <div id="booking-widget-container">
+  <div class="widget-header">
+    <h3 id="selected-date-display">Finalise your booking</h3>
+    <p style="font-size: 14px; color: var(--muted)">Safe & secure checkout via Tixtree</p>
+  </div>
+  
+  <div id="tixtree-wrapper"></div>
+</div>
 
     <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
   </div>
@@ -1604,23 +1602,44 @@ body {
 
   // CTA BOOKING PICKER
 
-  function selectDate(month) {
-  // 1. Show the widget container
+function selectDate(month) {
+  // 1. Define your IDs
+  const ids = {
+    'may': 'beginners-guide-to-investing-0d1850321bea',
+    'june': 'beginners-guide-to-investing-f6e7b00efeb0'
+  };
+
+  const selectedID = ids[month];
+
+  // 2. Show the container
   const container = document.getElementById('booking-widget-container');
   container.style.display = 'block';
 
-  // 2. Clear previous selections
+  // 3. Clear the existing widget (Important so they don't stack)
+  const wrapper = document.getElementById('tixtree-wrapper');
+  wrapper.innerHTML = ''; 
+
+  // 4. Create and inject the new Tixtree script
+  const script = document.createElement('script');
+  script.id = 'tixtree-script';
+  script.src = 'https://www.tixtree.com/widgets/tixtree.js';
+  script.setAttribute('data-type', 'event');
+  script.setAttribute('data-id', selectedID);
+  
+  wrapper.appendChild(script);
+
+  // 5. Visual UI Updates
   document.querySelectorAll('.date-card').forEach(card => card.classList.remove('selected'));
   document.querySelectorAll('.select-btn').forEach(btn => btn.innerText = 'Select these dates');
 
-  // 3. Highlight the chosen card
+  // Find the clicked card (using event.currentTarget)
   const selectedCard = event.currentTarget;
   selectedCard.classList.add('selected');
   selectedCard.querySelector('.select-btn').innerText = 'Selected ✓';
 
-  // 4. Update the heading and scroll down smoothly
-  document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1);
+  document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
   
+  // 6. Smooth Scroll
   container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
