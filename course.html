@@ -1720,6 +1720,20 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_Wtt
     keepalive: true
   });
 }
+
+let hasLoggedScroll = false;
+
+window.addEventListener('scroll', () => {
+  // 1. Calculate how far down they are (Percentage)
+  let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+
+  // 2. If they pass 50% (0.5) and we haven't logged it yet...
+  if (!hasLoggedScroll && scrollPercent > 0.5) {
+    logButtonClick('Scroll: Halfway Down'); // This calls your existing function
+    hasLoggedScroll = true; // Prevents duplicate logs
+  }
+});
+
 </script>
 
 </body>
