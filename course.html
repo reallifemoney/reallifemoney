@@ -1721,6 +1721,13 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_Wtt
   });
 }
 
+// Keep track of which milestones we've already logged this session
+let loggedMilestones = {
+  quarter: false,
+  half: false,
+  threeQuarters: false
+};
+
 window.addEventListener('scroll', () => {
   // Calculate percentage of page scrolled
   let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
@@ -1743,6 +1750,7 @@ window.addEventListener('scroll', () => {
     loggedMilestones.threeQuarters = true;
   }
 });
+
 
 
 </script>
