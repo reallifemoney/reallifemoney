@@ -1734,6 +1734,37 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// Keep track of which milestones we've already logged this session
+let loggedMilestones = {
+  quarter: false,
+  half: false,
+  threeQuarters: false
+};
+
+window.addEventListener('scroll', () => {
+  // Calculate percentage of page scrolled
+  let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+
+  // 25% Scroll (The Quarter mark)
+  if (!loggedMilestones.quarter && scrollPercent > 0.25) {
+    logButtonClick('Scroll: 25% (Quarter)');
+    loggedMilestones.quarter = true;
+  }
+
+  // 50% Scroll (The Halfway mark)
+  if (!loggedMilestones.half && scrollPercent > 0.50) {
+    logButtonClick('Scroll: 50% (Halfway)');
+    loggedMilestones.half = true;
+  }
+
+  // 75% Scroll (Deep Interest mark)
+  if (!loggedMilestones.threeQuarters && scrollPercent > 0.75) {
+    logButtonClick('Scroll: 75% (Deep)');
+    loggedMilestones.threeQuarters = true;
+  }
+});
+
+
 </script>
 
 </body>
