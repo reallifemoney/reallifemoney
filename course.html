@@ -1732,6 +1732,18 @@ window.addEventListener('scroll', () => {
   // Calculate percentage of page scrolled
   let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
 
+  // 5% Scroll
+  if (!loggedMilestones.quarter && scrollPercent > 0.05) {
+    logButtonClick('Scroll: 5%');
+    loggedMilestones.quarter = true;
+  }
+
+  // 10% Scroll
+  if (!loggedMilestones.quarter && scrollPercent > 0.1) {
+    logButtonClick('Scroll: 10%');
+    loggedMilestones.quarter = true;
+  }
+
   // 25% Scroll (The Quarter mark)
   if (!loggedMilestones.quarter && scrollPercent > 0.25) {
     logButtonClick('Scroll: 25% (Quarter)');
