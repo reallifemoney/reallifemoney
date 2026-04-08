@@ -1733,15 +1733,15 @@ window.addEventListener('scroll', () => {
   let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
 
   // 5% Scroll
-  if (!loggedMilestones.quarter && scrollPercent > 0.05) {
+  if (!loggedMilestones.five && scrollPercent > 0.05) {
     logButtonClick('Scroll: 5%');
-    loggedMilestones.quarter = true;
+    loggedMilestones.five = true;
   }
 
   // 10% Scroll
-  if (!loggedMilestones.quarter && scrollPercent > 0.1) {
+  if (!loggedMilestones.ten && scrollPercent > 0.1) {
     logButtonClick('Scroll: 10%');
-    loggedMilestones.quarter = true;
+    loggedMilestones.ten = true;
   }
 
   // 25% Scroll (The Quarter mark)
