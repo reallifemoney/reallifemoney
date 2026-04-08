@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Wellbeing for Teams | Real Life Money</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        :root {
+            --mint: #e2f1ed;
+            --ink: #1a1a1a;
+            --purple: #6b4fbb;
+            --muted: #666;
+        }
+
+        body { font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Hero Section */
+        .hero-corp { background: var(--mint); padding: 80px 0; text-align: center; }
+        .hero-corp h1 { font-size: 3rem; margin-bottom: 20px; color: var(--ink); }
+        .hero-corp p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 30px; }
+
+        /* Options Grid */
+        .wellbeing-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 50px 0; }
+        .option-card { border: 1px solid #ddd; padding: 30px; border-radius: 12px; transition: 0.3s; }
+        .option-card:hover { border-color: var(--purple); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .option-card h3 { color: var(--purple); margin-top: 0; }
+
+        /* CTA Buttons */
+        .btn-primary { background: var(--purple); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; }
+        .btn-outline { border: 2px solid var(--purple); color: var(--purple); padding: 13px 28px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <section class="hero-corp">
+        <div class="container">
+            <span style="text-transform: uppercase; letter-spacing: 1px; font-weight: bold; color: var(--purple);">Staff Wellbeing</span>
+            <h1>Financial Clarity for Your Team</h1>
+            <p>Reduce employee stress and improve focus with a jargon-free investing course delivered at your office or online.</p>
+            <a href="mailto:leo@reallifemoney.co.uk?subject=Corporate%20Wellbeing" class="btn-primary" onclick="logButtonClick('Corp: Hero Contact')">Enquire for your team</a>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 60px 0;">
+        <h2 style="text-align: center;">How we can work together</h2>
+        <div class="wellbeing-options">
+            
+            <div class="option-card">
+                <h3>Fully Funded</h3>
+                <p>Provide the course as a 100% free benefit to your staff. We deliver 3 evenings (or lunch & learns) at your Bristol office.</p>
+                <p><strong>Benefit:</strong> Maximum engagement & highest "thank you" factor from staff.</p>
+            </div>
+
+            <div class="option-card">
+                <h3>Subsidised</h3>
+                <p>The company pays a portion of the cost, and interested staff pay the rest. This ensures "skin in the game" for attendees.</p>
+                <p><strong>Benefit:</strong> Cost-effective for the company while providing massive value.</p>
+            </div>
+
+            <div class="option-card">
+                <h3>Host & Facilitate</h3>
+                <p>Free for the company. You provide the space and internal promotion; staff pay for their own tickets at a discounted group rate.</p>
+                <p><strong>Benefit:</strong> No budget impact, but shows you care about their future.</p>
+            </div>
+
+        </div>
+
+        <div style="text-align: center; background: #f9f9f9; padding: 40px; border-radius: 12px;">
+            <h2>Ready to support your employees?</h2>
+            <p>I can tailor the course to your company's pension provider (e.g. Aegon, Aviva, HL) to make it directly relevant.</p>
+            <br>
+            <a href="mailto:leo@reallifemoney.co.uk" class="btn-outline" onclick="logButtonClick('Corp: Bottom Contact')">Get a Tailored Proposal →</a>
+        </div>
+    </section>
+
+    <script>
+        // YOUR EXISTING LOGGING LOGIC
+        async function logButtonClick(eventLabel) {
+            const url = "YOUR_GOOGLE_SCRIPT_URL"; 
+            const payload = {
+                timestamp: new Date().toISOString(),
+                event: eventLabel,
+                url: window.location.href
+            };
+            fetch(url, { method: "POST", mode: "no-cors", body: JSON.stringify(payload), keepalive: true });
+        }
+
+        // SCROLL TRACKING
+        let loggedMilestones = { q: false, h: false, t: false };
+        window.addEventListener('scroll', () => {
+            let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
+            if (!loggedMilestones.q && scrollPercent > 0.25) { logButtonClick('Corp Scroll: 25%'); loggedMilestones.q = true; }
+            if (!loggedMilestones.h && scrollPercent > 0.50) { logButtonClick('Corp Scroll: 50%'); loggedMilestones.h = true; }
+            if (!loggedMilestones.t && scrollPercent > 0.75) { logButtonClick('Corp Scroll: 75%'); loggedMilestones.t = true; }
+        });
+    </script>
+</body>
+</html>
