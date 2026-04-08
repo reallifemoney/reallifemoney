@@ -1,99 +1,960 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Wellbeing for Teams | Real Life Money</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        :root {
-            --mint: #e2f1ed;
-            --ink: #1a1a1a;
-            --purple: #6b4fbb;
-            --muted: #666;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Wellbeing for Your Team — Real Life Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --orange:  #ff914d;
+    --yellow:  #ffde59;
+    --green:   #71c558;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+  }
 
-        body { font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.6; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Hero Section */
-        .hero-corp { background: var(--mint); padding: 80px 0; text-align: center; }
-        .hero-corp h1 { font-size: 3rem; margin-bottom: 20px; color: var(--ink); }
-        .hero-corp p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 30px; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-        /* Options Grid */
-        .wellbeing-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 50px 0; }
-        .option-card { border: 1px solid #ddd; padding: 30px; border-radius: 12px; transition: 0.3s; }
-        .option-card:hover { border-color: var(--purple); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .option-card h3 { color: var(--purple); margin-top: 0; }
+body {
+background: var(–mint);
+color: var(–text);
+font-family: ‘Lexend’, sans-serif;
+font-weight: 300;
+line-height: 1.7;
+overflow-x: hidden;
+}
 
-        /* CTA Buttons */
-        .btn-primary { background: var(--purple); color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; }
-        .btn-outline { border: 2px solid var(--purple); color: var(--purple); padding: 13px 28px; border-radius: 8px; text-decoration: none; display: inline-block; font-weight: bold; }
-    </style>
+/* ── NAV (identical to course page) ── */
+nav {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 100;
+height: 66px;
+padding: 0 40px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: var(–mint);
+border-bottom: 1px solid var(–rule);
+transition: box-shadow 0.2s;
+}
+nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+.nav-logo { display: flex; align-items: center; text-decoration: none; }
+.nav-cta {
+background: var(–purple); color: #fff;
+font-family: ‘Lexend’, sans-serif; font-size: 13px; font-weight: 500;
+padding: 10px 24px; border-radius: 100px; text-decoration: none;
+transition: opacity 0.2s, transform 0.15s;
+}
+.nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+min-height: 100vh;
+padding-top: 66px;
+display: grid;
+grid-template-columns: 55% 45%;
+}
+
+.hero-left {
+background: var(–ink);
+padding: 80px 56px 80px 60px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+position: relative;
+overflow: hidden;
+}
+
+.hero-left::before {
+content: ‘’;
+position: absolute;
+width: 350px; height: 350px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(140,82,255,0.18), transparent 70%);
+top: -100px; right: -80px;
+pointer-events: none;
+}
+
+.hero-left::after {
+content: ‘’;
+position: absolute;
+width: 220px; height: 220px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(113,197,88,0.14), transparent 70%);
+bottom: 30px; left: -50px;
+pointer-events: none;
+}
+
+.hero-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 2.5px;
+text-transform: uppercase;
+color: var(–green);
+margin-bottom: 24px;
+}
+
+.pulse {
+width: 7px; height: 7px;
+border-radius: 50%;
+background: var(–green);
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%,100% { opacity:1; transform:scale(1); }
+50%      { opacity:0.4; transform:scale(0.65); }
+}
+
+.hero-title {
+font-size: clamp(36px, 4vw, 56px);
+font-weight: 700;
+line-height: 1.06;
+color: #fff;
+letter-spacing: -1.5px;
+margin-bottom: 24px;
+animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.hero-body {
+font-size: 16px;
+line-height: 1.75;
+color: rgba(255,255,255,0.6);
+max-width: 420px;
+margin-bottom: 40px;
+font-weight: 300;
+animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.hero-actions {
+display: flex;
+align-items: center;
+gap: 18px;
+flex-wrap: wrap;
+margin-bottom: 52px;
+animation: fadeUp 0.6s ease 0.4s both;
+}
+
+.btn-primary {
+background: var(–yellow); color: var(–ink);
+font-family: ‘Lexend’, sans-serif; font-size: 14px; font-weight: 600;
+padding: 14px 32px; border-radius: 100px; text-decoration: none;
+letter-spacing: -0.2px; transition: transform 0.15s, box-shadow 0.15s;
+display: inline-block;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,222,89,0.45); }
+
+.hero-note { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+.hero-stats {
+display: flex;
+gap: 36px;
+padding-top: 36px;
+border-top: 1px solid rgba(255,255,255,0.08);
+animation: fadeUp 0.6s ease 0.5s both;
+flex-wrap: wrap;
+}
+
+.stat-val {
+font-size: 30px; font-weight: 700;
+letter-spacing: -1px; line-height: 1; margin-bottom: 4px;
+}
+.stat-lbl { font-size: 11px; color: rgba(255,255,255,0.38); font-weight: 400; }
+
+/* Hero right — wellbeing impact panel */
+.hero-right {
+background: var(–mint);
+padding: 72px 44px 72px 40px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 14px;
+}
+
+.impact-badge {
+background: var(–white);
+border: 1.5px solid var(–green);
+border-radius: 12px;
+padding: 18px 22px;
+display: flex;
+align-items: flex-start;
+gap: 14px;
+}
+
+.impact-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+
+.impact-text { font-size: 13px; color: #2d5228; line-height: 1.55; font-weight: 300; }
+.impact-text strong { display: block; font-weight: 600; font-size: 13px; margin-bottom: 3px; color: #1a3a16; }
+
+.why-card {
+background: var(–white);
+border: 1px solid var(–rule);
+border-radius: 12px;
+padding: 18px 22px;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.why-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.07); }
+.why-card.dark { background: var(–purple); border-color: var(–purple); }
+
+.why-card .wq {
+font-size: 14px; font-weight: 400; line-height: 1.6;
+color: var(–ink); margin-bottom: 6px;
+}
+.why-card.dark .wq { color: rgba(255,255,255,0.92); }
+
+.why-card .ws {
+font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+color: var(–muted); text-transform: uppercase;
+}
+.why-card.dark .ws { color: rgba(255,255,255,0.45); }
+
+/* ── SHARED ── */
+section { padding: 88px 0; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+
+.stag {
+display: inline-flex; align-items: center; gap: 8px;
+font-size: 11px; font-weight: 600; letter-spacing: 2px;
+text-transform: uppercase; margin-bottom: 16px;
+}
+.stag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+.sec-title {
+font-size: clamp(28px, 3.2vw, 44px); font-weight: 700;
+line-height: 1.1; color: var(–ink); letter-spacing: -0.8px; margin-bottom: 14px;
+}
+.sec-intro {
+font-size: 16px; color: var(–muted);
+max-width: 560px; line-height: 1.7; font-weight: 300;
+}
+
+/* ── WHY IT MATTERS ── */
+.why-sec { background: var(–white); }
+
+.why-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 20px; margin-top: 48px;
+}
+
+.why-impact-card {
+border-radius: 16px; padding: 32px 28px;
+border: 1.5px solid transparent;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.why-impact-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+.why-impact-card.c1 { background: #f3eeff; border-color: #d9c8ff; }
+.why-impact-card.c2 { background: #fff4ee; border-color: #ffd4b8; }
+.why-impact-card.c3 { background: #f0faed; border-color: #c2e8b8; }
+
+.wic-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+.wic-stat { font-size: 38px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+.wic-title { font-size: 16px; font-weight: 600; color: var(–ink); margin-bottom: 8px; letter-spacing: -0.2px; }
+.wic-body { font-size: 13px; color: var(–muted); line-height: 1.7; }
+
+/* ── THE COURSE ── */
+.course-sec { background: var(–mint); }
+
+.sessions-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 20px; margin-top: 52px;
+}
+
+.sess-card { border-radius: 16px; overflow: hidden; }
+
+.sess-head {
+padding: 28px 28px 22px;
+position: relative; overflow: hidden;
+}
+.sess-card:nth-child(1) .sess-head { background: var(–purple); }
+.sess-card:nth-child(2) .sess-head { background: var(–ink); }
+.sess-card:nth-child(3) .sess-head { background: var(–green); }
+
+.sess-head::after {
+content: attr(data-n);
+position: absolute; right: 16px; top: 6px;
+font-size: 80px; font-weight: 700;
+color: rgba(255,255,255,0.06); line-height: 1; letter-spacing: -3px;
+}
+
+.sess-num {
+font-size: 10px; font-weight: 600;
+letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+}
+.sess-card:nth-child(1) .sess-num { color: var(–yellow); }
+.sess-card:nth-child(2) .sess-num { color: var(–green); }
+.sess-card:nth-child(3) .sess-num { color: var(–yellow); }
+
+.sess-title {
+font-size: 18px; font-weight: 700; color: #fff;
+line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 4px;
+}
+.sess-sub { font-size: 12px; color: rgba(255,255,255,0.42); }
+
+.sess-body {
+background: var(–white); padding: 22px 28px 26px;
+border: 1px solid var(–rule); border-top: none;
+border-radius: 0 0 16px 16px;
+}
+
+.sess-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.sess-list li {
+display: flex; align-items: flex-start;
+gap: 10px; font-size: 13px;
+color: var(–text); line-height: 1.5; font-weight: 300;
+}
+
+.sbullet {
+width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+margin-top: 1px; display: flex; align-items: center; justify-content: center;
+font-size: 9px; font-weight: 700; color: var(–ink);
+}
+.sess-card:nth-child(1) .sbullet { background: var(–yellow); }
+.sess-card:nth-child(2) .sbullet { background: var(–green); }
+.sess-card:nth-child(3) .sbullet { background: var(–yellow); }
+
+/* PDF notes banner */
+.pdf-banner {
+margin-top: 20px;
+background: var(–white);
+border: 1.5px solid var(–rule);
+border-left: 4px solid var(–purple);
+border-radius: 0 12px 12px 0;
+padding: 16px 22px;
+display: flex; align-items: center; gap: 16px;
+}
+.pdf-icon {
+width: 42px; height: 42px; border-radius: 10px;
+background: #f3eeff; display: flex; align-items: center;
+justify-content: center; flex-shrink: 0; font-size: 20px;
+}
+.pdf-title { font-size: 14px; font-weight: 600; color: var(–ink); margin-bottom: 3px; }
+.pdf-sub { font-size: 13px; color: var(–muted); font-weight: 300; line-height: 1.5; }
+
+/* ── OPTIONS ── */
+.options-sec { background: var(–white); }
+
+.options-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 20px; margin-top: 52px;
+}
+
+.option-card {
+border-radius: 16px; overflow: hidden;
+box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+transition: transform 0.2s, box-shadow 0.2s;
+display: flex; flex-direction: column;
+}
+.option-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+
+.option-head {
+padding: 28px 28px 22px;
+}
+.option-card:nth-child(1) .option-head { background: var(–purple); }
+.option-card:nth-child(2) .option-head { background: var(–orange); }
+.option-card:nth-child(3) .option-head { background: var(–ink); }
+
+.option-label {
+font-size: 10px; font-weight: 600; letter-spacing: 2px;
+text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px;
+}
+.option-card:nth-child(1) .option-label { color: var(–yellow); }
+.option-card:nth-child(2) .option-label { color: var(–yellow); }
+.option-card:nth-child(3) .option-label { color: var(–green); }
+
+.option-title {
+font-size: 22px; font-weight: 700; color: #fff;
+letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px;
+}
+
+.option-sub { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+.option-body {
+background: var(–mint); padding: 24px 28px 28px;
+border: 1px solid var(–rule); border-top: none;
+border-radius: 0 0 16px 16px; flex: 1;
+}
+
+.option-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.option-list li {
+display: flex; align-items: flex-start;
+gap: 10px; font-size: 13px; color: var(–text);
+line-height: 1.5; font-weight: 300;
+}
+
+.option-list li::before {
+content: ‘’; width: 6px; height: 6px; border-radius: 50%;
+flex-shrink: 0; margin-top: 7px;
+}
+.option-card:nth-child(1) .option-list li::before { background: var(–purple); }
+.option-card:nth-child(2) .option-list li::before { background: var(–orange); }
+.option-card:nth-child(3) .option-list li::before { background: var(–green); }
+
+.option-best {
+margin-top: 16px; padding: 10px 14px;
+background: rgba(255,255,255,0.7);
+border-radius: 8px;
+font-size: 12px; font-weight: 500; color: var(–muted);
+font-style: italic;
+}
+
+/* ── ABOUT ── */
+.about-sec { background: var(–ink); }
+
+.about-grid {
+display: grid; grid-template-columns: 1fr 1fr;
+gap: 72px; align-items: center;
+}
+
+.about-sec .sec-title { color: #fff; }
+.about-sec .sec-intro { color: rgba(255,255,255,0.5); max-width: 100%; }
+
+.about-body {
+font-size: 15px; line-height: 1.85;
+color: rgba(255,255,255,0.58); margin-top: 20px; font-weight: 300;
+}
+.about-body p + p { margin-top: 14px; }
+
+.creds { display: flex; flex-direction: column; gap: 12px; }
+
+.cred {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.09);
+border-radius: 12px; padding: 16px 20px;
+display: flex; align-items: center; gap: 16px;
+transition: background 0.2s;
+}
+.cred:hover { background: rgba(255,255,255,0.08); }
+
+.cred-ico {
+width: 40px; height: 40px; border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+.cred-ico.p { background: rgba(140,82,255,0.28); }
+.cred-ico.o { background: rgba(255,145,77,0.28); }
+.cred-ico.y { background: rgba(255,222,89,0.22); }
+.cred-ico.g { background: rgba(113,197,88,0.22); }
+
+.cred-txt strong { display: block; font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 2px; }
+.cred-txt span { font-size: 13px; color: rgba(255,255,255,0.42); font-weight: 300; }
+
+/* ── TESTIMONIALS ── */
+.testi-sec { background: var(–mint); }
+
+.testi-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 16px; margin-top: 52px;
+}
+
+.tc {
+background: var(–white); border: 1px solid var(–rule);
+border-radius: 14px; padding: 26px 26px 22px;
+display: flex; flex-direction: column;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.tc:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+.tc.feat { background: var(–purple); border-color: var(–purple); }
+
+.tc-stars { font-size: 13px; letter-spacing: 2px; color: var(–orange); margin-bottom: 14px; }
+.tc.feat .tc-stars { color: var(–yellow); }
+
+.tc-q { font-size: 15px; font-weight: 400; line-height: 1.65; color: var(–ink); flex: 1; margin-bottom: 16px; }
+.tc.feat .tc-q { color: rgba(255,255,255,0.92); }
+
+.tc-by { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(–muted); }
+.tc.feat .tc-by { color: rgba(255,255,255,0.38); }
+
+/* ── FAQ ── */
+.faq-sec { background: var(–white); }
+
+.faq-list { display: flex; flex-direction: column; gap: 10px; margin-top: 48px; }
+
+.faq-item {
+background: var(–mint); border: 1px solid var(–rule);
+border-radius: 10px; overflow: hidden;
+}
+.faq-item.open { border-color: var(–ink); }
+
+.faq-q {
+display: flex; align-items: center; justify-content: space-between;
+padding: 18px 22px; cursor: pointer; gap: 16px;
+user-select: none; -webkit-user-select: none;
+}
+
+.faq-q-text { font-size: 15px; font-weight: 500; color: var(–ink); flex: 1; line-height: 1.4; }
+
+.faq-ico {
+width: 26px; height: 26px; border-radius: 50%;
+background: rgba(255,255,255,0.8); display: flex; align-items: center;
+justify-content: center; flex-shrink: 0;
+transition: background 0.2s, transform 0.3s;
+color: var(–ink); font-size: 18px; font-weight: 300; line-height: 1;
+}
+.faq-item.open .faq-ico { background: var(–ink); color: #fff; transform: rotate(45deg); }
+
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+.faq-a-inner {
+padding: 16px 22px 20px;
+border-top: 1px solid var(–rule);
+font-size: 14px; line-height: 1.8; color: #444; font-weight: 300;
+}
+
+/* ── CTA ── */
+.cta-sec {
+background: var(–yellow); padding: 80px 0; text-align: center;
+}
+.cta-sec .sec-title { color: var(–ink); margin-bottom: 14px; }
+.cta-sec .sec-intro { color: rgba(0,0,0,0.5); margin: 0 auto 36px; text-align: center; }
+
+.btn-dark {
+background: var(–ink); color: #fff;
+font-family: ‘Lexend’, sans-serif; font-size: 15px; font-weight: 600;
+padding: 16px 44px; border-radius: 100px; text-decoration: none;
+display: inline-block; letter-spacing: -0.3px;
+transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+
+.cta-sub { font-size: 13px; color: rgba(0,0,0,0.38); margin-top: 18px; font-weight: 400; }
+
+/* ── FOOTER ── */
+footer { background: var(–ink); padding: 36px 40px; text-align: center; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.7; font-weight: 300; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+footer a:hover { color: rgba(255,255,255,0.8); }
+
+@keyframes fadeUp {
+from { opacity:0; transform:translateY(20px); }
+to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+nav { padding: 0 20px; }
+.hero { grid-template-columns: 1fr; }
+.hero-left { padding: 64px 28px 56px; }
+.hero-right { padding: 44px 28px; }
+.why-grid, .sessions-grid, .options-grid, .about-grid, .testi-grid { grid-template-columns: 1fr; }
+.container { padding: 0 24px; }
+section { padding: 64px 0; }
+.about-grid { gap: 44px; }
+}
+
+@media (max-width: 480px) {
+.nav-cta { display: none; }
+.hero-title { font-size: 34px; letter-spacing: -1px; }
+}
+</style>
+
 </head>
 <body>
 
-    <section class="hero-corp">
-        <div class="container">
-            <span style="text-transform: uppercase; letter-spacing: 1px; font-weight: bold; color: var(--purple);">Staff Wellbeing</span>
-            <h1>Financial Clarity for Your Team</h1>
-            <p>Reduce employee stress and improve focus with a jargon-free investing course delivered at your office or online.</p>
-            <a href="mailto:leo@reallifemoney.co.uk?subject=Corporate%20Wellbeing" class="btn-primary" onclick="logButtonClick('Corp: Hero Contact')">Enquire for your team</a>
+<!-- NAV -->
+
+<nav>
+  <a class="nav-logo" href="/index.html">
+    <img src="/logo.png" alt="Real Life Money" style="height: 52px; width: auto;">
+  </a>
+  <a class="nav-cta" href="#contact">Get in touch →</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow" style="animation:fadeUp 0.6s ease 0.1s both"><span class="pulse"></span>Bristol · Staff Financial Wellbeing</div>
+    <h1 class="hero-title">Give your team a<br><span style="color:var(--yellow)">benefit they'll</span><br>actually use.</h1>
+    <p class="hero-body" style="animation:fadeUp 0.6s ease 0.3s both">A practical investing course delivered to your employees — in your office or nearby. No jargon, no products to sell. Just the financial education most people never got.</p>
+    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
+      <a href="#contact" class="btn-primary">Get in touch →</a>
+      <span class="hero-note">No obligation · we'll find the right fit</span>
+    </div>
+    <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
+      <div>
+        <div class="stat-val" style="color:var(--yellow)">5★</div>
+        <div class="stat-lbl">avg attendee rating</div>
+      </div>
+      <div>
+        <div class="stat-val" style="color:var(--green)">100%</div>
+        <div class="stat-lbl">would recommend</div>
+      </div>
+      <div>
+        <div class="stat-val" style="color:var(--purple)">2×</div>
+        <div class="stat-lbl">confidence increase</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="impact-badge">
+      <span class="impact-icon">📊</span>
+      <div class="impact-text">
+        <strong>79% of UK employees say financial stress affects their work performance</strong>
+        A one-hour investing course costs less than a team lunch — and lasts a lifetime.
+      </div>
+    </div>
+    <div class="why-card dark">
+      <p class="wq">"I'm so glad I did this — although wish I'd done it 20 years ago!! My knowledge increased exponentially, which is what I would like my investments to do!"</p>
+      <div class="ws">★★★★★ &nbsp;·&nbsp; Verified attendee</div>
+    </div>
+    <div class="why-card">
+      <p class="wq">"Leo made this much easier through keeping information simple and using games. I would highly recommend this course to anyone — it was simply brilliant."</p>
+      <div class="ws">★★★★★ &nbsp;·&nbsp; Dan, Bristol</div>
+    </div>
+    <div class="why-card">
+      <p class="wq">"I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
+      <div class="ws">★★★★★ &nbsp;·&nbsp; Verified attendee</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+
+<section class="why-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Why it matters</div>
+    <h2 class="sec-title">Financial stress is costing<br>your business more than you think</h2>
+    <p class="sec-intro">Money worries are the UK's number one source of workplace stress. The good news — it's one of the easiest wellbeing gaps to close.</p>
+    <div class="why-grid">
+      <div class="why-impact-card c1">
+        <span class="wic-icon">🧠</span>
+        <div class="wic-stat" style="color:var(--purple)">77%</div>
+        <h3 class="wic-title">Report money-related stress</h3>
+        <p class="wic-body">Nearly 8 in 10 UK employees say financial worries affect their mental health. Stress leads to distraction, absenteeism and lower productivity.</p>
+      </div>
+      <div class="why-impact-card c2">
+        <span class="wic-icon">💸</span>
+        <div class="wic-stat" style="color:var(--orange)">2×</div>
+        <h3 class="wic-title">More likely to leave</h3>
+        <p class="wic-body">Financially stressed employees are twice as likely to look for a new job. Financial wellbeing support is increasingly a retention tool, not just a perk.</p>
+      </div>
+      <div class="why-impact-card c3">
+        <span class="wic-icon">🚀</span>
+        <div class="wic-stat" style="color:var(--green)">59%</div>
+        <h3 class="wic-title">Expect employer support</h3>
+        <p class="wic-body">More than half of UK employees believe their employer should actively support their financial wellbeing. It's fast becoming a baseline expectation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE COURSE -->
+
+<section class="course-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>The course</div>
+    <h2 class="sec-title">Three focused sessions.<br>Real, lasting change.</h2>
+    <p class="sec-intro">Delivered in your workplace or a nearby venue. 60 minutes per session, max 12 per group, interactive throughout — not a lecture.</p>
+    <div class="sessions-grid">
+      <div class="sess-card">
+        <div class="sess-head" data-n="1">
+          <div class="sess-num">Session One · 60 mins</div>
+          <h3 class="sess-title">Why invest &amp; types of investment</h3>
+          <p class="sess-sub">The foundations</p>
         </div>
-    </section>
-
-    <section class="container" style="padding: 60px 0;">
-        <h2 style="text-align: center;">How we can work together</h2>
-        <div class="wellbeing-options">
-            
-            <div class="option-card">
-                <h3>Fully Funded</h3>
-                <p>Provide the course as a 100% free benefit to your staff. We deliver 3 evenings (or lunch & learns) at your Bristol office.</p>
-                <p><strong>Benefit:</strong> Maximum engagement & highest "thank you" factor from staff.</p>
-            </div>
-
-            <div class="option-card">
-                <h3>Subsidised</h3>
-                <p>The company pays a portion of the cost, and interested staff pay the rest. This ensures "skin in the game" for attendees.</p>
-                <p><strong>Benefit:</strong> Cost-effective for the company while providing massive value.</p>
-            </div>
-
-            <div class="option-card">
-                <h3>Host & Facilitate</h3>
-                <p>Free for the company. You provide the space and internal promotion; staff pay for their own tickets at a discounted group rate.</p>
-                <p><strong>Benefit:</strong> No budget impact, but shows you care about their future.</p>
-            </div>
-
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Why investing matters — and what inflation is quietly doing to savings</li>
+            <li><span class="sbullet">2</span>The main asset classes explained simply: cash, bonds, equities</li>
+            <li><span class="sbullet">3</span>Investment simulation — watch how different choices perform over time</li>
+          </ul>
         </div>
-
-        <div style="text-align: center; background: #f9f9f9; padding: 40px; border-radius: 12px;">
-            <h2>Ready to support your employees?</h2>
-            <p>I can tailor the course to your company's pension provider (e.g. Aegon, Aviva, HL) to make it directly relevant.</p>
-            <br>
-            <a href="mailto:leo@reallifemoney.co.uk" class="btn-outline" onclick="logButtonClick('Corp: Bottom Contact')">Get a Tailored Proposal →</a>
+      </div>
+      <div class="sess-card">
+        <div class="sess-head" data-n="2">
+          <div class="sess-num">Session Two · 60 mins</div>
+          <h3 class="sess-title">Managing risk &amp; learning about funds</h3>
+          <p class="sess-sub">Deepen understanding</p>
         </div>
-    </section>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Four point plan to manage investment risk</li>
+            <li><span class="sbullet">2</span>How to measure your personal attitude to risk</li>
+            <li><span class="sbullet">3</span>Explore real funds using an engaging card game</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sess-card">
+        <div class="sess-head" data-n="3">
+          <div class="sess-num">Session Three · 60 mins</div>
+          <h3 class="sess-title">Picking your portfolio &amp; clicking invest</h3>
+          <p class="sess-sub">Putting it into practice</p>
+        </div>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>ISAs, pensions and investment accounts explained</li>
+            <li><span class="sbullet">2</span>Finding investments that match goals and risk appetite</li>
+            <li><span class="sbullet">3</span>Hands-on platform exploration — actually clicking invest</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="pdf-banner">
+      <div class="pdf-icon">📄</div>
+      <div>
+        <div class="pdf-title">Session notes sent after every session</div>
+        <div class="pdf-sub">Every employee receives a clear PDF summary after each session — everything covered, theirs to keep and refer back to.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // YOUR EXISTING LOGGING LOGIC
-        async function logButtonClick(eventLabel) {
-            const url = "YOUR_GOOGLE_SCRIPT_URL"; 
-            const payload = {
-                timestamp: new Date().toISOString(),
-                event: eventLabel,
-                url: window.location.href
-            };
-            fetch(url, { method: "POST", mode: "no-cors", body: JSON.stringify(payload), keepalive: true });
-        }
+<!-- OPTIONS -->
 
-        // SCROLL TRACKING
-        let loggedMilestones = { q: false, h: false, t: false };
-        window.addEventListener('scroll', () => {
-            let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-            if (!loggedMilestones.q && scrollPercent > 0.25) { logButtonClick('Corp Scroll: 25%'); loggedMilestones.q = true; }
-            if (!loggedMilestones.h && scrollPercent > 0.50) { logButtonClick('Corp Scroll: 50%'); loggedMilestones.h = true; }
-            if (!loggedMilestones.t && scrollPercent > 0.75) { logButtonClick('Corp Scroll: 75%'); loggedMilestones.t = true; }
-        });
-    </script>
+<section class="options-sec" id="options">
+  <div class="container">
+    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>How it works</div>
+    <h2 class="sec-title">Three ways to bring<br>this to your team</h2>
+    <p class="sec-intro">Every organisation is different. There's a model that works for your budget — including one that costs you nothing at all.</p>
+    <div class="options-grid">
+
+```
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option A</div>
+      <h3 class="option-title">You fund it fully</h3>
+      <p class="option-sub">The premium staff benefit</p>
+    </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You pay per head for attending employees — no upfront commitment</li>
+        <li>Staff attend completely free as a company benefit</li>
+        <li>Delivered at your office or a nearby venue of your choice</li>
+        <li>Can be positioned as CPD, wellbeing or a team benefit</li>
+        <li>Pricing discussed based on group size — get in touch for a quote</li>
+      </ul>
+      <div class="option-best">Best for: organisations wanting to offer a meaningful, zero-effort benefit to all staff</div>
+    </div>
+  </div>
+
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option B</div>
+      <h3 class="option-title">You subsidise it</h3>
+      <p class="option-sub">Shared investment, shared reward</p>
+    </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You cover part of the cost, employees contribute the rest</li>
+        <li>Staff who contribute tend to be more engaged and committed</li>
+        <li>Split can be agreed flexibly — 50/50, 75/25, whatever suits</li>
+        <li>Delivered at your office or a venue of your choice</li>
+        <li>Low cost to the business while still feeling like a genuine perk</li>
+      </ul>
+      <div class="option-best">Best for: organisations with a wellbeing budget that want to stretch it further</div>
+    </div>
+  </div>
+
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option C</div>
+      <h3 class="option-title">Zero cost to you</h3>
+      <p class="option-sub">Your space, your staff — no budget needed</p>
+    </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You share the course details with your team and let interested staff sign up</li>
+        <li>Staff pay the standard course price directly</li>
+        <li>Delivered in your office after hours — no venue cost to anyone</li>
+        <li>You get to offer a genuinely valuable benefit at zero cost</li>
+        <li>Still counts as supporting employee financial wellbeing</li>
+      </ul>
+      <div class="option-best">Best for: smaller organisations or those with no dedicated wellbeing budget</div>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="about-sec">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>Who delivers it</div>
+        <h2 class="sec-title">Not a corporate seminar. A course that actually lands.</h2>
+        <div class="about-body">
+          <p>I'm Leo — a secondary school maths teacher and qualified ex-financial adviser based in Bristol. I've seen both sides: the financial services industry where most people can't afford advice, and the classroom where I learned how to make complex things genuinely engaging.</p>
+          <p>Real Life Money was built to close that gap. The sessions are interactive, include games and simulations, and are deliberately designed to leave people feeling confident — not overwhelmed.</p>
+          <p>Your employees will leave with real knowledge, a PDF summary, and the tools to start investing on their own terms. No products. No commissions. No follow-up sales calls.</p>
+        </div>
+      </div>
+      <div class="creds">
+        <div class="cred"><div class="cred-ico p">🎓</div><div class="cred-txt"><strong>Qualified Financial Adviser</strong><span>Several years in financial services working directly with clients</span></div></div>
+        <div class="cred"><div class="cred-ico o">📐</div><div class="cred-txt"><strong>Secondary School Maths Teacher</strong><span>Trained to explain complex ideas in plain, accessible language</span></div></div>
+        <div class="cred"><div class="cred-ico y">🎮</div><div class="cred-txt"><strong>Interactive, not passive</strong><span>Games, simulations and hands-on practice — not slides and lectures</span></div></div>
+        <div class="cred"><div class="cred-ico g">🚫</div><div class="cred-txt"><strong>Nothing to sell your employees</strong><span>No products, no commissions, no upsells — ever</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="testi-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>What attendees say</div>
+    <h2 class="sec-title">Real feedback from<br>real people</h2>
+    <div class="testi-grid">
+      <div class="tc feat">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Having a course with an actual human who completely understands the world of investing, and being able to ask questions there and then, has been amazing to help me understand and build my confidence."</p>
+        <div class="tc-by">Rachael, Bristol</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"I found it really engaging and clear to understand. I was very cautious and scared about investing going into this — but now I feel I understand much more and feel confident. I can't fault the course."</p>
+        <div class="tc-by">Lucy, Bristol</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Leo made this much easier through keeping information simple and using games to keep me actively engaged. I would highly recommend this course to anyone — it was simply brilliant."</p>
+        <div class="tc-by">Dan, Bristol</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+
+<section class="faq-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>Questions</div>
+    <h2 class="sec-title">Common questions<br>from employers</h2>
+    <div class="faq-list">
+
+```
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">How many employees can attend each course?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">Each course group is capped at 12 people. This is intentional — small groups mean everyone can ask questions, the sessions stay interactive, and no one gets left behind. If you have more staff interested, we can run multiple course rounds.</div></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">How long does each session take and when are they delivered?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">Each session is 60 minutes, delivered weekly across three weeks. We can deliver in the working day, at lunch, or after hours — whichever works best for your team. The only space you need is a room that comfortably seats up to 12 people.</div></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Is this regulated financial advice?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">No — and that's important. This is financial education, not regulated financial advice. No specific products are recommended, no FCA permissions are required, and there's no risk of mis-selling. Employees leave with knowledge and tools to make their own decisions. This also means it's straightforward to offer as a wellbeing benefit without any compliance headaches.</div></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">Do you need any special equipment or setup?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">Very little. A room with enough chairs, a screen or TV to connect a laptop to, and ideally WiFi so attendees can explore investment platforms in Session Three. That's it. Everything else — materials, games, activities — is provided.</div></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">What if some of my staff already invest — will they still get value?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">Yes. The course is designed for complete beginners but regularly produces insights even for people who have already started investing. Understanding risk properly, comparing funds, and knowing which tax wrappers to use are areas where even experienced investors often have gaps. Nobody has ever left saying they already knew all of it.</div></div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggle(this)">
+      <span class="faq-q-text">How do I get a quote?</span>
+      <span class="faq-ico">+</span>
+    </div>
+    <div class="faq-a"><div class="faq-a-inner">Just get in touch using the button below. There's no obligation — we'll have a brief conversation about your team size, what you're looking for, and which option suits you best. Pricing for Option A and B depends on group size and is agreed in advance with no surprises.</div></div>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta-sec" id="contact">
+  <div class="container">
+    <div class="stag" style="color:rgba(0,0,0,0.35);justify-content:center"><span class="stag-dot" style="background:rgba(0,0,0,0.25)"></span>Get in touch</div>
+    <h2 class="sec-title">Ready to invest in<br>your team's future?</h2>
+    <p class="sec-intro">Drop me a message and we'll find the right option for your organisation. No obligation, no hard sell — just a straightforward conversation.</p>
+    <a href="mailto:leo@reallifemoney.co.uk?subject=Employer%20Enquiry%20%E2%80%94%20Real%20Life%20Money" class="btn-dark">Email Leo →</a>
+    <p class="cta-sub">Or visit <a href="/contact" style="color:rgba(0,0,0,0.5);border-bottom:1px solid rgba(0,0,0,0.25);text-decoration:none;">reallifemoney.co.uk/contact</a> to send a message</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <p>
+    <strong style="color:rgba(255,255,255,0.55)">Real Life Money</strong> · Bristol ·
+    Financial education, not regulated financial advice. All content is general and educational in nature.<br>
+    <a href="/course">Individual courses</a> · <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a>
+  </p>
+</footer>
+
+<script>
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  function toggle(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.why-impact-card,.sess-card,.option-card,.tc,.cred').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    obs.observe(el);
+  });
+</script>
+
 </body>
 </html>
