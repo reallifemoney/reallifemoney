@@ -1044,6 +1044,14 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .container > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+
 </style>
 </head>
 <body>
@@ -1159,6 +1167,35 @@ body {
 
   </div>
 </section>
+
+<section style="background: #eef8eb; padding: 80px 0; border-top: 1px solid var(--rule);">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      
+      <div style="position: relative; cursor: pointer; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" onclick="openIvanVideo()">
+        <video autoplay muted loop playsinline style="width: 100%; display: block;">
+          <source src="Ivan-loop.mp4" type="video/mp4">
+        </video>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
+          <div style="background: var(--purple); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <div style="width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; margin-left: 4px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="stag" style="color:var(--green)">
+          <span class="stag-dot" style="background:var(--green)"></span>Student spotlight
+        </div>
+        <h2 class="sec-title" style="margin-bottom: 20px;">"It made investing feel uncomplicated, which is not how it felt before."</h2>
+        <p class="sec-intro" style="margin-bottom: 30px;">Ivan joined the course feeling "left behind" by the world of finance. Watch his 60-second story about how the course changed his outlook on his future.</p>
+        <button class="btn-primary" style="background-color: var(--purple); color: #ffffff !important;" onclick="openIvanVideo()">Watch Ivan's Story</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <section class="trust-bar">
   <div class="container">
@@ -1577,6 +1614,16 @@ body {
     </div>
 </div>
 
+<div id="ivanModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;">
+    <div style="position: relative; width: 90%; max-width: 900px;">
+        <span onclick="closeIvanVideo()" style="position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; font-family: sans-serif;">× Close</span>
+        <div style="padding:56.25% 0 0 0;position:relative;">
+             <iframe id="ivanVimeoPlayer" src="https://player.vimeo.com/video/1181385044?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ivan testimonial"></iframe>
+        </div>
+    </div>
+</div>
+
+
  
 <!-- FOOTER -->
 <footer>
@@ -1821,6 +1868,27 @@ window.onclick = function(event) {
     if (event.target == modal) {
         closeVideo();
     }
+}
+
+
+function openIvanVideo() {
+    document.getElementById('ivanModal').style.display = 'flex';
+    logButtonClick('Video: Opened Ivan Story');
+}
+
+function closeIvanVideo() {
+    document.getElementById('ivanModal').style.display = 'none';
+    var iframe = document.getElementById('ivanVimeoPlayer');
+    var tempSrc = iframe.src;
+    iframe.src = tempSrc; // Resets video/stops audio
+}
+
+// Update your window.onclick to close the Ivan modal too
+window.onclick = function(event) {
+    let modal1 = document.getElementById('videoModal');
+    let modal2 = document.getElementById('ivanModal');
+    if (event.target == modal1) closeVideo();
+    if (event.target == modal2) closeIvanVideo();
 }
 
 
