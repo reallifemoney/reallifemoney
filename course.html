@@ -1057,9 +1057,7 @@ body {
 </nav>
  
 <!-- HERO -->
-<section class="hero">
-  <section class="hero" style="position: relative;">
-
+<section class="hero" style="position: relative;">
   <div class="hero-left">
     <div class="hero-eyebrow"><span class="pulse"></span>Bristol · Three Evening Course</div>
     <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
@@ -1067,10 +1065,24 @@ body {
       <span style="color:var(--yellow)">understand</span><br>
       investing.
     </h1>
-    <p class="hero-body" style="animation:fadeUp 0.6s ease 0.3s both">An engaging, jargon-free and practical investing course for complete beginners. Three evenings. Small groups. No products to sell — just honest, straightforward financial education.</p>
-    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
-      <a href="#book" class="btn-primary" onclick="logButtonClick('Hero: Book Your Place')">Book your place - £75 or less</a>
+
+    <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 30px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo()">
+      
+      <video autoplay muted loop playsinline poster="your-thumbnail.jpg" style="width: 100%; display: block; border-radius: 16px;">
+        <source src="intro-loop.mp4" type="video/mp4">
+      </video>
+
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+        <div style="background: rgba(107, 79, 187, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px);">
+            <div style="width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px;"></div>
+        </div>
+      </div>
     </div>
+
+    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
+      <button class="btn-primary" style="background-color: var(--purple);" onclick="openVideo()">Watch the Full Story (1:40)</button>
+    </div>
+
     <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
       <div>
         <div class="stat-val" style="color:var(--yellow)">5★</div>
@@ -1078,14 +1090,15 @@ body {
       </div>
       <div>
         <div class="stat-val" style="color:var(--green)">100%</div>
-        <div class="stat-lbl">would recommend</div>
+        <div class="stat-lbl">recommendation</div>
       </div>
       <div>
-        <div class="stat-val" style="color:var(--purple)">2×</div>
+        <div class="stat-val" style="color:var(--purple)">2x</div>
         <div class="stat-lbl">confidence increase</div>
       </div>
     </div>
   </div>
+
   <div class="hero-right" style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px;">
 
     <!-- Google Reviews Header -->
