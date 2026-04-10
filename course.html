@@ -1089,6 +1089,7 @@ body {
 
     <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
       <button class="btn-primary" style="background-color: var(--purple); color: #ffffff" onclick="openVideo()">Watch the full story (1:40)</button>
+      <button class="btn-primary" style="background-color: var(--green); color: #ffffff !important; margin-top: 15px;" onclick="bookFromHero()">Book your place — £75 or less</button>
     </div>
 
     <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
@@ -1612,6 +1613,10 @@ body {
 </iframe>
 <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <button class="btn-primary" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo')">Book your place — £75 or less</button>
+</div>
+
     </div>
 </div>
 
@@ -1621,6 +1626,10 @@ body {
         <div style="padding:56.25% 0 0 0;position:relative;">
              <iframe id="ivanVimeoPlayer" src="https://player.vimeo.com/video/1181385044?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ivan testimonial"></iframe>
         </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <button class="btn-primary" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('ivan')">Book your place — £75 or less</button>
+</div>
+
     </div>
 </div>
 
@@ -1890,6 +1899,29 @@ window.onclick = function(event) {
     let modal2 = document.getElementById('ivanModal');
     if (event.target == modal1) closeVideo();
     if (event.target == modal2) closeIvanVideo();
+}
+
+// Function for the Hero button
+function bookFromHero() {
+    logButtonClick('Click: Hero Book Now Button');
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function for the popup buttons
+function bookAndClose(source) {
+    // 1. Log which video they came from
+    if (source === 'leo') {
+        logButtonClick('Click: Book Now from Leo Video');
+        closeVideo(); // Closes Leo's modal
+    } else {
+        logButtonClick('Click: Book Now from Ivan Video');
+        closeIvanVideo(); // Closes Ivan's modal
+    }
+    
+    // 2. Smooth scroll to the courses section
+    setTimeout(() => {
+        document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+    }, 300); // Small delay to allow modal to start closing
 }
 
 
