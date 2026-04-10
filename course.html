@@ -1904,7 +1904,6 @@ window.onclick = function(event) {
 // Function for the Hero button
 function bookFromHero() {
     logButtonClick('Click: Hero Book Now Button');
-    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Function for the popup buttons
@@ -1918,10 +1917,7 @@ function bookAndClose(source) {
         closeIvanVideo(); // Closes Ivan's modal
     }
     
-    // 2. Smooth scroll to the courses section
-    setTimeout(() => {
-        document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
-    }, 300); // Small delay to allow modal to start closing
+
 }
 
 
