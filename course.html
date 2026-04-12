@@ -1920,6 +1920,35 @@ function bookAndClose(source) {
 }
 
 
+
+  // 1. Capture start time immediately (takes 0.001ms)
+  const pageEntryTime = Date.now();
+  let maxScroll = 0;
+
+  // 2. Track scroll depth silently
+  window.addEventListener('scroll', () => {
+    const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+    if (scrolled > maxScroll) maxScroll = scrolled;
+  }, { passive: true }); // 'passive' makes the scroll smooth and fast
+
+  // 3. Send data only when they leave
+  window.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+      const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+      
+      const data = JSON.stringify({
+        timeOnPage: timeSpent,
+        scrollDepth: maxScroll,
+        url: window.location.href
+      });
+
+      // 4. sendBeacon is non-blocking and ultra-fast
+      navigator.sendBeacon('YOUR_GOOGLE_SCRIPT_URL', data);
+    }
+  });
+
+
+
 </script>
 
 </body>
