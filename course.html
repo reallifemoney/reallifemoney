@@ -1117,7 +1117,7 @@ body {
     <a class="nav-logo" href="/">
       <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
-    <a class="nav-cta" href="#book" onclick="logButtonClick('Navbar: Book Your Place')">Book your place →</a>
+    <a class="nav-cta" href="#book" onclick="logButtonClick()">Book your place →</a>
 </nav>
  
 <!-- HERO -->
@@ -1473,7 +1473,7 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-may" onclick="logButtonClick('Choose May Course')">Select these dates</button>
+    <button class="select-btn" id="btn-may" onclick="logCourseClick()">Select these dates</button>
   </div>
 
   <div class="date-card" onclick="selectDate('june')">
@@ -1496,7 +1496,7 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-june" onclick="logButtonClick('Choose June Course')">Select these dates</button>
+    <button class="select-btn" id="btn-june" onclick="logCourseClick()">Select these dates</button>
   </div>
   <div style="text-align: center; margin-top: 40px; padding: 20px; border: 1px dashed var(--rule); border-radius: 12px;">
   <p style="font-size: 14px; color: var(--muted); margin-bottom: 10px;">Can't make these dates, or want to bring a group?</p>
@@ -1840,11 +1840,13 @@ document.querySelectorAll('[data-copy-btn]').forEach(btn => {
 });
 
   
-
+let ctaClicked = "No"; // This starts as No for every visitor
+let videoClicked = "No"; // This starts as No for every visitor
+let courseClicked = "No"; // This starts as No for every visitor
 
 function openVideo() {
     document.getElementById('videoModal').style.display = 'flex';
-    logButtonClick('Video: Opened Full Story'); // Logs to your sheet!
+    videoClicked = "Yes";
 }
 
 function closeVideo() {
@@ -1867,7 +1869,7 @@ window.onclick = function(event) {
 
 function openIvanVideo() {
     document.getElementById('ivanModal').style.display = 'flex';
-    logButtonClick('Video: Opened Ivan Story');
+    videoClicked = "Yes";
 }
 
 function closeIvanVideo() {
@@ -1885,19 +1887,24 @@ window.onclick = function(event) {
     if (event.target == modal2) closeIvanVideo();
 }
 
+// Function for CTA book button
+function logButtonClick() {
+    ctaClicked = "Yes";
+}
+
 // Function for the Hero button
-function bookFromHero() {
-    logButtonClick('Click: Hero Book Now Button');
+function logCourseClick() {
+    courseClicked = "Yes";
 }
 
 // Function for the popup buttons
 function bookAndClose(source) {
     // 1. Log which video they came from
     if (source === 'leo') {
-        logButtonClick('Click: Book Now from Leo Video');
+        ctaClicked = "Yes";
         closeVideo(); // Closes Leo's modal
     } else {
-        logButtonClick('Click: Book Now from Ivan Video');
+        ctaClicked = "Yes";
         closeIvanVideo(); // Closes Ivan's modal
     }
     
@@ -1917,21 +1924,21 @@ function bookAndClose(source) {
 
   // 2. The Final Send (Fires when they leave)
   function sendFinalData() {
-    if (sent) return; 
-    sent = true;
+  if (sent) return; 
+  sent = true;
 
-    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
-    const logData = {
-      timeSpent: timeSpent,
-      scrollDepth: maxScroll + "%",
-      url: window.location.href,
-      type: "EXIT_DATA" // This helps you see which row is which
-    };
+  const logData = {
+    timeSpent: Math.floor((Date.now() - pageEntryTime) / 1000),
+    scrollDepth: maxScroll + "%",
+    ctaClicked: ctaClicked,       // Matches Column D
+    videoClicked: videoClicked,   // Matches Column E
+    courseSelected: courseSelected, // Matches Column F
+    url: window.location.href
+  };
 
-    // Use a simple blob for Google Sheets compatibility
-    const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
-    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbymPCckh2ZYjCANpUUZHf26Yldq8wkGv9CH-zw2EKOQaVFkc2p7l5kQREcU7e_HGn0/exec', blob);
-  }
+  const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
+  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxH6FCV4Ss0JB-V-bbWtiSNmrzwbB0NonIK7SkMx3Bui2NAPR7VV6x-f85OIn3Zw0Do4Q/exec', blob);
+}
 
   // Trigger on close or hide
   window.addEventListener('visibilitychange', () => {
