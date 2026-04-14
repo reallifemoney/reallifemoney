@@ -1930,14 +1930,15 @@ function bookAndClose(source) {
   const logData = {
     timeSpent: Math.floor((Date.now() - pageEntryTime) / 1000),
     scrollDepth: maxScroll + "%",
-    ctaClicked: ctaClicked,       // Matches Column D
-    videoClicked: videoClicked,   // Matches Column E
-    courseSelected: courseSelected, // Matches Column F
-    url: window.location.href
+    ctaClicked: ctaClicked,       // Must match Google Script
+    videoClicked: videoClicked,   // Must match Google Script
+    courseSelected: courseSelected, // Must match Google Script
+    url: window.location.href     // Must match Google Script
   };
 
+  // We use 'text/plain' to bypass Google's strict CORS security
   const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
-  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxH6FCV4Ss0JB-V-bbWtiSNmrzwbB0NonIK7SkMx3Bui2NAPR7VV6x-f85OIn3Zw0Do4Q/exec', blob);
+  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxQgFAAkmiIHbq01Oxj279-_JNbdNZr2o-bO-xLiNV36glkBlCQJgZfd95HBjcBGlJDgQ/exec', blob);
 }
 
   // Trigger on close or hide
