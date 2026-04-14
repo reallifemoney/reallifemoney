@@ -1056,6 +1056,48 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.email-capture {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.email-capture h3 { margin-bottom: 10px; color: #333; }
+
+#emailForm {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#userEmail {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+}
+
+#submitBtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#submitBtn:hover { background-color: #0056b3; }
+
+@media (max-width: 480px) {
+  #emailForm { flex-direction: column; }
+}
  
   @keyframes fadeUp {
     from { opacity:0; transform:translateY(20px); }
@@ -1498,10 +1540,20 @@ body {
     </div>
     <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
   </div>
-  <div style="text-align: center; margin-top: 40px; padding: 20px; border: 1px dashed var(--rule); border-radius: 12px;">
-  <p style="font-size: 14px; color: var(--muted); margin-bottom: 10px;">Can't make these dates, or want to bring a group?</p>
-  <a href="mailto:leo@reallifemoney.co.uk?subject=Future%20Dates" class="nav-back" style="display: inline-block;">Email me for future dates</a>
-</div>
+  <section class="email-capture">
+  <div class="container">
+    <h3>Can't make these dates?</h3>
+    <p>Get notified when I announce new Bristol venues and future course dates.</p>
+    
+    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+      <input type="email" id="userEmail" placeholder="Enter your email" required>
+      <button type="submit" id="submitBtn">Notify Me</button>
+    </form>
+    <div id="thankYouMessage" style="display:none; color: green; margin-top: 10px;">
+      Thanks! We'll keep you updated.
+    </div>
+  </div>
+</section>
 
 </div>
 
@@ -1958,6 +2010,28 @@ function acceptCookies() {
 
 function hideToast() {
     document.getElementById('cookie-toast').style.display = 'none';
+}
+
+function handleEmailSubmit(event) {
+  event.preventDefault();
+  const email = document.getElementById('userEmail').value;
+  const submitBtn = document.getElementById('submitBtn');
+  
+  submitBtn.innerText = "Sending...";
+  submitBtn.disabled = true;
+
+  const logData = {
+    type: "EMAIL_SIGNUP",
+    email: email,
+    url: window.location.href
+  };
+
+  // Send to your existing Google Script
+  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxJgEPd7gHmf8-DJRVqcTgDDDKqHS_rjWYd06adsm9iUlH1UxgXQh9UYxanyYqFq4C1/exec', JSON.stringify(logData));
+
+  // Visual feedback
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('thankYouMessage').style.display = 'block';
 }
 
 
