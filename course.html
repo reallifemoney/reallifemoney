@@ -1840,78 +1840,7 @@ document.querySelectorAll('[data-copy-btn]').forEach(btn => {
 });
 
   
-  // Log activity into google sheet
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwjFXUCJ_Zt-7T-rm_WttCyj32TF5Ly5GSPz_hyc1-qBpqfpzh39FRo7uULQCjxvQIyhg/exec';
-  
-  // This grabs the exact URL in the browser bar
-  const currentURL = window.location.href;
-  const currentTitle = document.title;
 
-  fetch(`${scriptURL}?url=${encodeURIComponent(currentURL)}&title=${encodeURIComponent(currentTitle)}`)
-    .catch(err => console.log('Ping failed', err));
-
-  async function logButtonClick(eventLabel) {
-  // Replace with your current deployment URL
-  const url = "https://script.google.com/macros/s/AKfycbxwPt-sGX19XEm3lOknDZ15hiCExDPuGUzX3uviw_XJL9k_2_GlJ_HWiraZ60S2v--3Yg/exec"; 
-  
-  const payload = {
-    timestamp: new Date().toISOString(),
-    event: eventLabel,
-    url: window.location.href
-  };
-
-  fetch(url, {
-    method: "POST",
-    mode: "no-cors", 
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-    keepalive: true
-  });
-}
-
-// Keep track of which milestones we've already logged this session
-let loggedMilestones = {
-  five: false,
-  ten: false,
-  quarter: false,
-  half: false,
-  threeQuarters: false
-};
-
-window.addEventListener('scroll', () => {
-  // Calculate percentage of page scrolled
-  let scrollPercent = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight;
-
-  // 5% Scroll
-  if (!loggedMilestones.five && scrollPercent > 0.05) {
-    logButtonClick('Scroll: 5%');
-    loggedMilestones.five = true;
-  }
-
-  // 10% Scroll
-  if (!loggedMilestones.ten && scrollPercent > 0.1) {
-    logButtonClick('Scroll: 10%');
-    loggedMilestones.ten = true;
-  }
-
-  // 25% Scroll (The Quarter mark)
-  if (!loggedMilestones.quarter && scrollPercent > 0.25) {
-    logButtonClick('Scroll: 25% (Quarter)');
-    loggedMilestones.quarter = true;
-  }
-
-  // 50% Scroll (The Halfway mark)
-  if (!loggedMilestones.half && scrollPercent > 0.50) {
-    logButtonClick('Scroll: 50% (Halfway)');
-    loggedMilestones.half = true;
-  }
-
-  // 75% Scroll (Deep Interest mark)
-  if (!loggedMilestones.threeQuarters && scrollPercent > 0.75) {
-    logButtonClick('Scroll: 75% (Deep)');
-    loggedMilestones.threeQuarters = true;
-  }
-});
 
 function openVideo() {
     document.getElementById('videoModal').style.display = 'flex';
@@ -1975,35 +1904,45 @@ function bookAndClose(source) {
 
 }
 
-
-
-  // 1. Capture start time immediately (takes 0.001ms)
+// All logging scripts
   const pageEntryTime = Date.now();
   let maxScroll = 0;
+  let sent = false; // Prevents double-sending
 
-  // 2. Track scroll depth silently
+  // 1. Track Scroll Depth
   window.addEventListener('scroll', () => {
     const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
     if (scrolled > maxScroll) maxScroll = scrolled;
-  }, { passive: true }); // 'passive' makes the scroll smooth and fast
+  }, { passive: true });
 
-  // 3. Send data only when they leave
-  window.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-      const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
-      
-      const data = JSON.stringify({
-        timeOnPage: timeSpent,
-        scrollDepth: maxScroll,
-        url: window.location.href
-      });
+  // 2. The Final Send (Fires when they leave)
+  function sendFinalData() {
+    if (sent) return; 
+    sent = true;
 
-      // 4. sendBeacon is non-blocking and ultra-fast
-      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxwPt-sGX19XEm3lOknDZ15hiCExDPuGUzX3uviw_XJL9k_2_GlJ_HWiraZ60S2v--3Yg/exec', blob);
-    }
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      url: window.location.href,
+      type: "EXIT_DATA" // This helps you see which row is which
+    };
+
+    // Use a simple blob for Google Sheets compatibility
+    const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbymPCckh2ZYjCANpUUZHf26Yldq8wkGv9CH-zw2EKOQaVFkc2p7l5kQREcU7e_HGn0/exec', blob);
+  }
+
+  // Trigger on close or hide
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendFinalData();
   });
+  window.addEventListener('pagehide', sendFinalData);
 
+
+
+
+// Cookies
 window.addEventListener('load', function() {
     if (!localStorage.getItem('cookieConsent')) {
         document.getElementById('cookie-toast').style.display = 'block';
