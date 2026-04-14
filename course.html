@@ -1938,7 +1938,7 @@ function bookAndClose(source) {
 
   // We use 'text/plain' to bypass Google's strict CORS security
   const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
-  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxQgFAAkmiIHbq01Oxj279-_JNbdNZr2o-bO-xLiNV36glkBlCQJgZfd95HBjcBGlJDgQ/exec', blob);
+  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbwqR4Y-oagqaajuykDZbpoasLLiJFSnciuFYuHYTys0hj47oCekd1c5q8bwGoVk9_2wIg/exec', blob);
 }
 
   // Trigger on close or hide
