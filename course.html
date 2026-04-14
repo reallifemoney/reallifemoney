@@ -1984,7 +1984,7 @@ function bookAndClose(source) {
     };
 
     // This is the most reliable way to send to Google
-    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbxwKIkdwU2S0vDZUFkTCH2hmPPxcVXp5u1_yJ_oca6A40eEGaFcAK5VMLg6eoCslhm-LQ/exec', JSON.stringify(logData));
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
   }
 
   window.addEventListener('visibilitychange', () => {
@@ -2020,14 +2020,7 @@ function handleEmailSubmit(event) {
   submitBtn.innerText = "Sending...";
   submitBtn.disabled = true;
 
-  const logData = {
-    type: "EMAIL_SIGNUP",
-    email: email,
-    url: window.location.href
-  };
-
-  // Send to your existing Google Script
-  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbx_3pJPD-z2LF0r5zKWg1hcLFPp4vbY2IJK-QI0IaeeClx8j3r-Lyez6w9jSnWvlqOaVw/exec', JSON.stringify(logData));
+  
 
   // Visual feedback
   document.getElementById('emailForm').style.display = 'none';
