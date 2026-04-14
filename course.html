@@ -571,6 +571,82 @@ body {
  
   .cred-txt strong { display: block; font-size: 14px; font-weight: 500; color: black; margin-bottom: 2px; }
   .cred-txt span { font-size: 13px; color: black; font-weight: 300; }
+
+
+  .friend-cta {
+  background: var(--mint); /* Matches surrounding sections */
+  padding: 40px 0; /* Tighter padding since it's a bar */
+}
+
+.friend-card {
+  background: #1e3a29; /* Dark green to contrast the mint */
+  border-radius: 24px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.friend-badge {
+  display: inline-block;
+  background: rgba(113, 197, 88, 0.2);
+  color: var(--green);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.friend-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.friend-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.btn-friend {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn-friend:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 222, 89, 0.3);
+}
+
+/* Mobile Layout */
+@media (max-width: 900px) {
+  .friend-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .friend-text {
+    margin: 0 auto;
+  }
+}
  
   /* DETAILS */
   .details-sec { background: var(--white); }
@@ -1387,8 +1463,24 @@ body {
 
   </div>
 </section>
- 
-
+ <section class="friend-cta">
+  <div class="container">
+    <div class="friend-card">
+      <div class="friend-content">
+        <span class="friend-badge">Better Together</span>
+        <h2 class="friend-title">Bring a friend & save</h2>
+        <p class="friend-text">
+          Learning about money is more fun with a partner or friend. Book two places together and you’ll both save on the course fee. Plus, you’ll have someone to keep you accountable!
+        </p>
+      </div>
+      <div class="friend-actions">
+        <a href="#book" class="btn-friend" onclick="logbuttonclick('Bring a Friend CTA')">
+          Book now & save →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section style="background: #eef8eb; padding: 80px 0; border-top: 1px solid var(--rule);">
   <div class="container">
