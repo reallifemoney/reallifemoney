@@ -1546,12 +1546,12 @@ body {
     <p>Get notified when I announce new Bristol venues and future course dates.</p>
     
     <form id="emailForm" onsubmit="handleEmailSubmit(event)">
-      <input type="email" id="userEmail" placeholder="Enter your email" required>
-      <button type="submit" id="submitBtn">Notify Me</button>
-    </form>
-    <div id="thankYouMessage" style="display:none; color: green; margin-top: 10px;">
-      Thanks! We'll keep you updated.
-    </div>
+  <input type="email" id="userEmail" placeholder="Enter your email" required>
+  <button type="submit" id="submitBtn">Notify Me</button>
+</form>
+<div id="thankYouMessage" style="display:none; color: #28a745;">
+  Perfect! I'll be in touch with future dates.
+</div>
   </div>
 </section>
 
@@ -2014,17 +2014,40 @@ function hideToast() {
 
 function handleEmailSubmit(event) {
   event.preventDefault();
-  const email = document.getElementById('userEmail').value;
-  const submitBtn = document.getElementById('submitBtn');
   
-  submitBtn.innerText = "Sending...";
+  const emailInput = document.getElementById('userEmail');
+  const submitBtn = document.getElementById('submitBtn');
+  const thankYou = document.getElementById('thankYouMessage');
+  const emailValue = emailInput.value;
+
+  // Change button text to show it's working
+  submitBtn.innerText = "Saving...";
   submitBtn.disabled = true;
 
-  
+  const emailData = {
+    email: emailValue,
+    url: window.location.href
+  };
 
-  // Visual feedback
-  document.getElementById('emailForm').style.display = 'none';
-  document.getElementById('thankYouMessage').style.display = 'block';
+  // TARGET THE NEW EMAIL SCRIPT URL HERE
+  fetch('https://script.google.com/macros/s/AKfycbyYA1iTKvsbFdRZ8Acms7nf1DT0toT50EK7EXY96FKQ4QXFZbU8-a_VrIHk8jgXjmhS/exec', {
+    method: 'POST',
+    mode: 'no-cors', // Important for Google Scripts
+    body: JSON.stringify(emailData)
+  })
+  .then(() => {
+    // Hide form and show success message
+    document.getElementById('emailForm').style.display = 'none';
+    thankYou.style.display = 'block';
+    
+    // Optional: Log to your other script that a signup happened
+    // ctaClicked = "Email Signup"; 
+  })
+  .catch(err => {
+    console.error("Email save failed", err);
+    submitBtn.innerText = "Try Again";
+    submitBtn.disabled = false;
+  });
 }
 
 
