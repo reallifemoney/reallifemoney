@@ -1117,7 +1117,7 @@ body {
     <a class="nav-logo" href="/">
       <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
-    <a class="nav-cta" href="#book" onclick="logButtonClick()">Book your place →</a>
+    <a class="nav-cta" href="#book" onclick="logbuttonclick()">Book your place →</a>
 </nav>
  
 <!-- HERO -->
@@ -1130,7 +1130,7 @@ body {
       investing.
     </h1>
 
-    <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 30px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo()">
+    <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 30px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
       
       <video autoplay muted loop playsinline poster="intro-loop.webp" style="width: 100%; display: block; border-radius: 16px;">
         <source src="intro-loop.mp4" type="video/mp4">
@@ -1145,7 +1145,7 @@ body {
 
     <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
       <button class="btn-primary" style="background-color: var(--purple); color: #ffffff; margin-top: 10px;" onclick="openVideo()">Watch the full story (1:40)</button>
-      <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important; margin-top: 10px;" onclick="bookFromHero()">Book your place - £75</a>
+      <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important; margin-top: 10px;" onclick="logbuttonclick()">Book your place - £75</a>
     </div>
 
     <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
@@ -1233,7 +1233,7 @@ body {
         </div>
         <h2 class="sec-title" style="margin-bottom: 20px;">"It made investing feel uncomplicated, which is not how it felt before."</h2>
 
-        <button class="btn-primary" style="background-color: var(--purple); color: #ffffff !important;" onclick="openIvanVideo()">Watch Ivan's Story</button>
+        <button class="btn-primary" style="background-color: var(--purple); color: #ffffff !important;" onclick="openIvanVideo(); logvideoclick();">Watch Ivan's Story</button>
       </div>
       
       <div style="position: relative; cursor: pointer; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" onclick="openIvanVideo()">
@@ -1473,7 +1473,7 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-may" onclick="logCourseClick()">Select these dates</button>
+    <button class="select-btn" id="btn-may" onclick="logCourseClick(); logcourseselection();">Select these dates</button>
   </div>
 
   <div class="date-card" onclick="selectDate('june')">
@@ -1496,7 +1496,7 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-june" onclick="logCourseClick()">Select these dates</button>
+    <button class="select-btn" id="btn-june" onclick="logCourseClick(); logcourseselection();">Select these dates</button>
   </div>
   <div style="text-align: center; margin-top: 40px; padding: 20px; border: 1px dashed var(--rule); border-radius: 12px;">
   <p style="font-size: 14px; color: var(--muted); margin-bottom: 10px;">Can't make these dates, or want to bring a group?</p>
@@ -1669,7 +1669,7 @@ body {
 <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
         <div style="text-align: center; margin-top: 20px;">
-    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo')">Book your place - £75</a>
+    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo'); logbuttonclick();">Book your place - £75</a>
 </div>
 
     </div>
@@ -1682,7 +1682,7 @@ body {
              <iframe id="ivanVimeoPlayer" src="https://player.vimeo.com/video/1181385044?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ivan testimonial"></iframe>
         </div>
         <div style="text-align: center; margin-top: 20px;">
-    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('ivan')">Book your place - £75</a>
+    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('ivan'); logbuttonclick();">Book your place - £75</a>
 </div>
 
     </div>
@@ -1840,13 +1840,10 @@ document.querySelectorAll('[data-copy-btn]').forEach(btn => {
 });
 
   
-let ctaClicked = "No"; // This starts as No for every visitor
-let videoClicked = "No"; // This starts as No for every visitor
-let courseClicked = "No"; // This starts as No for every visitor
+
 
 function openVideo() {
     document.getElementById('videoModal').style.display = 'flex';
-    videoClicked = "Yes";
 }
 
 function closeVideo() {
@@ -1869,7 +1866,6 @@ window.onclick = function(event) {
 
 function openIvanVideo() {
     document.getElementById('ivanModal').style.display = 'flex';
-    videoClicked = "Yes";
 }
 
 function closeIvanVideo() {
@@ -1887,24 +1883,14 @@ window.onclick = function(event) {
     if (event.target == modal2) closeIvanVideo();
 }
 
-// Function for CTA book button
-function logButtonClick() {
-    ctaClicked = "Yes";
-}
 
-// Function for the Hero button
-function logCourseClick() {
-    courseClicked = "Yes";
-}
 
 // Function for the popup buttons
 function bookAndClose(source) {
     // 1. Log which video they came from
     if (source === 'leo') {
-        ctaClicked = "Yes";
         closeVideo(); // Closes Leo's modal
     } else {
-        ctaClicked = "Yes";
         closeIvanVideo(); // Closes Ivan's modal
     }
     
@@ -1912,36 +1898,43 @@ function bookAndClose(source) {
 }
 
 // All logging scripts
+
+  let sent = false;
   const pageEntryTime = Date.now();
   let maxScroll = 0;
-  let sent = false; // Prevents double-sending
+  // Initialize these globally
+  let ctaClicked = "No";
+  let videoClicked = "No";
+  let courseSelected = "No";
 
-  // 1. Track Scroll Depth
   window.addEventListener('scroll', () => {
     const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
     if (scrolled > maxScroll) maxScroll = scrolled;
   }, { passive: true });
 
-  // 2. The Final Send (Fires when they leave)
+  function logbuttonclick() { ctaClicked = "Yes"; }
+  function logvideoclick() { videoClicked = "Yes"; }
+  function logcourseselection() { courseSelected = "Yes"; }
+
   function sendFinalData() {
-  if (sent) return; 
-  sent = true;
+    if (sent) return;
+    sent = true;
 
-  const logData = {
-    timeSpent: Math.floor((Date.now() - pageEntryTime) / 1000),
-    scrollDepth: maxScroll + "%",
-    ctaClicked: ctaClicked,       // Must match Google Script
-    videoClicked: videoClicked,   // Must match Google Script
-    courseSelected: courseSelected, // Must match Google Script
-    url: window.location.href     // Must match Google Script
-  };
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
 
-  // We use 'text/plain' to bypass Google's strict CORS security
-  const blob = new Blob([JSON.stringify(logData)], { type: 'text/plain' });
-  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbwqR4Y-oagqaajuykDZbpoasLLiJFSnciuFYuHYTys0hj47oCekd1c5q8bwGoVk9_2wIg/exec', blob);
-}
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      ctaClicked: ctaClicked,
+      videoClicked: videoClicked,
+      courseSelected: courseSelected,
+      url: window.location.href
+    };
 
-  // Trigger on close or hide
+    // This is the most reliable way to send to Google
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbwqR4Y-oagqaajuykDZbpoasLLiJFSnciuFYuHYTys0hj47oCekd1c5q8bwGoVk9_2wIg/exec', JSON.stringify(logData));
+  }
+
   window.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') sendFinalData();
   });
