@@ -2101,15 +2101,23 @@ document.getElementById('employerForm').addEventListener('submit', function(e) {
   const formData = new FormData(this);
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzXw3qYra_q3nxNwgrUo6-GJRmJQM3rPO7Li4VgMNhKYhZHIosEY8K7xlUX8lF-hjCs/exec';
 
-  fetch(scriptURL, { method: 'POST', body: formData })
-    .then(response => {
-       document.getElementById('employerForm').style.display = 'none';
-       const res = document.getElementById('formResponse');
-       res.style.display = 'block';
-       res.innerHTML = "<h3>Thanks! We'll be in touch.</h3>";
-    })
-    .catch(error => console.error('Error!', error.message));
-});
+// Use 'no-cors' to bypass the Google Script CORS block
+  fetch(scriptURL, { 
+    method: 'POST', 
+    mode: 'no-cors', 
+    body: formData 
+  })
+  .then(() => {
+    // With no-cors, we assume success if no error is caught
+    document.getElementById('employerForm').style.display = 'none';
+    const res = document.getElementById('牽formResponse');
+    res.style.display = 'block';
+    res.innerHTML = "<h3>Thanks! We'll be in touch.</h3>";
+  })
+  .catch(error => {
+    console.error('Error!', error.message);
+    btn.innerText = "Error - Try again";
+  });
 
 
 </script>
