@@ -223,6 +223,13 @@ body {
     margin-bottom: 56px;
     animation: fadeUp 0.6s ease 0.4s both;
   }
+
+  .play-icon {
+  width: 20px;
+  height: 20px;
+  fill: #A855F7; /* Your Purple color */
+  transition: transform 0.2s ease;
+}
  
   .btn-primary {
     background: var(--yellow);
@@ -1282,6 +1289,13 @@ body {
     </h1>
     <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
+    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
+      <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important; margin-top: 10px;" onclick="logbuttonclick()">Secure your seat</a>
+      <button class="btn-primary" style="background-color: var(--purple); color: #ffffff; margin-top: 10px;" onclick="openVideo(); logvideoclick();"><svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z"/>
+  </svg>Discover more (1min 40s)</button>
+    </div>
+
     <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 30px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
       
       <video autoplay muted loop playsinline poster="intro-loop.webp" style="width: 100%; display: block; border-radius: 16px;">
@@ -1295,10 +1309,7 @@ body {
       </div>
     </div>
 
-    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
-      <button class="btn-primary" style="background-color: var(--purple); color: #ffffff; margin-top: 10px;" onclick="openVideo(); logvideoclick();">Find out more (1min 40s)</button>
-      <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important; margin-top: 10px;" onclick="logbuttonclick()">Secure your seat</a>
-    </div>
+    
 
     <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
       <div>
