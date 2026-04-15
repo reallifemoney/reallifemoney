@@ -875,6 +875,25 @@ body {
   margin-top: 40px;
 }
 
+.pricing-lead-in {
+  text-align: center;
+  margin-top: -10px; /* Pulls it closer to the main heading */
+  margin-bottom: 30px;
+  color: #1e3a29; /* Dark green for readability on yellow */
+  font-size: 1.1rem;
+}
+
+.friend-badge {
+  display: inline-block;
+  background-color: #A855F7; /* Using your purple for consistent branding */
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
 .date-card {
   background: var(--white);
   border: 2px solid var(--rule);
@@ -1628,6 +1647,10 @@ body {
       <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
     </div>
     <h2 class="sec-title">Available Course Dates</h2>
+    <div class="pricing-lead-in">
+  <p>Your investment: <strong>£75 per course</strong></p>
+  <span class="friend-badge">Special offer: Bring a friend and save (£68 per course)</span>
+</div>
 
   <div class="booking-grid">
   <div class="date-card" onclick="selectDate('may')">
