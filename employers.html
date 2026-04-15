@@ -594,80 +594,28 @@ body {
   .cred-txt span { font-size: 13px; color: black; font-weight: 300; }
 
 
-  .friend-cta {
-  background: var(--mint); /* Matches surrounding sections */
-  padding: 40px 0; /* Tighter padding since it's a bar */
+/* ── WHY IT MATTERS ── */
+.why-sec { background: var(--white); }
+
+.why-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 20px; margin-top: 48px;
 }
 
-.friend-card {
-  background: #1e3a29; /* Dark green to contrast the mint */
-  border-radius: 24px;
-  padding: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  color: white;
-  position: relative;
-  overflow: hidden;
+.why-impact-card {
+border-radius: 16px; padding: 32px 28px;
+border: 1.5px solid transparent;
+transition: transform 0.2s, box-shadow 0.2s;
 }
+.why-impact-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+.why-impact-card.c1 { background: #f3eeff; border-color: #d9c8ff; }
+.why-impact-card.c2 { background: #fff4ee; border-color: #ffd4b8; }
+.why-impact-card.c3 { background: #f0faed; border-color: #c2e8b8; }
 
-.friend-badge {
-  display: inline-block;
-  background: rgba(113, 197, 88, 0.2);
-  color: var(--green);
-  padding: 6px 14px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-}
-
-.friend-title {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
-}
-
-.friend-text {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 500px;
-  line-height: 1.6;
-}
-
-.btn-friend {
-  background: var(--yellow);
-  color: var(--ink);
-  padding: 16px 32px;
-  border-radius: 100px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  display: inline-block;
-  transition: transform 0.2s, box-shadow 0.2s;
-  white-space: nowrap;
-}
-
-.btn-friend:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 222, 89, 0.3);
-}
-
-/* Mobile Layout */
-@media (max-width: 900px) {
-  .friend-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 24px;
-  }
-  .friend-text {
-    margin: 0 auto;
-  }
-}
+.wic-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+.wic-stat { font-size: 38px; font-weight: 700; letter-spacing: -1px; line-height: 1; margin-bottom: 8px; }
+.wic-title { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.2px; }
+.wic-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
  
   /* DETAILS */
   .details-sec { background: var(--white); }
@@ -867,138 +815,73 @@ body {
   .btn-copy:hover { background: #e5e7eb; }
   .btn-copy.copied { color: #16a34a; }
 
-  /* BOOKING PICKER */
-.booking-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-top: 40px;
+
+/* ── OPTIONS ── */
+.options-sec { background: var(--white); }
+
+.options-grid {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 20px; margin-top: 52px;
 }
 
-.pricing-lead-in {
-  text-align: center;
-  margin-top: -10px; /* Pulls it closer to the main heading */
-  margin-bottom: 30px;
-  color: #1e3a29; /* Dark green for readability on yellow */
-  font-size: 1.1rem;
+.option-card {
+border-radius: 16px; overflow: hidden;
+box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+transition: transform 0.2s, box-shadow 0.2s;
+display: flex; flex-direction: column;
+}
+.option-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
+
+.option-head {
+padding: 28px 28px 22px;
+}
+.option-card:nth-child(1) .option-head { background: var(--purple); }
+.option-card:nth-child(2) .option-head { background: var(--orange); }
+.option-card:nth-child(3) .option-head { background: var(--ink); }
+
+.option-label {
+font-size: 10px; font-weight: 600; letter-spacing: 2px;
+text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px;
+}
+.option-card:nth-child(1) .option-label { color: var(--yellow); }
+.option-card:nth-child(2) .option-label { color: var(--yellow); }
+.option-card:nth-child(3) .option-label { color: var(--green); }
+
+.option-title {
+font-size: 22px; font-weight: 700; color: #fff;
+letter-spacing: -0.5px; line-height: 1.15; margin-bottom: 8px;
 }
 
-.friend-badge {
-  display: inline-block;
-  background-color: #A855F7; /* Using your purple for consistent branding */
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-top: 8px;
+.option-sub { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+.option-body {
+background: var(--mint); padding: 24px 28px 28px;
+border: 1px solid var(--rule); border-top: none;
+border-radius: 0 0 16px 16px; flex: 1;
 }
 
-.date-card {
-  background: var(--white);
-  border: 2px solid var(--rule);
-  border-radius: 16px;
-  padding: 30px;
-  text-align: left;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
+.option-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.option-list li {
+display: flex; align-items: flex-start;
+gap: 10px; font-size: 13px; color: var(–text);
+line-height: 1.5; font-weight: 300;
 }
 
-.date-card:hover {
-  border-color: var(--purple);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(140, 82, 255, 0.1);
+.option-list li::before {
+content: ‘’; width: 6px; height: 6px; border-radius: 50%;
+flex-shrink: 0; margin-top: 7px;
 }
+.option-card:nth-child(1) .option-list li::before { background: var(--purple); }
+.option-card:nth-child(2) .option-list li::before { background: var(--orange); }
+.option-card:nth-child(3) .option-list li::before { background: var(--green); }
 
-.date-card.selected {
-  border-color: var(--purple);
-  background: #f8f5ff;
-}
-
-.date-card .badge {
-  display: inline-block;
-  padding: 4px 12px;
-  background: var(--mint);
-  color: var(--green);
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-}
-
-.date-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-
-.date-subtitle {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
-
-.select-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1.5px solid var(--purple);
-  background: transparent;
-  color: var(--purple);
-  font-family: 'Lexend', sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.date-card.selected .select-btn {
-  background: var(--purple);
-  color: white;
-}
-
-/* WIDGET CONTAINER */
-#booking-widget-container {
-  display: none; /* Hidden until a date is picked */
-  margin-top: 50px;
-  padding: 40px;
-  background: white;
-  border-radius: 20px;
-  border: 1px solid var(--rule);
-  animation: fadeUp 0.5s ease forwards;
-}
-
-.widget-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-/* MOBILE WIDGET OPTIMIZATION */
-@media (max-width: 600px) {
-  /* 1. Reduce the main section horizontal padding */
-  .cta-sec .container {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  /* 2. Make the widget container "Edge-to-Edge" */
-  #booking-widget-container {
-    margin-top: 30px;
-    padding: 20px 0; /* Top/Bottom padding only, 0 on sides */
-    background: transparent; /* Remove white box background on mobile for more space */
-    border: none; /* Remove border to prevent "double-boxing" look */
-  }
-
-  .widget-header h3 {
-    font-size: 18px; /* Slightly smaller text so it doesn't wrap awkwardly */
-  }
-  
-  /* 3. Ensure the Tixtree wrapper itself has no hidden margins */
-  #tixtree-wrapper {
-    width: 100% !important;
-    margin: 0 !important;
-  }
+.option-best {
+margin-top: 16px; padding: 10px 14px;
+background: rgba(255,255,255,0.7);
+border-radius: 8px;
+font-size: 12px; font-weight: 500; color: var(–muted);
+font-style: italic;
 }
 
   /* FAQ */
@@ -1539,27 +1422,31 @@ body {
 
 
   
-<!-- WHO -->
-<section class="who-sec">
+<!-- WHY IT MATTERS -->
+
+<section class="why-sec">
   <div class="container">
-    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Who it's for</div>
-    <h2 class="sec-title">Made for people who feel left behind by money</h2>
-    <p class="sec-intro">Most of us were never taught how investing works. This course is built for exactly that. We all want to maximise the potential of our money!</p>
-    <div class="who-grid">
-      <div class="who-card c1">
-        <span class="who-icon">🌱</span>
-        <h3 class="who-title">Complete beginners</h3>
-        <p class="who-body">You've heard about ISAs and investments but never known where to start. This course is built for you — no prior knowledge needed, no stupid questions. Even if you have dabbled a bit, you will get lots out of it.</p>
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Why it matters</div>
+    <h2 class="sec-title">Financial stress is costing<br>your business more than you think</h2>
+    <p class="sec-intro">Money worries are the UK's number one source of workplace stress. The good news — it's one of the easiest wellbeing gaps to close.</p>
+    <div class="why-grid">
+      <div class="why-impact-card c1">
+        <span class="wic-icon">🧠</span>
+        <div class="wic-stat" style="color:var(--purple)">77%</div>
+        <h3 class="wic-title">Report money-related stress</h3>
+        <p class="wic-body">Nearly 8 in 10 UK employees say financial worries affect their mental health. Stress leads to distraction, absenteeism and lower productivity.</p>
       </div>
-      <div class="who-card c2">
-        <span class="who-icon">💸</span>
-        <h3 class="who-title">Cash savers</h3>
-        <p class="who-body">You save even just a little (eg. £25+) each month or you've got money sitting in a savings account - investing is for you. I'll show you the potential of your savings over the long-term and what you could do to maximise this potential.</p>
+      <div class="why-impact-card c2">
+        <span class="wic-icon">💸</span>
+        <div class="wic-stat" style="color:var(--orange)">2×</div>
+        <h3 class="wic-title">More likely to leave</h3>
+        <p class="wic-body">Financially stressed employees are twice as likely to look for a new job. Financial wellbeing support is increasingly a retention tool, not just a perk.</p>
       </div>
-      <div class="who-card c3">
-        <span class="who-icon">🧩</span>
-        <h3 class="who-title">Confused by the noise</h3>
-        <p class="who-body">There is so much information out there - who can you trust? This gives you a clear, structured path from zero to confident. Best of all, you can ask me questions along the way, and there's no such thing as a silly question!</p>
+      <div class="why-impact-card c3">
+        <span class="wic-icon">🚀</span>
+        <div class="wic-stat" style="color:var(--green)">59%</div>
+        <h3 class="wic-title">Expect employer support</h3>
+        <p class="wic-body">More than half of UK employees believe their employer should actively support their financial wellbeing. It's fast becoming a baseline expectation.</p>
       </div>
     </div>
   </div>
@@ -1607,109 +1494,76 @@ body {
 </section>
 
  
-<!-- DETAILS -->
-<section class="details-sec">
+<!-- OPTIONS -->
+
+<section class="options-sec" id="options">
   <div class="container">
-    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>Course details</div>
-    <h2 class="sec-title">Simple, transparent,<br>no surprises</h2>
-    <div class="details-grid">
-      <div class="det-card"><div class="det-icon">💷</div><div class="det-val">£75</div><div class="det-lbl">for the full course</div></div>
-      <div class="det-card"><div class="det-icon">👥</div><div class="det-val">Max 12</div><div class="det-lbl">small group, more personal</div></div>
-      <div class="det-card"><div class="det-icon">🕐</div><div class="det-val">3 × 60</div><div class="det-lbl">minutes per session</div></div>
-      <div class="det-card"><div class="det-icon">📍</div><div class="det-val">Bristol</div><div class="det-lbl">in-person evening course</div></div>
+    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>How it works</div>
+    <h2 class="sec-title">Three ways to bring<br>this to your team</h2>
+    <p class="sec-intro">Every organisation is different. There's a model that works for your budget — including one that costs you nothing at all.</p>
+    <div class="options-grid">
+
+```
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option A</div>
+      <h3 class="option-title">You fund it fully</h3>
+      <p class="option-sub">The premium staff benefit</p>
     </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You pay per head for attending employees — no upfront commitment</li>
+        <li>Staff attend completely free as a company benefit</li>
+        <li>Delivered at your office or a nearby venue of your choice</li>
+        <li>Can be positioned as CPD, wellbeing or a team benefit</li>
+        <li>Pricing discussed based on group size — get in touch for a quote</li>
+      </ul>
+      <div class="option-best">Best for: organisations wanting to offer a meaningful, zero-effort benefit to all staff</div>
+    </div>
+  </div>
+
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option B</div>
+      <h3 class="option-title">You subsidise it</h3>
+      <p class="option-sub">Shared investment, shared reward</p>
+    </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You cover part of the cost, employees contribute the rest</li>
+        <li>Staff who contribute tend to be more engaged and committed</li>
+        <li>Split can be agreed flexibly — 50/50, 75/25, whatever suits</li>
+        <li>Delivered at your office or a venue of your choice</li>
+        <li>Low cost to the business while still feeling like a genuine perk</li>
+      </ul>
+      <div class="option-best">Best for: organisations with a wellbeing budget that want to stretch it further</div>
+    </div>
+  </div>
+
+  <div class="option-card">
+    <div class="option-head">
+      <div class="option-label">Option C</div>
+      <h3 class="option-title">Zero cost to you</h3>
+      <p class="option-sub">Your space, your staff — no budget needed</p>
+    </div>
+    <div class="option-body">
+      <ul class="option-list">
+        <li>You share the course details with your team and let interested staff sign up</li>
+        <li>Staff pay the standard course price directly</li>
+        <li>Delivered in your office after hours — no venue cost to anyone</li>
+        <li>You get to offer a genuinely valuable benefit at zero cost</li>
+        <li>Still counts as supporting employee financial wellbeing</li>
+      </ul>
+      <div class="option-best">Best for: smaller organisations or those with no dedicated wellbeing budget</div>
+    </div>
+  </div>
+
+</div>
+```
+
   </div>
 </section>
- 
 
-
-
-<!-- CTA BOOKING PICKER -->
-<section class="cta-sec" id="book">
-  <div class="container">
-    <div class="stag" style="color:var(--purple); justify-content:center">
-      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
-    </div>
-    <h2 class="sec-title">Available Course Dates</h2>
-    <div class="pricing-lead-in">
-  <p>Your investment: <strong>£75 per course</strong></p>
-  <span class="friend-badge">Bring a friend and save (£68 per course)</span>
-</div>
-
-  <div class="booking-grid">
-  <div class="date-card" onclick="selectDate('may')">
-    <span class="badge">Next Intake</span>
-    <div class="date-title">May 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 7th, 14th &amp; 21st May</div>
-      <div class="date-meta-row">🕡 6:30pm – 7:30pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-may" onclick="logcourseselection()">Select these dates</button>
-  </div>
-
-  <div class="date-card" onclick="selectDate('june')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">June 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 4th, 11th &amp; 18th June</div>
-      <div class="date-meta-row">🕡 6:30pm – 7:30pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <section class="date-card">
-    <h3>Can't make these dates?</h3>
-    <p>Get notified when I announce new Bristol venues and future course dates.</p>
-    
-    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
-  <input type="email" id="userEmail" placeholder="Enter your email" required>
-  <button type="submit" id="submitBtn">Notify me</button>
-</form>
-<div id="thankYouMessage" style="display:none; color: #28a745;">
-  Perfect! I'll be in touch with future dates.
-</div>
-  
-</section>
-
-</div>
-
-  <div id="booking-widget-container">
-  <div class="widget-header">
-    <h3 id="selected-date-display">Finalise your booking</h3>
-    <p style="font-size: 14px; color: var(--muted)">Safe & secure checkout via Tixtree</p>
-  </div>
-  
-  <div id="tixtree-wrapper"></div>
-</div>
-
-    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
-  </div>
-</section>
 
 <!-- FAQ -->
 <div class="faq-header">
