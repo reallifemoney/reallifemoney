@@ -185,6 +185,25 @@ body {
     margin-bottom: 24px;
     animation: fadeUp 0.6s ease 0.2s both;
   }
+
+  .hero-subheadline {
+  font-size: 1.25rem;            /* Large enough to read, small enough to show hierarchy */
+  line-height: 1.6;              /* Gives the text breathing room */
+  color: rgba(255, 255, 255, 0.9); /* Slightly off-white so it's softer on the eyes than pure white */
+  max-width: 550px;              /* Prevents the text from stretching too wide (improves readability) */
+  margin-top: 24px;              /* Space below the main headline */
+  margin-bottom: 32px;           /* Space before the video/CTA starts */
+  font-weight: 300;              /* Light weight to contrast with a bold headline */
+  letter-spacing: 0.01em;        /* Subtle spacing for a high-end feel */
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  .hero-subheadline {
+    font-size: 1.1rem;
+    max-width: 100%;             /* Allow it to fill the width on phones */
+  }
+}
  
   .hero-body {
     font-size: 16px;
@@ -1253,12 +1272,11 @@ body {
 <!-- HERO -->
 <section class="hero" style="position: relative;">
   <div class="hero-left">
-    <div class="hero-eyebrow"><span class="pulse"></span>Bristol · Three Evening Course</div>
     <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
-      Three evenings in Bristol. A lifetime of investing <br>
+      Three evenings in Bristol.<br>A lifetime of investing <br>
       <span style="color:var(--yellow)">confidence.</span>
     </h1>
-    <h2>Highly rated and engaging course that will take you from beginner to clicking invest.</h2>
+    <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
     <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 30px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
       
