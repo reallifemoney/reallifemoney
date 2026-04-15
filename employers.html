@@ -884,6 +884,22 @@ font-size: 12px; font-weight: 500; color: var(–muted);
 font-style: italic;
 }
 
+.popup-overlay {
+  display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+  width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+}
+.popup-content {
+  background: white; margin: 5% auto; padding: 30px; border-radius: 12px;
+  width: 90%; max-width: 500px; position: relative;
+}
+.popup-content input, .popup-content select, .popup-content textarea {
+  width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px;
+}
+#submitBtn {
+  width: 100%; padding: 15px; background: #A855F7; color: white; border: none; 
+  border-radius: 6px; font-weight: 700; cursor: pointer;
+}
+
   /* FAQ */
   .faq-header {
     text-align: center;
@@ -1170,7 +1186,7 @@ font-style: italic;
     <a class="nav-logo" href="/">
       <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
-    <a class="nav-cta" href="#book" onclick="logbuttonclick()">Book your place →</a>
+    <a class="nav-cta" href="javascript:void(0)" onclick="logbuttonclick(); togglePopup();">Make enquiry →</a>
 </nav>
  
 <!-- HERO -->
@@ -1561,6 +1577,34 @@ font-style: italic;
 
   </div>
 </section>
+
+
+<!-- POPUP FORM -->
+
+<div id="employerPopup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-btn" onclick="togglePopup()">&times;</span>
+    <h2>Workplace Financial Wellbeing</h2>
+    <form id="employerForm">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="text" name="company" placeholder="Company Name" required>
+      <input type="email" name="email" placeholder="Work Email" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+      <input type="number" name="employees" placeholder="Approx. No. of Employees">
+      
+      <select name="package" required>
+        <option value="" disabled selected>Which package are you interested in?</option>
+        <option value="fully_paid">Fully Paid For</option>
+        <option value="subsidised">Subsidised</option>
+        <option value="zero_cost">Zero Cost</option>
+      </select>
+      
+      <textarea name="message" placeholder="Tell us a bit about your goals..."></textarea>
+      <button type="submit" id="submitBtn">Send Enquiry</button>
+    </form>
+    <div id="formResponse" style="display:none; margin-top:10px;"></div>
+  </div>
+</div>
 
 
 <!-- FAQ -->
@@ -2043,6 +2087,29 @@ function handleEmailSubmit(event) {
   });
 }
 
+
+function togglePopup() {
+  const popup = document.getElementById('employerPopup');
+  popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+}
+
+document.getElementById('employerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.innerText = "Sending...";
+  
+  const formData = new FormData(this);
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzXw3qYra_q3nxNwgrUo6-GJRmJQM3rPO7Li4VgMNhKYhZHIosEY8K7xlUX8lF-hjCs/exec';
+
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(response => {
+       document.getElementById('employerForm').style.display = 'none';
+       const res = document.getElementById('formResponse');
+       res.style.display = 'block';
+       res.innerHTML = "<h3>Thanks! We'll be in touch.</h3>";
+    })
+    .catch(error => console.error('Error!', error.message));
+});
 
 
 </script>
