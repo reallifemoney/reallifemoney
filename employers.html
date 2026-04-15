@@ -1186,7 +1186,7 @@ font-style: italic;
     <a class="nav-logo" href="/">
       <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
-    <a class="nav-cta" href="javascript:void(0)" onclick="logbuttonclick(); togglePopup();">Make enquiry →</a>
+    <a class="nav-cta" href="javascript:void(0)" onclick="togglePopup()">Make enquiry →</a>
 </nav>
  
 <!-- HERO -->
@@ -2087,30 +2087,32 @@ function handleEmailSubmit(event) {
   });
 }
 
-
 function togglePopup() {
   const popup = document.getElementById('employerPopup');
-  popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+  if (popup.style.display === 'block') {
+    popup.style.display = 'none';
+  } else {
+    popup.style.display = 'block';
+  }
 }
 
 document.getElementById('employerForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
-  btn.innerText = "Sending...";
-  
-  const formData = new FormData(this);
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzXw3qYra_q3nxNwgrUo6-GJRmJQM3rPO7Li4VgMNhKYhZHIosEY8K7xlUX8lF-hjCs/exec';
+  const formData = new FormData(this);
 
-// Use 'no-cors' to bypass the Google Script CORS block
+  btn.innerText = "Sending...";
+
   fetch(scriptURL, { 
     method: 'POST', 
-    mode: 'no-cors', 
+    mode: 'no-cors', // Bypasses CORS policy
     body: formData 
   })
   .then(() => {
-    // With no-cors, we assume success if no error is caught
+    // Hide form and show success message
     document.getElementById('employerForm').style.display = 'none';
-    const res = document.getElementById('牽formResponse');
+    const res = document.getElementById('formResponse');
     res.style.display = 'block';
     res.innerHTML = "<h3>Thanks! We'll be in touch.</h3>";
   })
@@ -2118,6 +2120,7 @@ document.getElementById('employerForm').addEventListener('submit', function(e) {
     console.error('Error!', error.message);
     btn.innerText = "Error - Try again";
   });
+}); // This was likely the bracket you were missing!
 
 
 </script>
