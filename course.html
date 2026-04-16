@@ -443,6 +443,83 @@ body {
   .hero-tcard.pop .hstars { color: var(--yellow); }
 
 
+  /* Container and Section Style */
+#confidence-guarantee-mini {
+    background: #f8fafc; /* Keep the clean background color */
+    padding: 30px 0; /* Significant reduction in padding */
+    margin: 20px 0; /* Space above and below */
+    border-top: 1px solid rgba(0,0,0,0.03);
+    border-bottom: 1px solid rgba(0,0,0,0.03); /* Subtle borders make it a clean block */
+}
+
+/* Flex Container (Crucial: NO media query to stack) */
+.mini-trust-container {
+    max-width: 800px; /* Reduced container size for tight integration */
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center; /* Vertically center everything in the line */
+    justify-content: center; /* Center the whole group */
+    gap: 30px; /* Tight gap */
+}
+
+/* Explanation Text (Left) */
+.mini-explanation {
+    flex: 1.4; /* Give text 60% of the space */
+    text-align: left;
+    color: #374151; /* Soft Gray-Black */
+    font-size: 16px; /* slightly smaller font */
+    line-height: 1.4; /* tight leading */
+}
+
+.mini-explanation h3 {
+    color: #1a3024; /* Deep Green */
+    font-size: 26px; /* scaled down title */
+    font-weight: 800;
+    margin-bottom: 8px; /* tight margin */
+}
+
+.mini-explanation p {
+    margin: 0;
+}
+
+/* The Seal Styling (Right) */
+.mini-visual {
+    flex: 0 0 auto; /* DO NOT GROW, DO NOT SHRINK. Crucial for matching image size. */
+    display: flex;
+    justify-content: center;
+}
+
+.mini-seal {
+    max-width: 220px; /* Your requested smaller visual size */
+    height: auto; /* Preserve aspect ratio */
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.06)); /* subtle shadow */
+}
+
+/* --- Essential Mobile/Tablet Adjustments --- */
+@media (max-width: 768px) {
+    #confidence-guarantee-mini {
+        padding: 20px 0; /* even smaller vertical space on mobile */
+    }
+    
+    .mini-trust-container {
+        flex-direction: row; /* FORCE horizontal alignment on mobile */
+        gap: 15px; /* tighten gap further */
+    }
+    
+    .mini-explanation h3 {
+        font-size: 20px; /* smaller title */
+    }
+    
+    .mini-explanation p {
+        font-size: 14px; /* smaller text */
+    }
+    
+    .mini-seal {
+        max-width: 140px; /* significantly smaller image on mobile */
+    }
+}
+
 
  
   /* SHARED */
@@ -1451,6 +1528,21 @@ body {
     </div>
     <p class="pricing-text">£75 per course or £68 if you bring a friend</p>
   </div>
+
+  <section id="confidence-guarantee-mini" class="mini-trust-block">
+    <div class="mini-trust-container">
+        
+        <div class="mini-explanation">
+            <h3>Confidence increase, guaranteed.</h3>
+            <p>If you finish this course and don't feel more empowered about investing — let me know for a full refund.</p>
+        </div>
+        
+        <div class="mini-visual">
+            <img src="confidence-guarantee.webp" alt="Real Life Money - Confidence Increase Guarantee Gold Seal" class="mini-seal">
+        </div>
+        
+    </div>
+</section>
 
 
     <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 10px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
