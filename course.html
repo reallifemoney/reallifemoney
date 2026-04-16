@@ -311,24 +311,10 @@ body {
 .date-card-actions .select-btn-other {
   flex: 1; /* Makes both buttons equal width */
   white-space: nowrap; /* Prevents text from wrapping on small buttons */
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-weight: 600;
   cursor: pointer;
-  border: none;
 }
 
-/* Specific styles for the "Other" button so it doesn't fight the primary one */
-.select-btn-other {
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #e5e7eb !important;
-  transition: background 0.2s;
-}
 
-.select-btn-other:hover {
-  background: #e5e7eb;
-}
 
 /* Mobile Stacking - Optional */
 @media (max-width: 480px) {
@@ -1440,7 +1426,7 @@ body {
         <button class="select-btn" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
         <button class="select-btn-other" onclick="logbuttonclick()">View other dates</button>
     </div>
-    <p>£75 per course or £68 if you bring a friend</p>
+    <p class="pricing-text">£75 per course or £68 if you bring a friend</p>
   </div>
 
 
