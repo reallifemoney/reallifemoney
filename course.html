@@ -1424,7 +1424,7 @@ body {
     </div>
     <div class="date-card-actions">
         <button class="select-btn" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
-        <button class="select-btn-other" onclick="logbuttonclick()">View other dates</button>
+        <a class="select-btn-other" href="#book" onclick="logbuttonclick()">View other dates</a>
     </div>
     <p class="pricing-text">£75 per course or £68 if you bring a friend</p>
   </div>
@@ -2115,16 +2115,30 @@ function selectDate(month) {
   
   wrapper.appendChild(script);
 
-  // 5. Visual UI Updates
+// 5. Visual UI Updates
+  // Remove 'selected' class from ALL cards (Hero and Booking section)
   document.querySelectorAll('.date-card').forEach(card => card.classList.remove('selected'));
-  document.querySelectorAll('.select-btn').forEach(btn => btn.innerText = 'Select these dates');
+  
+  // Reset ALL buttons text
+  document.querySelectorAll('.select-btn').forEach(btn => {
+    btn.innerText = 'Select course'; // Using 'Select course' to match your new hero button
+  });
 
-  // Find the clicked card (using event.currentTarget)
-  const selectedCard = event.currentTarget;
-  selectedCard.classList.add('selected');
-  selectedCard.querySelector('.select-btn').innerText = 'Selected ✓';
+  // Find the clicked card
+  const clickedBtn = event.currentTarget;
+  const selectedCard = clickedBtn.closest('.date-card');
+  
+  if (selectedCard) {
+    selectedCard.classList.add('selected');
+    const btnInCard = selectedCard.querySelector('.select-btn');
+    if (btnInCard) btnInCard.innerText = 'Selected ✓';
+  }
 
-  document.getElementById('selected-date-display').innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
+  // SAFETY CHECK: Only update the display text if the element actually exists
+  const dateDisplay = document.getElementById('selected-date-display');
+  if (dateDisplay) {
+    dateDisplay.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
+  }
   
   // 6. Smooth Scroll (with a tiny delay to allow the widget to load)
   setTimeout(() => {
