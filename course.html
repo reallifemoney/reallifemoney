@@ -300,6 +300,50 @@ body {
   transform: translateY(-2px);
 }
 
+.date-card-actions {
+  display: flex;
+  gap: 12px; /* Space between buttons */
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.date-card-actions .select-btn,
+.date-card-actions .select-btn-other {
+  flex: 1; /* Makes both buttons equal width */
+  white-space: nowrap; /* Prevents text from wrapping on small buttons */
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+/* Specific styles for the "Other" button so it doesn't fight the primary one */
+.select-btn-other {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb !important;
+  transition: background 0.2s;
+}
+
+.select-btn-other:hover {
+  background: #e5e7eb;
+}
+
+/* Mobile Stacking - Optional */
+@media (max-width: 480px) {
+  .date-card-actions {
+    flex-direction: column; /* Stacks them if the screen is too narrow */
+  }
+}
+
+/* Styling the price text slightly to keep it tidy */
+.pricing-text {
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
 /* Mobile Stacking */
 @media (max-width: 768px) {
   .hero-quick-course {
@@ -1392,8 +1436,10 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
-    <button class="select-btn-other" onclick="logbuttonclick()">View other dates</button>
+    <div class="date-card-actions">
+        <button class="select-btn" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
+        <button class="select-btn-other" onclick="logbuttonclick()">View other dates</button>
+    </div>
     <p>£75 per course or £68 if you bring a friend</p>
   </div>
 
