@@ -249,6 +249,66 @@ body {
     font-size: 13px;
     color: rgba(255,255,255,0.3);
   }
+
+  .hero-quick-course {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+  align-items: center;
+  margin-top: 30px;
+  max-width: fit-content;
+}
+
+.q-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.q-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.q-value {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+
+/* The Action Button */
+.q-btn {
+  background: #FFD700; /* Your Yellow */
+  color: #1e3a29;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.q-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Mobile Stacking */
+@media (max-width: 768px) {
+  .hero-quick-course {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+}
  
   .hero-stats {
     display: flex;
@@ -1300,7 +1360,38 @@ body {
     <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
     <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
-      <a class="btn-primary" href="#book" style="background-color: var(--purple); color: #ffffff !important;" onclick="logbuttonclick()">View course dates</a>
+      <div class="hero-quick-course">
+  <div class="q-item">
+    <span class="q-label">Next Intake</span>
+    <span class="q-value">Thu 7th, 14th & 21st May</span>
+  </div>
+
+  <div class="q-item" style="position: relative;">
+    <span class="q-label">Location</span>
+    <span class="q-value" style="cursor: pointer;" onclick="toggleHeroVenue()">
+      Brooklands Park, Bristol <span style="font-size: 0.9em;">📍</span>
+    </span>
+    
+    <div id="heroVenuePopover" class="venue-popover">
+      <div class="popover-name">Brooklands Park Community Centre</div>
+      <div class="popover-address">
+        Brooklands Rd, Stoke Gifford,<br>Bristol BS34 8PS
+      </div>
+      <div class="popover-actions">
+        <a href="https://maps.app.goo.gl/YourMapLink" target="_blank" class="btn-map">View Map</a>
+        <a href="javascript:void(0)" class="btn-copy" onclick="copyAddress(this)">Copy</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-label">Investment</span>
+    <span class="q-value">£75 <span style="font-size: 0.8em; font-weight: 400; opacity: 0.8;">(or £68 with a friend)</span></span>
+  </div>
+
+  <button class="q-btn" onclick="selectDate('may'); logcourseselection();">Select Course</button>
+</div>
+      
       
     </div>
 
@@ -2047,6 +2138,31 @@ document.querySelectorAll('[data-copy-btn]').forEach(btn => {
     }, 2000);
   });
 });
+
+function toggleHeroVenue() {
+  const popover = document.getElementById('heroVenuePopover');
+  popover.classList.toggle('open');
+  
+  // Optional: Close popover if user clicks anywhere else
+  document.addEventListener('click', function closeOut(e) {
+    if (!e.target.closest('.q-item')) {
+      popover.classList.remove('open');
+      document.removeEventListener('click', closeOut);
+    }
+  });
+}
+
+function copyAddress(btn) {
+  const address = "Brooklands Park Community Centre, Brooklands Rd, Bristol BS34 8PS";
+  navigator.clipboard.writeText(address).then(() => {
+    btn.innerText = "Copied!";
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = "Copy";
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
 
   
 
