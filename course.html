@@ -814,7 +814,6 @@ body {
     position: relative;
     color: #374151;
     font-size: 15px;
-    font-weight: 500;
     text-decoration: underline;
     text-decoration-style: dotted;
     text-underline-offset: 3px;
@@ -1359,41 +1358,27 @@ body {
     </h1>
     <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
-    <div class="hero-actions" style="animation:fadeUp 0.6s ease 0.4s both">
-      <div class="hero-quick-course">
-  <div class="q-item">
-    <span class="q-label">Next Intake</span>
-    <span class="q-value">Thu 7th, 14th & 21st May</span>
-  </div>
-
-  <div class="q-item" style="position: relative;">
-    <span class="q-label">Location</span>
-    <span class="q-value" style="cursor: pointer;" onclick="toggleHeroVenue()">
-      Brooklands Park, Bristol <span style="font-size: 0.9em;">📍</span>
-    </span>
-    
-    <div id="heroVenuePopover" class="venue-popover">
-      <div class="popover-name">Brooklands Park Community Centre</div>
-      <div class="popover-address">
-        Brooklands Rd, Stoke Gifford,<br>Bristol BS34 8PS
-      </div>
-      <div class="popover-actions">
-        <a href="https://maps.app.goo.gl/YourMapLink" target="_blank" class="btn-map">View Map</a>
-        <a href="javascript:void(0)" class="btn-copy" onclick="copyAddress(this)">Copy</a>
+    <div class="date-card" onclick="selectDate('may')">
+    <span class="badge">Next available course</span>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 7th, 14th &amp; 21st May</div>
+      <div class="date-meta-row">🕡 6:30pm – 7:30pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
       </div>
     </div>
+    <button class="select-btn" id="btn-may-hero" onclick="logcourseselection()">Select these dates</button>
   </div>
-
-  <div class="q-item">
-    <span class="q-label">Investment</span>
-    <span class="q-value">£75 <span style="font-size: 0.8em; font-weight: 400; opacity: 0.8;">(or £68 with a friend)</span></span>
-  </div>
-
-  <button class="q-btn" onclick="selectDate('may'); logcourseselection();">Select Course</button>
-</div>
-      
-      
-    </div>
 
 
 
