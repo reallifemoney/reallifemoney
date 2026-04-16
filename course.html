@@ -964,6 +964,17 @@ body {
   position: relative;
 }
 
+.date-card-hero {
+  background: var(--white);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: 10px;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
 .date-card:hover {
   border-color: var(--purple);
   transform: translateY(-4px);
@@ -1358,7 +1369,7 @@ body {
     </h1>
     <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
-    <div class="date-card" onclick="selectDate('may')">
+    <div class="date-card-hero">
     <span class="badge">Next available course</span>
     <div class="date-meta">
       <div class="date-meta-row">📅 Thu 7th, 14th &amp; 21st May</div>
@@ -1377,8 +1388,8 @@ body {
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-may-hero" onclick="logcourseselection()">Select course</button>
-    <p>£75 per course, or £68 if you bring a friend</p>
+    <button class="select-btn" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
+    <p>£75 or £68 if you bring a friend</p>
   </div>
 
 
