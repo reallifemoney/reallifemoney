@@ -314,6 +314,37 @@ body {
   cursor: pointer;
 }
 
+.date-card-actions .select-btn-other {
+  /* Layout & Centering (Critical for <a> tags) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1; 
+  text-align: center;
+  text-decoration: none; /* Removes the underline */
+  white-space: nowrap;
+
+  /* Your Existing Styles */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--green);
+  background: transparent;
+  color: var(--green);
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  font-size: 14px; /* Bumped slightly from 12px to match standard button visibility */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Hover effect to make it feel interactive */
+.date-card-actions .select-btn-other:hover {
+  background: var(--green);
+  color: white;
+  text-decoration: none;
+}
+
+
 
 
 /* Mobile Stacking - Optional */
@@ -1045,18 +1076,7 @@ body {
   transition: 0.2s;
 }
 
-.select-btn-other {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1.5px solid var(--green);
-  background: transparent;
-  color: var(--green);
-  font-family: 'Lexend', sans-serif;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
+
 
 .date-card.selected .select-btn {
   background: var(--purple);
