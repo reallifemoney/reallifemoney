@@ -607,6 +607,22 @@ border-radius: 16px; padding: 32px 28px;
 border: 1.5px solid transparent;
 transition: transform 0.2s, box-shadow 0.2s;
 }
+
+@media (max-width: 768px) {
+    .why-grid {
+        /* Force the 3 columns into 1 */
+        grid-template-columns: 1fr;
+        gap: 24px; /* Slightly more space between the cards */
+    }
+
+    .why-impact-card {
+        width: 100%;
+        max-width: 450px; /* Prevents the cards from looking too stretched on large phones */
+        margin: 0 auto;   /* Centers the cards if they hit the max-width */
+    }
+}
+
+
 .why-impact-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
 .why-impact-card.c1 { background: #f3eeff; border-color: #d9c8ff; }
 .why-impact-card.c2 { background: #fff4ee; border-color: #ffd4b8; }
