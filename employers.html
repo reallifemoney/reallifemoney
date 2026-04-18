@@ -833,62 +833,6 @@ transition: transform 0.2s, box-shadow 0.2s;
     flex: 1;
   }
 
-  .cta-action-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Aligns to the right on desktop */
-    text-align: right;
-    max-width: 350px;
-  }
-
-  .cta-supporting-text {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 12px;
-    font-family: sans-serif;
-    line-height: 1.4;
-  }
-
-  /* The Button Style */
-  .nav-cta-enquiry {
-    display: inline-block;
-    padding: 14px 28px;
-    background-color: #1A1A1A;
-    color: #FFFFFF;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-family: sans-serif;
-    transition: all 0.3s ease;
-    border: 2px solid #1A1A1A;
-  }
-
-  .nav-cta-enquiry:hover {
-    background-color: transparent;
-    color: #1A1A1A;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-
-  /* Mobile Adjustments */
-  @media (max-width: 768px) {
-    .cta-header-container {
-      flex-direction: column;
-      align-items: flex-start; /* Aligns everything left on mobile */
-      gap: 20px;
-      margin: 30px 0;
-    }
-
-    .cta-action-group {
-      align-items: flex-start;
-      text-align: left;
-      order: 2; /* Ensures it stays between the heading and cards */
-    }
-
-    .cta-text-wrapper {
-      order: 1;
-    }
-  }
 
 .options-grid {
 display: grid; grid-template-columns: 1fr 1fr 1fr;
@@ -1584,19 +1528,11 @@ font-style: italic;
 
 <section class="options-sec" id="options">
   <div class="container">
-    <div class="cta-header-container">
+   
     <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>How it works</div>
     <h2 class="sec-title">Three ways to bring<br>this to your team</h2>
     <p class="sec-intro">Every organisation is different. There's a model that works for your budget — including one that costs you nothing at all.</p>
-    
 
-  <div class="cta-action-group">
-    <p class="cta-supporting-text">Not sure which is right? Let's discuss a tailored plan for your staff.</p>
-    <a class="nav-cta-enquiry" href="javascript:void(0)" onclick="togglePopup()">
-      Make enquiry &rarr;
-    </a>
-  </div>
-</div>
     <div class="options-grid">
 
   <div class="option-card">
