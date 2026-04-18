@@ -839,12 +839,7 @@ display: grid; grid-template-columns: 1fr 1fr 1fr;
 gap: 20px; margin-top: 52px;
 }
 
-@media (max-width: 768px) {
-    .options-grid {
-        flex-direction: column; /* This stacks them vertically */
-        align-items: center;    /* Centers them on the screen */
-        padding: 0 20px;        /* Adds a bit of side padding for mobile */
-    }
+
 
 .option-card {
 border-radius: 16px; overflow: hidden;
@@ -852,6 +847,22 @@ box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 transition: transform 0.2s, box-shadow 0.2s;
 display: flex; flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .options-grid {
+        flex-direction: column; /* This stacks them vertically */
+        align-items: center;    /* Centers them on the screen */
+        padding: 0 20px;        /* Adds a bit of side padding for mobile */
+    }
+
+    .option-card {
+        width: 100%;            /* Makes cards full width of the phone */
+        max-width: 400px;       /* Prevents them from getting too wide on tablets */
+        margin-bottom: 20px;    /* Adds space between the stacked cards */
+    }
+}
+
+
 .option-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,0.1); }
 
 .option-head {
