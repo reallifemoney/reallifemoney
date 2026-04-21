@@ -1984,6 +1984,28 @@ body {
     </div>
     <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
   </div>
+  <div class="date-card" onclick="selectDate('july')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">July 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
+  </div>
   <section class="date-card">
     <h3>Can't make these dates?</h3>
     <p>Get notified when I announce new Bristol venues and future course dates.</p>
@@ -2254,7 +2276,8 @@ function selectDate(month) {
   // 1. Define your IDs
   const ids = {
     'may': 'beginners-guide-to-investing-0d1850321bea',
-    'june': 'beginners-guide-to-investing-f6e7b00efeb0'
+    'june': 'beginners-guide-to-investing-f6e7b00efeb0',
+    'july': 'beginners-guide-to-investing-53d055113a39'
   };
 
   const selectedID = ids[month];
