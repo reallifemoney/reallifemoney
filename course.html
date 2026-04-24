@@ -1517,6 +1517,47 @@ body {
 }
 
 
+/* Darkens the background when popup is open */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* The actual popup box */
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #8c52ff; /* Your Purple */
+}
+
+.checkout-button {
+    background-color: #71c558; /* Your Green */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -1985,7 +2026,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
     <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
   </div>
-  <div class="date-card" onclick="selectDate('july')">
+  <div class="date-card">
     <span class="badge">Limited Spaces</span>
     <div class="date-title">July 2026</div>
     <div class="date-meta">
@@ -2005,7 +2046,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         </button>
       </div>
     </div>
-    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
+    <button class="select-btn" id="btn-july" onclick="logcourseselection(); openTixTree('July Course')">Select these dates</button>
   </div>
   <section class="date-card">
     <h3>Can't make these dates?</h3>
@@ -2205,6 +2246,27 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
     </div>
 </div>
+
+<div id="tixTreeModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeTixTree()">&times;</span>
+        
+        <div class="modal-header">
+            <h2 id="modalTitle">Complete Your Booking</h2>
+            <p>Secure your spot via our encrypted checkout.</p>
+        </div>
+
+        <div id="widgetContainer">
+            <p>Loading secure checkout...</p>
+        </div>
+        
+        <div class="modal-footer">
+            <p>🔒 Secure Payment via Stripe/TixTree</p>
+        </div>
+    </div>
+</div>
+
+
 
 
  
@@ -2554,6 +2616,24 @@ function handleEmailSubmit(event) {
     submitBtn.innerText = "Try Again";
     submitBtn.disabled = false;
   });
+
+  function openTixTree(courseName) {
+    document.getElementById('tixTreeModal').style.display = 'flex';
+    // Optional: Log this as an 'Initiate Checkout' event for your data
+    console.log('User opened checkout for: ' + courseName);
+}
+
+function closeTixTree() {
+    document.getElementById('tixTreeModal').style.display = 'none';
+}
+
+// Close popup if user clicks outside the white box
+window.onclick = function(event) {
+    let modal = document.getElementById('tixTreeModal');
+    if (event.target == modal) {
+        closeTixTree();
+    }
+}
 }
 
 
