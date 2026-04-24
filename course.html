@@ -2617,25 +2617,42 @@ function handleEmailSubmit(event) {
     submitBtn.disabled = false;
   });
 
-  function openTixTree(courseName) {
-    document.getElementById('tixTreeModal').style.display = 'flex';
-    // Optional: Log this as an 'Initiate Checkout' event for your data
-    console.log('User opened checkout for: ' + courseName);
-}
 
-function closeTixTree() {
-    document.getElementById('tixTreeModal').style.display = 'none';
-}
+    // 1. Logic to Open the Modal
+    window.openTixTree = function(courseName) {
+        const modal = document.getElementById('tixTreeModal');
+        if (modal) {
+            modal.style.display = 'flex';
+            console.log("Modal opened for: " + courseName);
+        } else {
+            console.error("Error: Could not find element with ID 'tixTreeModal'");
+        }
+    };
 
-// Close popup if user clicks outside the white box
-window.onclick = function(event) {
-    let modal = document.getElementById('tixTreeModal');
-    if (event.target == modal) {
-        closeTixTree();
-    }
-}
-}
+    // 2. Logic to Close the Modal
+    window.closeTixTree = function() {
+        const modal = document.getElementById('tixTreeModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    };
 
+    // 3. Close Modal if user clicks the dark background (outside the white box)
+    window.onclick = function(event) {
+        const modal = document.getElementById('tixTreeModal');
+        if (event.target == modal) {
+            window.closeTixTree();
+        }
+    };
+
+    // 4. Handle Escape key to close (Good for accessibility)
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            window.closeTixTree();
+        }
+    });
+
+  }
 
 
 </script>
