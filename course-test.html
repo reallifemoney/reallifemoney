@@ -2335,8 +2335,10 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
   // CTA BOOKING PICKER
 
-function selectDate(month) {
-  // 1. Define your IDs
+
+// 1. Make the function global for GitHub Pages
+window.selectDate = function(month) {
+  // Define TixTree IDs
   const ids = {
     'may': 'beginners-guide-to-investing-0d1850321bea',
     'june': 'beginners-guide-to-investing-f6e7b00efeb0',
@@ -2344,60 +2346,50 @@ function selectDate(month) {
   };
 
   const selectedID = ids[month];
+  
+  // 2. Open the Modal
+  const modal = document.getElementById('tixTreeModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
 
-  // 2. Show the container
-  const container = document.getElementById('booking-widget-container');
-  container.style.display = 'block';
-
-  // 3. Clear the existing widget (Important so they don't stack)
+  // 3. Clear the existing widget inside the popup
   const wrapper = document.getElementById('tixtree-wrapper');
-  wrapper.innerHTML = ''; 
+  if (wrapper) {
+    wrapper.innerHTML = '<p style="text-align:center;">Loading secure checkout...</p>'; 
 
-  // 4. Create and inject the new Tixtree script
-  const script = document.createElement('script');
-  script.id = 'tixtree-script';
-  script.src = 'https://www.tixtree.com/widgets/tixtree.js';
-  script.setAttribute('data-type', 'event');
-  script.setAttribute('data-id', selectedID);
-  
-  wrapper.appendChild(script);
-
-// 5. Visual UI Updates
-  // Remove 'selected' class from ALL cards (Hero and Booking section)
-  document.querySelectorAll('.date-card').forEach(card => card.classList.remove('selected'));
-  
-  // Reset ALL buttons text
-  document.querySelectorAll('.select-btn').forEach(btn => {
-    btn.innerText = 'Select course'; // Using 'Select course' to match your new hero button
-  });
-
-  // Find the clicked card
-  const clickedBtn = event.currentTarget;
-  const selectedCard = clickedBtn.closest('.date-card');
-  
-  if (selectedCard) {
-    selectedCard.classList.add('selected');
-    const btnInCard = selectedCard.querySelector('.select-btn');
-    if (btnInCard) btnInCard.innerText = 'Selected ✓';
-  }
-
-  // SAFETY CHECK: Only update the display text if the element actually exists
-  const dateDisplay = document.getElementById('selected-date-display');
-  if (dateDisplay) {
-    dateDisplay.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
-  }
-  
-  // 6. Smooth Scroll (with a tiny delay to allow the widget to load)
-  setTimeout(() => {
-    const yOffset = -100; // This leaves a 100px gap at the top so it's not "squashed"
-    const y = container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    // 4. Create and inject the new Tixtree script
+    const script = document.createElement('script');
+    script.id = 'tixtree-script';
+    script.src = 'https://www.tixtree.com/widgets/tixtree.js';
+    script.setAttribute('data-type', 'event');
+    script.setAttribute('data-id', selectedID);
     
-    window.scrollTo({
-      top: y,
-      behavior: 'smooth'
-    });
-  }, 100);
-}
+    wrapper.appendChild(script);
+  }
+
+  // 5. Update Modal Title
+  const modalTitle = document.getElementById('modal-course-title');
+  if (modalTitle) {
+    modalTitle.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
+  }
+};
+
+// 6. Close Modal Function
+window.closeTixTree = function() {
+    document.getElementById('tixTreeModal').style.display = 'none';
+    // Clear the wrapper so the script doesn't keep running in the background
+    document.getElementById('tixtree-wrapper').innerHTML = '';
+};
+
+// Close on background click
+window.onclick = function(event) {
+    const modal = document.getElementById('tixTreeModal');
+    if (event.target == modal) {
+        window.closeTixTree();
+    }
+};
+
 
 // Brooklands park location
 
@@ -2626,6 +2618,19 @@ function handleEmailSubmit(event) {
     <div class="cookie-buttons">
         <button onclick="acceptCookies()" class="btn-accept">Yes, accept cookies</button>
         <button onclick="hideToast()" class="btn-decline">No thank you</button>
+    </div>
+</div>
+
+<div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
+    <div class="modal-content" style="background: white; width: 100%; max-width: 600px; border-radius: 15px; position: relative; padding: 20px; max-height: 90vh; overflow-y: auto;">
+        
+        <span onclick="closeTixTree()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #8c52ff;">&times;</span>
+        
+        <h2 id="modal-course-title" style="margin-bottom: 20px; color: #333; font-family: sans-serif;">Complete Your Booking</h2>
+        
+        <div id="tixtree-wrapper"></div>
+        
+        <p style="font-size: 12px; color: #666; margin-top: 15px; text-align: center;">🔒 Secure checkout powered by TixTree & Stripe</p>
     </div>
 </div>
 </body>
