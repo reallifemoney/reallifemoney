@@ -1623,16 +1623,11 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
     
   </div>
-  
-  <script async
-  src="https://js.stripe.com/v3/buy-button.js">
-</script>
 
-<stripe-buy-button
-  buy-button-id="buy_btn_1TPnfuG1bVxXIBBZS3V2fgu5"
-  publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZzqIk1qAUUqPakrA5RsN9hsGyCNpbhYLNqc00dqw4dlil"
->
-</stripe-buy-button>
+<!-- Noscript content for added SEO -->
+<noscript><a href="https://www.eventbrite.co.uk/e/beginners-guide-to-investing-course-tickets-1985867610481" rel="noopener noreferrer" target="_blank">Buy Tickets on Eventbrite</a></noscript>
+<!-- You can customise this button any way you like -->
+<button id="eventbrite-widget-modal-trigger-1985867610481" type="button">Buy Tickets</button>
 
 
 
@@ -2278,6 +2273,26 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a>
   </p>
 </footer>
+<script src="https://www.eventbrite.co.uk/static/widgets/eb_widgets.js"></script>
+
+<script type="text/javascript">
+    var exampleCallback = function() {
+        console.log('Order complete!');
+    };
+
+    window.EBWidgets.createWidget({
+        widgetType: 'checkout',
+        eventId: '1985867610481',
+        themeSettings: {
+            brandColor: '#1F3A29',
+            fontColor: '#000000',
+            background: '#ffffff',
+        },
+        modal: true,
+        modalTriggerElementId: 'eventbrite-widget-modal-trigger-1985867610481',
+        onOrderComplete: exampleCallback
+    });
+</script>
  
 <script>
   const obs = new IntersectionObserver(entries => {
@@ -2610,6 +2625,7 @@ function handleEmailSubmit(event) {
   });
 
 }
+
 
 
 </script>
