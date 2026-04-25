@@ -1618,19 +1618,13 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
       </div>
     </div>
     <div class="date-card-actions">
-        <button class="select-btn-hero" id="eventbrite-widget-modal-trigger-1988213027687" onclick="logcourseselection()">Select course</button>
+        <button class="select-btn-hero" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
         <a class="select-btn-other" href="#book" onclick="logbuttonclick()">View other dates</a>
     </div>
     
   </div>
 
-<!-- Noscript content for added SEO -->
-<noscript><a href="https://www.eventbrite.co.uk/e/beginners-guide-to-investing-course-tickets-1988213027687" rel="noopener noreferrer" target="_blank">Buy Tickets on Eventbrite</a></noscript>
 
-<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
-<stripe-pricing-table pricing-table-id="prctbl_1TQ2KyG1bVxXIBBZJmHXVBRh"
-publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZzqIk1qAUUqPakrA5RsN9hsGyCNpbhYLNqc00dqw4dlil">
-</stripe-pricing-table>
 
 
     <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 10px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
@@ -2070,6 +2064,16 @@ publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZ
 
 </div>
 
+  <div id="booking-widget-container">
+  <div class="widget-header">
+    <h3 id="selected-date-display">Finalise your booking</h3>
+    <p style="font-size: 14px; color: var(--muted)">Safe & secure checkout via Tixtree</p>
+  </div>
+  
+  <div id="tixtree-wrapper"></div>
+</div>
+
+    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
   </div>
 </section>
 
@@ -2243,6 +2247,27 @@ publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZ
     </div>
 </div>
 
+<div id="tixTreeModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeTixTree()">&times;</span>
+        
+        <div class="modal-header">
+            <h2 id="modalTitle">Complete Your Booking</h2>
+            <p>Secure your spot via our encrypted checkout.</p>
+        </div>
+
+        <div id="widgetContainer">
+            <p>Loading secure checkout...</p>
+        </div>
+        
+        <div class="modal-footer">
+            <p>🔒 Secure Payment via Stripe/TixTree</p>
+        </div>
+    </div>
+</div>
+
+
+
 
  
 <!-- FOOTER -->
@@ -2253,26 +2278,6 @@ publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZ
     <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a>
   </p>
 </footer>
-<script src="https://www.eventbrite.co.uk/static/widgets/eb_widgets.js"></script>
-
-<script type="text/javascript">
-    var exampleCallback = function() {
-        console.log('Order complete!');
-    };
-
-    window.EBWidgets.createWidget({
-        widgetType: 'checkout',
-        eventId: '1988213027687',
-        themeSettings: {
-            brandColor: '#1F3A29',
-            fontColor: '#000000',
-            background: '#ffffff',
-        },
-        modal: true,
-        modalTriggerElementId: 'eventbrite-widget-modal-trigger-1988213027687',
-        onOrderComplete: exampleCallback
-    });
-</script>
  
 <script>
   const obs = new IntersectionObserver(entries => {
@@ -2328,7 +2333,61 @@ publishable-key="pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZ
     e.stopPropagation();
   }, { passive: true });
 
- 
+
+// 1. Make the function global for GitHub Pages
+window.selectDate = function(month) {
+  // Define TixTree IDs
+  const ids = {
+    'may': 'beginners-guide-to-investing-0d1850321bea',
+    'june': 'beginners-guide-to-investing-f6e7b00efeb0',
+    'july': 'beginners-guide-to-investing-53d055113a39'
+  };
+
+  const selectedID = ids[month];
+  
+  // 2. Open the Modal
+  const modal = document.getElementById('tixTreeModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+
+  // 3. Clear the existing widget inside the popup
+  const wrapper = document.getElementById('tixtree-wrapper');
+  if (wrapper) {
+    wrapper.innerHTML = '<p style="text-align:center;">Loading secure checkout...</p>'; 
+
+    // 4. Create and inject the new Tixtree script
+    const script = document.createElement('script');
+    script.id = 'tixtree-script';
+    script.src = 'https://www.tixtree.com/widgets/tixtree.js';
+    script.setAttribute('data-type', 'event');
+    script.setAttribute('data-id', selectedID);
+    
+    wrapper.appendChild(script);
+  }
+
+  // 5. Update Modal Title
+  const modalTitle = document.getElementById('modal-course-title');
+  if (modalTitle) {
+    modalTitle.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Series";
+  }
+};
+
+// 6. Close Modal Function
+window.closeTixTree = function() {
+    document.getElementById('tixTreeModal').style.display = 'none';
+    // Clear the wrapper so the script doesn't keep running in the background
+    document.getElementById('tixtree-wrapper').innerHTML = '';
+};
+
+// Close on background click
+window.onclick = function(event) {
+    const modal = document.getElementById('tixTreeModal');
+    if (event.target == modal) {
+        window.closeTixTree();
+    }
+};
+
 
 // Brooklands park location
 
@@ -2551,7 +2610,6 @@ function handleEmailSubmit(event) {
 }
 
 
-
 </script>
 <div id="cookie-toast" class="cookie-toast">
     <p>I use some cookies to see if my ads work. Is that okay? 🍪</p>
@@ -2561,6 +2619,17 @@ function handleEmailSubmit(event) {
     </div>
 </div>
 
-
+<div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
+    <div class="modal-content" style="background: white; width: 100%; max-width: 600px; border-radius: 15px; position: relative; padding: 20px; max-height: 90vh; overflow-y: auto;">
+        
+        <span onclick="closeTixTree()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #8c52ff;">&times;</span>
+        
+        <h2 id="modal-course-title" style="margin-bottom: 20px; color: #333; font-family: sans-serif;">Complete Your Booking</h2>
+        
+        <div id="tixtree-wrapper"></div>
+        
+        <p style="font-size: 12px; color: #666; margin-top: 15px; text-align: center;">🔒 Secure checkout powered by TixTree & Stripe</p>
+    </div>
+</div>
 </body>
 </html>
