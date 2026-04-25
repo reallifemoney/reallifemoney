@@ -1214,11 +1214,23 @@ body {
   margin-bottom: 30px;
 }
 
- #tixtree-wrapper {
-    min-height: 500px !important;
-    width: 100%;
+/* Force the wrapper to actually take up space */
+#tixtree-wrapper {
     display: block !important;
+    min-height: 600px !important;
+    width: 100% !important;
+    background-color: #ffffff; /* So you can see if the box is there */
+    overflow: visible !important;
 }
+
+/* Ensure the modal content isn't squashing the widget */
+.modal-content {
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+ 
+
 /* MOBILE WIDGET OPTIMIZATION */
 @media (max-width: 600px) {
   /* 1. Reduce the main section horizontal padding */
