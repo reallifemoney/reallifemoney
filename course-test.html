@@ -1229,6 +1229,33 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+/* Universal Modal Fixes */
+#tixtree-wrapper {
+    min-height: 600px !important;
+    width: 100% !important;
+}
+
+/* Mobile Specific Adjustments */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important; /* Removes rounded corners for full-screen feel */
+        padding: 10px !important;    /* Tightens space for the widget */
+        margin: 0 !important;
+    }
+
+    .modal-overlay {
+        padding: 0 !important; /* Removes the dark gap around the edges */
+    }
+    
+    #tixtree-wrapper {
+        min-height: 80vh !important; /* Gives the widget more vertical room */
+    }
+}
  
 
 /* MOBILE WIDGET OPTIMIZATION */
