@@ -2334,6 +2334,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   }, { passive: true });
 
 
+
 // 1. Make the function global for GitHub Pages
 window.selectDate = function(month) {
   // Define TixTree IDs
@@ -2351,19 +2352,16 @@ window.selectDate = function(month) {
     modal.style.display = 'flex';
   }
 
-  // 3. Clear the existing widget inside the popup
+  // 3. Target the wrapper and show loading state
   const wrapper = document.getElementById('tixtree-wrapper');
   if (wrapper) {
-    wrapper.innerHTML = '<p style="text-align:center;">Loading secure checkout...</p>'; 
-
-    // 4. Create and inject the new Tixtree script
-    const script = document.createElement('script');
-    script.id = 'tixtree-script';
-    script.src = 'https://www.tixtree.com/widgets/tixtree.js';
-    script.setAttribute('data-type', 'event');
-    script.setAttribute('data-id', selectedID);
-    
-    wrapper.appendChild(script);
+    // 4. Inject the TixTree checkout via iFrame (More reliable for popups)
+    wrapper.innerHTML = `
+      <iframe 
+        src="https://www.tixtree.com/e/${selectedID}?embed=true" 
+        style="width:100%; height:550px; border:none; border-radius:8px;" 
+        allowtransparency="true">
+      </iframe>`;
   }
 
   // 5. Update Modal Title
@@ -2375,9 +2373,12 @@ window.selectDate = function(month) {
 
 // 6. Close Modal Function
 window.closeTixTree = function() {
-    document.getElementById('tixTreeModal').style.display = 'none';
-    // Clear the wrapper so the script doesn't keep running in the background
-    document.getElementById('tixtree-wrapper').innerHTML = '';
+    const modal = document.getElementById('tixTreeModal');
+    if (modal) {
+        modal.style.display = 'none';
+        // Clear the wrapper so the iframe stops running
+        document.getElementById('tixtree-wrapper').innerHTML = '';
+    }
 };
 
 // Close on background click
@@ -2387,6 +2388,14 @@ window.onclick = function(event) {
         window.closeTixTree();
     }
 };
+
+// Close on Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape") {
+        window.closeTixTree();
+    }
+});
+
 
 
 // Brooklands park location
