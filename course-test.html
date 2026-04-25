@@ -2359,12 +2359,7 @@ window.selectDate = function(month) {
     // The timeout ensures the modal is fully open before the iframe starts its request
     setTimeout(() => {
         wrapper.innerHTML = `
-          <iframe 
-            src="https://www.tixtree.com/widgets/event/${selectedID}/" 
-            style="width:100%; height:550px; border:none; background:white; overflow:hidden;" 
-            frameborder="0"
-            scrolling="yes">
-          </iframe>`;
+          <script id="tixtree-script" src="https://www.tixtree.com/widgets/tixtree.js" data-type="event" data-id="${selectedID}"></script>`;
     }, 50);
   }
 };
