@@ -2358,9 +2358,16 @@ window.selectDate = function(month) {
 
     // The timeout ensures the modal is fully open before the iframe starts its request
     setTimeout(() => {
-        wrapper.innerHTML = `
-          <script id="tixtree-script" src="https://www.tixtree.com/widgets/tixtree.js" data-type="event" data-id="${selectedID}"></script>`;
-    }, 50);
+        wrapper.innerHTML = ''; // Clear loading text
+        
+        const script = document.createElement('script');
+        script.id = "tixtree-script";
+        script.src = "https://www.tixtree.com/widgets/tixtree.js";
+        script.setAttribute("data-type", "event");
+        script.setAttribute("data-id", selectedID);
+        
+        wrapper.appendChild(script);
+    }, 100);
   }
 };
 
