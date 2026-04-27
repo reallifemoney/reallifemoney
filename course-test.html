@@ -104,7 +104,99 @@ body {
  
   .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
 
- 
+ /* Hero Section Container */
+.hero-section {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Text Styling */
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero-text .highlight {
+    color: #8c52ff; /* Your Brand Purple */
+}
+
+.hero-text .hero-submed {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Button Styling */
+.cta-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: #8c52ff;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 15px rgba(140, 82, 255, 0.3);
+}
+
+.cta-button:hover {
+    background-color: #5e2ced;
+    transform: translateY(-2px);
+}
+
+/* Image Styling */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Responsive Mobile Tweaks */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column; /* Stack vertically on phones */
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .hero-image {
+        order: 2; /* Put image under text on mobile */
+    }
+}
+
+
+
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -1635,39 +1727,21 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
  
 <!-- HERO -->
 <section class="hero" style="position: relative;">
-  <div class="hero-left">
-    <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
-      Two evenings in Bristol.<br>A lifetime of 
-      <span style="color:var(--yellow)">confidence.</span>
-    </h1>
-    <p class="hero-subheadline">Highly rated and engaging course that will take you from beginner to clicking invest.</p>
 
-    <div class="date-card" style="margin-bottom:25px">
-    <span class="badge-hero">Tickets selling fast</span>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 14th &amp; 21st May</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">💷 &pound;75 per course</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1>Stop missing out, <br><span class="highlight">let’s get you investing.</span></h1>
+            <p class="hero-submed">Most people lose thousands to inflation without realizing it. See the gap, close the gap, and start building real wealth today.</p>
+            <a href="#booking-section" class="cta-button">Get Started</a>
+        </div>
+
+        <div class="hero-image">
+            <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" class="graph-img">
+        </div>
     </div>
-    <div class="date-card-actions">
-        <button class="select-btn-hero" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Select course</button>
-        <a class="select-btn-other" href="#book" onclick="logbuttonclick()">View other dates</a>
-    </div>
-    
-  </div>
+</section>
+
 
 
 
