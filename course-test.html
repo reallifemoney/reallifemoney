@@ -291,21 +291,34 @@ body {
 
 
 .hero-cta {
+  /* 1. Stop it from stretching to 100% */
+  align-self: flex-start; 
   display: inline-block;
+  
+  /* 2. Control the size */
+  padding: 16px 36px;
+  font-size: 16px;
+  width: auto;
+  max-width: fit-content;
+
+  /* Your existing styles */
   background-color: var(--green);
-  color: #1e3a29; /* Dark green text for high contrast on the bright green button */
-  font-family: 'Lexend', sans-serif; /* Matching your brand font */
-  font-size: 18px;
+  color: black; 
+  font-family: 'Lexend', sans-serif;
   font-weight: 700;
-  padding: 18px 40px;
-  border-radius: 100px; /* Rounded pill shape is more inviting */
+  border-radius: 100px;
   text-decoration: none;
-  letter-spacing: -0.5px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover */
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  border: none;
   cursor: pointer;
-  text-align: center;
+}
+
+/* Mobile Tweak: If you WANT it full width on phones, keep this */
+@media (max-width: 600px) {
+  .hero-cta {
+    align-self: stretch; /* Stretches only on small screens */
+    text-align: center;
+  }
 }
 
 .hero-cta:hover {
