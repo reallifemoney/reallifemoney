@@ -1726,65 +1726,63 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 </nav>
  
 <!-- HERO -->
-<section class="hero" style="position: relative;">
-  <div class="hero-left">
-    <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
-      Stop missing out.<br>Let's get you 
-      <span style="color:var(--green)">investing.</span>
-    </h1>
-    <p class="hero-subheadline">Inflation is eating away at your money. <span style="color: var(--green)">It's time to bite back.</span><br><br>I will take you from beginner to clicking invest in two engaging evenings.</p>
-    <a href="#book" class="cta-button">Book now</a>
+<div class="hero-left" style="flex: 1; min-width: 320px;">
+  
+  <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
+    Stop losing money.<br>Let's get you 
+    <span style="color:var(--green)">investing.</span>
+  </h1>
 
-    <div class="hero-image">
-            <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" class="graph-img">
-        </div>
+  <p class="hero-subheadline">
+    Inflation is eating away at your money. <span style="color: var(--green)">It's time to bite back.</span><br><br>
+    I will take you from beginner to clicking invest in two engaging evenings.
+  </p>
 
+  <a href="#book" class="cta-button" style="display: inline-block; margin-bottom: 20px;">Book now</a>
 
+  <div class="hero-graph-container" style="animation:fadeUp 0.6s ease 0.3s both; margin: 10px 0 30px 0;">
+      <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" style="width: 100%; max-width: 500px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+  </div>
 
-
-    <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.3s both; max-width: 500px; margin: 10px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
-      
-      <video autoplay muted loop playsinline poster="intro-loop.webp" style="width: 100%; display: block; border-radius: 16px;">
-        <source src="intro-loop.mp4" type="video/mp4">
-      </video>
-
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
-        <div style="background: rgba(107, 79, 187, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px);">
-            <div style="width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px;"></div>
-        </div>
-      </div>
-    </div>
-
-      <section id="confidence-guarantee-mini" class="mini-trust-block">
-    <div class="mini-trust-container">
-        
-        <div class="mini-explanation">
-            <h3>Confidence increase, guaranteed.</h3>
-            <p>If you finish this course and don't feel more empowered about investing — let me know for a full refund.</p>
-        </div>
-        
-        <div class="mini-visual">
-            <img src="confidence-guarantee.webp" alt="Real Life Money - Confidence Increase Guarantee Gold Seal" class="mini-seal">
-        </div>
-        
-    </div>
-</section>
-
-           <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both">
-      <div>
-        <div class="stat-val" style="color:var(--yellow)">5★</div>
-        <div class="stat-lbl">average rating</div>
-      </div>
-      <div>
-        <div class="stat-val" style="color:var(--green)">100%</div>
-        <div class="stat-lbl">would recommend</div>
-      </div>
-      <div>
-        <div class="stat-val" style="color:var(--purple)">3x</div>
-        <div class="stat-lbl">confidence increase</div>
+  <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.4s both; max-width: 500px; margin: 20px 0; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
+    <video autoplay muted loop playsinline poster="intro-loop.webp" style="width: 100%; display: block; border-radius: 16px;">
+      <source src="intro-loop.mp4" type="video/mp4">
+    </video>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+      <div style="background: rgba(107, 79, 187, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px);">
+          <div style="width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px;"></div>
       </div>
     </div>
   </div>
+
+  <section id="confidence-guarantee-mini" class="mini-trust-block" style="margin-bottom: 30px;">
+    <div class="mini-trust-container" style="display: flex; align-items: center; gap: 15px; background: #f9f9f9; padding: 15px; border-radius: 15px;">
+        <div class="mini-explanation">
+            <h3 style="margin:0; font-size: 16px;">Confidence increase, guaranteed.</h3>
+            <p style="margin:5px 0 0 0; font-size: 14px;">If you don't feel empowered — let me know for a full refund.</p>
+        </div>
+        <div class="mini-visual">
+            <img src="confidence-guarantee.webp" alt="Guarantee Seal" style="width: 50px; height: 50px;">
+        </div>
+    </div>
+  </section>
+
+  <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both; display: flex; gap: 20px;">
+    <div>
+      <div class="stat-val" style="color:var(--yellow)">5★</div>
+      <div class="stat-lbl">average rating</div>
+    </div>
+    <div>
+      <div class="stat-val" style="color:var(--green)">100%</div>
+      <div class="stat-lbl">would recommend</div>
+    </div>
+    <div>
+      <div class="stat-val" style="color:var(--purple)">3x</div>
+      <div class="stat-lbl">confidence</div>
+    </div>
+  </div>
+  
+</div>
   <div class="hero-right" style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: start; gap: 14px;">
 
     <!-- Google Reviews Header -->
