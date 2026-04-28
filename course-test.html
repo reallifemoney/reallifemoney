@@ -309,7 +309,6 @@ body {
   border-radius: 100px;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -332,24 +331,6 @@ body {
   transform: scale(0.98); /* Sinks when clicked */
 }
 
-/* Optional: Adding a subtle 'shimmer' effect */
-.hero-cta {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-cta::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: rotate(45deg);
-  transition: 0.5s;
-  display: block;
-}
 
 .hero-cta:hover::after {
   left: 120%;
