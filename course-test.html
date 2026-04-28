@@ -530,7 +530,7 @@ body {
     margin-bottom: 4px;
   }
  
-  .stat-lbl { font-size: 11px; color: white; font-weight: 400; }
+  .stat-lbl { font-size: 11px; color: black; font-weight: 400; }
  
   /* Hero right */
   .hero-right {
@@ -603,6 +603,7 @@ body {
     align-items: center; /* Vertically center everything in the line */
     justify-content: center; /* Center the whole group */
     gap: 30px; /* Tight gap */
+    background: #1e3a29;
 }
 
 /* Explanation Text (Left) */
@@ -1913,6 +1914,106 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   </div>
 </section>
 
+<!-- CTA BOOKING PICKER -->
+<section class="cta-sec" id="book">
+  <div class="container">
+    <div class="stag" style="color:var(--purple); justify-content:center">
+      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
+    </div>
+    <h2 class="sec-title">Available Course Dates</h2>
+    <div class="pricing-lead-in">
+  <p>Your investment: <strong>£75 per course</strong></p>
+</div>
+
+  <div class="booking-grid">
+  <div class="date-card" onclick="selectDate('may')">
+    <span class="badge">Next Intake</span>
+    <div class="date-title">May 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 14th &amp; 21st May</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-may" onclick="logcourseselection()">Select these dates</button>
+  </div>
+
+  <div class="date-card" onclick="selectDate('june')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">June 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 11th &amp; 18th June</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
+  </div>
+  <div class="date-card" onclick="selectDate('july')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">July 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
+  </div>
+  <section class="date-card">
+    <h3>Can't make these dates?</h3>
+    <p>Get notified when I announce new Bristol venues and future course dates.</p>
+    
+    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+  <input type="email" id="userEmail" placeholder="Enter your email" required>
+  <button type="submit" id="submitBtn">Notify me</button>
+</form>
+<div id="thankYouMessage" style="display:none; color: #28a745;">
+  Perfect! I'll be in touch with future dates.
+</div>
+  
+</section>
+
+</div>
+
+
+    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
+  </div>
+</section>
+
 <section class="trust-bar">
   <div class="container">
     <div class="trust-grid">
@@ -2129,105 +2230,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
 
 
-<!-- CTA BOOKING PICKER -->
-<section class="cta-sec" id="book">
-  <div class="container">
-    <div class="stag" style="color:var(--purple); justify-content:center">
-      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
-    </div>
-    <h2 class="sec-title">Available Course Dates</h2>
-    <div class="pricing-lead-in">
-  <p>Your investment: <strong>£75 per course</strong></p>
-</div>
 
-  <div class="booking-grid">
-  <div class="date-card" onclick="selectDate('may')">
-    <span class="badge">Next Intake</span>
-    <div class="date-title">May 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 14th &amp; 21st May</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-may" onclick="logcourseselection()">Select these dates</button>
-  </div>
-
-  <div class="date-card" onclick="selectDate('june')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">June 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 11th &amp; 18th June</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <div class="date-card" onclick="selectDate('july')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">July 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <section class="date-card">
-    <h3>Can't make these dates?</h3>
-    <p>Get notified when I announce new Bristol venues and future course dates.</p>
-    
-    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
-  <input type="email" id="userEmail" placeholder="Enter your email" required>
-  <button type="submit" id="submitBtn">Notify me</button>
-</form>
-<div id="thankYouMessage" style="display:none; color: #28a745;">
-  Perfect! I'll be in touch with future dates.
-</div>
-  
-</section>
-
-</div>
-
-
-    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
-  </div>
-</section>
 
 <!-- FAQ -->
 <div class="faq-header">
