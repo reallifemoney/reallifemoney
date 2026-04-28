@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginner's Guide to Investing — Real Life Money</title>
+<meta name="description" content="Ready to start investing? My Bristol-based beginner course breaks down investing into 3 simple evenings. Learn how to use an ISA, choose funds, and grow your wealth without the headache. Book your spot now!">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link 
+  href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" 
+  rel="stylesheet" 
+  media="print" 
+  onload="this.media='all'"
+>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '248586408143097');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</noscript>
+
+<style>
+
+body {
+  font-family: 'Lexend', Helvetica, Arial, sans-serif; /* Fallbacks added */
+}
+
+  :root {
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --orange:  #ff914d;
+    --yellow:  #ffde59;
+    --green:   #71c558;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+  }
+ 
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--mint);
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 80px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--mint);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+ 
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+ 
+  .nav-cta {
+    background: var(--purple);
+    color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+ 
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+ /* Hero Section Container */
+.hero-section {
+    padding: 60px 20px;
+    background-color: #1f3a29;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Text Styling */
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero-text .highlight {
+    color: var(--green); /* Your Brand Green */
+}
+
+.hero-text .hero-submed {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Button Styling */
+.cta-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: #8c52ff;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 15px rgba(140, 82, 255, 0.3);
+}
+
+.cta-button:hover {
+    background-color: #5e2ced;
+    transform: translateY(-2px);
+}
+
+/* Image Styling */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Responsive Mobile Tweaks */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column; /* Stack vertically on phones */
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 36px;
+    }
+
+    .hero-image {
+        order: 2; /* Put image under text on mobile */
+    }
+}
+
+
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding-top: 66px;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    padding-bottom: 0 !important;
+  }
+ 
+ .hero-left {
+  background: var(--mint); 
+  padding: 80px 56px 80px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Softer, "sunny" glows instead of neon purple */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  width: 450px; height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 222, 89, 0.08), transparent 70%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+
+.hero-left::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(113, 197, 88, 0.1), transparent 70%);
+  bottom: -50px; left: -50px;
+  pointer-events: none;
+}
+
+/* Make the body text a bit warmer/softer white */
+.hero-body {
+  color: rgba(245, 250, 245, 0.75);
+  font-weight: 300;
+}
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+ 
+  .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+ 
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%      { opacity:0.4; transform:scale(0.65); }
+  }
+ 
+  .hero-title {
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    line-height: 1.06;
+    color: black;
+    letter-spacing: -1.5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+.hero-subheadline {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: black;
+  max-width: 550px;
+  
+  /* THIS IS THE FIX: Top 24px, Sides Auto, Bottom 40px */
+  margin: 24px auto 40px auto; 
+  
+  /* Ensure the text inside the box is also centered */
+  text-align: center;
+  
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+
+.hero-cta {
+  /* 1. Stop it from stretching to 100% */
+  align-self: flex-start; 
+  display: inline-block;
+  
+  /* 2. Control the size */
+  padding: 16px 36px;
+  font-size: 16px;
+  width: auto;
+  max-width: fit-content;
+  margin-bottom: 40px;
+
+  /* Your existing styles */
+  background-color: var(--green);
+  color: white; 
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* Mobile Tweak: If you WANT it full width on phones, keep this */
+@media (max-width: 600px) {
+  .hero-cta {
+    align-self: stretch; /* Stretches only on small screens */
+    text-align: center;
+  }
+}
+
+.hero-cta:hover {
+  transform: scale(1.05) translateY(-3px); /* Grows and lifts */
+  box-shadow: 0 15px 30px rgba(113, 197, 88, 0.4); /* Glow using your green */
+  background-color: #ffffff; /* Flashes white on hover for a premium feel */
+  color: var(--green);
+}
+
+.hero-cta:active {
+  transform: scale(0.98); /* Sinks when clicked */
+}
+
+
+.hero-cta:hover::after {
+  left: 120%;
+  transition: 0.5s;
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  .hero-subheadline {
+    font-size: 1.2rem;
+    max-width: 100%;             /* Allow it to fill the width on phones */
+  }
+}
+ 
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.6);
+    max-width: 420px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+ 
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+
+
+ 
+  .btn-primary {
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    letter-spacing: -0.2px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    display: inline-block;
+  }
+ 
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,222,89,0.45);
+  }
+ 
+  .hero-note {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .hero-quick-course {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  padding: 20px;
+  gap: 30px;
+  align-items: center;
+  margin-top: 30px;
+  max-width: fit-content;
+}
+
+.q-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.q-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.q-value {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+
+
+/* The Action Button */
+.q-btn {
+  background: #FFD700; /* Your Yellow */
+  color: #1e3a29;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.q-btn:hover {
+  transform: translateY(-2px);
+}
+
+.date-card-actions {
+  display: flex;
+  gap: 12px; /* Space between buttons */
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.date-card-actions .select-btn-hero,
+.date-card-actions .select-btn-other {
+  flex: 1; /* Makes both buttons equal width */
+  white-space: nowrap; /* Prevents text from wrapping on small buttons */
+  cursor: pointer;
+}
+
+.date-card-actions .select-btn-other {
+  /* Layout & Centering (Critical for <a> tags) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1; 
+  text-align: center;
+  text-decoration: none; /* Removes the underline */
+  white-space: nowrap;
+
+  /* Your Existing Styles */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--green);
+  background: transparent;
+  color: var(--green);
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  font-size: 12px; /* Bumped slightly from 12px to match standard button visibility */
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* Hover effect to make it feel interactive */
+.date-card-actions .select-btn-other:hover {
+  background: var(--green);
+  color: white;
+  text-decoration: none;
+}
+
+
+
+
+/* Mobile Stacking - Optional */
+@media (max-width: 480px) {
+  .date-card-actions {
+    flex-direction: column; /* Stacks them if the screen is too narrow */
+  }
+}
+
+/* Styling the price text slightly to keep it tidy */
+.pricing-text {
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* Mobile Stacking */
+@media (max-width: 768px) {
+  .hero-quick-course {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+}
+ 
+  .hero-stats {
+    display: flex;
+    gap: 36px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    animation: fadeUp 0.6s ease 0.5s both;
+    flex-wrap: wrap;
+  }
+ 
+  .stat-val {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+ 
+  .stat-lbl { font-size: 11px; color: black; font-weight: 400; }
+ 
+  /* Hero right */
+  .hero-right {
+    background: var(--mint);
+    padding: 72px 44px 72px 40px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+ 
+  .conf-badge {
+    background: var(--purple);
+    border: 1.5px solid var(--purple);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+ 
+  .conf-icon { font-size: 26px; flex-shrink: 0; }
+ 
+  .conf-text { font-size: 13px; color: white; line-height: 1.5; font-weight: 300; }
+  .conf-text strong { display: block; font-weight: 600; font-size: 13px; margin-bottom: 2px; color: white; }
+ 
+  .hero-tcard {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+ 
+  .hero-tcard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+  }
+ 
+ 
+  .hero-tcard .hq {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+ 
+  .hero-tcard.pop .hq { color: rgba(255,255,255,0.92); }
+ 
+  .hstars { color: var(--orange); font-size: 12px; letter-spacing: 1px; }
+  .hero-tcard.pop .hstars { color: var(--yellow); }
+
+
+  /* Container and Section Style */
+#confidence-guarantee-mini {
+    background: #1e3a29; /* Keep the clean background color */
+    padding: 30px 0; /* Significant reduction in padding */
+    margin: 10px 0; /* Space above and below */
+    border: 1px #1e3a29;
+    border-radius: 16px;
+}
+
+/* Flex Container (Crucial: NO media query to stack) */
+.mini-trust-container {
+    max-width: 800px; /* Reduced container size for tight integration */
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center; /* Vertically center everything in the line */
+    justify-content: center; /* Center the whole group */
+    gap: 30px; /* Tight gap */
+    background: #1e3a29;
+}
+
+/* Explanation Text (Left) */
+.mini-explanation {
+    flex: 1.4; /* Give text 60% of the space */
+    text-align: left;
+    color: white; 
+    font-size: 16px; /* slightly smaller font */
+    line-height: 1.4; /* tight leading */
+}
+
+.mini-explanation h3 {
+    color: white; /* Deep Green */
+    font-size: 26px; /* scaled down title */
+    font-weight: 800;
+    margin-bottom: 8px; /* tight margin */
+}
+
+.mini-explanation p {
+    margin: 0;
+}
+
+/* The Seal Styling (Right) */
+.mini-visual {
+    flex: 0 0 auto; /* DO NOT GROW, DO NOT SHRINK. Crucial for matching image size. */
+    display: flex;
+    justify-content: center;
+}
+
+.mini-seal {
+    max-width: 100px; /* Your requested smaller visual size */
+    height: auto; /* Preserve aspect ratio */
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.06)); /* subtle shadow */
+}
+
+/* --- Essential Mobile/Tablet Adjustments --- */
+@media (max-width: 768px) {
+    #confidence-guarantee-mini {
+        padding: 15px 0; /* even smaller vertical space on mobile */
+    }
+    
+    .mini-trust-container {
+        flex-direction: row; /* FORCE horizontal alignment on mobile */
+        gap: 15px; /* tighten gap further */
+    }
+    
+    .mini-explanation h3 {
+        font-size: 20px; /* smaller title */
+    }
+    
+    .mini-explanation p {
+        font-size: 14px; /* smaller text */
+    }
+    
+    .mini-seal {
+        max-width: 120px; /* significantly smaller image on mobile */
+    }
+}
+
+
+ 
+  /* SHARED */
+  section { padding: 88px 0; }
+ 
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+ 
+  .stag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+ 
+  .stag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+ 
+  .sec-title {
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+  }
+ 
+  .sec-intro {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+/* TRUST BAR */
+.trust-bar {
+  background: var(--white);
+  padding: 60px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.trust-grid {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.trust-item {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.trust-item:hover {
+  transform: translateY(-3px);
+}
+
+.trust-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+  .trust-label-tall {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.trust-logo {
+  height: 50px; /* Adjust this depending on your logo shapes */
+  width: auto;
+  filter: grayscale(100%); /* Optional: makes them look more 'corporate' and clean */
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+  .trust-logo-tall {
+  height: 60px; /* Adjust this depending on your logo shapes */
+  width: auto;
+  filter: grayscale(100%); /* Optional: makes them look more 'corporate' and clean */
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.trust-item:hover .trust-logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .trust-grid {
+    gap: 50px;
+  }
+}
+
+  
+  /* WHO */
+  .who-sec { background: var(--white); }
+ 
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 48px;
+  }
+ 
+  .who-card {
+    border-radius: 16px;
+    padding: 32px 28px;
+    border: 1.5px solid transparent;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+ 
+  .who-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+  .who-card.c1 { background: #f3eeff; border-color: #d9c8ff; }
+  .who-card.c2 { background: #fff4ee; border-color: #ffd4b8; }
+  .who-card.c3 { background: #f0faed; border-color: #c2e8b8; }
+ 
+  .who-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .who-title { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.3px; }
+  .who-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+ 
+  /* SESSIONS */
+  .sessions-sec { background: var(--mint); }
+ 
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 52px;
+  }
+ 
+  .sess-card { border-radius: 16px; overflow: hidden; }
+ 
+  .sess-head {
+    padding: 32px 32px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .sess-card:nth-child(1) .sess-head { background: var(--ink); }
+  .sess-card:nth-child(2) .sess-head { background: var(--ink); }
+  .sess-card:nth-child(3) .sess-head { background: var(--ink); }
+ 
+  .sess-head::after {
+    content: attr(data-n);
+    position: absolute;
+    right: 20px; top: 8px;
+    font-size: 96px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    letter-spacing: -4px;
+  }
+ 
+  .sess-num {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+ 
+  .sess-card:nth-child(1) .sess-num { color: var(--yellow); }
+  .sess-card:nth-child(2) .sess-num { color: var(--green); }
+  .sess-card:nth-child(3) .sess-num { color: var(--green); }
+ 
+  .sess-title {
+    font-size: 22px; font-weight: 700;
+    color: #fff; line-height: 1.2;
+    letter-spacing: -0.5px; margin-bottom: 6px;
+  }
+ 
+  .sess-sub { font-size: 13px; color: rgba(255,255,255,0.42); }
+ 
+  .sess-body {
+    background: var(--white);
+    padding: 26px 32px 30px;
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+  }
+ 
+  .sess-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+ 
+  .sess-list li {
+    display: flex; align-items: flex-start;
+    gap: 12px; font-size: 14px;
+    color: var(--text); line-height: 1.55; font-weight: 300;
+  }
+ 
+  .sbullet {
+    width: 20px; height: 20px;
+    border-radius: 50%; flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--ink);
+  }
+ 
+  .sess-card:nth-child(1) .sbullet { background: var(--yellow); }
+  .sess-card:nth-child(2) .sbullet { background: var(--green); }
+  .sess-card:nth-child(3) .sbullet { background: var(--purple); color: white; }
+  /* ABOUT */
+  .about-sec { background: #1e3a29; }
+ 
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center;
+  }
+ 
+  .about-sec .sec-title { color: #fff; }
+  .about-sec .sec-intro { color: rgba(255,255,255,0.5); max-width: 100%; }
+ 
+  .about-body {
+    font-size: 15px; line-height: 1.85;
+    color: white;
+    margin-top: 20px; font-weight: 300;
+  }
+ 
+  .about-body p + p { margin-top: 14px; }
+
+  .instructor-img {
+  width: 300px;         /* Adjust size as needed */
+  height: 300px;
+  object-fit: cover;    /* Ensures your face isn't stretched */
+  border-radius: 5%;   /* Makes it a clean circle */
+  margin: 25px auto;    /* Centers it and gives it space from text */
+  display: block;       /* Necessary for the centering to work */
+  border: 4px solid #1e3a29; /* Optional: matches your hero green */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+ 
+  .creds { display: flex; flex-direction: column; gap: 12px; }
+ 
+  .cred {
+    background: white;
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px; padding: 18px 20px;
+    display: flex; align-items: center; gap: 16px;
+    transition: background 0.2s;
+  }
+ 
+  .cred:hover { background: var(--mint); border-color: var(--green); }
+ 
+  .cred-ico {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+ 
+  .cred-ico.p { background: rgba(140,82,255,0.28); }
+  .cred-ico.o { background: rgba(255,145,77,0.28); }
+  .cred-ico.y { background: rgba(255,222,89,0.22); }
+  .cred-ico.g { background: rgba(113,197,88,0.22); }
+ 
+  .cred-txt strong { display: block; font-size: 14px; font-weight: 500; color: black; margin-bottom: 2px; }
+  .cred-txt span { font-size: 13px; color: black; font-weight: 300; }
+
+
+  .friend-cta {
+  background: var(--mint); /* Matches surrounding sections */
+  padding: 40px 0; /* Tighter padding since it's a bar */
+}
+
+.friend-card {
+  background: #1e3a29; /* Dark green to contrast the mint */
+  border-radius: 24px;
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.friend-badge {
+  display: inline-block;
+  background: rgba(113, 197, 88, 0.2);
+  color: var(--green);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.friend-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.friend-text {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.btn-friend {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn-friend:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 222, 89, 0.3);
+}
+
+/* Mobile Layout */
+@media (max-width: 900px) {
+  .friend-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .friend-text {
+    margin: 0 auto;
+  }
+}
+ 
+  /* DETAILS */
+  .details-sec { background: var(--white); }
+ 
+  .details-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 16px; margin-top: 48px;
+  }
+ 
+  .det-card {
+    border-radius: 14px; padding: 28px 24px;
+    text-align: center;
+    border: 1.5px solid var(--rule);
+    transition: transform 0.2s;
+  }
+ 
+  .det-card:hover { transform: translateY(-3px); }
+  .det-card:nth-child(1) { background: #f3eeff; border-color: var(--purple); }
+  .det-card:nth-child(2) { background: #fff4ee; border-color: var(--orange); }
+  .det-card:nth-child(3) { background: #fffbe8; border-color: var(--yellow); }
+  .det-card:nth-child(4) { background: #f0faed; border-color: var(--green); }
+ 
+  .det-icon { font-size: 28px; margin-bottom: 12px; }
+  .det-val { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; color: var(--ink); line-height: 1; margin-bottom: 6px; }
+  .det-lbl { font-size: 12px; color: var(--muted); font-weight: 400; }
+ 
+  /* TESTIMONIALS */
+  .testi-sec { background: var(--mint); }
+ 
+  .testi-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-top: 52px;
+  }
+ 
+  .tc {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 14px; padding: 26px 26px 22px;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+ 
+  .tc:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.07); }
+  .tc.feat { background: var(--purple); border-color: var(--purple); }
+ 
+  .tc-stars { font-size: 13px; letter-spacing: 2px; color: var(--orange); margin-bottom: 14px; }
+  .tc.feat .tc-stars { color: var(--yellow); }
+ 
+  .tc-q { font-size: 15px; font-weight: 400; line-height: 1.65; color: var(--ink); flex: 1; margin-bottom: 16px; }
+  .tc.feat .tc-q { color: rgba(255,255,255,0.92); }
+ 
+  .tc-by { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .tc.feat .tc-by { color: rgba(255,255,255,0.38); }
+ 
+  /* CTA */
+  .cta-sec {
+    background: var(--yellow);
+    padding: 80px 0; text-align: center;
+  }
+ 
+  .cta-sec .sec-title { color: var(--ink); margin-bottom: 14px; }
+  .cta-sec .sec-intro { color: rgba(0,0,0,0.5); margin: 0 auto 36px; text-align: center; }
+ 
+  .btn-dark {
+    background: var(--ink); color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px; font-weight: 600;
+    padding: 16px 44px; border-radius: 100px;
+    text-decoration: none; display: inline-block;
+    letter-spacing: -0.3px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+ 
+  .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+ 
+  .cta-sub { font-size: 13px; color: rgba(0,0,0,0.38); margin-top: 18px; font-weight: 400; }
+
+  /* BROOKLAND PARK LOCATION POPUP */
+  
+    .venue-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    position: relative;
+    color: #374151;
+    font-size: 15px;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+    text-decoration-color: #9ca3af;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: inherit;
+  }
+
+  .venue-trigger .pin-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  
+  .date-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 0 16px;
+}
+
+.date-meta-row {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+  /* The popover card */
+  .venue-popover {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    width: 260px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 100;
+    text-align: left;
+  }
+
+  .venue-popover.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Little arrow */
+  .venue-popover::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: #fff;
+    filter: drop-shadow(0 1px 0 #e5e7eb);
+  }
+
+  .popover-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .popover-address {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .popover-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .popover-actions a {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 7px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-map {
+    background: #7c3aed;
+    color: #fff;
+  }
+  .btn-map:hover { background: #6d28d9; }
+
+  .btn-copy {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+  }
+  .btn-copy:hover { background: #e5e7eb; }
+  .btn-copy.copied { color: #16a34a; }
+
+  /* BOOKING PICKER */
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.pricing-lead-in {
+  text-align: center;
+  margin-top: -10px; /* Pulls it closer to the main heading */
+  margin-bottom: 30px;
+  color: #1e3a29; /* Dark green for readability on yellow */
+  font-size: 1.1rem;
+}
+
+.friend-badge {
+  display: inline-block;
+  background-color: #A855F7; /* Using your purple for consistent branding */
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.date-card {
+  background: var(--white);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+
+
+.date-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(140, 82, 255, 0.1);
+}
+
+.date-card.selected {
+  border-color: var(--purple);
+  background: #f8f5ff;
+}
+
+.date-card .badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--mint);
+  color: var(--green);
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.date-card .badge-hero {
+  display: inline-block;
+  padding: 4px 12px;
+  /* Background is your orange at 15% opacity */
+  background: rgba(255, 145, 77, 0.15); 
+  /* Text is your solid branding orange */
+  color: var(--orange); 
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700; /* Increased to 700 so it's super legible against the tint */
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px; /* Adds a premium "badge" feel */
+}
+
+.date-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.date-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.select-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--purple);
+  background: transparent;
+  color: var(--purple);
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+
+.date-card.selected .select-btn {
+  background: var(--purple);
+  color: white;
+}
+
+.select-btn-hero {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--purple);
+  background: var(--purple);
+  color: white;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+
+.date-card.selected .select-btn-hero {
+  background: var(--purple);
+  color: white;
+}
+
+/* WIDGET CONTAINER */
+#booking-widget-container {
+  display: none; /* Hidden until a date is picked */
+  margin-top: 50px;
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid var(--rule);
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.widget-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Force the wrapper to actually take up space */
+#tixtree-wrapper {
+    display: block !important;
+    min-height: 600px !important;
+    width: 100% !important;
+    background-color: var(--mint); /* So you can see if the box is there */
+    overflow: visible !important;
+}
+
+/* Ensure the modal content isn't squashing the widget */
+.modal-content {
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Universal Modal Fixes */
+#tixtree-wrapper {
+    min-height: 600px !important;
+    width: 100% !important;
+}
+
+/* Mobile Specific Adjustments */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100% !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important; /* Removes rounded corners for full-screen feel */
+        padding: 10px !important;    /* Tightens space for the widget */
+        margin: 0 !important;
+    }
+
+    .modal-overlay {
+        padding: 0 !important; /* Removes the dark gap around the edges */
+    }
+    
+    #tixtree-wrapper {
+        min-height: 80vh !important; /* Gives the widget more vertical room */
+    }
+}
+ 
+
+/* MOBILE WIDGET OPTIMIZATION */
+@media (max-width: 600px) {
+  /* 1. Reduce the main section horizontal padding */
+  .cta-sec .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* 2. Make the widget container "Edge-to-Edge" */
+  #booking-widget-container {
+    margin-top: 30px;
+    padding: 20px 0; /* Top/Bottom padding only, 0 on sides */
+    background: transparent; /* Remove white box background on mobile for more space */
+    border: none; /* Remove border to prevent "double-boxing" look */
+  }
+
+  .widget-header h3 {
+    font-size: 18px; /* Slightly smaller text so it doesn't wrap awkwardly */
+  }
+  
+  /* 3. Ensure the Tixtree wrapper itself has no hidden margins */
+ #tixtree-wrapper {
+    min-height: 500px !important;
+    width: 100%;
+    display: block !important;
+}
+}
+
+  /* FAQ */
+  .faq-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-top: 66px;
+  }
+ 
+  .faq-header h2 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+ 
+  .faq-header p {
+    font-size: 15px;
+    color: #666;
+    font-weight: 300;
+  }
+ 
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+ 
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+ 
+  .faq-item:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+ 
+  .faq-item.open {
+    border-color: #1a1a1a;
+  }
+ 
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    gap: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+ 
+  .faq-question-text {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1a1a1a;
+    line-height: 1.4;
+    flex: 1;
+  }
+ 
+  .faq-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.3s;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1;
+  }
+ 
+  .faq-item.open .faq-icon {
+    background: #1a1a1a;
+    color: #fff;
+    transform: rotate(45deg);
+  }
+ 
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+ 
+  .faq-answer-inner {
+    padding: 16px 20px 20px 20px;
+    border-top: 1px solid #eeeeee;
+  }
+ 
+  .faq-answer-inner p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 300;
+  }
+ 
+  .faq-answer-inner p + p {
+    margin-top: 10px;
+  }
+ 
+  .highlight {
+    color: #1a1a1a;
+    font-weight: 400;
+  }
+ 
+  .faq-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding: 18px 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 66px;
+  }
+ 
+  .faq-footer p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+ 
+  .faq-footer a {
+    color: #1a1a1a;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+  }
+ 
+  /* FOOTER */
+  footer { background: var(--ink); padding: 36px 40px; text-align: center; }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.7; font-weight: 300; }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: rgba(255,255,255,0.8); }
+
+  .cookie-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ffffff;
+    border: 1px solid #0072ce; /* Your brand blue */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    max-width: 300px;
+    display: none; /* Hidden by default */
+    font-size: 14px;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-accept {
+    background: #0072ce;
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-decline {
+    background: transparent;
+    color: #666;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.email-capture {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.email-capture h3 { margin-bottom: 10px; color: #333; }
+
+#emailForm {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#userEmail {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+}
+
+#submitBtn {
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  padding: 12px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#submitBtn:hover { background-color: var(--green); }
+
+@media (max-width: 480px) {
+  #emailForm { flex-direction: column; }
+}
+ 
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+ 
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 44px 28px 56px; }
+    .hero-right { padding: 44px 28px; }
+    .who-grid, .sessions-grid, .about-grid, .testi-grid { grid-template-columns: 1fr; }
+    .details-grid { grid-template-columns: 1fr 1fr; }
+    .container { padding: 0 24px; }
+    section { padding: 64px 0; }
+    .about-grid { gap: 44px; }
+  }
+ 
+  @media (max-width: 480px) {
+    .hero-title { font-size: 34px; letter-spacing: -1px; }
+    .details-grid { grid-template-columns: 1fr 1fr; }
+  }
+  
+  /* FIX FOR WRAPPING STATS ON MOBILE */
+@media (max-width: 480px) {
+  .hero-stats-moss, .hero-stats-new {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* Forces 3 equal columns */
+    gap: 10px; /* Reduces the gap between them */
+    justify-items: center;
+  }
+
+  .stat-item-moss strong, .stat-item-new strong {
+    font-size: 24px; /* Shrinks the '2x' and '100%' slightly */
+  }
+
+  .stat-item-moss small, .stat-item-new small {
+    font-size: 10px; /* Shrinks the label text */
+    text-align: center;
+    white-space: nowrap; /* Prevents labels from breaking weirdly */
+  }
+}
+
+@media (max-width: 768px) {
+  .container > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+}
+
+
+/* Darkens the background when popup is open */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* The actual popup box */
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #8c52ff; /* Your Purple */
+}
+
+.checkout-button {
+    background-color: #71c558; /* Your Green */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+</style>
+
+<script type="text/javascript">
+_linkedin_partner_id = "9047218";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script><script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=9047218&fmt=gif" />
+</noscript>
+</head>
+<body>
+ 
+<!-- NAV -->
+<nav>
+    <a class="nav-logo" href="/">
+      <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
+    </a>
+    <a class="nav-cta" href="#book" onclick="logbuttonclick()">Book your place →</a>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" style="position: relative;">
+<div class="hero-left" style="flex: 1; min-width: 320px; align-items: center; text-align: center;">
+  <div style="align-items: center; text-align: center;">
+    <div class="stag" style="color:var(--purple); justify-content:center">
+      <span class="stag-dot" style="background:var(--purple)"></span>Limited spaces available
+    </div>
+  <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
+    Inflation is eating your money.<br><br>It's time to <span style="color:var(--green)">bite back.</span></h1>
+    
+
+  <p class="hero-subheadline" style="animation:fadeUp 0.6s ease 0.2s both">I will take you from beginner to clicking invest in two engaging evenings.</p>
+
+  <a class="hero-cta" href="#book" onclick="logbuttonclick()" style="animation:fadeUp 0.6s ease 0.2s both">Book now</a>
+  
+
+  <div class="hero-graph-container" style="animation:fadeUp 0.6s ease 0.2s both; margin: 10px 0 30px 0;">
+      <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" style="width: 100%; max-width: 500px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+  </div>
+
+  <div class="hero-video-loop" style="animation:fadeUp 0.6s ease 0.4s both; max-width: 500px; margin: 20px auto; border-radius: 16px; overflow: hidden; position: relative; cursor: pointer;" onclick="openVideo(); logvideoclick();">
+    <video autoplay muted loop playsinline poster="intro-loop.webp" style="width: 100%; display: block; border-radius: 16px;">
+      <source src="intro-loop.mp4" type="video/mp4">
+    </video>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center;">
+      <div style="background: rgba(107, 79, 187, 0.9); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px);">
+          <div style="width: 0; height: 0; border-top: 15px solid transparent; border-bottom: 15px solid transparent; border-left: 25px solid white; margin-left: 5px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="confidence-guarantee-mini" class="mini-trust-block" style="margin-bottom: 30px;">
+    <div class="mini-trust-container" style="display: flex; align-items: center; gap: 15px; background: #1F3A29; padding: 15px; border-radius: 15px;">
+        <div class="mini-explanation">
+            <h3 style="margin:0; font-size: 16px;">Confidence increase, guaranteed.</h3>
+            <p style="margin:5px 0 0 0; font-size: 14px;">If you don't feel empowered — let me know for a full refund.</p>
+        </div>
+        <div class="mini-visual">
+            <img src="confidence-guarantee.webp" alt="Guarantee Seal" style="width: 60px; height: 60px;">
+        </div>
+    </div>
+  </section>
+
+  <div class="hero-stats" style="animation:fadeUp 0.6s ease 0.5s both; display: flex; gap: 36px; justify-content: center; margin: 0 auto; width: 100%; max-width: 500px; border-top: 1px solid rgba(0,0,0,0.1);">
+    <div style="text-align: center;">
+      <div class="stat-val" style="color:var(--yellow)">5★</div>
+      <div class="stat-lbl">average rating</div>
+    </div>
+    <div style="text-align: center;">
+      <div class="stat-val" style="color:var(--green)">100%</div>
+      <div class="stat-lbl">would recommend</div>
+    </div>
+    <div style="text-align: center;">
+      <div class="stat-val" style="color:var(--purple)">3x</div>
+      <div class="stat-lbl">confidence</div>
+    </div>
+</div>
+  </div>
+  
+</div>
+  <div class="hero-right" style="padding: 44px 40px; display: flex; flex-direction: column; justify-content: start; gap: 14px;">
+
+    <!-- Google Reviews Header -->
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px;">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+        <!-- Google G logo SVG -->
+        <svg width="36" height="36" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-9 20-20 0-1.3-.1-2.7-.4-4z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3-11.3-7.3l-6.6 5.1C9.6 39.6 16.3 44 24 44z"/>
+          <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.2-2.3 4-4.2 5.2l6.2 5.2C40.8 35.2 44 30 44 24c0-1.3-.1-2.7-.4-4z"/>
+        </svg>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px;">Real Life Money</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <div style="color: #fbbc04; font-size: 16px; letter-spacing: 1px;">★★★★★</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">5.0</span>
+            <span style="font-size: 12px; color: var(--muted);">Google Reviews</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review cards -->
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;">DB</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Dan</div>
+          <div style="color: #fbbc04; font-size: 12px; letter-spacing: 1px;">★★★★★</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300;">I'm not great with sitting in long meetings and taking in lot's of information, however Leo made this much easier through keeping information simple and using games to keep me actively engaged.<br><br>I would highly recommend this course to anyone, as it was simply brilliant.   </p>
+    </div>
+
+    <div style="background: var(--white); border-radius: 14px; padding: 18px 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;">LC</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Lucy</div>
+          <div style="color: #fbbc04; font-size: 12px; letter-spacing: 1px;">★★★★★</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300;">I had a great time doing Leo’s investment course. I found it really engaging and clear to understand.<br><br>I can’t fault the course and am really grateful for Leo delivering this - thank you! </p>
+    </div>
+
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;">RS</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Rachael</div>
+          <div style="color: #fbbc04; font-size: 12px; letter-spacing: 1px;">★★★★★</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300;">Having a course with an actual human who completely understands the world of investing, and being able to ask questions there and then, has been amazing to help me understand and build my confidence in the world of investing. Thank you.</p>
+    </div>
+
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--purple); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;">JB</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Justine</div>
+          <div style="color: #fbbc04; font-size: 12px; letter-spacing: 1px;">★★★★★</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300;">Excellent course, with hands on practical games to help develop understanding of investment. I would recomend this to anyone wanting to begin looking into investing</p>
+    </div>
+
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 20px;">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;">CL</div>
+        <div>
+          <div style="font-size: 13px; font-weight: 500; color: var(--ink);">Caitlin</div>
+          <div style="color: #fbbc04; font-size: 12px; letter-spacing: 1px;">★★★★★</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--text); line-height: 1.6; font-weight: 300;">Thank you so much to Leo for helping me with my finances recently. He was incredibly patient and encouraging, which is not easy because I know absolutely nothing about money! He coached me through setting up savings and investments so that I can plan my finances for my wedding next year - thank you for helping me to have any kind of budget to make that happen!</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BOOKING PICKER -->
+<section class="cta-sec" id="book">
+  <div class="container">
+    <div class="stag" style="color:var(--purple); justify-content:center">
+      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
+    </div>
+    <h2 class="sec-title">Available Course Dates</h2>
+    <div class="pricing-lead-in">
+  <p>Your investment: <strong>£75 per course</strong></p>
+</div>
+
+  <div class="booking-grid">
+  <div class="date-card" onclick="selectDate('may')">
+    <span class="badge">Next Intake</span>
+    <div class="date-title">May 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 14th &amp; 21st May</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-may" onclick="logcourseselection()">Select these dates</button>
+  </div>
+
+  <div class="date-card" onclick="selectDate('june')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">June 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Thu 11th &amp; 18th June</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
+  </div>
+  <div class="date-card" onclick="selectDate('july')">
+    <span class="badge">Limited Spaces</span>
+    <div class="date-title">July 2026</div>
+    <div class="date-meta">
+      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
+      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <div class="date-meta-row">
+        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
+  </div>
+  <section class="date-card">
+    <h3>Can't make these dates?</h3>
+    <p>Get notified when I announce new Bristol venues and future course dates.</p>
+    
+    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
+  <input type="email" id="userEmail" placeholder="Enter your email" required>
+  <button type="submit" id="submitBtn">Notify me</button>
+</form>
+<div id="thankYouMessage" style="display:none; color: #28a745;">
+  Perfect! I'll be in touch with future dates.
+</div>
+  
+</section>
+
+</div>
+
+
+    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
+  </div>
+</section>
+
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      
+      <a href="https://www.cset.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label">In partnership with</span>
+        <img src="cset.webp" alt="CSET Logo" class="trust-logo">
+      </a>
+
+      <a href="https://www.cii.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label-tall">Qualification from</span>
+        <img src="cii.webp" alt="CII Logo" class="trust-logo-tall">
+      </a>
+
+      <a href="https://maps.app.goo.gl/HdFMCXXdQW5TEw8s9?g_st=ic" target="_blank" class="trust-item">
+        <span class="trust-label">Rated 5 stars on</span>
+        <img src="google.webp" alt="Google Reviews" class="trust-logo">
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>About me</div>
+        <h2 class="sec-title">I want you to walk away smiling</h2>
+        <div class="about-body">
+          <p>Before becoming a maths teacher, I got my qualification and spent a few years working in financial advice. I noticed that most of the clients I saw had little or no knowledge of investing and fully relied on us to help them. Then I learned that most people don't have the luxury of an adviser.</p>
+          <img src="leo-dennis.webp" alt="Leo Dennis" class="instructor-img">
+          <p>Financial literacy isn't taught in schools. Proper financial advice is expensive and inaccessible for most people. That gap bothered me — so I built Real Life Money to do something about it.</p>
+          <p>Once I became a Maths Teacher, I knew that I now had the potential to really make a difference and combine that with Real Life Money to close the financial knowledge gap. For me, life has always been about people and purpose.</p>
+          <p>I'm a big believer in learning through enjoyment - so whilst these are serious and important topics, I want to see you walk away smiling - not only because you gained so much, but because you enjoyed yourself along the way.</p>
+        </div>
+      </div>
+      <div class="creds">
+        <div class="cred"><div class="cred-ico p">🎓</div><div class="cred-txt"><strong>Qualified Financial Adviser</strong><span>Several years in financial services, working directly with clients</span></div></div>
+        <div class="cred"><div class="cred-ico o">📐</div><div class="cred-txt"><strong>Secondary School Maths Teacher</strong><span>Experienced at explaining complex ideas in plain, accessible language</span></div></div>
+        <div class="cred"><div class="cred-ico y">🚫</div><div class="cred-txt"><strong>Nothing to sell you</strong><span>No products, no commissions, no upsells — ever</span></div></div>
+        <div class="cred"><div class="cred-ico g">📍</div><div class="cred-txt"><strong>Based in Bristol</strong><span>Local, in-person courses in a small, friendly group setting</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSIONS -->
+<section class="sessions-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>The course</div>
+    <h2 class="sec-title">Two evenings.<br>A lifetime of clarity.</h2>
+    <p class="sec-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.</p>
+    <div class="sessions-grid">
+      <div class="sess-card">
+        <div class="sess-head" data-n="1">
+          <div class="sess-num">Session One · 90 mins</div>
+          <h3 class="sess-title">Why do we invest<br>and types of investment</h3>
+          <p class="sess-sub">The foundations of investing and managing risk</p>
+        </div>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Why we invest — and what inflation is quietly doing to your savings right now</li>
+            <li><span class="sbullet">2</span>The main investment types explained simply: cash, bonds, equities and more</li>
+            <li><span class="sbullet">3</span>Monopoly money simulation — watch how different investments behave over time</li>
+            <li><span class="sbullet">4</span>Managing risk and learn about funds</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sess-card">
+        <div class="sess-head" data-n="2">
+          <div class="sess-num">Session Two · 90 mins</div>
+          <h3 class="sess-title">Choosing investments<br>and clicking the invest button</h3>
+          <p class="sess-sub">Deepen your understanding</p>
+        </div>
+        <div class="sess-body">
+          <ul class="sess-list">
+            <li><span class="sbullet">1</span>Get to know funds better</li>
+            <li><span class="sbullet">2</span>Selecting investments suitable for you</li>
+            <li><span class="sbullet">3</span>Clicking the invest button</li>
+          </ul>
+        </div>
+      </div>
+       
+    </div>
+  </div>
+      <div style="margin-top: 24px; background: var(--white); border: 1.5px solid var(--rule); border-left: 4px solid var(--purple); border-radius: 0 12px 12px 0; padding: 18px 24px; display: flex; align-items: center; gap: 18px;">
+      <div style="width: 44px; height: 44px; border-radius: 10px; background: #f3eeff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px;">📄</div>
+      <div>
+        <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 3px;">Session notes sent after every session</div>
+        <div style="font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5;">You'll receive a clear PDF summary after each session — everything covered, yours to keep and refer back to whenever you need it.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section style="background: #eef8eb; padding: 80px 0; border-top: 1px solid var(--rule);">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+       <div>
+        <div class="stag" style="color:var(--green)">
+          <span class="stag-dot" style="background:var(--green)"></span>Student spotlight
+        </div>
+        <h2 class="sec-title" style="margin-bottom: 20px;">"It made investing feel uncomplicated, which is not how it felt before."</h2>
+
+        <button class="btn-primary" style="background-color: var(--purple); color: #ffffff !important;" onclick="openIvanVideo(); logvideoclick();">Watch Ivan's Story</button>
+      </div>
+      
+      <div style="position: relative; cursor: pointer; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" onclick="openIvanVideo(); logvideoclick();">
+        <video autoplay muted loop playsinline poster="Ivan-loop.webp" style="width: 100%; display: block;">
+          <source src="Ivan-loop.mp4" type="video/mp4">
+        </video>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;">
+          <div style="background: var(--purple); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <div style="width: 0; height: 0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; border-left: 20px solid white; margin-left: 4px;"></div>
+          </div>
+        </div>
+      </div>
+
+     
+
+    </div>
+  </div>
+</section>
+
+
+
+  
+<!-- WHO -->
+<section class="who-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Who it's for</div>
+    <h2 class="sec-title">Made for people who feel left behind by money</h2>
+    <p class="sec-intro">Most of us were never taught how investing works. This course is built for exactly that. We all want to maximise the potential of our money!</p>
+    <div class="who-grid">
+      <div class="who-card c1">
+        <span class="who-icon">🌱</span>
+        <h3 class="who-title">Complete beginners</h3>
+        <p class="who-body">You've heard about ISAs and investments but never known where to start. This course is built for you — no prior knowledge needed, no stupid questions. Even if you have dabbled a bit, you will get lots out of it.</p>
+      </div>
+      <div class="who-card c2">
+        <span class="who-icon">💸</span>
+        <h3 class="who-title">Cash savers</h3>
+        <p class="who-body">You save even just a little (eg. £25+) each month or you've got money sitting in a savings account - investing is for you. I'll show you the potential of your savings over the long-term and what you could do to maximise this potential.</p>
+      </div>
+      <div class="who-card c3">
+        <span class="who-icon">🧩</span>
+        <h3 class="who-title">Confused by the noise</h3>
+        <p class="who-body">There is so much information out there - who can you trust? This gives you a clear, structured path from zero to confident. Best of all, you can ask me questions along the way, and there's no such thing as a silly question!</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Testimonials</div>
+    <h2 class="sec-title">Real feedback from<br>real attendees</h2>
+    <div class="testi-grid">
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"I knew nothing going into this course but Leo was clear and informative and I felt much more well informed and confident about how to invest by the end."</p>
+        <div class="tc-by">Bristol teacher</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"Leo ran a brilliant session, it was very helpful especially as a beginner. He helped break a lot of things down and show how investments work and what is actually happening with your money.<br><br>The game was very fun as well, very helpful for a person like me who has a short attention span, it kept me engaged. Also helped that I won!"</p>
+        <div class="tc-by">Course attendee</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"I'm so glad I did this - although wish I'd done it 20 years ago!! "</p>
+        <div class="tc-by">Bristol teacher</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"This course was well delivered and clear for anyone wishing to understand more about their personal finances. I entered as a complete novice and left feeling like I had the tools to begin investing on my own."</p>
+        <div class="tc-by">Course attendee</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"The clarity and simplicity of explanation was really good and very much appreciated. Anything that I was unsure about was answered clearly."</p>
+        <div class="tc-by">Course attendee</div>
+      </div>
+      <div class="tc">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-q">"My knowledge increased exponentially (which is what I would like my investments to do!)"</p>
+        <div class="tc-by">Dan, Bristol</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
+<!-- DETAILS -->
+<section class="details-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>Course details</div>
+    <h2 class="sec-title">Simple, transparent,<br>no surprises</h2>
+    <div class="details-grid">
+      <div class="det-card"><div class="det-icon">💷</div><div class="det-val">£75</div><div class="det-lbl">for the full course</div></div>
+      <div class="det-card"><div class="det-icon">👥</div><div class="det-val">Max 12</div><div class="det-lbl">small group, more personal</div></div>
+      <div class="det-card"><div class="det-icon">🕐</div><div class="det-val">2 × 90</div><div class="det-lbl">minutes per session</div></div>
+      <div class="det-card"><div class="det-icon">📍</div><div class="det-val">Bristol</div><div class="det-lbl">in-person evening course</div></div>
+    </div>
+  </div>
+</section>
+ 
+
+
+
+
+
+<!-- FAQ -->
+<div class="faq-header">
+  <h2>Your questions, answered</h2>
+  <p>No jargon. No silly questions. Just honest answers.</p>
+</div>
+<div class="faq-list">
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Is this suitable for complete beginners?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Absolutely — in fact, this course is <span class="highlight">designed specifically for people who feel like they know nothing</span>. Most attendees arrive feeling uncertain or even a little embarrassed about how little they know. That's completely normal, and it's exactly why this course exists.</p>
+        <p>Even if you have a little bit of experience and have dabbled in investing before, you would still get a lot out of this course. It is never a bad thing to have an even better understanding of exactly what you are putting your hard earned cash into.</p>
+        <p>By the end of the course, you'll have a clear picture of how investing works, what your options are, and how to take your first steps with confidence. No prior knowledge needed whatsoever.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How much money do I need to get started with investing?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Less than you probably think. Many investment platforms let you start with <span class="highlight">as little as £1 a month</span>, and some of the most effective long-term strategies involve small, regular contributions rather than large lump sums.</p>
+        <p>The course will walk you through realistic options at every budget level — whether you have £20 a month or £20,000 sitting in a savings account. The most important thing is understanding how it works, not how much you have to start with.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Will you tell me what to invest in?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>This course is financial <span class="highlight">education</span>, not financial advice — and that's an important distinction. I won't tell you exactly what to buy, because everyone's situation is different, and recommending specific products is regulated activity that requires an FCA licence.</p>
+        <p>What I will do is give you the knowledge and tools to make those decisions yourself — confidently and independently. By the end you'll understand what to look for, how to compare options, and how to build a simple strategy that suits you. That's worth far more than being told what to do.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Is investing risky? Could I lose my money?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Yes — all investing carries some risk, and anyone who tells you otherwise isn't being straight with you. But <span class="highlight">risk is something you can understand, manage and plan around</span> — and that's a big part of what this course covers.</p>
+        <p>We'll look at how risk and potential return are linked, why time in the market matters so much, and how to build a simple portfolio that matches your own comfort level. Most people leave realising that doing nothing — keeping all your money in cash — carries its own very real risk too.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What will I actually walk away knowing how to do?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>By the end of the two sessions you'll understand <span class="highlight">why investing matters, how the main asset classes work, what ISAs and pensions are actually doing for you</span>, and how to explore and compare real investment funds.</p>
+        <p>More importantly, you'll feel confident enough to open an investment account, make a decision, and actually get started — rather than putting it off for another year. One of my recent attendees said they wished they'd done it 20 years ago. You don't have to feel that way.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">Who are you and why should I trust you?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Fair question. I'm Leo — a secondary school maths teacher and <span class="highlight">qualified financial adviser</span>. I spent years in financial services realising that only the already wealthy can afford financial advice and most of us just have to muddle through. Inevitably, we either make costly mistakes or we don't take action that could maximise the potential of our money. That gap bothered me, so I built Real Life Money to do something about it.</p>
+        <p>I always wanted to help people, as I know that gives me most satisfaction in my life. Being a Maths teacher is incredibly rewarding, but Real Life Money was setup to try and help adults navigate this scary and complicated world of personal finance.</p>
+        <p>I'm not trying to sell you anything. There are no products, no referral fees, no follow-up sales calls. Just two evenings of practical, honest financial education from someone who has seen both sides — the advice industry and the classroom.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How is this different from just watching YouTube videos?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>YouTube is great, but it's also overwhelming — thousands of videos, conflicting advice, no way to ask questions, and no guarantee the person talking actually knows what they're doing.</p>
+        <p>This course gives you <span class="highlight">a structured, sequenced learning experience in a small group</span> where you can ask any question you like without feeling judged. Every attendee so far has said that being able to ask questions as we went was one of the most valuable parts. That's something no video can give you.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What does the course actually involve — is it just a lecture?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>Not at all. The sessions are deliberately <span class="highlight">interactive and practical</span> — think investment simulations, group activities, and hands-on exploration of real platforms and funds, not someone reading off slides at you.</p>
+        <p>Groups are kept small (maximum 12 people) so there's plenty of time for discussion and questions. The aim is for it to feel more like a conversation than a classroom — approachable, engaging, and genuinely useful.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">What if I have questions after the course?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>It's completely natural to have more questions once you start putting things into practice — that's a good sign it's all clicking into place. You're welcome to <span class="highlight">get in touch by email</span> with general questions after the course.</p>
+        <p>If you'd like more personalised support, I also offer one-to-one financial education sessions where we can go deeper on your specific situation at your own pace.</p>
+      </div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggle(this)">
+      <span class="faq-question-text">How much does it cost and what's included?</span>
+      <span class="faq-icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <p>The course is <span class="highlight">£75 per person</span> for two sessions — that's two evenings of 90 minutes each, in a small group of no more than 12 people.</p>
+        <p>There are no hidden costs, no upsells, and nothing to buy afterwards. Just straightforward financial education at a price that reflects the fact that this stuff should be accessible to everyone — not just people who can afford a financial adviser.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="faq-footer">
+  <p>Still got a question that's not answered here? Feel free to <a href="/contact">get in touch</a>— no question is too basic and there's genuinely no such thing as a silly question when it comes to your money.</p>
+</div>
+
+<!-- VIDEO POPUP -->
+<div id="videoModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;">
+    <div style="position: relative; width: 90%; max-width: 900px;">
+        <span onclick="closeVideo()" style="position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; font-family: sans-serif;">&times; Close</span>
+        
+        <div style="padding:56.25% 0 0 0;position:relative;">
+             <iframe 
+    id="vimeoPlayer" 
+    src="https://player.vimeo.com/video/1181290406?badge=0&autopause=0&player_id=0&app_id=58479" 
+    frameborder="0" 
+    allow="fullscreen; picture-in-picture" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+    title="About Leo - Real Life Money">
+</iframe>
+<script src="https://player.vimeo.com/api/player.js"></script>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo'); logbuttonclick();">Book your place - £75</a>
+</div>
+
+    </div>
+</div>
+
+<div id="ivanModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;">
+    <div style="position: relative; width: 90%; max-width: 900px;">
+        <span onclick="closeIvanVideo()" style="position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; font-family: sans-serif;">× Close</span>
+        <div style="padding:56.25% 0 0 0;position:relative;">
+             <iframe id="ivanVimeoPlayer" src="https://player.vimeo.com/video/1181385044?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Ivan testimonial"></iframe>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('ivan'); logbuttonclick();">Book your place - £75</a>
+</div>
+
+    </div>
+</div>
+
+
+
+
+
+
+ 
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong style="color:rgba(255,255,255,0.55)">Real Life Money</strong> · Bristol ·
+    Financial education, not regulated financial advice. All content is general and educational in nature.<br>
+    <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a>
+  </p>
+</footer>
+ 
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+ 
+  document.querySelectorAll('.who-card,.sess-card,.tc,.cred,.det-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    obs.observe(el);
+  });
+
+  // FAQ script
+    function sendHeight() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'resize', height: height }, '*');
+  }
+ 
+  function toggle(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+ 
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+ 
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+ 
+    // Notify parent of new height after animation
+    setTimeout(sendHeight, 420);
+  }
+ 
+  // Send height on load and on any resize
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+ 
+  // Enable touch scrolling inside Google Sites iframe on mobile
+  document.addEventListener('touchstart', function() {}, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    e.stopPropagation();
+  }, { passive: true });
+
+
+
+window.selectDate = function(month) {
+  const ids = {
+    'may': 'beginners-guide-to-investing-0d1850321bea',
+    'june': 'beginners-guide-to-investing-f6e7b00efeb0',
+    'july': 'beginners-guide-to-investing-53d055113a39'
+  };
+
+  const selectedID = ids[month];
+  
+  // 1. Show the Modal
+  const modal = document.getElementById('tixTreeModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+
+  // 2. Update the Title
+  const modalTitle = document.getElementById('modal-course-title');
+  if (modalTitle) {
+    modalTitle.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Course";
+  }
+
+  // 3. The Iframe Injection
+  const wrapper = document.getElementById('tixtree-wrapper');
+  if (wrapper) {
+    // We add a 'loading' message so the user knows it's working
+    wrapper.innerHTML = '<div style="text-align:center; padding-top:100px; font-family:sans-serif;">🔒 Loading Secure Checkout...</div>';
+
+    // The timeout ensures the modal is fully open before the iframe starts its request
+    setTimeout(() => {
+        wrapper.innerHTML = ''; // Clear loading text
+        
+        const script = document.createElement('script');
+        script.id = "tixtree-script";
+        script.src = "https://www.tixtree.com/widgets/tixtree.js";
+        script.setAttribute("data-type", "event");
+        script.setAttribute("data-id", selectedID);
+        
+        wrapper.appendChild(script);
+    }, 100);
+  }
+};
+
+window.closeTixTree = function() {
+    const modal = document.getElementById('tixTreeModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.getElementById('tixtree-wrapper').innerHTML = '';
+    }
+};
+
+window.onclick = function(event) {
+    const modal = document.getElementById('tixTreeModal');
+    if (event.target == modal) { window.closeTixTree(); }
+};
+
+
+
+// Brooklands park location
+
+// Venue popovers
+document.querySelectorAll('.venue-trigger').forEach(trigger => {
+  const popover = trigger.querySelector('.venue-popover');
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent card's onclick firing
+    const isOpen = popover.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  });
+});
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.venue-popover.open').forEach(p => {
+    p.classList.remove('open');
+    p.closest('.venue-trigger').setAttribute('aria-expanded', false);
+  });
+});
+
+// Copy buttons
+document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText('Brooklands Park Community Centre, 2 Clover Wy, Bristol, BS34 8AZ');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy address';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+});
+
+function toggleHeroVenue() {
+  const popover = document.getElementById('heroVenuePopover');
+  popover.classList.toggle('open');
+  
+  // Optional: Close popover if user clicks anywhere else
+  document.addEventListener('click', function closeOut(e) {
+    if (!e.target.closest('.q-item')) {
+      popover.classList.remove('open');
+      document.removeEventListener('click', closeOut);
+    }
+  });
+}
+
+function copyAddress(btn) {
+  const address = "Brooklands Park Community Centre, Brooklands Rd, Bristol BS34 8PS";
+  navigator.clipboard.writeText(address).then(() => {
+    btn.innerText = "Copied!";
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerText = "Copy";
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+  
+
+
+function openVideo() {
+    document.getElementById('videoModal').style.display = 'flex';
+}
+
+function closeVideo() {
+    document.getElementById('videoModal').style.display = 'none';
+    // This finds the iframe inside the modal and resets the source to stop the music
+    var iframe = document.querySelector('#videoModal iframe');
+    var tempSrc = iframe.src;
+    iframe.src = tempSrc;
+}
+
+
+// Close popup if they click outside the video
+window.onclick = function(event) {
+    let modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeVideo();
+    }
+}
+
+
+function openIvanVideo() {
+    document.getElementById('ivanModal').style.display = 'flex';
+}
+
+function closeIvanVideo() {
+    document.getElementById('ivanModal').style.display = 'none';
+    var iframe = document.getElementById('ivanVimeoPlayer');
+    var tempSrc = iframe.src;
+    iframe.src = tempSrc; // Resets video/stops audio
+}
+
+// Update your window.onclick to close the Ivan modal too
+window.onclick = function(event) {
+    let modal1 = document.getElementById('videoModal');
+    let modal2 = document.getElementById('ivanModal');
+    if (event.target == modal1) closeVideo();
+    if (event.target == modal2) closeIvanVideo();
+}
+
+
+
+// Function for the popup buttons
+function bookAndClose(source) {
+    // 1. Log which video they came from
+    if (source === 'leo') {
+        closeVideo(); // Closes Leo's modal
+    } else {
+        closeIvanVideo(); // Closes Ivan's modal
+    }
+    
+
+}
+
+// All logging scripts
+
+  let sent = false;
+  const pageEntryTime = Date.now();
+  let maxScroll = 0;
+  // Initialize these globally
+  let ctaClicked = "No";
+  let videoClicked = "No";
+  let courseSelected = "No";
+
+  window.addEventListener('scroll', () => {
+    const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+    if (scrolled > maxScroll) maxScroll = scrolled;
+  }, { passive: true });
+
+  function logbuttonclick() { ctaClicked = "Yes"; }
+  function logvideoclick() { videoClicked = "Yes"; }
+  function logcourseselection() { courseSelected = "Yes"; }
+
+  function sendFinalData() {
+    if (sent) return;
+    sent = true;
+
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      ctaClicked: ctaClicked,
+      videoClicked: videoClicked,
+      courseSelected: courseSelected,
+      url: window.location.href
+    };
+
+    // This is the most reliable way to send to Google
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
+  }
+
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendFinalData();
+  });
+  window.addEventListener('pagehide', sendFinalData);
+
+
+
+
+// Cookies
+window.addEventListener('load', function() {
+    if (!localStorage.getItem('cookieConsent')) {
+        document.getElementById('cookie-toast').style.display = 'block';
+    }
+});
+
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'true');
+    hideToast();
+    // Optional: Trigger Pixel initialization here if you want to be 100% compliant
+}
+
+function hideToast() {
+    document.getElementById('cookie-toast').style.display = 'none';
+}
+
+function handleEmailSubmit(event) {
+  event.preventDefault();
+  
+  const emailInput = document.getElementById('userEmail');
+  const submitBtn = document.getElementById('submitBtn');
+  const thankYou = document.getElementById('thankYouMessage');
+  const emailValue = emailInput.value;
+
+  // Change button text to show it's working
+  submitBtn.innerText = "Saving...";
+  submitBtn.disabled = true;
+
+  const emailData = {
+    email: emailValue,
+    url: window.location.href
+  };
+
+  // TARGET THE NEW EMAIL SCRIPT URL HERE
+  fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
+    method: 'POST',
+    mode: 'no-cors', // Important for Google Scripts
+    body: JSON.stringify(emailData)
+  })
+  .then(() => {
+    // Hide form and show success message
+    document.getElementById('emailForm').style.display = 'none';
+    thankYou.style.display = 'block';
+    
+    // Optional: Log to your other script that a signup happened
+    // ctaClicked = "Email Signup"; 
+  })
+  .catch(err => {
+    console.error("Email save failed", err);
+    submitBtn.innerText = "Try Again";
+    submitBtn.disabled = false;
+  });
+
+}
+
+
+</script>
+<div id="cookie-toast" class="cookie-toast">
+    <p>I use some cookies to see if my ads work. Is that okay? 🍪</p>
+    <div class="cookie-buttons">
+        <button onclick="acceptCookies()" class="btn-accept">Yes, accept cookies</button>
+        <button onclick="hideToast()" class="btn-decline">No thank you</button>
+    </div>
+</div>
+
+<div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
+    <div class="modal-content" style="background: var(--mint); width: 100%; max-width: 600px; border-radius: 15px; position: relative; padding: 20px; max-height: 90vh; overflow-y: auto;">
+        
+        <span onclick="closeTixTree()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #8c52ff;">&times;</span>
+        
+        <h2 id="modal-course-title" style="padding: 20px 20px; margin-bottom: 20px; color: #333; font-family: sans-serif;">Complete Your Booking</h2>
+        <p style="font-size: 12px; color: #666; margin-top: 15px; text-align: center;">🔒 Secure checkout powered by Stripe & TixTree</p>
+        <div id="tixtree-wrapper"></div>
+        
+        
+    </div>
+</div>
+</body>
+</html>
