@@ -289,6 +289,60 @@ body {
   letter-spacing: 0.01em;        /* Subtle spacing for a high-end feel */
 }
 
+
+.hero-cta {
+  display: inline-block;
+  background-color: var(--green);
+  color: #1e3a29; /* Dark green text for high contrast on the bright green button */
+  font-family: 'Lexend', sans-serif; /* Matching your brand font */
+  font-size: 18px;
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: 100px; /* Rounded pill shape is more inviting */
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.hero-cta:hover {
+  transform: scale(1.05) translateY(-3px); /* Grows and lifts */
+  box-shadow: 0 15px 30px rgba(113, 197, 88, 0.4); /* Glow using your green */
+  background-color: #ffffff; /* Flashes white on hover for a premium feel */
+  color: var(--green);
+}
+
+.hero-cta:active {
+  transform: scale(0.98); /* Sinks when clicked */
+}
+
+/* Optional: Adding a subtle 'shimmer' effect */
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: rotate(45deg);
+  transition: 0.5s;
+  display: block;
+}
+
+.hero-cta:hover::after {
+  left: 120%;
+  transition: 0.5s;
+}
+
 /* For mobile screens */
 @media (max-width: 768px) {
   .hero-subheadline {
@@ -1613,7 +1667,7 @@ body {
   @media (max-width: 900px) {
     nav { padding: 0 20px; }
     .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 80px 28px 56px; }
+    .hero-left { padding: 100px 28px 56px; }
     .hero-right { padding: 44px 28px; }
     .who-grid, .sessions-grid, .about-grid, .testi-grid { grid-template-columns: 1fr; }
     .details-grid { grid-template-columns: 1fr 1fr; }
@@ -1738,7 +1792,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     I will take you from beginner to clicking invest in two engaging evenings.
   </p>
 
-  <a href="#book" class="cta-button" style="display: inline-block; margin-bottom: 20px;">Book now</a>
+  <a class="hero-cta" href="#book" onclick="logbuttonclick()">Book now</a>
 
   <div class="hero-graph-container" style="animation:fadeUp 0.6s ease 0.3s both; margin: 10px 0 30px 0;">
       <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" style="width: 100%; max-width: 500px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
