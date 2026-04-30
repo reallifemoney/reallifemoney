@@ -305,7 +305,17 @@ body {
 }
 
 .badge-reserve {
-  display: inline-block;
+  /* 1. This forces it onto its own line */
+  display: block; 
+  
+  /* 2. Keep the width tight to the text */
+  width: fit-content;
+  
+  /* 3. Center it horizontally */
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Your existing styling */
   padding: 4px 12px;
   background: var(--mint);
   color: var(--green);
@@ -313,7 +323,7 @@ body {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* Space between badge and button */
 }
 
 
