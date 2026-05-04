@@ -1796,6 +1796,24 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     // <event_parameters>
   });
 </script>
+<!-- Google tag (gtag.js) event - delayed navigation helper -->
+<script>
+  // Helper function to delay opening a URL until a gtag event is sent.
+  // Call it in response to an action that should navigate to a URL.
+  function gtagSendEvent(url) {
+    var callback = function () {
+      if (typeof url === 'string') {
+        window.location = url;
+      }
+    };
+    gtag('event', 'choose_course', {
+      'event_callback': callback,
+      'event_timeout': 2000,
+      // <event_parameters>
+    });
+    return false;
+  }
+</script>
 
 </head>
 <body>
@@ -2688,6 +2706,18 @@ function bookAndClose(source) {
     }
     
 
+}
+
+function logcourseselection() {
+  // This sends the "shout" to Google Ads
+  gtag('event', 'choose_course', {
+    'event_callback': function() {
+      console.log('Conversion sent to Google!');
+    }
+  });
+
+  // You can keep any existing Tixtree logic here if needed
+  // but usually the widget just listens for the button click anyway
 }
 
 // All logging scripts
