@@ -1619,6 +1619,47 @@ body {
     cursor: pointer;
 }
 
+.tps-badge {
+    background: var(--white);
+    border: 2px solid var(--purple);
+    border-radius: 12px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .tps-badge::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--green));
+  }
+ 
+  .tps-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+ 
+  .tps-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%; background: var(--purple);
+  }
+ 
+  .tps-title {
+    font-size: 15px; font-weight: 600;
+    color: var(--ink); margin-bottom: 6px; line-height: 1.3;
+  }
+ 
+  .tps-body {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.6; font-weight: 300;
+  }
+ 
+
 </style>
 
 <script type="text/javascript">
@@ -1657,6 +1698,11 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
       <span style="color:var(--yellow)">Teacher Pension Scheme.</span>
     </h1>
     <p class="hero-subheadline">I'm a local maths teacher and qualified financial advisor, and my Bristol-based course helps teachers go from complete beginners to clicking invest.</p>
+    <div class="tps-badge">
+      <div class="tps-label">Exclusive to teacher courses</div>
+      <div class="tps-title">Includes information about the Teachers' Pension Scheme</div>
+      <div class="tps-body">Most teachers have no idea how the TPS really works or how much it's actually worth. I will fix that with simulations and by answering all your questions.</div>
+    </div>
 
 
 
