@@ -1764,6 +1764,82 @@ body {
     }
 }
  
+.badge-reserve {
+  /* 1. This forces it onto its own line */
+  display: block; 
+  
+  /* 2. Keep the width tight to the text */
+  width: fit-content;
+  
+  /* 3. Center it horizontally */
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Your existing styling */
+  padding: 4px 12px;
+  background: var(--mint);
+  color: var(--green);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px; /* Space between badge and button */
+}
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-cta {
+  /* 1. Stop it from stretching to 100% */
+  align-self: flex-start; 
+  display: inline-block;
+  
+  /* 2. Control the size */
+  padding: 16px 36px;
+  font-size: 16px;
+  width: auto;
+  max-width: fit-content;
+  margin-bottom: 40px;
+
+  /* Your existing styles */
+  background-color: var(--green);
+  color: white; 
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+/* Mobile Tweak: If you WANT it full width on phones, keep this */
+@media (max-width: 600px) {
+  .hero-cta {
+    align-self: stretch; /* Stretches only on small screens */
+    text-align: center;
+  }
+}
+
+.hero-cta:hover {
+  transform: scale(1.05) translateY(-3px); /* Grows and lifts */
+  box-shadow: 0 15px 30px rgba(113, 197, 88, 0.4); /* Glow using your green */
+  background-color: #ffffff; /* Flashes white on hover for a premium feel */
+  color: var(--green);
+}
+
+.hero-cta:active {
+  transform: scale(0.98); /* Sinks when clicked */
+}
+
+
+.hero-cta:hover::after {
+  left: 120%;
+  transition: 0.5s;
+}
 
 </style>
 
@@ -1961,6 +2037,29 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
   </div>
 </section>
+
+<div style="align-items: center; text-align: center;">
+    <div class="stag" style="color:var(--purple); justify-content:center">
+      <span class="stag-dot" style="background:var(--purple)"></span>Limited spaces available
+    </div>
+  <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
+    Inflation is eating your money.<br><br>It's time to <span style="color:var(--green)">bite back.</span></h1>
+    
+
+  <p class="hero-subheadline" style="animation:fadeUp 0.6s ease 0.2s both">For just £75, I will take you from beginner to clicking invest in two engaging evenings.</p>
+<span class="badge-reserve">Reserve your seat from £0</span>
+  <a class="hero-cta" href="#book" onclick="logbuttonclick()" style="animation:fadeUp 0.6s ease 0.2s both">Book now</a>
+  
+
+  <div class="hero-graph-container" style="animation:fadeUp 0.6s ease 0.2s both; margin: 10px 0 30px 0; background-color: #1F3A29; border-radius: 16px;">
+      <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" style="width: 100%; max-width: 500px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <p style="font-family: 'Lexend', sans-serif; color: white; font-size: 14px; line-height: 1.6; margin-top: 15px; font-weight: 300; padding: 20px 10px;">
+        The purple line shows £1,000 of savings sitting in a bank - it loses 15% of its "buying power" to inflation even though it is earning interest. 
+        The green line is that same £1,000 put to work and invested.
+    </p>
+  </div>
+ 
+  </div>
 
 <!-- ABOUT -->
 <section class="about-sec">
@@ -2177,14 +2276,13 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     <div class="school-card">
         <div class="school-content">
             <div class="stag"><span class="stag-dot"></span>In-School Workshops</div>
-            <h2 class="school-title">Bring Real Life Money to your classroom</h2>
+            <h2 class="school-title">Bring Real Life Money to your school</h2>
             <p class="school-text">
-                I regularly visit schools and colleges across the South West to deliver tailored financial education. 
-                Whether it's a one-off assembly or a full-day workshop for a specific year group, 
-                we can work together to give your students the practical money skills they actually need.
+                I regularly visit schools and colleges across the Bristol area to deliver investing and pension courses. 
+                If you feel your school would be interested in this, then please reach out and I will get in touch with them to make it happen. If your school books a course, I will give you £50!
             </p>
             <button class="school-btn" onclick="openContactModal()">
-                <span>🏫</span> Get in touch about a school visit
+                <span>🏫</span> Reach out
             </button>
         </div>
         <div class="school-illustration">
