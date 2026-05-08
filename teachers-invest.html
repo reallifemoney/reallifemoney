@@ -1656,6 +1656,113 @@ body {
     font-size: 14px; color: black;
     line-height: 1.6; font-weight: 300;
   }
+
+  /* School Outreach Styling */
+.school-outreach {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.school-card {
+    background: var(--white);
+    max-width: 900px;
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 32px;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.school-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.school-title {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.school-text {
+    font-size: 17px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 500px;
+}
+
+.school-btn {
+    background: var(--purple);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.school-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(140, 82, 255, 0.2);
+    filter: brightness(1.1);
+}
+
+.school-illustration {
+    width: 180px;
+    height: 180px;
+    background: var(--mint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+    flex-shrink: 0;
+}
+
+.school-illustration svg {
+    width: 80px;
+    height: 80px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .school-card {
+        flex-direction: column;
+        padding: 40px 24px;
+        text-align: center;
+    }
+    
+    .school-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .school-illustration {
+        order: -1; /* Move icon to top on mobile */
+        width: 100px;
+        height: 100px;
+    }
+    
+    .school-illustration svg {
+        width: 40px;
+        height: 40px;
+    }
+}
  
 
 </style>
@@ -2066,7 +2173,28 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   </div>
 </section>
  
-
+<section class="school-outreach">
+    <div class="school-card">
+        <div class="school-content">
+            <div class="stag"><span class="stag-dot"></span>In-School Workshops</div>
+            <h2 class="school-title">Bring Real Life Money to your classroom</h2>
+            <p class="school-text">
+                I regularly visit schools and colleges across the South West to deliver tailored financial education. 
+                Whether it's a one-off assembly or a full-day workshop for a specific year group, 
+                we can work together to give your students the practical money skills they actually need.
+            </p>
+            <button class="school-btn" onclick="openContactModal()">
+                <span>🏫</span> Get in touch about a school visit
+            </button>
+        </div>
+        <div class="school-illustration">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3.333 3 8.667 3 12 0v-5"/>
+            </svg>
+        </div>
+    </div>
+</section>
 
 
 <!-- CTA BOOKING PICKER -->
