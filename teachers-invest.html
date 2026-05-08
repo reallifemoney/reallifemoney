@@ -1578,6 +1578,27 @@ body {
   }
 }
 
+ .graph-title {
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    line-height: 1.06;
+    color: black;
+    letter-spacing: -1.5px;
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .graph-subheadline {
+  font-size: 1.25rem;            /* Large enough to read, small enough to show hierarchy */
+  line-height: 1.6;              /* Gives the text breathing room */
+  color: black; /* Slightly off-white so it's softer on the eyes than pure white */
+  max-width: 550px;              /* Prevents the text from stretching too wide (improves readability) */
+  margin-top: 24px;              /* Space below the main headline */
+  margin-bottom: 32px;           /* Space before the video/CTA starts */
+  font-weight: 300;              /* Light weight to contrast with a bold headline */
+  letter-spacing: 0.01em;        /* Subtle spacing for a high-end feel */
+}
+
 
 /* Darkens the background when popup is open */
 .modal-overlay {
@@ -1841,6 +1862,36 @@ body {
   transition: 0.5s;
 }
 
+.hero-graph-container {
+    /* Layout & Sizing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Responsive Widths */
+    max-width: 600px; /* Graph (500) + Padding (50+50) */
+    width: 90%;       /* On mobile, take up most of the screen */
+    margin: 20px auto 40px auto; /* Centered horizontally */
+    
+    /* Aesthetics */
+    background-color: #1F3A29;
+    border-radius: 20px;
+    padding: 40px 20px; /* Generous top/bottom, safe side padding */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for depth */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    
+    /* Animation */
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
+}
+
+@media (max-width: 480px) {
+    .hero-graph-container {
+        padding: 30px 15px; /* Tighter padding for small screens */
+        width: 95%;
+        border-radius: 16px;
+    }
+}
+
 </style>
 
 <script type="text/javascript">
@@ -2039,19 +2090,17 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 </section>
 
 <div style="align-items: center; text-align: center;">
-    <div class="stag" style="color:var(--purple); justify-content:center">
-      <span class="stag-dot" style="background:var(--purple)"></span>Limited spaces available
-    </div>
-  <h1 class="hero-title" style="animation:fadeUp 0.6s ease 0.2s both">
+    
+  <h1 class="graph-title" style="animation:fadeUp 0.6s ease 0.2s both">
     Inflation is eating your money.<br><br>It's time to <span style="color:var(--green)">bite back.</span></h1>
     
 
-  <p class="hero-subheadline" style="animation:fadeUp 0.6s ease 0.2s both">For just £75, I will take you from beginner to clicking invest in two engaging evenings.</p>
+  <p class="graph-subheadline" style="animation:fadeUp 0.6s ease 0.2s both">For just £75, I will take you from beginner to clicking invest in two engaging evenings.</p>
 <span class="badge-reserve">Reserve your seat from £0</span>
   <a class="hero-cta" href="#book" onclick="logbuttonclick()" style="animation:fadeUp 0.6s ease 0.2s both">Book now</a>
   
 
-  <div class="hero-graph-container" style="animation:fadeUp 0.6s ease 0.2s both; margin: 10px 0 30px 0; background-color: #1F3A29; border-radius: 16px;">
+  <div class="hero-graph-container">
       <img src="gap-graph.webp" alt="Savings vs Investing Growth Graph" style="width: 100%; max-width: 500px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
       <p style="font-family: 'Lexend', sans-serif; color: white; font-size: 14px; line-height: 1.6; margin-top: 15px; font-weight: 300; padding: 20px 10px;">
         The purple line shows £1,000 of savings sitting in a bank - it loses 15% of its "buying power" to inflation even though it is earning interest. 
