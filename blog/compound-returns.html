@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The power of compound returns | Real Life Money</title>
+        <meta name="description" content="Investing can seem pointless with only a few percent growth, but that is far from the truth over a long period. Learn to invest in Bristol with my engaging course.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    /* Shared Blog Styles */
+:root {
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+    --green:   #71c558;
+}
+
+body {
+    background: var(--mint);
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+/* Nav specific to Blog/Articles */
+nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 80px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(238, 248, 235, 0.8); /* var(--mint) with transparency */
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+}
+
+.nav-logo img { height: 70px; width: auto; }
+
+.nav-cta {
+    background: var(--purple);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nav-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+
+/* Custom "Stag" label style from your main page */
+.stag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 24px;
+}
+.stag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple); }
+
+@media (max-width: 600px) {
+    nav { padding: 0 20px; }
+}
+
+        .article-hero { padding: 160px 20px 60px; text-align: center; background: var(--mint); }
+        .article-container { max-width: 700px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Typography for reading */
+        .content { font-size: 18px; line-height: 1.8; color: var(--text); }
+        .content h2 { margin: 40px 0 20px; color: var(--ink); font-size: 28px; }
+        .content p { margin-bottom: 25px; }
+        
+        .blog-cta {
+            background: var(--mint);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 80px;
+            text-align: center;
+            border: 1px solid var(--rule);
+        }
+
+        .progress-bar {
+            position: fixed; top: 80px; left: 0; width: 0%; height: 4px;
+            background: var(--purple); z-index: 101;
+        }
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.select-btn {
+    display: inline-block;
+    background-color: var(--green);
+    color: white;
+    text-decoration: none;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 32px;
+    border-radius: 100px; /* Fully rounded "pill" shape */
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(113, 197, 88, 0.3); /* Soft green glow */
+    text-align: center;
+}
+
+.select-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(113, 197, 88, 0.4);
+    filter: brightness(1.05); /* Makes it slightly more vibrant on hover */
+}
+
+.select-btn:active {
+    transform: translateY(0);
+}
+
+    .footer-nav {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-nav a {
+            color: rgba(0,0,0,0.5);
+            text-decoration: none;
+        }
+        
+        .footer-nav a:hover { color: var(--purple); }
+
+
+    </style>
+</head>
+<body>
+      
+    <nav>
+    <a class="nav-logo" href="/">
+      <img src="/logo.webp" alt="Real Life Money">
+    </a>
+    <a class="nav-cta" href="/blog">← Back to blog</a>
+</nav>
+
+    
+    <div class="progress-bar" id="pb"></div>
+    <div class="article-hero">
+        <div class="stag"><span class="stag-dot"></span>Investing Basics</div>
+        <h1 style="max-width: 800px; margin: 0 auto; line-height: 1.1;">The power of compounding returns</h1>
+    </div>
+
+    <article class="article-container">
+        <div class="content">
+         <section class="article-body">
+    <div style="background: var(--white); border: 2px dashed var(--rule); border-radius: 16px; padding: 25px; margin-bottom: 40px;">
+        <p style="margin-bottom: 0;"><strong>The quick summary:</strong> Compounding is the process where your money earns interest, and then that interest earns its own interest. Over time, this creates a snowball effect that can turn small, regular amounts into a significant nest egg.</p>
+    </div>
+
+    <p>Most people think that building wealth requires a massive salary or a lucky win on the lottery. In reality, the most powerful tool in finance is something much simpler: time.</p>
+
+    <p>Albert Einstein famously called compound interest the "eighth wonder of the world." He understood that when you give your money enough time to grow, the results become exponential.</p>
+
+    <h2>The snowball effect</h2>
+    <p>Imagine you are at the top of a snowy hill in Bristol. You pack a small snowball and start rolling it down. At first, it does not pick up much. But as it rolls, the surface area grows. More snow sticks to the outside, which makes it even bigger, which allows even more snow to stick.</p>
+
+    
+
+    <p>Investing works exactly the same way. In the early years, it feels slow. You might only see your balance grow by a few pounds. But after a decade or two, the "snowball" is so large that the growth starts to happen in huge leaps.</p>
+
+    <h2>The cost of waiting</h2>
+    <p>The biggest mistake beginners make is waiting for the "perfect time" to start. They wait for a pay rise or for the stock market to look "safer."</p>
+
+    <p>However, waiting even five years can have a massive impact on your end result. This is because you are missing out on those final, biggest years of the snowball effect. In the world of investing, someone who starts with a small amount in their twenties will often end up with more money than someone who starts with a large amount in their forties.</p>
+
+    <h2>Is it gambling?</h2>
+    <p>People often confuse investing with trading. Trading is trying to guess what will happen to a price tomorrow or next week—that can feel like gambling. Investing is simply buying a small piece of the global economy and letting it grow alongside human progress.</p>
+
+    <p>When you invest in a diversified fund, you are owning tiny slices of hundreds of successful companies. As those companies grow and make profits, they reinvest that money, and your slice becomes more valuable.</p>
+
+    <div style="background: var(--mint); padding: 25px; border-left: 4px solid var(--purple); border-radius: 4px; margin: 40px 0;">
+        <p style="margin-bottom: 0;"><strong>The golden rule:</strong> The best day to start was ten years ago. The second best day is today.</p>
+    </div>
+
+    <h2>How to get started</h2>
+    <p>You do not need thousands of pounds to begin. Most modern platforms allow you to start with as little as twenty-five pounds a month. The goal is not to get rich quickly, but to get your snowball moving as early as possible.</p>
+
+    <p>If you can master the habit of consistent investing and give it the gift of time, the math will do the heavy lifting for you.</p>
+</section>
+
+        </div>
+
+        <div class="blog-cta">
+            <h3>Ready to beat inflation?</h3>
+            <p style="margin-bottom: 20px;">I run evening courses in Bristol for those who want to gain the confidence to invest.</p>
+            <a class="select-btn" href="/course">View Course Dates</a>
+        </div>
+    </article>
+    
+       <footer>
+        <p>© 2026 Real Life Money. Built with ❤️ in Bristol.</p>
+        <div class="footer-nav">
+            <a href="/course">Course</a>
+            <a href="/blog">Blog</a>
+            <a href="/teachers-invest">Schools</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("pb").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
