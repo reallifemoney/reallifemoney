@@ -173,6 +173,51 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* NEW STYLES FOR THE LINKS */
+        .secondary-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .text-link-btn {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 100px;
+            border: 1px solid var(--rule);
+            background: rgba(255, 255, 255, 0.5);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .text-link-btn:hover {
+            background: var(--white);
+            border-color: var(--purple);
+            transform: translateY(-2px);
+        }
+
+        .footer-nav {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-nav a {
+            color: rgba(0,0,0,0.5);
+            text-decoration: none;
+        }
+        
+        .footer-nav a:hover { color: var(--purple); }
+
     </style>
 </head>
 <body>
@@ -190,11 +235,25 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             <div class="btn-go">View Course Details →</div>
         </a>
 
+        <div class="secondary-links">
+            <a href="/teachers-invest" class="text-link-btn">
+                <span>🍎</span> For Teachers
+            </a>
+            <a href="/blog" class="text-link-btn">
+                <span>📖</span> Read the Blog
+            </a>
+        </div>
+
         <a href="/contact" class="contact-link">Have a question? Contact Leo</a>
     </section>
 
     <footer>
         <p>© 2026 Real Life Money. Built with ❤️ in Bristol.</p>
+        <div class="footer-nav">
+            <a href="/blog">Blog</a>
+            <a href="/teachers-invest">Schools</a>
+            <a href="/contact">Contact</a>
+        </div>
     </footer>
 
 </body>
