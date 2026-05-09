@@ -26,6 +26,13 @@
             position: fixed; top: 80px; left: 0; width: 0%; height: 4px;
             background: var(--purple); z-index: 101;
         }
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
     </style>
 </head>
 <body>
@@ -80,7 +87,19 @@
 </section>
 
             
-            <div class="hero-graph-container">...</div>
+            <div class="hero-graph-container">
+
+    <img src="gap-graph.webp" 
+         alt="Graph showing the gap between Savings and Investing over time" 
+         class="graph-img"
+         style="width: 100%; max-width: 500px; height: auto; display: block; margin: 0 auto;">
+
+    <p style="font-family: 'Lexend', sans-serif; color: white; font-size: 15px; line-height: 1.6; margin-top: 25px; font-weight: 300; text-align: center; max-width: 480px;">
+        The <span style="color: #8c52ff; font-weight: 600;">purple line</span> shows £1,000 of savings sitting in a bank—losing buying power to inflation. 
+        The <span style="color: #71c558; font-weight: 600;">green line</span> is that same £1,000 put to work and invested.
+    </p>
+
+</div>
         </div>
 
         <div class="blog-cta">
