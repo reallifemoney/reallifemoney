@@ -1,0 +1,31 @@
+name: Generate sitemap
+
+on:
+  push:
+    branches: [ main ] # Or "master" if that is your main branch name
+
+jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: sitemap-generator
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0 
+    
+    - name: Generate the sitemap
+      id: sitemap
+      uses: cicirello/generate-sitemap@v1
+      with:
+        base-url-path: https://reallifemoney.co.uk/
+        
+    - name: Commit and push the sitemap
+      run: |
+        if [[ `git status --porcelain sitemap.xml` ]]; then
+          git config --global user.name 'sitemap-bot'
+          git config --global user.email 'sitemap-bot@users.noreply.github.com'
+          git add sitemap.xml
+          git commit -m "Automated sitemap update"
+          git push
+        fi
