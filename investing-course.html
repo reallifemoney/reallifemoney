@@ -1771,6 +1771,311 @@ body {
     cursor: pointer;
 }
 
+.step-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+}
+
+.selected-summary {
+    background: var(--mint);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: center;
+    border: 1px solid var(--purple);
+}
+
+.check-container {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.waitlist-card {
+    background: var(--mint) !important;
+    border: 1px dashed var(--purple) !important;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #eef8eb; /* Your brand mint */
+    color: #28a745;            /* Success green */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 auto;
+    border: 2px solid #28a745;
+    animation: successPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-header h2 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.booking-value-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+
+.steps-title {
+    font-family: 'Lexend', sans-serif;
+    margin-bottom: 20px;
+}
+
+.value-strip {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-align: left;
+    max-width: 250px;
+}
+
+.value-icon {
+    font-size: 24px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+
+.value-text span {
+    font-size: 13px;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .value-strip {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+    .value-item {
+        max-width: 100%;
+    }
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #25D366; /* WhatsApp Green */
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.whatsapp-btn:hover {
+    background-color: #128C7E; /* Darker Green */
+    transform: translateY(-2px);
+}
+
+.whatsapp-btn svg {
+    flex-shrink: 0;
+}
+
+.reasons-section {
+    padding: 60px 20px;
+    background-color: var(--mint);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Centering the Header Text */
+.reasons-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+
+.sec-subtitle {
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Centering the List Block */
+.reasons-wrapper {
+    display: flex;
+    justify-content: center; /* This centers the list block horizontally */
+}
+
+.reasons-list {
+    display: inline-flex; /* Shrinks the width to fit the content */
+    flex-direction: column;
+    gap: 10px;
+    text-align: left; /* Keeps the text and icons aligned nicely */
+}
+
+.reason-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 0;
+}
+
+.reason-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.check-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* The Biscuit Row */
+.biscuit-row {
+    margin-top: 10px;
+    padding: 12px 20px;
+    background: #fff9e6;
+    border-radius: 12px;
+    border: 2px dashed #f39c12;
+}
+
+@media (max-width: 480px) {
+    .reasons-list {
+        width: 100%; /* On small phones, let it take full width */
+    }
+}
+
+.trust-bridge {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f9f7ff 100%);
+    text-align: center;
+}
+
+.trust-content {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eef8eb;
+    color: #25D366;
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.pulse-icon {
+    width: 8px;
+    height: 8px;
+    background: #25D366;
+    border-radius: 50%;
+    position: relative;
+}
+
+.pulse-icon::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #25D366;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+.trust-bridge h2 {
+    font-size: 1.8rem;
+    color: var(--purple);
+    margin-bottom: 15px;
+}
+
+.trust-bridge p {
+    color: var(--ink);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.whatsapp-btn-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #25D366;
+    color: white !important;
+    padding: 18px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    background: #1ebe5d;
+}
+
+@media (max-width: 480px) {
+    .trust-bridge { padding: 50px 20px; }
+    .trust-bridge h2 { font-size: 1.5rem; }
+}
+
 </style>
 
 <script type="text/javascript">
@@ -1814,7 +2119,12 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     return false;
   }
 </script>
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("FaZMs4M-HnEtpdw3G"); 
+   })();
+</script>
 </head>
 <body>
  
@@ -1972,13 +2282,107 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   </div>
 </section>
 
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      
+      <a href="https://www.cset.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label">In partnership with</span>
+        <img src="cset.webp" alt="CSET Logo" class="trust-logo">
+      </a>
+
+      <a href="https://www.cii.co.uk/" target="_blank" class="trust-item">
+        <span class="trust-label-tall">Qualification from</span>
+        <img src="cii.webp" alt="CII Logo" class="trust-logo-tall">
+      </a>
+
+      <a href="https://maps.app.goo.gl/HdFMCXXdQW5TEw8s9?g_st=ic" target="_blank" class="trust-item">
+        <span class="trust-label">Rated 5 stars on</span>
+        <img src="google.webp" alt="Google Reviews" class="trust-logo">
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="reasons-section">
+    <div class="container">
+        <div class="reasons-header">
+            <h2 class="sec-title">Investing doesn't have to be intimidating</h2>
+            <p class="sec-subtitle">I built this course specifically for beginners who want to take control of their finances without the jargon. Here is why it’s different:</p>
+        </div>
+
+        <div class="reasons-wrapper">
+            <div class="reasons-list">
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Start with the basics</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Explained using simple language</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Ask any questions in the moment</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>No such thing as silly questions!</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Learn in a nurturing environment</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>No selling, just education</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Engaging activities, not just slides</p>
+                </div>
+                
+                <div class="reason-item biscuit-row">
+                    <span class="biscuit-icon">🍪</span>
+                    <p>...and there will be biscuits</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="trust-bridge">
+    <div class="container">
+        <div class="trust-content">
+            <div class="trust-badge">
+                <span class="pulse-icon"></span>
+                Real-time Support
+            </div>
+            <h2 style="color: black">Got a question? I'm actually here.</h2>
+            <p>
+                I know the internet can be a skeptical place.<br><br>I’m Leo, a local teacher at <strong>Castle School in Thornbury</strong> and living in <strong>Stoke Gifford</strong>. 
+                Whether you're unsure if the course is right for you, or just want to check I'm a real human before booking - just send me a message and I'll be happy to chat. 
+            </p>
+            
+            <div class="trust-actions">
+                <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I'm%20on%20your%20website%20and%20had%20a%20quick%20question..." 
+                   target="_blank" 
+                   class="whatsapp-btn-large">
+                    <svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.8-16.6-14.8-27.8-33.2-31.1-38.8-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                    Message me on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- SESSIONS -->
 <section class="sessions-sec">
   <div class="container">
     <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>The course</div>
     <h2 class="sec-title">Two evenings.<br>A lifetime of clarity.</h2>
-    <p class="sec-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.<br><br>This course teaches you sensible investing principles that financial advisors use with their clients.</p>
+    <p class="sec-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.</p>
     <div class="sessions-grid">
       <div class="sess-card">
         <div class="sess-head" data-n="1">
@@ -2024,131 +2428,6 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 </section>
 
 
-<!-- CTA BOOKING PICKER -->
-<section class="cta-sec" id="book">
-  <div class="container">
-    <div class="stag" style="color:var(--purple); justify-content:center">
-      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
-    </div>
-    <h2 class="sec-title">Available Course Dates</h2>
-    <div class="pricing-lead-in">
-  <p>Your investment: <strong>£75 per course</strong></p>
-</div>
-
-  <div class="booking-grid">
- 
-
-  <div class="date-card" onclick="selectDate('june')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">June 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 11th &amp; 18th June</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <div class="date-card" onclick="selectDate('july')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">July 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  
-   <div class="date-card" onclick="selectDate('august')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">August 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Wed 12th &amp; 19th August</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-august" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <section class="date-card">
-    <h3>Can't make these dates?</h3>
-    <p>Get notified when I announce new Bristol venues and future course dates.</p>
-    
-    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
-  <input type="email" id="userEmail" placeholder="Enter your email" required>
-  <button type="submit" id="submitBtn">Notify me</button>
-</form>
-<div id="thankYouMessage" style="display:none; color: #28a745;">
-  Perfect! I'll be in touch with future dates.
-</div>
-  
-</section>
-
-</div>
-
-
-    <p class="cta-sub" style="margin-top: 40px;">Questions? <a href="/contact">Get in touch</a></p>
-  </div>
-</section>
-
-<section class="trust-bar">
-  <div class="container">
-    <div class="trust-grid">
-      
-      <a href="https://www.cset.co.uk/" target="_blank" class="trust-item">
-        <span class="trust-label">In partnership with</span>
-        <img src="cset.webp" alt="CSET Logo" class="trust-logo">
-      </a>
-
-      <a href="https://www.cii.co.uk/" target="_blank" class="trust-item">
-        <span class="trust-label-tall">Qualification from</span>
-        <img src="cii.webp" alt="CII Logo" class="trust-logo-tall">
-      </a>
-
-      <a href="https://maps.app.goo.gl/HdFMCXXdQW5TEw8s9?g_st=ic" target="_blank" class="trust-item">
-        <span class="trust-label">Rated 5 stars on</span>
-        <img src="google.webp" alt="Google Reviews" class="trust-logo">
-      </a>
-
-    </div>
-  </div>
-</section>
-
 <!-- ABOUT -->
 <section class="about-sec">
   <div class="container">
@@ -2157,6 +2436,21 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>About me</div>
         <h2 class="sec-title">I want you to walk away smiling</h2>
         <div class="about-body">
+          <div class="social-verification">
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/leo-dennis-004ab797" target="_blank" class="social-link" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        
+        <a href="https://www.instagram.com/leodennis94" target="_blank" class="social-link" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+        <a href="https://www.facebook.com/share/18o1Qape2m/" target="_blank" class="social-link" title="Facebook">
+            <i class="fab fa-facebook"></i>
+        </a>
+    </div>
+</div>
           <p>Before becoming a maths teacher, I got my qualification and spent a few years working in financial advice. I noticed that most of the clients I saw had little or no knowledge of investing and fully relied on us to help them. Then I learned that most people don't have the luxury of an adviser.</p>
           <img src="leo-dennis.webp" alt="Leo Dennis" class="instructor-img">
           <p>Financial literacy isn't taught in schools. Proper financial advice is expensive and inaccessible for most people. That gap bothered me — so I built Real Life Money to do something about it.</p>
@@ -2164,6 +2458,8 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           <p>I'm a big believer in learning through enjoyment - so whilst these are serious and important topics, I want to see you walk away smiling - not only because you gained so much, but because you enjoyed yourself along the way.</p>
         </div>
       </div>
+      
+
       <div class="creds">
         <div class="cred"><div class="cred-ico p">🎓</div><div class="cred-txt"><strong>Qualified Financial Adviser</strong><span>Several years in financial services, working directly with clients</span></div></div>
         <div class="cred"><div class="cred-ico o">📐</div><div class="cred-txt"><strong>Secondary School Maths Teacher</strong><span>Experienced at explaining complex ideas in plain, accessible language</span></div></div>
@@ -2174,6 +2470,149 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   </div>
 </section>
 
+<section class="cta-sec" id="book">
+  <div class="container">
+    <div class="stag" style="color:var(--purple); justify-content:center">
+      <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
+    </div>
+
+    <div class="booking-value-header">
+    <h1 class="steps-title">3 simple steps to investing confidence</h1>
+    
+    <div class="value-strip">
+        <div class="value-item">
+            <span class="value-icon">💷</span>
+            <div class="value-text">
+                
+                <span>£75 per person including course notes</span>
+            </div>
+        </div>
+
+        <div class="value-item">
+            <span class="value-icon">📍</span>
+            <div class="value-text">
+                
+                <span>Easy-to-access location in Bristol</span>
+            </div>
+        </div>
+        
+        <div class="value-item">
+            <span class="value-icon">🛡️</span>
+            <div class="value-text">
+                
+                <span>Full refund available up to 7 days before</span>
+            </div>
+        </div>
+
+      
+    </div>
+</div>
+    
+    <div id="step-1">
+      <h2>Step 1: Select your dates</h2>
+      <div class="booking-grid">
+        <div class="date-card" id="card-may" onclick="selectDateStep('May', 'Thu 14th & 21st May', '6:30pm – 8:00pm')">
+          <span class="badge">Next Intake</span>
+          <div class="date-title">May 2026</div>
+          <div class="date-meta">
+            <div class="date-meta-row">📅 Thu 14th & 21st May</div>
+            <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+            <div class="date-meta-row">
+              <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+            </div>
+          </div>
+          <button class="select-btn">Select these dates</button>
+        </div>
+
+        <div class="date-card" id="card-june" onclick="selectDateStep('June', 'Thu 11th & 18th June', '6:30pm – 8:00pm')">
+          <span class="badge">Limited Spaces</span>
+          <div class="date-title">June 2026</div>
+          <div class="date-meta">
+            <div class="date-meta-row">📅 Thu 11th & 18th June</div>
+            <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+            <div class="date-meta-row">
+              <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+            </div>
+          </div>
+          <button class="select-btn">Select these dates</button>
+        </div>
+
+        <div class="date-card waitlist-card">
+          <h3>Can't make these?</h3>
+          <p style="padding-bottom: 15px">I'll email you when new Bristol dates are announced.</p>
+          <form onsubmit="handleWaitlist(event)">
+            <input type="email" class="step-input" placeholder="Your email" required>
+            <button type="submit" class="select-btn" style="background:var(--green);color:white;">Notify me</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="step-2" style="display:none; max-width:500px; margin: 40px auto; animation: fadeUp 0.5s ease;">
+      <h3 style="padding-bottom: 15px">Step 2: Reserve your seat</h3>
+      <div class="selected-summary">
+        Selected: <strong id="display-date">May 2026</strong> <span id="display-times" style="display:block; font-size: 14px; color: var(--muted);"></span> <span id="display-timings" style="display:block; font-size: 14px; color: var(--muted);"></span>
+      </div>
+      
+      <form id="reserve-form" class="step-form" onsubmit="handleReserve(event)">
+        <input type="text" id="res-name" class="step-input" placeholder="Full name" required>
+        <input type="email" id="res-email" class="step-input" placeholder="Email address" required>
+        <input type="tel" id="res-phone" class="step-input" placeholder="Phone number">
+        <button type="submit" class="select-btn" style="width:100%; margin-top:20px;">Confirm Reservation</button>
+      </form>
+    </div>
+
+   
+
+    <div id="step-3" style="display:none; max-width:500px; margin: 40px auto; text-align:center; animation: fadeUp 0.5s ease;">
+  
+  <div class="success-header" style="margin-bottom: 30px;">
+    <div class="success-icon">✓</div>
+    <h2 style="color: black; margin-top: 15px;">Seat reserved!</h2>
+    <p style="color: #28a745; font-weight: 600; font-size: 18px; margin: 0;">I've saved a spot for you.</p>
+  </div>
+
+  <p style="margin-bottom:20px;color:black;">Thanks for booking, I look forward to helping you. To finalise your place, please complete the payment below.</p>
+  
+  <div style="display:flex; flex-direction:column; gap:15px;">
+    <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" rel="noopener noreferrer" class="select-btn" style="text-decoration:none;">
+        Pay £75 now via Stripe
+    </a>
+    <button onclick="payLater()" style="background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer;">
+        I'll pay later (Send me an invoice)
+    </button>
+  </div>
+</div>
+
+
+
+  </div>
+</section>
+
+</div>
+
+  </div>
+</section>
 
 <section style="background: #eef8eb; padding: 80px 0; border-top: 1px solid var(--rule);">
   <div class="container">
@@ -2442,7 +2881,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     style="position:absolute;top:0;left:0;width:100%;height:100%;" 
     title="About Leo - Real Life Money">
 </iframe>
-<script src="https://player.vimeo.com/api/player.js" defer></script>
+<script src="https://player.vimeo.com/api/player.js"></script>
         </div>
         <div style="text-align: center; margin-top: 20px;">
     <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo'); logbuttonclick();">Book your place - £75</a>
@@ -2539,8 +2978,7 @@ window.selectDate = function(month) {
   const ids = {
     'may': 'beginners-guide-to-investing-0d1850321bea',
     'june': 'beginners-guide-to-investing-f6e7b00efeb0',
-    'july': 'beginners-guide-to-investing-53d055113a39',
-    'august': 'beginners-guide-to-investing-bbac96fd6a36'
+    'july': 'beginners-guide-to-investing-53d055113a39'
   };
 
   const selectedID = ids[month];
@@ -2711,18 +3149,6 @@ function bookAndClose(source) {
 
 }
 
-function logcourseselection() {
-  // This sends the "shout" to Google Ads
-  gtag('event', 'choose_course', {
-    'event_callback': function() {
-      console.log('Conversion sent to Google!');
-    }
-  });
-
-  // You can keep any existing Tixtree logic here if needed
-  // but usually the widget just listens for the button click anyway
-}
-
 // All logging scripts
 
   let sent = false;
@@ -2826,7 +3252,113 @@ function handleEmailSubmit(event) {
 }
 
 
+
+let selectedMonth = "";
+let selectedTimes = "";
+let selectedTimings = "";
+
+function selectDateStep(month, times, timings) {
+    selectedMonth = month;
+    selectedTimes = times;
+    selectedTimings = timings;
+    
+    document.getElementById('display-date').innerText = month + " course";
+    document.getElementById('display-times').innerText = times;
+    document.getElementById('display-timings').innerText = selectedTimings;
+    document.getElementById('step-2').style.display = 'block';
+    
+    window.scrollTo({
+        top: document.getElementById('step-2').offsetTop - 100,
+        behavior: 'smooth'
+    });
+}
+
+function handleReserve(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.innerText = "Confirming, please wait...";
+    btn.disabled = true;
+
+    const templateParams = {
+        name: document.getElementById('res-name').value,
+        email: document.getElementById('res-email').value,
+        phone: document.getElementById('res-phone').value,
+        course_date: selectedMonth,
+        course_times: selectedTimes,
+        course_timings: selectedTimings
+    };
+
+    // 1. Send Email to YOU
+    emailjs.send('service_7hn83cm', 'template_g5nbo46', templateParams)
+        .then(() => {
+            // 2. Send Confirmation to CUSTOMER
+            return emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams);
+        })
+        .then(() => {
+            // 3. Success! Show Step 3
+            document.getElementById('step-2').style.opacity = '0.3';
+            document.getElementById('step-2').style.pointerEvents = 'none';
+            document.getElementById('step-3').style.display = 'block';
+            
+            window.scrollTo({
+                top: document.getElementById('step-3').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }, (error) => {
+            alert("Something went wrong. Please WhatsApp me directly!");
+            btn.innerText = "Confirm Reservation";
+            btn.disabled = false;
+        });
+}
+
+function payLater() {
+    // Hide the payment buttons
+    const step3 = document.getElementById('step-3');
+    
+    step3.innerHTML = `
+        <div class="success-header">
+            <div class="success-icon" style="background:#fff9e6; color:#f39c12; border-color:#f39c12;">⏳</div>
+            <h2>Reservation Pending</h2>
+            <p style="color: var(--ink); margin-top:10px;">
+                No problem at all!
+            </p>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 15px; line-height: 1.4;">
+                I will reach out in a few days to see if you are ready to confirm and pay.<br><br>
+                Please note: seats are only fully secured once you have made payment.
+            </p>
+            <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20investing%20course..." 
+   target="_blank" 
+   class="whatsapp-btn">
+    <svg viewBox="0 0 448 512" width="20" height="20" fill="currentColor">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.8-16.6-14.8-27.8-33.2-31.1-38.8-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+    Any questions? Send me a Whatsapp
+</a>
+            <a href="/investing-course" class="select-btn" style="display:inline-block; margin-top:20px; background:var(--green); text-decoration:none;">Back to the top</a>
+        </div>
+    `;
+}
+
+
+
+
+
+
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "How my investing course can help you",
+  "description": "My background as a maths teacher and qualified financial advisor in Bristol and why my investing course is so powerful.",
+  "thumbnailUrl": "https://vumbnail.com/1181290406.jpg",
+  "uploadDate": "2026-05-09",
+  "duration": "PT12M30S",
+  "contentUrl": "https://vimeo.com/1181290406",
+  "embedUrl": "https://player.vimeo.com/video/1181290406"
+}
+</script>
+
 <div id="cookie-toast" class="cookie-toast">
     <p>I use some cookies to see if my ads work. Is that okay? 🍪</p>
     <div class="cookie-buttons">
@@ -2835,7 +3367,7 @@ function handleEmailSubmit(event) {
     </div>
 </div>
 
-<div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; padding: 20px;">
+<div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
     <div class="modal-content" style="background: var(--mint); width: 100%; max-width: 600px; border-radius: 15px; position: relative; padding: 20px; max-height: 90vh; overflow-y: auto;">
         
         <span onclick="closeTixTree()" style="position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #8c52ff;">&times;</span>
@@ -2847,21 +3379,5 @@ function handleEmailSubmit(event) {
         
     </div>
 </div>
-<script>
-    window.addEventListener('load', function() {
-  // Paste your original Meta Pixel code here
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '248586408143097');
-  fbq('track', 'PageView');
-});
-</script>
-
 </body>
 </html>
