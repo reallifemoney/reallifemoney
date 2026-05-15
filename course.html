@@ -1762,31 +1762,48 @@ body {
 
 .reasons-section {
     padding: 60px 20px;
-    background-color: #ffffff;
-    max-width: 800px;
+    background-color: var(--mint);
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-.sec-subtitle {
+/* Centering the Header Text */
+.reasons-header {
     text-align: center;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+}
+
+.sec-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--purple); /* Using your brand purple */
+}
+
+.sec-subtitle {
     color: var(--muted);
-    margin-bottom: 40px;
     font-size: 1.1rem;
     line-height: 1.6;
 }
 
-.reasons-list {
+/* Centering the List Block */
+.reasons-wrapper {
     display: flex;
+    justify-content: center; /* This centers the list block horizontally */
+}
+
+.reasons-list {
+    display: inline-flex; /* Shrinks the width to fit the content */
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
+    text-align: left; /* Keeps the text and icons aligned nicely */
 }
 
 .reason-item {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 12px;
-    transition: transform 0.2s ease;
+    padding: 8px 0;
 }
 
 .reason-item p {
@@ -1800,31 +1817,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    background-color: #25D366; /* Using a vibrant green like your image */
+    width: 28px;
+    height: 28px;
+    background-color: #25D366;
     color: white;
     border-radius: 50%;
+    font-size: 14px;
     font-weight: bold;
     flex-shrink: 0;
 }
 
-/* Styling for the biscuit row to make it pop */
+/* The Biscuit Row */
 .biscuit-row {
     margin-top: 10px;
-    background: #fff9e6; /* Soft cream/yellow background */
+    padding: 12px 20px;
+    background: #fff9e6;
     border-radius: 12px;
     border: 2px dashed #f39c12;
 }
 
-.biscuit-icon {
-    font-size: 32px;
-    flex-shrink: 0;
-}
-
 @media (max-width: 480px) {
-    .reason-item p {
-        font-size: 1rem;
+    .reasons-list {
+        width: 100%; /* On small phones, let it take full width */
     }
 }
 
@@ -2054,42 +2068,46 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
 <section class="reasons-section">
     <div class="container">
-        <h2 class="sec-title">Investing doesn't have to be intimidating</h2>
-        <p class="sec-subtitle">I built this course specifically for beginners who want to take control of their finances without the jargon. Here is why it’s different:</p>
+        <div class="reasons-header">
+            <h2 class="sec-title">Investing doesn't have to be intimidating</h2>
+            <p class="sec-subtitle">I built this course specifically for beginners who want to take control of their finances without the jargon. Here is why it’s different:</p>
+        </div>
 
-        <div class="reasons-list">
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>Start with the basics</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>Explained using simple language</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>Ask any questions in the moment</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>No such thing as silly questions!</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>Learn in a nurturing environment</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>No selling, just education</p>
-            </div>
-            <div class="reason-item">
-                <span class="check-icon">✓</span>
-                <p>Engaging activities, not just slides</p>
-            </div>
-            
-            <div class="reason-item biscuit-row">
-                <span class="biscuit-icon">🍪</span>
-                <p>...and there will be biscuits</p>
+        <div class="reasons-wrapper">
+            <div class="reasons-list">
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Start with the basics</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Explained using simple language</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Ask any questions in the moment</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>No such thing as silly questions!</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Learn in a nurturing environment</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>No selling, just education</p>
+                </div>
+                <div class="reason-item">
+                    <span class="check-icon">✓</span>
+                    <p>Engaging activities, not just slides</p>
+                </div>
+                
+                <div class="reason-item biscuit-row">
+                    <span class="biscuit-icon">🍪</span>
+                    <p>...and there will be biscuits</p>
+                </div>
             </div>
         </div>
     </div>
