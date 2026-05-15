@@ -1619,6 +1619,38 @@ body {
     cursor: pointer;
 }
 
+.step-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+}
+
+.selected-summary {
+    background: var(--mint);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: center;
+    border: 1px solid var(--purple);
+}
+
+.check-container {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.waitlist-card {
+    background: var(--mint) !important;
+    border: 1px dashed var(--purple) !important;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -2047,97 +2079,75 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
 
 
-<!-- CTA BOOKING PICKER -->
 <section class="cta-sec" id="book">
   <div class="container">
     <div class="stag" style="color:var(--purple); justify-content:center">
       <span class="stag-dot" style="background:var(--purple)"></span>Secure your spot
     </div>
-    <h2 class="sec-title">Available Course Dates</h2>
-    <div class="pricing-lead-in">
-  <p>Your investment: <strong>£75 per course</strong></p>
-</div>
-
-  <div class="booking-grid">
-  <div class="date-card" onclick="selectDate('may')">
-    <span class="badge">Next Intake</span>
-    <div class="date-title">May 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 14th &amp; 21st May</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-may" onclick="logcourseselection()">Select these dates</button>
-  </div>
-
-  <div class="date-card" onclick="selectDate('june')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">June 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Thu 11th &amp; 18th June</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-june" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <div class="date-card" onclick="selectDate('july')">
-    <span class="badge">Limited Spaces</span>
-    <div class="date-title">July 2026</div>
-    <div class="date-meta">
-      <div class="date-meta-row">📅 Wed 1st &amp; 8th July</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">
-        <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <button class="select-btn" id="btn-july" onclick="logcourseselection()">Select these dates</button>
-  </div>
-  <section class="date-card">
-    <h3>Can't make these dates?</h3>
-    <p>Get notified when I announce new Bristol venues and future course dates.</p>
     
-    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
-  <input type="email" id="userEmail" placeholder="Enter your email" required>
-  <button type="submit" id="submitBtn">Notify me</button>
-</form>
-<div id="thankYouMessage" style="display:none; color: #28a745;">
-  Perfect! I'll be in touch with future dates.
-</div>
-  
+    <div id="step-1">
+      <h2 class="sec-title">Step 1: Select your dates</h2>
+      <div class="booking-grid">
+        <div class="date-card" id="card-may" onclick="selectDateStep('May', 'Thu 14th & 21st May')">
+          <span class="badge">Next Intake</span>
+          <div class="date-title">May 2026</div>
+          <div class="date-meta">
+            <div class="date-meta-row">📅 Thu 14th & 21st May</div>
+            <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+            <div class="date-meta-row">📍 Brooklands Park, BS34</div>
+          </div>
+          <button class="select-btn">Select these dates</button>
+        </div>
+
+        <div class="date-card" id="card-june" onclick="selectDateStep('June', 'Thu 11th & 18th June')">
+          <span class="badge">Limited Spaces</span>
+          <div class="date-title">June 2026</div>
+          <div class="date-meta">
+            <div class="date-meta-row">📅 Thu 11th & 18th June</div>
+            <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+            <div class="date-meta-row">📍 Brooklands Park, BS34</div>
+          </div>
+          <button class="select-btn">Select these dates</button>
+        </div>
+
+        <div class="date-card waitlist-card">
+          <h3>Can't make these?</h3>
+          <p>I'll email you when new Bristol dates are announced.</p>
+          <form onsubmit="handleWaitlist(event)">
+            <input type="email" class="step-input" placeholder="Your email" required>
+            <button type="submit" class="select-btn" style="background:var(--ink)">Notify me</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="step-2" style="display:none; max-width:500px; margin: 40px auto; animation: fadeUp 0.5s ease;">
+      <h2 class="sec-title">Step 2: Reserve your seat</h2>
+      <div class="selected-summary">
+        Selected: <strong id="display-date">May 2026</strong> <span id="display-times" style="display:block; font-size: 14px; color: var(--muted);"></span>
+      </div>
+      
+      <form id="reserve-form" class="step-form" onsubmit="handleReserve(event)">
+        <input type="text" id="res-name" class="step-input" placeholder="Full Name" required>
+        <input type="email" id="res-email" class="step-input" placeholder="Email Address" required>
+        <input type="tel" id="res-phone" class="step-input" placeholder="Phone Number (WhatsApp for reminders)" required>
+        <label class="check-container">
+          <input type="checkbox" required> I understand the course is held in Stoke Gifford.
+        </label>
+        <button type="submit" class="select-btn" style="width:100%; margin-top:20px;">Confirm Reservation</button>
+      </form>
+    </div>
+
+    <div id="step-3" style="display:none; max-width:500px; margin: 40px auto; text-align:center; animation: fadeUp 0.5s ease;">
+      <h2 class="sec-title">Step 3: Secure your place</h2>
+      <p style="margin-bottom:20px;">Your seat is reserved! To finalize your booking, please pay the course fee (£75).</p>
+      
+      <div style="display:flex; flex-direction:column; gap:15px;">
+        <a href="YOUR_STRIPE_LINK" class="select-btn" style="text-decoration:none;">Pay £75 now via Stripe</a>
+        <button onclick="payLater()" style="background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer;">I'll pay later (Send me an invoice)</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 </div>
@@ -2663,6 +2673,38 @@ function handleEmailSubmit(event) {
     submitBtn.disabled = false;
   });
 
+}
+
+
+function selectDateStep(month, times) {
+    // 1. Log the intent to Google Ads (your existing function)
+    logcourseselection();
+
+    // 2. Update the display text for Step 2
+    document.getElementById('display-date').innerText = month + " Intake";
+    document.getElementById('display-times').innerText = times;
+
+    // 3. Scroll to and show Step 2
+    document.getElementById('step-2').style.display = 'block';
+    window.scrollTo({
+        top: document.getElementById('step-2').offsetTop - 100,
+        behavior: 'smooth'
+    });
+}
+
+function handleReserve(e) {
+    e.preventDefault();
+    // Here you would normally send the data via EmailJS or a Form service
+    console.log("Reservation recorded for:", document.getElementById('res-name').value);
+    
+    // Show Step 3
+    document.getElementById('step-2').style.opacity = '0.5';
+    document.getElementById('step-2').style.pointerEvents = 'none';
+    document.getElementById('step-3').style.display = 'block';
+}
+
+function payLater() {
+    alert("Check your email! I've sent over the reservation details and an invoice for the course fee.");
 }
 
 
