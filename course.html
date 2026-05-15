@@ -1678,6 +1678,71 @@ body {
     margin-bottom: 5px;
 }
 
+.booking-value-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 0 15px;
+}
+
+.steps-title {
+    font-family: 'Lexend', sans-serif;
+    color: var(--purple);
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+.value-strip {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    background: #fdfdfd;
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.value-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    max-width: 250px;
+}
+
+.value-icon {
+    font-size: 24px;
+    background: var(--mint);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.value-text strong {
+    display: block;
+    font-size: 15px;
+    color: var(--ink);
+}
+
+.value-text span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+@media (max-width: 768px) {
+    .value-strip {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    .value-item {
+        max-width: 100%;
+    }
+}
+
 </style>
 
 <script type="text/javascript">
@@ -2119,37 +2184,31 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
 
     <div class="booking-value-header">
-    <h3 class="steps-title">3 simple steps to investing confidence</h3>
+    <h1 class="steps-title">3 simple steps to investing confidence</h1>
     
     <div class="value-strip">
         <div class="value-item">
             <span class="value-icon">💰</span>
             <div class="value-text">
-                <strong>£75 total investment</strong>
-                <span>For both evenings + all materials</span>
+                
+                <span>£75 per person</span>
             </div>
         </div>
         
         <div class="value-item">
             <span class="value-icon">🛡️</span>
             <div class="value-text">
-                <strong>Peace of mind</strong>
+                
                 <span>Full refund available up to 7 days before</span>
             </div>
         </div>
 
-        <div class="value-item">
-            <span class="value-icon">🎓</span>
-            <div class="value-text">
-                <strong>Small groups</strong>
-                <span>Private venue in Stoke Gifford</span>
-            </div>
-        </div>
+      
     </div>
 </div>
     
     <div id="step-1">
-      <h2 class="sec-title">Step 1: Select your dates</h2>
+      <h3 class="sec-title">Step 1: Select your dates</h3>
       <div class="booking-grid">
         <div class="date-card" id="card-may" onclick="selectDateStep('May', 'Thu 14th & 21st May')">
           <span class="badge">Next Intake</span>
@@ -2185,7 +2244,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
 
     <div id="step-2" style="display:none; max-width:500px; margin: 40px auto; animation: fadeUp 0.5s ease;">
-      <h2 class="sec-title">Step 2: Reserve your seat</h2>
+      <h3 class="sec-title">Step 2: Reserve your seat</h3>
       <div class="selected-summary">
         Selected: <strong id="display-date">May 2026</strong> <span id="display-times" style="display:block; font-size: 14px; color: var(--muted);"></span>
       </div>
