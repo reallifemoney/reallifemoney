@@ -2242,7 +2242,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     <div id="step-1">
       <h2>Step 1: Select your dates</h2>
       <div class="booking-grid">
-        <div class="date-card" id="card-may" onclick="selectDateStep('May', 'Thu 14th & 21st May')">
+        <div class="date-card" id="card-may" onclick="selectDateStep('May', 'Thu 14th & 21st May', '6:30pm – 8:00pm')">
           <span class="badge">Next Intake</span>
           <div class="date-title">May 2026</div>
           <div class="date-meta">
@@ -2265,7 +2265,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           <button class="select-btn">Select these dates</button>
         </div>
 
-        <div class="date-card" id="card-june" onclick="selectDateStep('June', 'Thu 11th & 18th June')">
+        <div class="date-card" id="card-june" onclick="selectDateStep('June', 'Thu 11th & 18th June', '6:30pm – 8:00pm')">
           <span class="badge">Limited Spaces</span>
           <div class="date-title">June 2026</div>
           <div class="date-meta">
@@ -2870,13 +2870,16 @@ function handleEmailSubmit(event) {
 
 let selectedMonth = "";
 let selectedTimes = "";
+let selectedTimings = "";
 
 function selectDateStep(month, times) {
     selectedMonth = month;
     selectedTimes = times;
+    selectedTimings = timings;
     
     document.getElementById('display-date').innerText = month + " course";
     document.getElementById('display-times').innerText = times;
+    document.getElementById('display-timings').innerText = selectedTimings;
     document.getElementById('step-2').style.display = 'block';
     
     window.scrollTo({
@@ -2896,7 +2899,8 @@ function handleReserve(e) {
         email: document.getElementById('res-email').value,
         phone: document.getElementById('res-phone').value,
         course_date: selectedMonth,
-        course_times: selectedTimes
+        course_times: selectedTimes,
+        course_timings: selectedTimings
     };
 
     // 1. Send Email to YOU
