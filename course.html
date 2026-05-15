@@ -1651,6 +1651,33 @@ body {
     border: 1px dashed var(--purple) !important;
 }
 
+.success-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #eef8eb; /* Your brand mint */
+    color: #28a745;            /* Success green */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 auto;
+    border: 2px solid #28a745;
+    animation: successPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-header h2 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -2144,15 +2171,30 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
       </form>
     </div>
 
+   
+
     <div id="step-3" style="display:none; max-width:500px; margin: 40px auto; text-align:center; animation: fadeUp 0.5s ease;">
-      <h2 class="sec-title">Step 3: Secure your place</h2>
-      <p style="margin-bottom:20px;">Your seat is reserved! To finalize your booking, please pay the course fee (£75).</p>
-      
-      <div style="display:flex; flex-direction:column; gap:15px;">
-        <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" class="select-btn" style="text-decoration:none;">Pay £75 now via Stripe</a>
-        <button onclick="payLater()" style="background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer;">I'll pay later (Send me an invoice)</button>
-      </div>
-    </div>
+  
+  <div class="success-header" style="margin-bottom: 30px;">
+    <div class="success-icon">✓</div>
+    <h2 style="color: #1F3A29; margin-top: 15px;">Seat reserved!</h2>
+    <p style="color: #28a745; font-weight: 600; font-size: 18px; margin: 0;">We've saved a spot for you.</p>
+  </div>
+
+  <p style="margin-bottom:20px;">Thanks for booking, I look forward to helping you. To finalise your place, please complete the payment below.</p>
+  
+  <div style="display:flex; flex-direction:column; gap:15px;">
+    <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" rel="noopener noreferrer" class="select-btn" style="text-decoration:none;">
+        Pay £75 now via Stripe
+    </a>
+    <button onclick="payLater()" style="background:none; border:none; color:var(--muted); text-decoration:underline; cursor:pointer;">
+        I'll pay later (Send me an invoice)
+    </button>
+  </div>
+</div>
+
+
+
   </div>
 </section>
 
@@ -2704,7 +2746,7 @@ function selectDateStep(month, times) {
 function handleReserve(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button');
-    btn.innerText = "Sending...";
+    btn.innerText = "Confirming...";
     btn.disabled = true;
 
     const templateParams = {
