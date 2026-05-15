@@ -1670,6 +1670,12 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 <noscript>
 <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=9047218&fmt=gif" />
 </noscript>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("FaZMs4M-HnEtpdw3G"); 
+   })();
+</script>
 </head>
 <body>
  
@@ -2675,17 +2681,20 @@ function handleEmailSubmit(event) {
 
 }
 
+// Add this to your <head> or before your own script
+
+
+let selectedMonth = "";
+let selectedTimes = "";
 
 function selectDateStep(month, times) {
-    // 1. Log the intent to Google Ads (your existing function)
-    logcourseselection();
-
-    // 2. Update the display text for Step 2
+    selectedMonth = month;
+    selectedTimes = times;
+    
     document.getElementById('display-date').innerText = month + " Intake";
     document.getElementById('display-times').innerText = times;
-
-    // 3. Scroll to and show Step 2
     document.getElementById('step-2').style.display = 'block';
+    
     window.scrollTo({
         top: document.getElementById('step-2').offsetTop - 100,
         behavior: 'smooth'
@@ -2694,18 +2703,43 @@ function selectDateStep(month, times) {
 
 function handleReserve(e) {
     e.preventDefault();
-    // Here you would normally send the data via EmailJS or a Form service
-    console.log("Reservation recorded for:", document.getElementById('res-name').value);
-    
-    // Show Step 3
-    document.getElementById('step-2').style.opacity = '0.5';
-    document.getElementById('step-2').style.pointerEvents = 'none';
-    document.getElementById('step-3').style.display = 'block';
+    const btn = e.target.querySelector('button');
+    btn.innerText = "Sending...";
+    btn.disabled = true;
+
+    const templateParams = {
+        name: document.getElementById('res-name').value,
+        email: document.getElementById('res-email').value,
+        phone: document.getElementById('res-phone').value,
+        course_date: selectedMonth,
+        course_times: selectedTimes
+    };
+
+    // 1. Send Email to YOU
+    emailjs.send('service_7hn83cm', 'template_g5nbo46', templateParams)
+        .then(() => {
+            // 2. Send Confirmation to CUSTOMER
+            return emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams);
+        })
+        .then(() => {
+            // 3. Success! Show Step 3
+            document.getElementById('step-2').style.opacity = '0.3';
+            document.getElementById('step-2').style.pointerEvents = 'none';
+            document.getElementById('step-3').style.display = 'block';
+            
+            window.scrollTo({
+                top: document.getElementById('step-3').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }, (error) => {
+            alert("Something went wrong. Please WhatsApp me directly!");
+            btn.innerText = "Confirm Reservation";
+            btn.disabled = false;
+        });
 }
 
-function payLater() {
-    alert("Check your email! I've sent over the reservation details and an invoice for the course fee.");
-}
+
+
 
 
 
