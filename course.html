@@ -2285,7 +2285,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
   <div class="success-header" style="margin-bottom: 30px;">
     <div class="success-icon">✓</div>
     <h2 style="color: #1F3A29; margin-top: 15px;">Seat reserved!</h2>
-    <p style="color: #28a745; font-weight: 600; font-size: 18px; margin: 0;">We've saved a spot for you.</p>
+    <p style="color: #28a745; font-weight: 600; font-size: 18px; margin: 0;">I've saved a spot for you.</p>
   </div>
 
   <p style="margin-bottom:20px;">Thanks for booking, I look forward to helping you. To finalise your place, please complete the payment below.</p>
@@ -2885,6 +2885,26 @@ function handleReserve(e) {
             btn.innerText = "Confirm Reservation";
             btn.disabled = false;
         });
+}
+
+function payLater() {
+    // Hide the payment buttons
+    const step3 = document.getElementById('step-3');
+    
+    step3.innerHTML = `
+        <div class="success-header">
+            <div class="success-icon" style="background:#fff9e6; color:#f39c12; border-color:#f39c12;">⏳</div>
+            <h2>Reservation Pending</h2>
+            <p style="color: var(--ink); margin-top:10px;">
+                No problem, {{name}}! I’ve sent your details to my inbox.
+            </p>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 15px; line-height: 1.4;">
+                I will send a <strong>Stripe Invoice</strong> to your email shortly. <br>
+                Please note: seats are only fully secured once the invoice is settled.
+            </p>
+            <a href="/" class="select-btn" style="display:inline-block; margin-top:20px; background:var(--ink); text-decoration:none;">Back to home</a>
+        </div>
+    `;
 }
 
 
