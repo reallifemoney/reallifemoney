@@ -15,6 +15,8 @@
   media="print" 
   onload="this.media='all'"
 >
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
 <!-- Meta Pixel Code -->
 
@@ -2123,22 +2125,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 18px; /* Balanced spacing between images */
+    gap: 15px; /* Perfect spacing */
 }
 
-.pay-logo-img {
-    height: 22px; /* Uniform height constraint */
-    width: auto;  /* Allows width to scale naturally so logos aren't stretched */
-    display: block;
-    
-    /* Premium touch: Makes them clean slate-gray to match your layout */
-    filter: grayscale(100%);
-    opacity: 0.65;
+/* Style the icons like clean, slate-gray text */
+.payment-logos i {
+    font-size: 32px; /* Uniform height lock */
+    color: #6b6b6b;  /* Slate gray matching your text */
+    opacity: 0.75;
     transition: all 0.2s ease;
 }
 
-.pay-logo-img:hover {
-    filter: grayscale(0%);
+.payment-logos i:hover {
+    color: #8c52ff;  /* Turns your brand purple when hovered! */
     opacity: 1;
 }
 
@@ -2705,17 +2704,18 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" rel="noopener noreferrer" class="select-btn" style="text-decoration:none;">
         Pay £75 now via Stripe
     </a>
-    <div class="stripe-trust-container">
+   <div class="stripe-trust-container">
     <p class="secure-text">
-        🔒 Secure checkout powered by Stripe.
+        <span>🔒</span> Secure checkout powered by Stripe
     </p>
     <div class="payment-logos">
-        <img src="https://cdnjs.cloudflare.com/svg-logos/svg-logos/v/visa.svg" alt="Visa" class="pay-logo-img">
-        <img src="https://cdnjs.cloudflare.com/svg-logos/svg-logos/m/mastercard.svg" alt="Mastercard" class="pay-logo-img">
-        <img src="https://cdnjs.cloudflare.com/svg-logos/svg-logos/a/apple-pay.svg" alt="Apple Pay" class="pay-logo-img">
-        <img src="https://cdnjs.cloudflare.com/svg-logos/svg-logos/g/google-pay.svg" alt="Google Pay" class="pay-logo-img">
+        <i class="fa-brands fa-cc-visa" title="Visa"></i>
+        <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+        <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+        <i class="fa-brands fa-cc-amazon-pay" title="Google Pay/Other cards"></i> 
     </div>
 </div>
+
 
 
 </div>
