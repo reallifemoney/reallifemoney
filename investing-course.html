@@ -3598,6 +3598,86 @@ function payLater() {
 }
 
 
+// Array containing the paths to your specific slide images
+const slideImages = [
+    'slide1.webp',
+    'slide2.webp',
+    'slide3.webp',
+    'slide4.webp'
+];
+
+let currentSlideIndex = 0;
+let isLoaded = false;
+
+function openSlideShow() {
+    const modal = document.getElementById('slideModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevents background scrolling
+
+    // Lazy load files on the very first click only
+    if (!isLoaded) {
+        loadCarouselImages();
+    } else {
+        showSlide(currentSlideIndex);
+    }
+}
+
+function loadCarouselImages() {
+    const wrapper = document.getElementById('carouselSlide');
+    const dotsContainer = document.getElementById('carouselDots');
+    
+    // Clear out the loading placeholder
+    wrapper.innerHTML = '';
+    dotsContainer.innerHTML = '';
+
+    slideImages.forEach((src, index) => {
+        // Create image elements dynamically
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Course Slide Preview ${index + 1}`;
+        img.style.display = index === 0 ? 'block' : 'none'; // Only show the first slide initially
+        img.id = `slide-img-${index}`;
+        wrapper.appendChild(img);
+
+        // Create indicator dots dynamically
+        const dot = document.createElement('div');
+        dot.className = index === 0 ? 'dot active' : 'dot';
+        dot.onclick = () => { currentSlideIndex = index; showSlide(currentSlideIndex); };
+        dot.id = `slide-dot-${index}`;
+        dotsContainer.appendChild(dot);
+    });
+
+    isLoaded = true;
+}
+
+function showSlide(index) {
+    slideImages.forEach((_, i) => {
+        const img = document.getElementById(`slide-img-${i}`);
+        const dot = document.getElementById(`slide-dot-${i}`);
+        if (img && dot) {
+            img.style.display = i === index ? 'block' : 'none';
+            if (i === index) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        }
+    });
+}
+
+function changeSlide(direction) {
+    currentSlideIndex += direction;
+    if (currentSlideIndex >= slideImages.length) { currentSlideIndex = 0; }
+    if (currentSlideIndex < 0) { currentSlideIndex = slideImages.length - 1; }
+    showSlide(currentSlideIndex);
+}
+
+function closeSlideShow(event) {
+    const modal = document.getElementById('slideModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restores background scrolling
+}
+
 
 
 
