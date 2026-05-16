@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Invest your pension | Real Life Money</title>
+        <meta name="description" content="Your pension is vitally important, so why not take control of it with a SIPP and learn how to invest it? Join one of my investing courses in Bristol.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+    /* Shared Blog Styles */
+:root {
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+    --green:   #71c558;
+}
+
+body {
+    background: var(--mint);
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+/* Nav specific to Blog/Articles */
+nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 80px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(238, 248, 235, 0.8); /* var(--mint) with transparency */
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+}
+
+.nav-logo img { height: 70px; width: auto; }
+
+.nav-cta {
+    background: var(--purple);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.nav-cta:hover { transform: translateY(-1px); opacity: 0.9; }
+
+/* Custom "Stag" label style from your main page */
+.stag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 24px;
+}
+.stag-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--purple); }
+
+@media (max-width: 600px) {
+    nav { padding: 0 20px; }
+}
+
+        .article-hero { padding: 160px 20px 60px; text-align: center; background: var(--mint); }
+        .article-container { max-width: 700px; margin: 0 auto; padding: 60px 20px; }
+        
+        /* Typography for reading */
+        .content { font-size: 18px; line-height: 1.8; color: var(--text); }
+        .content h2 { margin: 40px 0 20px; color: var(--ink); font-size: 28px; }
+        .content p { margin-bottom: 25px; }
+        
+        .blog-cta {
+            background: var(--mint);
+            border-radius: 24px;
+            padding: 40px;
+            margin-top: 80px;
+            text-align: center;
+            border: 1px solid var(--rule);
+        }
+
+        .progress-bar {
+            position: fixed; top: 80px; left: 0; width: 0%; height: 4px;
+            background: var(--purple); z-index: 101;
+        }
+
+.graph-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.select-btn {
+    display: inline-block;
+    background-color: var(--green);
+    color: white;
+    text-decoration: none;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 16px 32px;
+    border-radius: 100px; /* Fully rounded "pill" shape */
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(113, 197, 88, 0.3); /* Soft green glow */
+    text-align: center;
+}
+
+.select-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(113, 197, 88, 0.4);
+    filter: brightness(1.05); /* Makes it slightly more vibrant on hover */
+}
+
+.select-btn:active {
+    transform: translateY(0);
+}
+
+    .footer-nav {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-nav a {
+            color: rgba(0,0,0,0.5);
+            text-decoration: none;
+        }
+        
+        .footer-nav a:hover { color: var(--purple); }
+
+
+    </style>
+</head>
+<body>
+      
+    <nav>
+    <a class="nav-logo" href="/">
+      <img src="/logo.webp" alt="Real Life Money">
+    </a>
+    <a class="nav-cta" href="/blog">← Back to blog</a>
+</nav>
+
+    
+    <div class="progress-bar" id="pb"></div>
+    <div class="article-hero">
+        <div class="stag"><span class="stag-dot"></span>Investing Basics</div>
+        <h1 style="max-width: 800px; margin: 0 auto; line-height: 1.1;">Why inflation is a big problem for your savings</h1>
+    </div>
+
+<article class="article-container">
+    <div>
+        
+        <h1 class="article-title">Why your pension isn't just a "savings account" (and how a SIPP changes the game)</h1>
+        
+        <p class="article-lead">When you look at your pension statement, what do you see? For most people, it’s just a number on a screen that goes up or down a little bit each month. We treat it like a bank account—money we lock away until we turn 60, hoping there’s enough in there to live on.</p>
+
+        <p>But here is the real truth about your pension: <strong>It is not a savings account. It is an investment account.</strong> If your retirement fund is sitting in a default fund that you haven't looked at since the day you signed your contract, your money might not be working anywhere near as hard as you are.</p>
+
+        <hr class="article-divider">
+
+        <h2>The invisible problem with "default" funds</h2>
+        
+        <p>When you join a workplace pension, your provider automatically places your money into a <strong>default investment fund</strong>. These funds are designed to be a "one-size-fits-all" jacket. The problem? One size rarely fits anyone perfectly.</p>
+        
+        <p>Default funds are often incredibly cautious, or they might be invested in things that don't align with how many years you have left until retirement. Over a 20 or 30-year career, a default fund that underperforms by just 1% or 2% a year could cost you tens of thousands of pounds in lost growth.</p>
+
+        <h2>Enter the SIPP: Total control over your future</h2>
+        
+        <p>If you want to move away from the "one-size-fits-all" approach, a <strong>SIPP (Self-Invested Personal Pension)</strong> is one of the most powerful tools available in the UK.</p>
+        
+        <p>Think of a traditional pension like a set menu at a restaurant—you get what you’re given. A SIPP is the buffet. It is a type of personal pension that gives you the absolute freedom to choose exactly where your money is invested.</p>
+        
+        <p>With a SIPP, you can:</p>
+        <ul class="article-list">
+            <li><strong>Consolidate old pots:</strong> If you've changed jobs a few times, you likely have three or four random pensions floating around. A SIPP allows you to combine them into one easy-to-manage place.</li>
+            <li><strong>Choose your own funds:</strong> You can invest in low-cost index funds that track the global economy, rather than relying on a provider's expensive in-house managers.</li>
+            <li><strong>Gain visibility:</strong> You can see exactly what your money is doing, what fees you are paying, and how your wealth is growing.</li>
+        </ul>
+
+        <div class="workshop-callout">
+            <h3>🧠 How we demystify this in the workshop</h3>
+            <p>Managing your own retirement can feel incredibly overwhelming, but it doesn't have to be. In my upcoming investing course, we are going to break down exactly how SIPPs work and how you can take the reins of your own pension. You’ll learn how to build a portfolio tailored specifically to your unique life situation and your personal feelings toward risk. There’s no hidden sales pitch and no complicated math—just a clear, supportive space where you can figure out how to make your pension match your personal comfort levels, ensuring you sleep soundly at night while your money builds for the long term.</p>
+        </div>
+
+        <h2>Understanding your relationship with risk</h2>
+        
+        <p>Taking control of a SIPP doesn't mean you have to become a day trader or bet your retirement on volatile individual stocks. In fact, for most people, it means the exact opposite.</p>
+        
+        <p>Investing your pension successfully comes down to balancing two things:</p>
+        <ol class="article-list">
+            <li><strong>Your timeline:</strong> How many years do you have until you want to access the money?</li>
+            <li><strong>Your sleep at night factor (risk tolerance):</strong> If the market dips by 5% tomorrow, do you panic, or do you view it as a normal market cycle?</li>
+        </ol>
+        
+        <p>By learning the basics of asset allocation—how to balance steadier assets with growth-focused global funds—you can build a pension structure that feels robust, transparent, and entirely yours.</p>
+
+        <h2>Stop ignoring the pot</h2>
+        
+        <p>Your pension is likely the biggest financial asset you will ever own outside of your home. Leaving it on autopilot without understanding the fees or the underlying investments is like buying a car and never checking the oil.</p>
+        
+        <p>You don't need a degree in finance to optimize your retirement. You just need to understand the mechanics of the tools available to you.</p>
+
+    </div>
+</article>
+
+
+        <div class="blog-cta">
+            <h3>Ready to beat inflation?</h3>
+            <p style="margin-bottom: 20px;">I run evening courses in Bristol for those who want to gain the confidence to invest.</p>
+            <a class="select-btn" href="/course">View Course Dates</a>
+        </div>
+    </article>
+    
+       <footer>
+        <p>© 2026 Real Life Money. Built with ❤️ in Bristol.</p>
+        <div class="footer-nav">
+            <a href="/course">Course</a>
+            <a href="/blog">Blog</a>
+            <a href="/teachers-invest">Schools</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("pb").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>
