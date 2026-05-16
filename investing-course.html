@@ -2614,7 +2614,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     <h2 class="sec-title">Two evenings.<br>A lifetime of clarity.</h2>
     <p class="sec-intro">Each session is 90 minutes, kept to a maximum of 12 people, and packed with practical activities — not just slides.</p>
     <div class="sneak-peek-container">
-    <button class="pill-btn-secondary" onclick="openSlideShow()">
+    <button class="pill-btn-secondary" onclick="openSlideShow(); logsneakpeekclick()">
         ✨ Sneak peek at some slides
     </button>
 </div>
@@ -2836,7 +2836,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
       </div>
       
       <form id="reserve-form" class="step-form" onsubmit="handleReserve(event)">
-        <input type="text" id="res-name" class="step-input" placeholder="Full name" required>
+        <input type="text" id="res-name" onfocus="lognamefieldfocus()" class="step-input" placeholder="Full name" required>
         <input type="email" id="res-email" class="step-input" placeholder="Email address" required>
         <input type="tel" id="res-phone" class="step-input" placeholder="Phone number">
         <button type="submit" class="select-btn" style="width:100%; margin-top:20px;">Confirm Reservation</button>
@@ -3433,6 +3433,8 @@ function bookAndClose(source) {
 
 // All logging scripts
 
+ // All logging scripts
+
   let sent = false;
   const pageEntryTime = Date.now();
   let maxScroll = 0;
@@ -3440,6 +3442,8 @@ function bookAndClose(source) {
   let ctaClicked = "No";
   let videoClicked = "No";
   let courseSelected = "No";
+  let sneakPeekClicked = "No";      // Added tracking variable
+  let nameFieldFocused = "No";      // Added tracking variable
 
   window.addEventListener('scroll', () => {
     const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
@@ -3449,6 +3453,8 @@ function bookAndClose(source) {
   function logbuttonclick() { ctaClicked = "Yes"; }
   function logvideoclick() { videoClicked = "Yes"; }
   function logcourseselection() { courseSelected = "Yes"; }
+  function logsneakpeekclick() { sneakPeekClicked = "Yes"; } // Added tracking function
+  function lognamefieldfocus() { nameFieldFocused = "Yes"; } // Added tracking function
 
   function sendFinalData() {
     if (sent) return;
@@ -3462,6 +3468,8 @@ function bookAndClose(source) {
       ctaClicked: ctaClicked,
       videoClicked: videoClicked,
       courseSelected: courseSelected,
+      sneakPeekClicked: sneakPeekClicked, // Added to payload
+      nameFieldFocused: nameFieldFocused, // Added to payload
       url: window.location.href
     };
 
@@ -3473,8 +3481,6 @@ function bookAndClose(source) {
     if (document.visibilityState === 'hidden') sendFinalData();
   });
   window.addEventListener('pagehide', sendFinalData);
-
-
 
 
 // Cookies
