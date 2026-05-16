@@ -2189,9 +2189,37 @@ body {
     opacity: 1;
 }
 
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: #f1ecff; /* Light brand tint for a clean background button look */
+    border: none;
+    color: var(--ink, #2e2e2e);
+    font-size: 28px;
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1010; /* Ensures it sits firmly on top of the carousel track */
+    transition: all 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    background-color: var(--purple, #8c52ff);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Added a touch of extra padding to the top of the modal content 
+   container to make sure the slides don't bump into our new button */
 .modal-content {
     background: #ffffff;
-    padding: 20px;
+    padding: 60px 20px 20px 20px; /* Increased top padding from 20px to 60px */
     border-radius: 24px;
     max-width: 750px;
     width: 90%;
@@ -2199,15 +2227,6 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
-.close-modal-btn {
-    position: absolute;
-    top: -45px; right: 0;
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 36px;
-    cursor: pointer;
-}
 
 /* Carousel Setup */
 .carousel-container {
@@ -3709,7 +3728,8 @@ function closeSlideShow(event) {
 
 <div id="slideModal" class="modal-overlay" onclick="closeSlideShow(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="close-modal-btn" onclick="closeSlideShow(event)">&times;</button>
+        
+        <button class="close-modal-btn" onclick="closeSlideShow(event)" aria-label="Close Preview">&times;</button>
         
         <div class="carousel-container">
             <div id="carouselSlide" class="carousel-slide-wrapper">
@@ -3723,6 +3743,7 @@ function closeSlideShow(event) {
         <div id="carouselDots" class="carousel-dots-container"></div>
     </div>
 </div>
+
 
 
 <div id="tixTreeModal" class="modal-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center;">
