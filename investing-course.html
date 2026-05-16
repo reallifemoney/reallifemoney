@@ -2042,15 +2042,20 @@ body {
     background: #25D366;
     border-radius: 50%;
     position: relative;
+    display: inline-block; /* Ensures it maintains its dimensions properly inline */
 }
 
 .pulse-icon::after {
     content: '';
     position: absolute;
-    width: 100%; height: 100%;
+    top: 0;    /* Anchor it to the top edge */
+    left: 0;   /* Anchor it to the left edge */
+    width: 100%; 
+    height: 100%;
     background: #25D366;
     border-radius: 50%;
     animation: pulse 2s infinite;
+    box-sizing: border-box; /* Keeps sizing exact */
 }
 
 @keyframes pulse {
@@ -2622,9 +2627,9 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
             <div class="trust-content-col">
                 <div class="trust-badge">
                 <span class="pulse-icon"></span>
-                Real-time Support
+                A real human
             </div>
-            <h2 style="color: black">Got a question? I'm actually here.</h2>
+            <h2 style="color: black">Got a question? I'm here for you.</h2>
             <p>
                 I know the internet can be a scary place, so I want to help you trust me.<br><br>I’m Leo, a <strong>local maths teacher</strong> in Bristol and living in <strong>Stoke Gifford</strong>. 
                 Whether you're unsure if the course is right for you, or just want to check I'm a real human before booking - send me a message and I'll be happy to chat. 
