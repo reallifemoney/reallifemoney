@@ -2292,6 +2292,28 @@ body {
 
 .loading-spinner { color: #6b6b6b; font-size: 0.95rem; font-weight: 500; }
 
+.social-icons {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+
+.social-link {
+    font-size: 18px; /* Size of the icons */
+    color: var(--green);  /* Your purple brand color */
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    transform: translateY(-3px); /* Little bounce effect */
+    color: #5e2ced;           /* Darker purple on hover */
+}
+
+/* Specific Brand Colors on Hover (Optional) */
+.fa-linkedin:hover { color: #0077b5; }
+.fa-instagram:hover { color: #e1306c; }
+.fa-facebook:hover { color: #1877f2; }
 
 
 </style>
