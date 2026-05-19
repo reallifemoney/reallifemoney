@@ -2631,7 +2631,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
             </div>
             <h2 style="color: black">Got a question? I'm here for you.</h2>
             <p>
-                I know the internet can be a scary place, so I want to help you trust me.<br><br>I’m Leo, a <strong>local maths teacher</strong> in Bristol and living in <strong>Stoke Gifford</strong>. 
+                I know the internet can be a scary place, so I want to help you trust me.<br><br>I’m Leo, a <strong>local maths teacher</strong> and <strong>qualified financial adviser</strong> in Bristol. 
                 Whether you're unsure if the course is right for you, or just want to check I'm a real human before booking - send me a message and I'll be happy to chat. 
             </p>
             
@@ -2702,6 +2702,53 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
 
   </div>
+</section>
+
+<section class="newsletter-signup-section" style="background-color: #ffffff; padding: 100px 20px;">
+    <div class="newsletter-container" style="max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 60px;">
+        
+        <div class="newsletter-image-column" style="flex: 1;">
+            <img src="simply-investing.webp" alt="Real Life Money Monthly Newsletter Cover" style="width: 100%; max-width: 250px; height: auto; border-radius: 12px; box-shadow: 0 15px 40px black;">
+        </div>
+
+        <div class="newsletter-content-column" style="flex: 1;">
+            <span class="badge" style="display: inline-block; background-color: #eef8eb; color: #25D366; padding: 6px 16px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;">
+                FREE INSIDER PERKS
+            </span>
+            <h2 style="font-family: 'Lexend', sans-serif; font-size: 2.5rem; color: #1a1a1a; margin-bottom: 20px; line-height: 1.2;">
+                Join the community: Get tips, discounts, and more
+            </h2>
+            <p style="font-size: 1.2rem; color: #6b6b6b; margin-bottom: 30px; line-height: 1.6;">
+                Investing is easier with the right help. Subscribe to my newsletter "Simply Investing" and enjoy these exclusive benefits sent straight to your inbox:
+            </p>
+
+            <ul class="benefits-list" style="list-style: none; padding: 0; margin-bottom: 40px;">
+                <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
+                    <span style="color: #25D366;">✓</span> Learning is better together: discount code for booking a course with a friend.
+                </li>
+                <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
+                    <span style="color: #25D366;">✓</span> Monthly jargon-busting articles, tips and updates.
+                </li>
+                
+                 <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
+                    <span style="color: #25D366;">✓</span> VIP first access: know before new course dates are announced.
+                </li>
+            </ul>
+
+            <form id="newsletter-form" style="display: flex; gap: 15px;">
+                <input type="text" name="firstName" placeholder="First Name" required style="flex: 1; padding: 18px 24px; border: 2px solid #daecd6; border-radius: 12px; font-size: 1.1rem; font-family: inherit; transition: border-color 0.3s ease;">
+                <input type="email" name="email" placeholder="Email Address" required style="flex: 1; padding: 18px 24px; border: 2px solid #daecd6; border-radius: 12px; font-size: 1.1rem; font-family: inherit; transition: border-color 0.3s ease;">
+                <button type="submit" style="padding: 18px 40px; background-color: #8c52ff; color: #ffffff; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease; white-space: nowrap;">
+                    Join for free
+                </button>
+            </form>
+            
+            <p style="font-size: 0.9rem; color: #a1a1a1; margin-top: 15px; text-align: left;">
+                I respect your inbox. One newsletter a month, strictly giving value.
+            </p>
+        </div>
+
+    </div>
 </section>
 
 
@@ -3756,6 +3803,73 @@ async function handleWaitlist(event) {
     submitButton.style.background = originalBtnText;
   }
 }
+
+
+document.getElementById('newsletter-form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Stop page refresh
+
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Extract input values using their form "name" attributes
+    const firstName = form.querySelector('input[name="firstName"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const currentUrl = window.location.href;
+
+    const payload = {
+        firstName: firstName,
+        email: email,
+        url: currentUrl
+    };
+
+    // UI Feedback: Show progress immediately
+    const originalBtnText = submitButton.textContent;
+    submitButton.textContent = "Joining...";
+    submitButton.disabled = true;
+
+    try {
+        // REPLACE THE URL BELOW WITH YOUR NEWLY DEPLOYED WEB APP URL
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbzfppRH3C2kXhnY9uW4aOgfAqn65YaMwKRwPuGqg5VlKDflt2WYO7vkDeTVbvfM1SmP/exec';
+
+        await fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors', // Essential to skip browser redirection/CORS blocks with Apps Script
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        // 1. Update the button state
+        submitButton.textContent = "Success! ✔";
+        submitButton.style.backgroundColor = "#25D366"; // Shift to success green
+        
+        // 2. Dynamically create and style the paragraph tag below the form
+        const successMessage = document.createElement('p');
+        successMessage.className = 'form-success-msg';
+        successMessage.textContent = `Thank you ${firstName}! Your sign-up is confirmed and I will be in touch soon.`;
+        
+        // Inline styles to match your design palette
+        successMessage.style.color = "#2e2e2e";
+        successMessage.style.fontSize = "1rem";
+        successMessage.style.marginTop = "15px";
+        successMessage.style.fontWeight = "500";
+        successMessage.style.textAlign = "center";
+        successMessage.style.width = "100%";
+        
+        // 3. Inject the message right after the form element
+        form.parentNode.insertBefore(successMessage, form.nextSibling);
+
+        form.reset(); // Clear input boxes
+
+    } catch (error) {
+        console.error("Newsletter subscription error:", error);
+        submitButton.textContent = "Error, try again";
+        submitButton.disabled = false;
+        submitButton.style.backgroundColor = ""; // Reset to brand purple
+    }
+});
+
 
 
 
