@@ -2863,7 +2863,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
           <h3>Can't make these?</h3>
           <p style="padding-bottom: 15px">I'll email you when new Bristol dates are announced.</p>
           <form onsubmit="handleWaitlist(event)">
-            <input type="email" class="step-input" placeholder="Your email" required>
+            <input type="email" id="waitlist-email" class="step-input" placeholder="Your email" required>
             <button type="submit" class="select-btn" style="background:var(--green);color:white;">Notify me</button>
           </form>
         </div>
@@ -3754,6 +3754,46 @@ function closeSlideShow(event) {
 }
 
 
+async function handleWaitlist(event) {
+  // 1. Prevent the page from reloading on form submit
+  event.preventDefault();
+  
+  const emailInput = document.getElementById('waitlist-email');
+  const submitButton = event.target.querySelector('button[type="submit"]');
+  
+  const payload = {
+    email: emailInput.value,
+    url: window.location.href // Automatically grabs the current page URL
+  };
+
+  // Optimistically update the UI to feel lightning fast
+  const originalBtnText = submitButton.textContent;
+  submitButton.textContent = "Saving...";
+  submitButton.disabled = true;
+
+  try {
+    // 2. Send data to your specific Google Web App URL
+    await fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
+      method: 'POST',
+      mode: 'no-cors', // Crucial for handling Google Web App redirects seamlessly
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // 3. Success state updates
+    submitButton.textContent = "Added! ✔";
+    submitButton.style.background = "#25D366"; // Success green highlight
+    emailInput.value = ""; // Clear the input field
+    
+  } catch (error) {
+    console.error("Waitlist error:", error);
+    submitButton.textContent = "Error, try again";
+    submitButton.disabled = false;
+    submitButton.style.background = originalBtnText;
+  }
+}
 
 
 
