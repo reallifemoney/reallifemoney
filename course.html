@@ -3280,6 +3280,54 @@ function payLater() {
 }
 
 
+document.getElementById('newsletter-form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Stop page refresh
+
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Extract input values using their form "name" attributes
+    const firstName = form.querySelector('input[name="firstName"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const currentUrl = window.location.href;
+
+    const payload = {
+        firstName: firstName,
+        email: email,
+        url: currentUrl
+    };
+
+    // UI Feedback: Show progress immediately
+    const originalBtnText = submitButton.textContent;
+    submitButton.textContent = "Joining...";
+    submitButton.disabled = true;
+
+    try {
+        // REPLACE THE URL BELOW WITH YOUR NEWLY DEPLOYED WEB APP URL
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbzfppRH3C2kXhnY9uW4aOgfAqn65YaMwKRwPuGqg5VlKDflt2WYO7vkDeTVbvfM1SmP/exec';
+
+        await fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors', // Essential to skip browser redirection/CORS blocks with Apps Script
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        // Success state updates
+        submitButton.textContent = "Welcome! ✔";
+        submitButton.style.backgroundColor = "#25D366"; // Shift to success green
+        form.reset(); // Clear input boxes
+
+    } catch (error) {
+        console.error("Newsletter subscription error:", error);
+        submitButton.textContent = "Error, try again";
+        submitButton.disabled = false;
+        submitButton.style.backgroundColor = ""; // Reset to brand purple
+    }
+});
+
 
 
 
