@@ -3315,9 +3315,26 @@ document.getElementById('newsletter-form').addEventListener('submit', async func
             body: JSON.stringify(payload)
         });
 
-        // Success state updates
-        submitButton.textContent = "Welcome! ✔";
+        // 1. Update the button state
+        submitButton.textContent = "Success! ✔";
         submitButton.style.backgroundColor = "#25D366"; // Shift to success green
+        
+        // 2. Dynamically create and style the paragraph tag below the form
+        const successMessage = document.createElement('p');
+        successMessage.className = 'form-success-msg';
+        successMessage.textContent = `Thank you ${firstName}! Your sign-up is confirmed and I will be in touch soon.`;
+        
+        // Inline styles to match your design palette
+        successMessage.style.color = "#2e2e2e";
+        successMessage.style.fontSize = "1rem";
+        successMessage.style.marginTop = "15px";
+        successMessage.style.fontWeight = "500";
+        successMessage.style.textAlign = "center";
+        successMessage.style.width = "100%";
+        
+        // 3. Inject the message right after the form element
+        form.parentNode.insertBefore(successMessage, form.nextSibling);
+
         form.reset(); // Clear input boxes
 
     } catch (error) {
