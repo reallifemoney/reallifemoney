@@ -3541,44 +3541,6 @@ function hideToast() {
     document.getElementById('cookie-toast').style.display = 'none';
 }
 
-function handleEmailSubmit(event) {
-  event.preventDefault();
-  
-  const emailInput = document.getElementById('userEmail');
-  const submitBtn = document.getElementById('submitBtn');
-  const thankYou = document.getElementById('thankYouMessage');
-  const emailValue = emailInput.value;
-
-  // Change button text to show it's working
-  submitBtn.innerText = "Saving...";
-  submitBtn.disabled = true;
-
-  const emailData = {
-    email: emailValue,
-    url: window.location.href
-  };
-
-  // TARGET THE NEW EMAIL SCRIPT URL HERE
-  fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
-    method: 'POST',
-    mode: 'no-cors', // Important for Google Scripts
-    body: JSON.stringify(emailData)
-  })
-  .then(() => {
-    // Hide form and show success message
-    document.getElementById('emailForm').style.display = 'none';
-    thankYou.style.display = 'block';
-    
-    // Optional: Log to your other script that a signup happened
-    // ctaClicked = "Email Signup"; 
-  })
-  .catch(err => {
-    console.error("Email save failed", err);
-    submitBtn.innerText = "Try Again";
-    submitBtn.disabled = false;
-  });
-
-}
 
 
 
@@ -3783,7 +3745,7 @@ async function handleWaitlist(event) {
     });
 
     // 3. Success state updates
-    submitButton.textContent = "Added! ✔";
+    submitButton.textContent = "Success! ✔";
     submitButton.style.background = "#25D366"; // Success green highlight
     emailInput.value = ""; // Clear the input field
     
