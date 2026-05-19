@@ -2751,6 +2751,57 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
     </div>
 </section>
 
+<style>
+    .newsletter-form input:focus {
+        border-color: #8c52ff;
+        outline: none;
+    }
+    .newsletter-form button:hover {
+        background-color: #7a46e0;
+    }
+    
+   /* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .newsletter-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 15px; /* Keeps everything away from the phone screen edges */
+        box-sizing: border-box;
+    }
+    
+    .newsletter-content-column {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* FIX: Force the form wrapper to stack items vertically */
+    #newsletter-form {
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    /* FIX: Prevent the inputs from pushing out wider than the screen */
+    #newsletter-form input, 
+    #newsletter-form button {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box; /* Includes the padding in the width calculation */
+    }
+
+    .newsletter-image-column img {
+        max-width: 260px; /* Slightly smaller so it looks great on small phones */
+        margin: 0 auto 30px auto;
+    }
+
+    .benefits-list li {
+        justify-content: flex-start; /* Aligns checkboxes nicely on mobile left-to-right */
+        text-align: left;
+    }
+}
+
+</style>
+
 
 <!-- ABOUT -->
 <section class="about-sec">
