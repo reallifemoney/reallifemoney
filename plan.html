@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Bristol Investing — 12-Month Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint: #eef8eb; --purple: #8c52ff; --orange: #ff914d;
+  --yellow: #ffde59; --green: #71c558; --ink: #1a1a1a;
+  --text: #2e2e2e; --muted: #6b6b6b; --rule: #daecd6; --white: #fff;
+  --eve: #8c52ff; --sch: #71c558; --emp: #ff914d; --oto: #ffde59;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lexend', sans-serif;
+  background: var(--ink);
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.header {
+  background: var(--ink);
+  padding: 56px 60px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.header::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140,82,255,0.15), transparent 70%);
+  top: -200px; right: -100px;
+}
+.header-top {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 36px;
+}
+.logo-area { display: flex; align-items: center; gap: 12px; }
+.logo-dots { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.ld { width: 10px; height: 10px; border-radius: 50%; }
+.brand { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.6); }
+.project-badge {
+  background: var(--yellow); color: var(--ink);
+  font-size: 11px; font-weight: 700;
+  padding: 6px 16px; border-radius: 100px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.header-title {
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 800; color: #fff;
+  letter-spacing: -2.5px; line-height: 1.0;
+  margin-bottom: 20px;
+}
+.header-title span { color: var(--yellow); }
+.header-sub {
+  font-size: 17px; font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  max-width: 600px; line-height: 1.6;
+  margin-bottom: 40px;
+}
+.target-row {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.target-pill {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px; padding: 14px 20px;
+}
+.tp-val { font-size: 28px; font-weight: 700; letter-spacing: -1px; line-height: 1; }
+.tp-lbl { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+/* MAIN */
+.main { background: var(--mint); }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+section { padding: 64px 0; border-bottom: 1px solid var(--rule); }
+section:last-child { border-bottom: none; }
+
+.stag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.stag-dot { width: 7px; height: 7px; border-radius: 50%; }
+.sec-title {
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 700; color: var(--ink);
+  letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 10px;
+}
+.sec-intro {
+  font-size: 15px; color: var(--muted);
+  max-width: 580px; line-height: 1.7;
+}
+
+/* STREAMS */
+.streams-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.stream-card {
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.stream-head {
+  padding: 24px 26px 18px;
+}
+.stream-card:nth-child(1) .stream-head { background: var(--purple); }
+.stream-card:nth-child(2) .stream-head { background: #2c4a3e; }
+.stream-card:nth-child(3) .stream-head { background: var(--orange); }
+.stream-card:nth-child(4) .stream-head { background: var(--ink); }
+
+.stream-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+.stream-card:nth-child(1) .stream-label { color: var(--yellow); }
+.stream-card:nth-child(2) .stream-label { color: var(--green); }
+.stream-card:nth-child(3) .stream-label { color: var(--yellow); }
+.stream-card:nth-child(4) .stream-label { color: var(--green); }
+
+.stream-title {
+  font-size: 20px; font-weight: 700; color: #fff;
+  letter-spacing: -0.3px; margin-bottom: 6px;
+}
+.stream-price {
+  font-size: 28px; font-weight: 700; color: #fff;
+  letter-spacing: -1px; line-height: 1;
+}
+.stream-price span { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.4); }
+
+.stream-body {
+  background: var(--white); padding: 20px 26px 22px;
+  border: 1px solid var(--rule); border-top: none;
+  border-radius: 0 0 14px 14px;
+}
+.stream-targets {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+}
+.stream-targets li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text); line-height: 1.5;
+}
+.stream-targets li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.stream-card:nth-child(1) .stream-targets li::before { background: var(--purple); }
+.stream-card:nth-child(2) .stream-targets li::before { background: var(--green); }
+.stream-card:nth-child(3) .stream-targets li::before { background: var(--orange); }
+.stream-card:nth-child(4) .stream-targets li::before { background: var(--ink); }
+
+/* FORECAST TABLE */
+.forecast-sec { background: var(--white); }
+
+.legend {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin: 24px 0 32px;
+}
+.leg-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500; color: var(--muted);
+}
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+.forecast-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 13px; border-radius: 12px;
+  overflow: hidden; border: 1px solid var(--rule);
+}
+.forecast-table thead tr { background: var(--ink); }
+.forecast-table th {
+  padding: 13px 14px; text-align: left;
+  font-weight: 600; font-size: 11px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+.forecast-table th:first-child { color: #fff; }
+.forecast-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+.forecast-table tr:last-child td { border-bottom: none; }
+.forecast-table tr:nth-child(even) td { background: #fafaf8; }
+.forecast-table tr.total-row td {
+  background: var(--ink) !important;
+  color: #fff; font-weight: 600;
+  border-bottom: none;
+}
+
+.month-cell { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+.rev-pill {
+  display: inline-block;
+  padding: 3px 9px; border-radius: 100px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+
+.net-cell {
+  font-weight: 700; font-size: 14px;
+}
+
+.target-met {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; color: var(--green);
+}
+
+.bar-cell { width: 100px; }
+.bar-wrap { background: #f0f0f0; border-radius: 4px; height: 6px; overflow: hidden; }
+.bar-fill { height: 6px; border-radius: 4px; background: var(--green); }
+
+/* MONTH BY MONTH */
+.months-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.month-card {
+  background: var(--white); border: 1px solid var(--rule);
+  border-radius: 14px; padding: 22px 22px 18px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.month-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+.month-card.highlight {
+  background: var(--ink); border-color: var(--ink);
+}
+.mc-month {
+  font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+}
+.month-card.highlight .mc-month { color: var(--yellow); }
+.mc-net {
+  font-size: 32px; font-weight: 700; letter-spacing: -1px;
+  line-height: 1; margin-bottom: 12px; color: var(--ink);
+}
+.month-card.highlight .mc-net { color: #fff; }
+.mc-focus {
+  font-size: 12px; font-weight: 500; color: var(--muted);
+  line-height: 1.5; padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+.month-card.highlight .mc-focus { color: rgba(255,255,255,0.5); border-top-color: rgba(255,255,255,0.1); }
+.mc-streams {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.mc-tag {
+  font-size: 10px; font-weight: 600; padding: 3px 9px;
+  border-radius: 100px; letter-spacing: 0.3px;
+}
+
+/* MARKETING ACTIONS */
+.actions-sec { background: var(--mint); }
+
+.actions-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.action-card {
+  background: var(--white); border: 1px solid var(--rule);
+  border-radius: 14px; overflow: hidden;
+}
+.action-head {
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 12px;
+}
+.action-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.action-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+.action-body { padding: 16px 22px 18px; }
+.action-list {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+}
+.action-list li {
+  font-size: 13px; color: var(--text); line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.action-list li::before {
+  content: '→'; color: var(--purple);
+  font-weight: 600; flex-shrink: 0; margin-top: 1px;
+}
+
+/* BUDGET */
+.budget-sec { background: var(--white); }
+.budget-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px; margin-top: 40px;
+}
+.budget-card {
+  border-radius: 12px; padding: 22px 20px;
+  border: 1.5px solid var(--rule);
+}
+.budget-card.phase1 { background: #f3eeff; border-color: #d9c8ff; }
+.budget-card.phase2 { background: #f0faed; border-color: #c2e8b8; }
+.budget-card.phase3 { background: #fffbe8; border-color: var(--yellow); }
+.bc-phase { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.phase1 .bc-phase { color: var(--purple); }
+.phase2 .bc-phase { color: #2c6b1a; }
+.phase3 .bc-phase { color: #b8930a; }
+.bc-months { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.bc-spend { font-size: 28px; font-weight: 700; letter-spacing: -1px; color: var(--ink); margin-bottom: 4px; }
+.bc-sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+.bc-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.bc-items li { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; }
+.bc-items li span { font-weight: 600; color: var(--ink); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .header { padding: 40px 24px 36px; }
+  .streams-grid, .months-grid, .actions-grid, .budget-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 24px; }
+  .forecast-table { font-size: 11px; }
+  .forecast-table th, .forecast-table td { padding: 10px 10px; }
+  .bar-cell { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-area">
+      <div class="logo-dots">
+        <div class="ld" style="background:#ffde59"></div>
+        <div class="ld" style="background:#8c52ff"></div>
+        <div class="ld" style="background:#71c558"></div>
+        <div class="ld" style="background:#ff914d"></div>
+      </div>
+      <span class="brand">Real Life Money</span>
+    </div>
+    <div class="project-badge">Project Bristol Investing</div>
+  </div>
+  <h1 class="header-title">12-Month<br><span>Marketing Plan</span></h1>
+  <p class="header-sub">June 2025 — May 2026. Four revenue streams. One clear target. A month-by-month roadmap to £750 net per month and beyond.</p>
+  <div class="target-row">
+    <div class="target-pill">
+      <div>
+        <div class="tp-val" style="color:var(--yellow)">£750</div>
+        <div class="tp-lbl">Target net/month by May 26</div>
+      </div>
+    </div>
+    <div class="target-pill">
+      <div>
+        <div class="tp-val" style="color:var(--green)">4</div>
+        <div class="tp-lbl">Revenue streams</div>
+      </div>
+    </div>
+    <div class="target-pill">
+      <div>
+        <div class="tp-val" style="color:var(--purple)">£31k+</div>
+        <div class="tp-lbl">Projected annual gross</div>
+      </div>
+    </div>
+    <div class="target-pill">
+      <div>
+        <div class="tp-val" style="color:var(--orange)">£1,040</div>
+        <div class="tp-lbl">Total ad budget year 1</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- REVENUE STREAMS -->
+<section>
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Revenue streams</div>
+    <h2 class="sec-title">Four ways to earn.<br>Each feeds the others.</h2>
+    <p class="sec-intro">The streams are deliberately complementary — school courses build credibility for employers, 1:1s convert from people who attended courses, evening courses build the public brand.</p>
+    <div class="streams-grid">
+
+      <div class="stream-card">
+        <div class="stream-head">
+          <div class="stream-label">Stream 1</div>
+          <div class="stream-title">Evening courses — public</div>
+          <div class="stream-price">£75 <span>per person · max 12</span></div>
+        </div>
+        <div class="stream-body">
+          <ul class="stream-targets">
+            <li>Target: 1-2 courses per month from September onwards</li>
+            <li>Venue: community centres, co-working spaces across Bristol</li>
+            <li>Channel: Meta ads (teacher targeting), Google search, local Facebook groups, flyers</li>
+            <li>Full course £900 revenue · realistic avg group size 8-10 = £600-750</li>
+            <li>Costs: ~£45/course (venue + materials)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-head">
+          <div class="stream-label">Stream 2</div>
+          <div class="stream-title">School / teacher courses</div>
+          <div class="stream-price">£99 <span>per head · 12-30 people</span></div>
+        </div>
+        <div class="stream-body">
+          <ul class="stream-targets">
+            <li>Target: 1 school cohort per month from September onwards</li>
+            <li>Includes TPS bonus session — unique differentiator</li>
+            <li>Channel: LinkedIn (heads/DHTs), direct school outreach, your headteacher network</li>
+            <li>12 people = £1,188 · 20 people = £1,980 · near-zero delivery cost</li>
+            <li>Your biggest margin stream — prioritise this</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-head">
+          <div class="stream-label">Stream 3</div>
+          <div class="stream-title">Employer / organisation courses</div>
+          <div class="stream-price">£800–£1,200 <span>per cohort</span></div>
+        </div>
+        <div class="stream-body">
+          <ul class="stream-targets">
+            <li>Target: 1 employer course per quarter — don't over-rely on this</li>
+            <li>Pipeline: construction workers (bro-in-law), Longleat (father-in-law), others</li>
+            <li>Channel: LinkedIn outreach to HR/wellbeing leads, employers page, referrals</li>
+            <li>Close the warm leads first — these exist now and need a direct ask</li>
+            <li>Each one validates the next — build case studies from every delivery</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stream-card">
+        <div class="stream-head">
+          <div class="stream-label">Stream 4</div>
+          <div class="stream-title">1:1 retirement forecasting</div>
+          <div class="stream-price">£300 <span>per session · 1-2 hours</span></div>
+        </div>
+        <div class="stream-body">
+          <ul class="stream-targets">
+            <li>Target: 1-2 sessions per month by autumn, 3 by spring</li>
+            <li>Source: course attendees who want personalised follow-up, direct enquiries</li>
+            <li>Zero delivery cost — highest margin activity you have</li>
+            <li>Especially valuable for teachers wanting TPS + personal pension modelling</li>
+            <li>Keep strictly educational — cashflow modelling, not regulated advice</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORECAST TABLE -->
+<section class="forecast-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--green)"><span class="stag-dot" style="background:var(--green)"></span>Financial forecast</div>
+    <h2 class="sec-title">Month by month projections</h2>
+    <p class="sec-intro">Conservative estimates based on your current pipeline and realistic growth. The target of £750 net/month is hit from September — and significantly exceeded by May 2026.</p>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>Evening courses</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>School / teacher</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--orange)"></div>Employer</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#ffde59;border:1px solid #ddd;"></div>1:1 sessions</div>
+    </div>
+
+    <div style="overflow-x:auto;">
+    <table class="forecast-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Eve</th>
+          <th>Schools</th>
+          <th>Employer</th>
+          <th>1:1</th>
+          <th>Gross</th>
+          <th>Ad spend</th>
+          <th>Other costs</th>
+          <th>NET</th>
+          <th>vs Target</th>
+          <th class="bar-cell"></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td class="month-cell">Jun 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£300</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><strong>£300</strong></td>
+          <td style="color:var(--muted)">£120</td>
+          <td style="color:var(--muted)">£60</td>
+          <td class="net-cell" style="color:var(--muted)">£120</td>
+          <td style="color:var(--muted);font-size:11px;">Building</td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:16%;background:var(--muted)"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Jul 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£450</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£300</span></td>
+          <td><strong>£750</strong></td>
+          <td style="color:var(--muted)">£100</td>
+          <td style="color:var(--muted)">£60</td>
+          <td class="net-cell" style="color:var(--orange)">£590</td>
+          <td style="color:var(--orange);font-size:11px;">Almost</td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:79%;background:var(--orange)"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Aug 25</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fff4ee;color:var(--orange)">£900</span></td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£300</span></td>
+          <td><strong>£1,200</strong></td>
+          <td style="color:var(--muted)">£80</td>
+          <td style="color:var(--muted)">£45</td>
+          <td class="net-cell" style="color:var(--green)">£1,075</td>
+          <td><span class="target-met">✓ £325 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Sep 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£600</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,188</span></td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£300</span></td>
+          <td><strong>£2,088</strong></td>
+          <td style="color:var(--muted)">£100</td>
+          <td style="color:var(--muted)">£80</td>
+          <td class="net-cell" style="color:var(--green)">£1,908</td>
+          <td><span class="target-met">✓ £1,158 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Oct 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£675</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,485</span></td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£600</span></td>
+          <td><strong>£2,760</strong></td>
+          <td style="color:var(--muted)">£100</td>
+          <td style="color:var(--muted)">£80</td>
+          <td class="net-cell" style="color:var(--green)">£2,580</td>
+          <td><span class="target-met">✓ £1,830 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Nov 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£750</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,485</span></td>
+          <td><span class="rev-pill" style="background:#fff4ee;color:var(--orange)">£900</span></td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£600</span></td>
+          <td><strong>£3,735</strong></td>
+          <td style="color:var(--muted)">£80</td>
+          <td style="color:var(--muted)">£110</td>
+          <td class="net-cell" style="color:var(--green)">£3,545</td>
+          <td><span class="target-met">✓ £2,795 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Dec 25</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£600</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£300</span></td>
+          <td><strong>£900</strong></td>
+          <td style="color:var(--muted)">£60</td>
+          <td style="color:var(--muted)">£60</td>
+          <td class="net-cell" style="color:var(--green)">£780</td>
+          <td><span class="target-met">✓ £30 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Jan 26</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£750</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,782</span></td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£600</span></td>
+          <td><strong>£3,132</strong></td>
+          <td style="color:var(--muted)">£100</td>
+          <td style="color:var(--muted)">£80</td>
+          <td class="net-cell" style="color:var(--green)">£2,952</td>
+          <td><span class="target-met">✓ £2,202 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Feb 26</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£825</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,980</span></td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£600</span></td>
+          <td><strong>£3,405</strong></td>
+          <td style="color:var(--muted)">£80</td>
+          <td style="color:var(--muted)">£80</td>
+          <td class="net-cell" style="color:var(--green)">£3,245</td>
+          <td><span class="target-met">✓ £2,495 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Mar 26</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£1,500</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,980</span></td>
+          <td><span class="rev-pill" style="background:#fff4ee;color:var(--orange)">£1,000</span></td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£600</span></td>
+          <td><strong>£5,080</strong></td>
+          <td style="color:var(--muted)">£80</td>
+          <td style="color:var(--muted)">£155</td>
+          <td class="net-cell" style="color:var(--green)">£4,845</td>
+          <td><span class="target-met">✓ £4,095 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">Apr 26</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£1,650</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£1,980</span></td>
+          <td>—</td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£900</span></td>
+          <td><strong>£4,530</strong></td>
+          <td style="color:var(--muted)">£80</td>
+          <td style="color:var(--muted)">£125</td>
+          <td class="net-cell" style="color:var(--green)">£4,325</td>
+          <td><span class="target-met">✓ £3,575 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr>
+          <td class="month-cell">May 26 🎯</td>
+          <td><span class="rev-pill" style="background:#f3eeff;color:var(--purple)">£1,800</span></td>
+          <td><span class="rev-pill" style="background:#f0faed;color:#2c6b1a">£2,475</span></td>
+          <td><span class="rev-pill" style="background:#fff4ee;color:var(--orange)">£1,000</span></td>
+          <td><span class="rev-pill" style="background:#fffbe8;color:#b8930a;border:1px solid var(--yellow)">£900</span></td>
+          <td><strong>£6,175</strong></td>
+          <td style="color:var(--muted)">£60</td>
+          <td style="color:var(--muted)">£155</td>
+          <td class="net-cell" style="color:var(--green);font-size:18px;">£5,960</td>
+          <td><span class="target-met">✓ £5,210 over</span></td>
+          <td class="bar-cell"><div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div></td>
+        </tr>
+
+        <tr class="total-row">
+          <td><strong>YEAR TOTAL</strong></td>
+          <td colspan="4"></td>
+          <td><strong>£34,055</strong></td>
+          <td>£1,040</td>
+          <td>£910</td>
+          <td><strong>£31,925</strong></td>
+          <td colspan="2" style="color:var(--yellow)">£2,660/mo avg net</td>
+        </tr>
+
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px;font-style:italic;">* Projections assume school pipeline activates September 2025. Employer courses modelled conservatively at ~1 per quarter. 1:1 sessions grow from referrals. All figures are estimates.</p>
+  </div>
+</section>
+
+<!-- MONTHLY FOCUS -->
+<section>
+  <div class="container">
+    <div class="stag" style="color:var(--purple)"><span class="stag-dot" style="background:var(--purple)"></span>Month by month focus</div>
+    <h2 class="sec-title">What to do, when.</h2>
+    <p class="sec-intro">Each month has a primary focus — the one thing that matters most that month. Don't try to do everything at once.</p>
+    <div class="months-grid">
+
+      <div class="month-card">
+        <div class="mc-month">June 2025</div>
+        <div class="mc-net">£120 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: Close your warm leads.</strong> Chase construction workers and Longleat directly — ask for one decision-maker conversation. Email your headteacher with a specific proposal for September. Run first June evening course. Launch teacher-targeted Facebook ads.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">July 2025</div>
+        <div class="mc-net">£590 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: First 1:1 sessions and July course.</strong> Promote 1:1 retirement forecasting to past attendees and email list. Run July evening course. Start building LinkedIn presence with 2x posts/week. Press pitches to Bristol 24/7 and Bristol Live.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">August 2025</div>
+        <div class="mc-net" style="color:var(--green)">£1,075 net ✓</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#fff4ee;color:var(--orange)">Employer</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: Deliver employer course(s).</strong> Longleat or construction workers should be confirmed by now. Deliver the course, collect testimonials, build case study. Use summer to redesign any ads that aren't converting. Prepare September school pitch deck.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">September 2025</div>
+        <div class="mc-net" style="color:var(--green)">£1,908 net ✓</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+          <span class="mc-tag" style="background:#f0faed;color:#2c6b1a">School</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: School pipeline activation.</strong> New academic year — heads are making decisions now. Your headteacher's LinkedIn schmooze to other heads should happen this month. Start first school cohort. First public evening course of the autumn. Google Search ads for "investing course bristol teachers".</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">Oct — Nov 2025</div>
+        <div class="mc-net" style="color:var(--green)">£2,580–£3,545 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+          <span class="mc-tag" style="background:#f0faed;color:#2c6b1a">School</span>
+          <span class="mc-tag" style="background:#fff4ee;color:var(--orange)">Employer</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: Full machine running.</strong> All four streams active. Reduce ad spend as word of mouth grows. Focus on Google reviews — every attendee gets a personal ask. Second employer course. Scale 1:1s to 2/month. Start thinking about online course feasibility.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">December 2025</div>
+        <div class="mc-net" style="color:var(--green)">£780 net ✓</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: Quieter month — use it wisely.</strong> One evening course. Fewer school commitments. Use December to build January pipeline, refresh ad creatives, plan spring employer outreach. Pension planning 1:1s — particularly timely in December. Plan Q1 press push.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">Jan — Feb 2026</div>
+        <div class="mc-net" style="color:var(--green)">£2,952–£3,245 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening</span>
+          <span class="mc-tag" style="background:#f0faed;color:#2c6b1a">School</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: ISA season push.</strong> January to April is ISA season — investing is in the news. Run targeted ads with ISA angle. Pitch Bristol press again with fresh data. Schools returning — second wave of teacher cohorts. Referral scheme: £10 off for introducing a friend.</div>
+      </div>
+
+      <div class="month-card">
+        <div class="mc-month">March — April 2026</div>
+        <div class="mc-net" style="color:var(--green)">£4,325–£4,845 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:#f3eeff;color:var(--purple)">Evening ×2</span>
+          <span class="mc-tag" style="background:#f0faed;color:#2c6b1a">School</span>
+          <span class="mc-tag" style="background:#fff4ee;color:var(--orange)">Employer</span>
+          <span class="mc-tag" style="background:#fffbe8;color:#b8930a;border:1px solid #f0d060">1:1 ×3</span>
+        </div>
+        <div class="mc-focus"><strong>Focus: Scale up evening courses.</strong> Two public courses per month — you should have the reputation and waitlist to fill them. Third employer course. Explore whether a facilitator or co-delivery model is viable to increase capacity without burning out.</div>
+      </div>
+
+      <div class="month-card highlight">
+        <div class="mc-month">May 2026 🎯 Target Month</div>
+        <div class="mc-net">£5,960 net</div>
+        <div class="mc-streams">
+          <span class="mc-tag" style="background:rgba(140,82,255,0.3);color:var(--yellow)">Evening ×2</span>
+          <span class="mc-tag" style="background:rgba(113,197,88,0.3);color:#aaffaa">School</span>
+          <span class="mc-tag" style="background:rgba(255,145,77,0.3);color:#ffcc99">Employer</span>
+          <span class="mc-tag" style="background:rgba(255,222,89,0.3);color:var(--yellow)">1:1 ×3</span>
+        </div>
+        <div class="mc-focus"><strong>Target exceeded by 7×.</strong> £750/month net was the goal. By May 2026 the realistic run rate — with school pipeline, employer courses and growing 1:1s — is closer to £5,000-6,000 net. The harder question by then is capacity, not income.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MARKETING ACTIONS -->
+<section class="actions-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--orange)"><span class="stag-dot" style="background:var(--orange)"></span>Marketing actions</div>
+    <h2 class="sec-title">What to actually do<br>in each channel.</h2>
+    <p class="sec-intro">Not vague strategy — specific, actionable things ordered by expected impact for your situation.</p>
+    <div class="actions-grid">
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#f3eeff;font-size:18px;">🎓</div>
+          <div class="action-title">Teacher targeting — highest priority</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Facebook ads: target teachers in Bristol (job title targeting + teaching groups). Use "By a teacher, for teachers" angle. Budget £3-5/day.</li>
+            <li>Google Search: keywords "investing course for teachers bristol", "teachers pension scheme explained bristol" — low competition, high intent.</li>
+            <li>LinkedIn: connect with heads, DHTs and school business managers. Post 2x/week about financial literacy in schools. Share pilot results.</li>
+            <li>Your head's LinkedIn schmooze — hold her to this. Send her the promo video link and a suggested caption she can post.</li>
+            <li>Teacher Facebook groups: Bristol Teachers, NQT groups. Short personal post, not an ad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#fff4ee;font-size:18px;">🏢</div>
+          <div class="action-title">Employer outreach — close warm leads first</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Construction workers: ask your brother-in-law to set up a 10-minute call with whoever makes the decision. Give him a one-pager PDF to forward this week.</li>
+            <li>Longleat: same approach via your father-in-law. "Just need 10 minutes with your HR/wellbeing person."</li>
+            <li>LinkedIn outreach: search "HR Manager Bristol" or "People Director Bristol" — personalised connection note referencing financial wellbeing stats.</li>
+            <li>Once first employer case study exists, use it in all future outreach — "We ran this at [Company] and here's what happened."</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#f0faed;font-size:18px;">🌍</div>
+          <div class="action-title">Public evening courses — organic first</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Facebook community groups: shorter posts, poll-style hook. "Did your school ever teach you anything useful about money?" Drop link in comments.</li>
+            <li>Eventbrite: keep listing sharp with testimonials and updated description. It has its own discovery — don't neglect it.</li>
+            <li>Flyers: hyper-local, Brooklands Park estate and nearby streets. £15-20 for 250 flyers. "Local maths teacher" angle is powerful here.</li>
+            <li>Retargeting ads: only run to people who've visited your site. Much cheaper, much warmer. Even £2/day.</li>
+            <li>Email list: message every subscriber personally when a new date opens. Not a newsletter blast — a personal email.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#fffbe8;font-size:18px;">👤</div>
+          <div class="action-title">1:1 retirement forecasting — lowest effort, highest margin</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Email every past attendee with a personal note: "I've started offering 1:1 retirement planning sessions — £300 for a thorough session. Particularly useful for teachers thinking about TPS alongside their own investing."</li>
+            <li>Add it prominently to your website — it's currently not clearly advertised.</li>
+            <li>Mention it at the end of every course: "If you want to go deeper on your specific situation, I offer private sessions."</li>
+            <li>Especially valuable for attendees in their 40s/50s thinking about retirement — your pilot had several of these.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#f3eeff;font-size:18px;">📰</div>
+          <div class="action-title">Press and credibility</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Bristol 24/7 and Bristol Live pitches — send from your wife's email this week if not already sent.</li>
+            <li>Pitch and Shout: respond to every relevant callout within 24 hours. Financial resilience, education, wellbeing angles all relevant.</li>
+            <li>One press feature does more for trust than months of ads — prioritise this.</li>
+            <li>Google Reviews: personally ask every single attendee. 10 reviews transforms how cold visitors perceive you.</li>
+            <li>Blog: two articles already — keep adding one per month. "How the Teachers' Pension Scheme works" will rank for long-tail search.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-card">
+        <div class="action-head">
+          <div class="action-icon" style="background:#f0faed;font-size:18px;">🔄</div>
+          <div class="action-title">Referrals and word of mouth</div>
+        </div>
+        <div class="action-body">
+          <ul class="action-list">
+            <li>Every attendee is a potential referrer. Send a personal WhatsApp 2 weeks after the course: "Hope the investing is going well — if you know anyone who'd benefit, I'd love to have them along."</li>
+            <li>Bring-a-friend: £68 each when booking together. Make sure this is clearly stated near the booking section.</li>
+            <li>Ivan's video testimonial — make sure it's front and centre on your landing page and in your ads. A real face converts far better than text.</li>
+            <li>Ask your headteacher to share your promo video on her LinkedIn to other heads — give her the exact text to post so she doesn't have to think about it.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AD BUDGET -->
+<section class="budget-sec">
+  <div class="container">
+    <div class="stag" style="color:var(--ink)"><span class="stag-dot" style="background:var(--ink)"></span>Ad budget plan</div>
+    <h2 class="sec-title">Spend less as you<br>earn more.</h2>
+    <p class="sec-intro">Ad spend should decrease as a percentage of revenue as organic and word of mouth grows. Three phases over the year.</p>
+    <div class="budget-grid">
+
+      <div class="budget-card phase1">
+        <div class="bc-phase">Phase 1 · Jun — Aug 2025</div>
+        <div class="bc-months">3 months · Testing</div>
+        <div class="bc-spend">£300</div>
+        <div class="bc-sub">£100/month average</div>
+        <ul class="bc-items">
+          <li>Meta teacher ads <span>£50/mo</span></li>
+          <li>Google search <span>£35/mo</span></li>
+          <li>Retargeting <span>£15/mo</span></li>
+        </ul>
+      </div>
+
+      <div class="budget-card phase2">
+        <div class="bc-phase">Phase 2 · Sep — Dec 2025</div>
+        <div class="bc-months">4 months · Scaling</div>
+        <div class="bc-spend">£380</div>
+        <div class="bc-sub">£95/month average</div>
+        <ul class="bc-items">
+          <li>Meta teacher ads <span>£40/mo</span></li>
+          <li>Google search <span>£40/mo</span></li>
+          <li>Retargeting <span>£15/mo</span></li>
+        </ul>
+      </div>
+
+      <div class="budget-card phase3">
+        <div class="bc-phase">Phase 3 · Jan — May 2026</div>
+        <div class="bc-months">5 months · Organic-led</div>
+        <div class="bc-spend">£360</div>
+        <div class="bc-sub">£72/month average</div>
+        <ul class="bc-items">
+          <li>Meta retargeting only <span>£30/mo</span></li>
+          <li>Google search <span>£30/mo</span></li>
+          <li>Seasonal pushes <span>£12/mo</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Key assumptions -->
+    <div style="margin-top:32px;background:var(--mint);border:1px solid var(--rule);border-radius:12px;padding:24px 28px;">
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:14px;">Key assumptions in this plan</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="font-size:13px;color:var(--muted);">✓ School pipeline activates September 2025 via your headteacher's network</div>
+        <div style="font-size:13px;color:var(--muted);">✓ At least one employer course confirmed by August (construction or Longleat)</div>
+        <div style="font-size:13px;color:var(--muted);">✓ 1:1 sessions grow organically from course referrals — no paid promotion needed</div>
+        <div style="font-size:13px;color:var(--muted);">✓ Evening course average group size grows from 4 to 10-12 by March 2026</div>
+        <div style="font-size:13px;color:var(--muted);">✓ Ad spend efficiency improves as pixel data and retargeting audiences build</div>
+        <div style="font-size:13px;color:var(--muted);">✓ At least one press feature lands by Q4 2025 adding organic credibility</div>
+      </div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);font-size:13px;color:var(--orange);font-weight:500;">
+        ⚠️ The biggest single risk: school pipeline doesn't activate. If your headteacher doesn't come through, September numbers drop significantly. Have a backup plan — direct LinkedIn outreach to 10 Bristol schools in August.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end main -->
+
+<!-- FOOTER -->
+<div style="background:var(--ink);padding:32px 60px;text-align:center;">
+  <p style="font-size:13px;color:rgba(255,255,255,0.3);font-family:'Lexend',sans-serif;font-weight:300;">
+    <strong style="color:rgba(255,255,255,0.6)">Real Life Money · Project Bristol Investing</strong> · 
+    12-month plan June 2025 — May 2026 · 
+    Review and update monthly
+  </p>
+</div>
+
+<script>
+  // Animate elements on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.stream-card,.month-card,.action-card,.budget-card').forEach((el,i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity 0.5s ease ${i*0.05}s, transform 0.5s ease ${i*0.05}s`;
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
