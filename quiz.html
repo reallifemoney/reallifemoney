@@ -182,7 +182,7 @@
         /* Lead Capture Styling specifics */
         .brand-logo {
             display: block;
-            max-width: 180px;
+            max-width: 240px;
             height: auto;
             margin: 0 auto 20px auto;
         }
@@ -220,6 +220,50 @@
             font-weight: 400;
         }
 
+        /* Styling for the structured benefits list layout */
+.benefits-list {
+    text-align: left;
+    margin: 0 auto 30px auto;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+/* Custom CSS Green Tick Badges */
+.checkmark-badge {
+    background-color: #d1f4cb; /* Soft crisp mint background */
+    color: var(--green);       /* Your sharp green color asset */
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.benefit-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+}
+
+.benefit-item p strong {
+    font-weight: 600;
+    color: #000000;
+}
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -236,7 +280,7 @@
         <form id="scoreappForm">
 
             <div class="step-card active" data-step="1">
-                <h2>How much lump sum would you invest?</h2>
+                <h2>How much lump sum do you have to invest?</h2>
                 <div class="currency-wrapper">
                     <span class="currency-symbol">£</span>
                     <input type="number" id="lumpSumInput" class="text-input" placeholder="0" min="0" required>
@@ -256,26 +300,44 @@
             <div class="step-card" data-step="3">
                 <h2>With investing, do you consider yourself a risk taker?</h2>
                 <div class="options-list">
-                    <button type="button" class="option-btn" onclick="nextOptionStep('Low Risk')">Low Risk (I prefer stability and modest safety)</button>
-                    <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk')">Medium Risk (Comfortable with normal market variations)</button>
-                    <button type="button" class="option-btn" onclick="nextOptionStep('High Risk')">High Risk (Maximizing long-term compound growth potential)</button>
+                    <button type="button" class="option-btn" onclick="nextOptionStep('Low Risk')">Low Risk (I prefer stability and modest growth)</button>
+                    <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk')">Medium Risk (Comfortable with some up and downs)</button>
+                    <button type="button" class="option-btn" onclick="nextOptionStep('High Risk')">High Risk (Priority is to maximise growth)</button>
                 </div>
             </div>
 
             <div class="step-card" data-step="4">
-                <img src="get-bristol-investing.webp" alt="Get Bristol Investing" class="brand-logo">
-                <h2>Where should we send your custom projections?</h2>
-                <p style="color: var(--muted); margin-bottom: 25px; font-weight: 400;">Enter your details below to instantly calculate your money's savings vs investing growth potential. We will send over your results deck, a sneak peek at the slides, our workshop game rules, and your £10 course discount code.</p>
-                
-                <div class="input-group">
-                    <input type="text" id="firstName" placeholder="First Name" required class="text-input capture-input">
-                </div>
-                <div class="input-group">
-                    <input type="email" id="email" placeholder="Email Address" required class="text-input capture-input">
-                </div>
+    <img src="get-bristol-investing.webp" alt="Get Bristol Investing" class="brand-logo">
+    <h2>Where should I send your results?</h2>
+    
+    <div class="benefits-list">
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Your Growth Potential Forecast:</strong> See how much more your money could grow if invested vs left in a savings account.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Sneak Peek Summary Slides:</strong> A jargon-free mini deck explaining core investing frameworks visually.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Fund Game Rules:</strong> The exact rules of the interactive games played live on our Bristol workshops.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>£10 Course Discount Code:</strong> Secure an exclusive discount voucher code sent straight to your inbox.</p>
+        </div>
+    </div>
+    
+    <div class="input-group">
+        <input type="text" id="firstName" placeholder="First Name" required class="text-input capture-input">
+    </div>
+    <div class="input-group">
+        <input type="email" id="email" placeholder="Email Address" required class="text-input capture-input">
+    </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">Calculate My Growth Potential</button>
-            </div>
+    <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+</div>
 
             <div class="step-card" data-step="5" class="success-box">
                 <h2 style="color: var(--green);">Projections Generated! ✔</h2>
