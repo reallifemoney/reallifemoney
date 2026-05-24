@@ -309,7 +309,7 @@
             <div class="step-card" data-step="4" style="padding-bottom: 100px">
     <img src="get-bristol-investing.webp" alt="Get Bristol Investing" class="brand-logo">
     <h2>Where should I send your results?</h2>
-    <p>You will receive:</p>
+    <p style="padding-bottom: 15px"><strong>You will receive:</strong>You will receive:</p>
     
     <div class="benefits-list">
         <div class="benefit-item">
@@ -341,9 +341,9 @@
 </div>
 
             <div class="step-card" data-step="5" class="success-box">
-                <h2 style="color: var(--green);">Projections Generated! ✔</h2>
-                <p>Thank you! Your tailored compound calculation is processing successfully.</p>
-                <p><strong>Check your inbox:</strong> Your tailored potential projections profile, workshop fund game rules, preview summary slides, and your <strong>£10 course discount code</strong> are landing in your inbox right now.</p>
+                <h2 style="color: var(--green);">Details submitted ✔</h2>
+                <p>Thank you! I will run the numbers and send everything over shorly.</p>
+                
             </div>
 
         </form>
@@ -383,7 +383,8 @@
             updateProgressBar();
         }
 
-        document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
+    
+    document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
     const submitButton = document.getElementById('submitBtn');
