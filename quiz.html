@@ -384,45 +384,47 @@
         }
 
         document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
-            const submitButton = document.getElementById('submitBtn');
-            const firstName = document.getElementById('firstName').value;
-            const email = document.getElementById('email').value;
+    event.preventDefault();
+    
+    const submitButton = document.getElementById('submitBtn');
+    const firstName = document.getElementById('firstName').value;
+    const email = document.getElementById('email').value;
 
-            const payload = {
-                firstName: firstName,
-                email: email,
-                url: window.location.href + `?quiz=potential&risk=${encodeURIComponent(answers.riskProfile || '')}`,
-                quizAnswers: answers 
-            };
+    // FLATTEN THE PAYLOAD: Send everything clearly on the top level
+    const payload = {
+        firstName: firstName,
+        email: email,
+        url: window.location.href + `?quiz=potential&risk=${encodeURIComponent(answers.riskProfile || '')}`,
+        lumpSum: answers.lumpSum || "Not provided",
+        monthlySavings: answers.monthlySavings || "Not provided",
+        riskProfile: answers.riskProfile || "Not provided"
+    };
 
-            submitButton.textContent = "Processing Projections...";
-            submitButton.disabled = true;
+    submitButton.textContent = "Processing Projections...";
+    submitButton.disabled = true;
 
-            try {
-                // Replace this placeholder string with your real Google Web App Deployment URL
-                const webAppUrl = 'https://script.google.com/macros/s/AKfycbwrPT-ar-7FvR1kvs4x8-AD2BLvsWrtZUYNouqYKUzimgZqRijYwOMUNvk5kf16_WCaMw/exec';
+    try {
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbwrPT-ar-7FvR1kvs4x8-AD2BLvsWrtZUYNouqYKUzimgZqRijYwOMUNvk5kf16_WCaMw/exec';
 
-                await fetch(webAppUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                // Display success confirmation card
-                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-                currentStep++;
-                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
-                document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
-
-            } catch (error) {
-                console.error("Quiz submission framework failure:", error);
-                submitButton.textContent = "Error, try again";
-                submitButton.disabled = false;
-            }
+        await fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload) // Sent as a clean, flat string
         });
+
+        // Display success confirmation card
+        document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+        currentStep++;
+        document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+
+    } catch (error) {
+        console.error("Quiz submission framework failure:", error);
+        submitButton.textContent = "Error, try again";
+        submitButton.disabled = false;
+    }
+});
     </script>
 </body>
 </html>
