@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Investing Style</title>
+    <style>
+        :root {
+            --purple: #8c52ff;
+            --green: #25D366;
+            --light-bg: #eef8eb;
+            --border-color: #daecd6;
+            --text-main: #2e2e2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Progress Bar Wrapper */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: var(--light-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--purple);
+            transition: width 0.4s ease;
+        }
+
+        /* Main App Card Container */
+        .quiz-box {
+            max-width: 550px;
+            width: 100%;
+            margin-top: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .step-card {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            color: #1a1a1a;
+        }
+
+        /* Answer Options */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid var(--border-color);
+            background: #ffffff;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            border-color: var(--purple);
+            background-color: var(--light-bg);
+        }
+
+        /* Input Styles for Capture Screen */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .success-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="quiz-box">
+        <form id="scoreappForm">
+
+            <div class="step-card active" data-step="1">
+                <h2>Do you currently hold any investments?</h2>
+                <div class="options-list">
+                    <button type="button" class="option-btn" onclick="nextStep('No, completely new to this')">No, completely new to this</button>
+                    <button type="button" class="option-btn" onclick="nextStep('I have a little bit saved in a fund')">I have a little bit saved in a fund</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Yes, actively managing a portfolio')">Yes, actively managing a portfolio</button>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="2">
+                <h2>How confident do you feel navigating financial jargon?</h2>
+                <div class="options-list">
+                    <button type="button" class="option-btn" onclick="nextStep('Completely lost - it feels like gibberish')">Completely lost - it feels like gibberish</button>
+                    <button type="button" class="option-btn" onclick="nextStep('I know basic terms but get nervous')">I know basic terms but get nervous</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Very comfortable making my own choices')">Very comfortable making my own choices</button>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="3">
+                <h2>When thinking about money, would you say you’re a risk-taker?</h2>
+                <div class="options-list">
+                    <button type="button" class="option-btn" onclick="nextStep('No, I prefer safety and peace of mind')">No, I prefer safety and peace of mind</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Moderate - comfortable with short-term drops')">Moderate - comfortable with short-term drops</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Yes, high risk for high potential growth')">Yes, high risk for high potential growth</button>
+                </div>
+            </div>
+
+            <div class="step-card" data-step="4">
+                <h2>Where should we send your results and game guide?</h2>
+                <p style="color: #6b6b6b; margin-bottom: 25px;">Enter your details to reveal your investing scorecard style, lock in your exclusive £10 course discount code, and receive your free PDF guides.</p>
+                
+                <div class="input-group">
+                    <input type="text" id="firstName" placeholder="First Name" required class="text-input">
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email Address" required class="text-input">
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Generate My Scorecard</button>
+            </div>
+
+            <div class="step-card" data-step="5" class="success-box">
+                <h2 style="color: var(--green);">Everything is on its way! ✔</h2>
+                <p>Thank you for completing the quiz. We have analyzed your inputs.</p>
+                <p><strong>Check your inbox:</strong> Your tailored investing profile PDF guide and your <strong>£10 discount code</strong> have just been sent to you.</p>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4; // Total content steps excluding final success screen
+        const answers = {};
+
+        function updateProgressBar() {
+            const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressBar').style.width = `${Math.min(percentage, 100)}%`;
+        }
+
+        function nextStep(selectedAnswer) {
+            // Save answer data from previous steps dynamically
+            if (currentStep === 1) answers.currentInvest = selectedAnswer;
+            if (currentStep === 2) answers.confidence = selectedAnswer;
+            if (currentStep === 3) answers.riskStyle = selectedAnswer;
+
+            // Transition cleanly to the next screen card
+            document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+            currentStep++;
+            document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+            
+            updateProgressBar();
+        }
+
+        document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const submitButton = document.getElementById('submitBtn');
+            const firstName = document.getElementById('firstName').value;
+            const email = document.getElementById('email').value;
+
+            // Collect complete package payload to pass over
+            const payload = {
+                firstName: firstName,
+                email: email,
+                url: window.location.href + `?quiz=completed&risk=${encodeURIComponent(answers.riskStyle || '')}`,
+                quizAnswers: answers // Appends your custom metrics inside the row system 
+            };
+
+            submitButton.textContent = "Analyzing results...";
+            submitButton.disabled = true;
+
+            try {
+                // Paste your deployed Google Sheet Web App URL below
+                const webAppUrl = 'YOUR_NEWSLETTER_WEB_APP_URL';
+
+                await fetch(webAppUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Display final outcome container card
+                document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+                currentStep++;
+                document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+                document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+
+            } catch (error) {
+                console.error("ScoreApp flow error:", error);
+                submitButton.textContent = "Error, try again";
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
