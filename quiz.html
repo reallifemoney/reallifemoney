@@ -1,39 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Investing Style</title>
-    <style>
-        :root {
-            --purple: #8c52ff;
-            --green: #25D366;
-            --light-bg: #eef8eb;
-            --border-color: #daecd6;
-            --text-main: #2e2e2e;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Financial Wellbeing — Real Life Money</title>
+<meta name="description" content="Want your employees to feel valued? Help them learn to invest with my engaging and practical investing course! Give them a benefit they will actually use.">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
+<link 
+  href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" 
+  rel="stylesheet" 
+  media="print" 
+  onload="this.media='all'"
+>
 
-        body {
-            background-color: #ffffff;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '248586408143097');
+fbq('track', 'PageView');
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18128232153"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18128232153');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</noscript>
+
+<style>
+
+body {
+  font-family: 'Lexend', Helvetica, Arial, sans-serif; /* Fallbacks added */
+}
+
+  :root {
+    --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --orange:  #ff914d;
+    --yellow:  #ffde59;
+    --green:   #71c558;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+  }
+ 
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--mint);
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+        
 
         /* Progress Bar Wrapper */
         .progress-container {
             width: 100%;
             height: 6px;
-            background-color: var(--light-bg);
+            background-color: var(--mint);
             position: fixed;
             top: 0;
             left: 0;
@@ -113,7 +168,7 @@
         .text-input {
             width: 100%;
             padding: 16px 20px;
-            border: 2px solid var(--border-color);
+            border: 2px solid black;
             border-radius: 12px;
             font-size: 1.1rem;
         }
@@ -154,20 +209,20 @@
         <form id="scoreappForm">
 
             <div class="step-card active" data-step="1">
-                <h2>Do you currently hold any investments?</h2>
+                <h2>Do you currently invest?</h2>
                 <div class="options-list">
-                    <button type="button" class="option-btn" onclick="nextStep('No, completely new to this')">No, completely new to this</button>
-                    <button type="button" class="option-btn" onclick="nextStep('I have a little bit saved in a fund')">I have a little bit saved in a fund</button>
-                    <button type="button" class="option-btn" onclick="nextStep('Yes, actively managing a portfolio')">Yes, actively managing a portfolio</button>
+                    <button type="button" class="option-btn" onclick="nextStep('No, beginner')">No, complete beginner</button>
+                    <button type="button" class="option-btn" onclick="nextStep('A little, unconfident')">A little, but not sure what I'm doing</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Yes')">Yes, very confident</button>
                 </div>
             </div>
 
             <div class="step-card" data-step="2">
-                <h2>How confident do you feel navigating financial jargon?</h2>
+                <h2>How does the thought of investing make you feel?</h2>
                 <div class="options-list">
-                    <button type="button" class="option-btn" onclick="nextStep('Completely lost - it feels like gibberish')">Completely lost - it feels like gibberish</button>
-                    <button type="button" class="option-btn" onclick="nextStep('I know basic terms but get nervous')">I know basic terms but get nervous</button>
-                    <button type="button" class="option-btn" onclick="nextStep('Very comfortable making my own choices')">Very comfortable making my own choices</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Scared, intimidated')">Scared, intimidated</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Confused')">Confused!</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Excited')">Excited - once I know how</button>
                 </div>
             </div>
 
@@ -175,7 +230,7 @@
                 <h2>When thinking about money, would you say you’re a risk-taker?</h2>
                 <div class="options-list">
                     <button type="button" class="option-btn" onclick="nextStep('No, I prefer safety and peace of mind')">No, I prefer safety and peace of mind</button>
-                    <button type="button" class="option-btn" onclick="nextStep('Moderate - comfortable with short-term drops')">Moderate - comfortable with short-term drops</button>
+                    <button type="button" class="option-btn" onclick="nextStep('Moderate - comfortable with short-term drops')">Moderate - comf</button>
                     <button type="button" class="option-btn" onclick="nextStep('Yes, high risk for high potential growth')">Yes, high risk for high potential growth</button>
                 </div>
             </div>
