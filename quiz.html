@@ -264,10 +264,39 @@
     color: #000000;
 }
 
+
+/* Center text inside all option and pill buttons */
+.option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* For the grid layout of amount buttons */
 .amount-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 10px;
+}
+
+/* Style for the back button link */
+.back-btn {
+    display: block;
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+}
+.back-btn:hover {
+    color: #333;
 }
 
         @keyframes fadeIn {
@@ -290,6 +319,7 @@
     <div class="options-list amount-grid">
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 0)">£0</button>
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 100)">£100</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 300)">£300</button>
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 500)">£500</button>
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 1000)">£1,000</button>
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 3000)">£3,000</button>
@@ -320,10 +350,11 @@
         <input type="text" id="cashLocationInput" class="text-input" placeholder="Where is it sitting?" style="width: 100%; box-sizing: border-box; padding: 12px;">
         <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('cashLocationInput', 'cashLocation')">Continue</button>
     </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
 
 <div class="step-card" data-step="3">
-    <h2>How much could you invest per month?</h2>
+    <h2>How much extra could you invest per month?</h2>
     <div class="options-list amount-grid">
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 50)">£50</button>
         <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 100)">£100</button>
@@ -340,6 +371,7 @@
         </div>
         <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('monthlyInput', 'monthlySavings')">Continue</button>
     </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
 
 <div class="step-card" data-step="4">
@@ -349,6 +381,7 @@
         <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk')">Medium risk (Comfortable with some up and downs)</button>
         <button type="button" class="option-btn" onclick="nextOptionStep('High Risk')">High risk (Priority is to maximise growth)</button>
     </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
 
             <div class="step-card" data-step="4" style="padding-bottom: 100px">
@@ -495,6 +528,30 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         submitButton.disabled = false;
     }
 });
+
+// Function to handle moving backwards in the multi-step form
+function goBackStep() {
+    if (currentStep > 1) {
+        // Hide current step
+        document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+        
+        // Decrement step counter
+        currentStep--;
+        
+        // Show previous step
+        document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        
+        // Re-calculate progress bar position
+        updateProgressBar();
+
+        // Optional: Hide custom "Other" textboxes if they go back so it resets beautifully
+        const containers = ['lumpSum', 'cashLocation', 'monthlySavings'];
+        containers.forEach(track => {
+            const el = document.getElementById(`custom-${track}-container`);
+            if (el) el.style.display = 'none';
+        });
+    }
+}
     </script>
 </body>
 </html>
