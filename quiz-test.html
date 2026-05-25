@@ -491,6 +491,7 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     flex-wrap: wrap;
     gap: 12px;
     justify-content: center;
+    margin-top: 25px;
     margin-bottom: 25px;
     padding: 15px;
     background-color: #f7fbf6;
@@ -524,6 +525,33 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     font-size: 1rem;
     font-weight: 700;
     color: #1c3d17;
+}
+
+/* Core Reveal Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Base animation class - elements start hidden until animation kicks in */
+.fade-in-element {
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Staggered Timings */
+.delay-headline {
+    animation-delay: 0.2s; /* Pops up almost instantly after scroll */
+}
+
+.delay-rest {
+    animation-delay: 0.9s; /* Waits nearly a second for dramatic effect */
 }
 
 /* Make it crisp on smaller screens */
@@ -663,11 +691,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="step-card results-box" data-step="6">
     
-    <div class="headline-container">
+    <div class="headline-container fade-in-element delay-headline">
         <p class="pre-header">YOU COULD HAVE...</p>
         <h2 class="big-money-headline">£<span id="displayDiff30">226,126</span></h2>
         <p class="post-header"><strong>more money in your pocket</strong> by investing your cash instead of leaving it where it is.</p>
     </div>
+
+    <div class="fade-in-element delay-rest">
 
     <div class="pitch-banner">
         <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
@@ -722,9 +752,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </tbody>
         </table>
     </div>
+    </div>
 
     <div class="value-bullets">
-        <h3>What you get inside the Workshop:</h3>
+        <h3>What you get from the workshop:</h3>
         <ul>
             <li>
                 <span class="bullet-icon">🎓</span>
@@ -737,7 +768,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span class="bullet-icon">🎲</span>
                 <div>
                     <strong>Gamified, interactive learning:</strong> 
-                    Not just sitting and listening. Learn  actively via my custom interactive workshop games.
+                    Not just sitting and listening. I like the sessions to be practical so you gain real confidence. Learn  actively via my interactive workshop games.
                 </div>
             </li>
             <li>
@@ -755,6 +786,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </a>
 
     <div class="user-selections-summary">
+        <h3>Reminder of your selections:</h3>
     <div class="selection-badge">
         <span class="badge-label">Lump Sum</span>
         <span class="badge-value" id="summaryLumpSum">£0</span>
@@ -783,7 +815,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <script>
- let currentStep = 1;
+let currentStep = 1;
 const totalSteps = 5; // Updated total steps to account for the new cash location card
 const answers = {};
 
@@ -919,11 +951,47 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         if(document.getElementById('summaryMonthly')) document.getElementById('summaryMonthly').textContent  = answers.monthlySavings || "£0";
         if(document.getElementById('summaryRisk')) document.getElementById('summaryRisk').textContent     = answers.riskProfile || "Unset";
 
-        // 3c. Trigger EmailJS to deliver the results direct to their inbox
+        // 3c. Dynamic Matrix Package Creation for EmailJS Delivery Parameters
         const emailParams = {
             firstName: firstName,
             email: email,
-            difference_30_years: res30.diff.toLocaleString()
+            difference_30_years: res30.diff.toLocaleString(),
+            
+            // User Parameters Context
+            lumpSumChosen: answers.lumpSum || "£0",
+            cashLocationChosen: answers.cashLocation || "Savings Account",
+            monthlyChosen: answers.monthlySavings || "£0",
+            riskChosen: answers.riskProfile || "Medium Risk",
+            
+            // 3 Year Track Data Block
+            putAway3: res3.putAway.toLocaleString(),
+            savings3: res3.savings.toLocaleString(),
+            invested3: res3.invested.toLocaleString(),
+            diff3: res3.diff.toLocaleString(),
+            
+            // 5 Year Track Data Block
+            putAway5: res5.putAway.toLocaleString(),
+            savings5: res5.savings.toLocaleString(),
+            invested5: res5.invested.toLocaleString(),
+            diff5: res5.diff.toLocaleString(),
+            
+            // 10 Year Track Data Block
+            putAway10: res10.putAway.toLocaleString(),
+            savings10: res10.savings.toLocaleString(),
+            invested10: res10.invested.toLocaleString(),
+            diff10: res10.diff.toLocaleString(),
+            
+            // 20 Year Track Data Block
+            putAway20: res20.putAway.toLocaleString(),
+            savings20: res20.savings.toLocaleString(),
+            invested20: res20.invested.toLocaleString(),
+            diff20: res20.diff.toLocaleString(),
+            
+            // 30 Year Track Data Block
+            putAway30: res30.putAway.toLocaleString(),
+            savings30: res30.savings.toLocaleString(),
+            invested30: res30.invested.toLocaleString(),
+            diff30: res30.diff.toLocaleString()
         };
 
         await emailjs.send('service_7hn83cm', 'template_g5nbo46', emailParams);
@@ -933,6 +1001,12 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         currentStep = 6; 
         document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
         document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+
+        // FORCE SCREEN SCROLL TO TOP INSTANTLY
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
 
     } catch (error) {
         console.error("Quiz submission framework failure:", error);
