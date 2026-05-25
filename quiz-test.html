@@ -452,7 +452,7 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 
 .bullet-icon {
     font-size: 1.4rem;
-    line-shrink: 0;
+
 }
 
 /* Fine Print Styles */
@@ -757,6 +757,7 @@ function advanceStep() {
     updateProgressBar();
 }
 
+// SUBMISSION & COMPOUND MATH ENGINE
 document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -781,6 +782,7 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
     try {
         const webAppUrl = 'https://script.google.com/macros/s/AKfycbwrPT-ar-7FvR1kvs4x8-AD2BLvsWrtZUYNouqYKUzimgZqRijYwOMUNvk5kf16_WCaMw/exec';
 
+        // 1. Ship your data to your spreadsheet securely in the background
         await fetch(webAppUrl, {
             method: 'POST',
             mode: 'no-cors',
@@ -788,9 +790,49 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
             body: JSON.stringify(payload)
         });
 
-        // Display success confirmation card
+        // 2. Perform the exact compound projection algorithms locally across all brackets
+        const res3  = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 3);
+        const res5  = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 5);
+        const res10 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 10);
+        const res20 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 20);
+        const res30 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 30);
+
+        // 3. Inject the results dynamically into the main headline spans
+        document.getElementById('displayDiff30').textContent = res30.diff.toLocaleString();
+        document.getElementById('diff30_table').textContent  = res30.diff.toLocaleString();
+        
+        // Populate 3 Year Data Column
+        document.getElementById('putAway3').textContent  = res3.putAway.toLocaleString();
+        document.getElementById('savings3').textContent  = res3.savings.toLocaleString();
+        document.getElementById('invested3').textContent = res3.invested.toLocaleString();
+        document.getElementById('diff3').textContent     = res3.diff.toLocaleString();
+
+        // Populate 5 Year Data Column
+        document.getElementById('putAway5').textContent  = res5.putAway.toLocaleString();
+        document.getElementById('savings5').textContent  = res5.savings.toLocaleString();
+        document.getElementById('invested5').textContent = res5.invested.toLocaleString();
+        document.getElementById('diff5').textContent     = res5.diff.toLocaleString();
+
+        // Populate 10 Year Data Column
+        document.getElementById('putAway10').textContent  = res10.putAway.toLocaleString();
+        document.getElementById('savings10').textContent  = res10.savings.toLocaleString();
+        document.getElementById('invested10').textContent = res10.invested.toLocaleString();
+        document.getElementById('diff10').textContent     = res10.diff.toLocaleString();
+
+        // Populate 20 Year Data Column
+        document.getElementById('putAway20').textContent  = res20.putAway.toLocaleString();
+        document.getElementById('savings20').textContent  = res20.savings.toLocaleString();
+        document.getElementById('invested20').textContent = res20.invested.toLocaleString();
+        document.getElementById('diff20').textContent     = res20.diff.toLocaleString();
+
+        // Populate 30 Year Data Column
+        document.getElementById('putAway30').textContent  = res30.putAway.toLocaleString();
+        document.getElementById('savings30').textContent  = res30.savings.toLocaleString();
+        document.getElementById('invested30').textContent = res30.invested.toLocaleString();
+
+        // 4. Smoothly shift view to display the calculated success screen results (Explicitly Step 6)
         document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-        currentStep++;
+        currentStep = 6; 
         document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
         document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
 
@@ -852,7 +894,6 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
   window.addEventListener('pagehide', sendFinalData);
 
 
-
 // Function to handle moving backwards in the multi-step form
 function goBackStep() {
     if (currentStep > 1) {
@@ -877,6 +918,7 @@ function goBackStep() {
     }
 }
 
+// Automated Projection Algorithm
 function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
     // Clean inputs (removes £ symbols and commas)
     const P = parseFloat(lumpSumRaw.replace(/[^\d.]/g, '')) || 0;
