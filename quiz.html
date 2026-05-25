@@ -15,6 +15,15 @@
       media="print" 
       onload="this.media='all'"
     >
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      // Replace 'YOUR_PUBLIC_KEY' with the actual Public Key from your EmailJS Account Dashboard
+      emailjs.init({
+        publicKey: "FaZMs4M-HnEtpdw3G",
+      });
+   })();
+</script>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -333,6 +342,225 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     transform: translateY(-1px); /* Slight organic lift on hover */
 }
 
+/* Core Styling Updates for Results Framework */
+.results-box {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.big-money-headline {
+    font-size: 3.5rem;
+    color: var(--green);
+    font-weight: 800;
+    margin: 10px 0;
+    letter-spacing: -1px;
+}
+
+.pre-header {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.post-header {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.pitch-banner {
+    background: #f4faf2;
+    border-left: 4px solid var(--green);
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.pitch-banner blockquote {
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1c3d17;
+}
+
+/* Responsive Table Infrastructure Layout */
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 35px;
+    border: 1px solid #eef2ed;
+    border-radius: 12px;
+}
+
+.projections-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.projections-table th {
+    background-color: #f7fbf6;
+    padding: 12px 14px;
+    font-weight: 600;
+    border-bottom: 2px solid #e2ece0;
+}
+
+.projections-table td {
+    padding: 14px;
+    border: 1px solid #e0e6df;
+}
+
+.row-label {
+    font-weight: 500;
+    background-color: #fafdfa;
+    width: 28%;
+}
+
+.row-label-gain {
+    font-weight: 500;
+    background-color: var(--green);
+    width: 28%;
+}
+
+.highlight-row {
+    background-color: #f9fdf8;
+}
+
+.difference-row {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.difference-row td {
+    color: var(--white) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Value Offer Formatting Elements */
+.value-bullets {
+    text-align: left;
+    margin-bottom: 35px;
+}
+
+.value-bullets h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.value-bullets ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.value-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    line-height: 1.5;
+}
+
+.bullet-icon {
+    font-size: 1.4rem;
+
+}
+
+/* Fine Print Styles */
+.compliance-footer {
+    font-size: 0.78rem;
+    color: #828c80;
+    text-align: left;
+    line-height: 1.6;
+    margin-top: 40px;
+    border-top: 1px solid #e6ece5;
+    padding-top: 20px;
+}
+.compliance-footer p {
+    margin-bottom: 12px;
+}
+
+/* User Selections Summary Badges Layout */
+.user-selections-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f7fbf6;
+    border-radius: 12px;
+    border: 1px solid #eef2ed;
+}
+
+.selection-badge {
+    flex: 1;
+    min-width: 130px;
+    background: var(--white);
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border: 1px solid #e2ece0;
+    text-align: center;
+}
+
+.badge-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #657362;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.badge-value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1c3d17;
+}
+
+/* Core Reveal Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Base animation class - elements start hidden until animation kicks in */
+.fade-in-element {
+    opacity: 0;
+    animation: fadeInUp 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Staggered Timings */
+.delay-headline {
+    animation-delay: 0.5s; /* Pops up almost instantly after scroll */
+}
+
+.delay-rest {
+    animation-delay: 2s; /* Waits nearly a second for dramatic effect */
+}
+
+/* Make it crisp on smaller screens */
+@media (max-width: 480px) {
+    .selection-badge {
+        min-width: 45%; /* Drops smoothly into a clean 2x2 grid on mobile */
+    }
+}
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -384,14 +612,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button type="button" class="option-btn" onclick="handleLocationSelection('Current Account'); logsneakpeekclick()">Current Account</button>
         <button type="button" class="option-btn" onclick="handleLocationSelection('Savings Account'); logsneakpeekclick()">Savings Account</button>
         <button type="button" class="option-btn" onclick="handleLocationSelection('Premium Bonds'); logsneakpeekclick()">Premium Bonds</button>
-        <button type="button" class="option-btn" onclick="revealCustomInput('cashLocation')">Other</button>
+        
     </div>
 
 
-    <div id="custom-cashLocation-container" style="display: none; margin-top: 15px;">
-        <input type="text" id="cashLocationInput" class="text-input" placeholder="Where is it sitting?" style="width: 100%; box-sizing: border-box; padding: 12px;">
-        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('cashLocationInput', 'cashLocation'); logsneakpeekclick()">Continue</button>
-    </div>
     <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
 
@@ -461,19 +685,134 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
 </div>
 
-            <div class="step-card" data-step="6" class="success-box">
-                <h2 style="color: var(--green);">Details submitted ✔</h2>
-                <p>Thank you! I will run the numbers and send everything over shorly.</p>
-                <a href="https://reallifemoney.co.uk/investing-course?=quiz" class="course-cta-btn">
-        Explore the Investing Workshops
+    <div class="step-card results-box" data-step="6">
+    
+    <div class="headline-container fade-in-element delay-headline">
+        <p class="pre-header">YOU COULD HAVE...</p>
+        <h2 class="big-money-headline">£<span id="displayDiff30">226,126</span></h2>
+        <p class="post-header"><strong>more money in your pocket</strong> by investing your cash instead of leaving it where it is.</p>
+    </div>
+
+    <div class="fade-in-element delay-rest">
+
+    <div class="pitch-banner">
+        <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
+        <p>At just <strong>£65 with your quiz discount</strong>, learning how to capture this growth potential isn't a cost —it's the best investment you will ever make.</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="projections-table">
+            <thead>
+                <tr>
+                    <th>Timeline</th>
+                    <th>3 years</th>
+                    <th>5 years</th>
+                    <th>10 years</th>
+                    <th>20 years</th>
+                    <th>30 years</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Total put away</td>
+                    <td>£<span id="putAway3">12,200</span></td>
+                    <td>£<span id="putAway5">17,000</span></td>
+                    <td>£<span id="putAway10">29,000</span></td>
+                    <td>£<span id="putAway20">53,000</span></td>
+                    <td>£<span id="putAway30">77,000</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Left where it is</td>
+                    <td>£<span id="savings3">13,526</span></td>
+                    <td>£<span id="savings5">20,191</span></td>
+                    <td>£<span id="savings10">40,907</span></td>
+                    <td>£<span id="savings20">105,459</span></td>
+                    <td>£<span id="savings30">216,123</span></td>
+                </tr>
+                <tr class="highlight-row">
+                    <td class="row-label">Total if invested</td>
+                    <td>£<span id="invested3">14,530</span></td>
+                    <td>£<span id="invested5">22,750</span></td>
+                    <td>£<span id="invested10">51,935</span></td>
+                    <td>£<span id="invested20">169,978</span></td>
+                    <td>£<span id="invested30">442,249</span></td>
+                </tr>
+                <tr class="difference-row">
+                    <td class="row-label-gain">Gain from investing</td>
+                    <td><strong>£<span id="diff3">1,004</span></strong></td>
+                    <td><strong>£<span id="diff5">2,559</span></strong></td>
+                    <td><strong>£<span id="diff10">11,027</span></strong></td>
+                    <td><strong>£<span id="diff20">64,519</span></strong></td>
+                    <td><strong>£<span id="diff30_table">226,126</span></strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <div class="value-bullets">
+        <h3>What you get from the workshop:</h3>
+        <ul>
+            <li>
+                <span class="bullet-icon">🎓</span>
+                <div>
+                    <strong>Expert, qualified teacher:</strong> 
+                    Led in plain English by a professional maths teacher and qualified financial advisor. I also say no to confusing industry jargon.
+                </div>
+            </li>
+            <li>
+                <span class="bullet-icon">🎲</span>
+                <div>
+                    <strong>Gamified, interactive learning:</strong> 
+                    Not just sitting and listening. I like the sessions to be practical so you gain real confidence. Learn  actively via my interactive workshop games.
+                </div>
+            </li>
+            <li>
+                <span class="bullet-icon">💬</span>
+                <div>
+                    <strong>Lifetime community access:</strong> 
+                    Get immediate entry into my private, attendees-only WhatsApp group to receive tips, ask any questions and share ideas with other like-minded individuals.
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <a href="https://reallifemoney.co.uk/investing-course?=quiz" class="course-cta-btn">
+        Secure your workshop space →
     </a>
-            </div>
+    <h3 style="padding-top: 40px">Reminder of your selections:</h3>
+
+    <div class="user-selections-summary">
+        
+    <div class="selection-badge">
+        <span class="badge-label">Lump Sum</span>
+        <span class="badge-value" id="summaryLumpSum">£0</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Cash Kept In</span>
+        <span class="badge-value" id="summaryLocation">Not provided</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Monthly Savings</span>
+        <span class="badge-value" id="summaryMonthly">£0</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Risk Profile</span>
+        <span class="badge-value" id="summaryRisk">Not provided</span>
+    </div>
+</div>
+
+    <div class="compliance-footer">
+        <p>*<strong>Calculation Assumptions:</strong> Savings calculations assume an easy-access account yielding a consistent 3.5% annually. Investment growth potential calculations scale conservatively based on your stated risk selection: Low Risk figures utilize 4.5% (predominantly fixed-income bonds mixed with limited equities), Medium Risk projections utilize 6.0% (a balanced 50/50 baseline split), and High Risk profiles utilize 7.5% (100% global equity trackers). Actual long-term historical performance of tracking benchmarks like Vanguard LifeStrategy 100% Equity have averaged roughly 10.2% annualised returns since inception in 2011, meaning calculations are designed conservatively.</p>
+        <p><strong>Disclaimer:</strong> This tool generates educational illustrations for comparison purposes only and does not constitute formal personal financial advice. Stock market values fluctuate; your capital is at risk, and you may get back less than you put in. Past performance does not guarantee future results.</p>
+    </div>
+</div>
 
         </form>
     </div>
 
     <script>
- let currentStep = 1;
+let currentStep = 1;
 const totalSteps = 5; // Updated total steps to account for the new cash location card
 const answers = {};
 
@@ -530,6 +869,7 @@ function advanceStep() {
     updateProgressBar();
 }
 
+// SUBMISSION & COMPOUND MATH ENGINE
 document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -554,6 +894,7 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
     try {
         const webAppUrl = 'https://script.google.com/macros/s/AKfycbwrPT-ar-7FvR1kvs4x8-AD2BLvsWrtZUYNouqYKUzimgZqRijYwOMUNvk5kf16_WCaMw/exec';
 
+        // 1. Ship your data to your spreadsheet securely in the background
         await fetch(webAppUrl, {
             method: 'POST',
             mode: 'no-cors',
@@ -561,11 +902,108 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
             body: JSON.stringify(payload)
         });
 
-        // Display success confirmation card
+        // 2. Perform the exact compound projection algorithms locally across all brackets
+        const res3  = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 3);
+        const res5  = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 5);
+        const res10 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 10);
+        const res20 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 20);
+        const res30 = calculateProjections(answers.lumpSum, answers.monthlySavings, answers.riskProfile, 30);
+
+        // 3. Inject the results dynamically into the main headline spans
+        document.getElementById('displayDiff30').textContent = res30.diff.toLocaleString();
+        document.getElementById('diff30_table').textContent  = res30.diff.toLocaleString();
+        
+        // Populate 3 Year Data Column
+        document.getElementById('putAway3').textContent  = res3.putAway.toLocaleString();
+        document.getElementById('savings3').textContent  = res3.savings.toLocaleString();
+        document.getElementById('invested3').textContent = res3.invested.toLocaleString();
+        document.getElementById('diff3').textContent     = res3.diff.toLocaleString();
+
+        // Populate 5 Year Data Column
+        document.getElementById('putAway5').textContent  = res5.putAway.toLocaleString();
+        document.getElementById('savings5').textContent  = res5.savings.toLocaleString();
+        document.getElementById('invested5').textContent = res5.invested.toLocaleString();
+        document.getElementById('diff5').textContent     = res5.diff.toLocaleString();
+
+        // Populate 10 Year Data Column
+        document.getElementById('putAway10').textContent  = res10.putAway.toLocaleString();
+        document.getElementById('savings10').textContent  = res10.savings.toLocaleString();
+        document.getElementById('invested10').textContent = res10.invested.toLocaleString();
+        document.getElementById('diff10').textContent     = res10.diff.toLocaleString();
+
+        // Populate 20 Year Data Column
+        document.getElementById('putAway20').textContent  = res20.putAway.toLocaleString();
+        document.getElementById('savings20').textContent  = res20.savings.toLocaleString();
+        document.getElementById('invested20').textContent = res20.invested.toLocaleString();
+        document.getElementById('diff20').textContent     = res20.diff.toLocaleString();
+
+        // Populate 30 Year Data Column
+        document.getElementById('putAway30').textContent  = res30.putAway.toLocaleString();
+        document.getElementById('savings30').textContent  = res30.savings.toLocaleString();
+        document.getElementById('invested30').textContent = res30.invested.toLocaleString();
+
+        // 3b. Inject the user's raw input choices into the summary badges
+        if(document.getElementById('summaryLumpSum')) document.getElementById('summaryLumpSum').textContent  = answers.lumpSum || "£0";
+        if(document.getElementById('summaryLocation')) document.getElementById('summaryLocation').textContent = answers.cashLocation || "Unset";
+        if(document.getElementById('summaryMonthly')) document.getElementById('summaryMonthly').textContent  = answers.monthlySavings || "£0";
+        if(document.getElementById('summaryRisk')) document.getElementById('summaryRisk').textContent     = answers.riskProfile || "Unset";
+
+        // 3c. Dynamic Matrix Package Creation for EmailJS Delivery Parameters
+        const emailParams = {
+            firstName: firstName,
+            email: email,
+            difference_30_years: res30.diff.toLocaleString(),
+            
+            // User Parameters Context
+            lumpSumChosen: answers.lumpSum || "£0",
+            cashLocationChosen: answers.cashLocation || "Savings Account",
+            monthlyChosen: answers.monthlySavings || "£0",
+            riskChosen: answers.riskProfile || "Medium Risk",
+            
+            // 3 Year Track Data Block
+            putAway3: res3.putAway.toLocaleString(),
+            savings3: res3.savings.toLocaleString(),
+            invested3: res3.invested.toLocaleString(),
+            diff3: res3.diff.toLocaleString(),
+            
+            // 5 Year Track Data Block
+            putAway5: res5.putAway.toLocaleString(),
+            savings5: res5.savings.toLocaleString(),
+            invested5: res5.invested.toLocaleString(),
+            diff5: res5.diff.toLocaleString(),
+            
+            // 10 Year Track Data Block
+            putAway10: res10.putAway.toLocaleString(),
+            savings10: res10.savings.toLocaleString(),
+            invested10: res10.invested.toLocaleString(),
+            diff10: res10.diff.toLocaleString(),
+            
+            // 20 Year Track Data Block
+            putAway20: res20.putAway.toLocaleString(),
+            savings20: res20.savings.toLocaleString(),
+            invested20: res20.invested.toLocaleString(),
+            diff20: res20.diff.toLocaleString(),
+            
+            // 30 Year Track Data Block
+            putAway30: res30.putAway.toLocaleString(),
+            savings30: res30.savings.toLocaleString(),
+            invested30: res30.invested.toLocaleString(),
+            diff30: res30.diff.toLocaleString()
+        };
+
+        await emailjs.send('service_7hn83cm', 'template_g5nbo46', emailParams);
+
+        // 4. Smoothly shift view to display the calculated success screen results (Explicitly Step 6)
         document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-        currentStep++;
+        currentStep = 6; 
         document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
         document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+
+        // FORCE SCREEN SCROLL TO TOP INSTANTLY
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
 
     } catch (error) {
         console.error("Quiz submission framework failure:", error);
@@ -625,7 +1063,6 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
   window.addEventListener('pagehide', sendFinalData);
 
 
-
 // Function to handle moving backwards in the multi-step form
 function goBackStep() {
     if (currentStep > 1) {
@@ -648,6 +1085,52 @@ function goBackStep() {
             if (el) el.style.display = 'none';
         });
     }
+}
+
+// Automated Projection Algorithm with Dynamic Cash Location Baselines
+function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
+    // Clean inputs (removes £ symbols, commas, and whitespace)
+    const P = parseFloat(lumpSumRaw.replace(/[^\d.]/g, '')) || 0;
+    const PMT = parseFloat(monthlyRaw.replace(/[^\d.]/g, '')) || 0;
+    
+    // 1. Assign investment rate based on user's selected risk profile
+    let investRate = 0.06; // Default to Medium (6.0%)
+    if (riskChoice === "Low Risk") investRate = 0.045;
+    if (riskChoice === "High Risk") investRate = 0.075;
+    
+    // 2. DYNAMICALLY assign cash baseline rate based on what they chose in Step 2 (answers.cashLocation)
+    let cashRate = 0.035; // Default fallback to Savings (3.5%)
+    
+    if (answers.cashLocation === "Current Account") {
+        cashRate = 0.005; // 0.5%
+    } else if (answers.cashLocation === "Premium Bonds") {
+        cashRate = 0.025; // 2.5%
+    } else if (answers.cashLocation === "Savings Account") {
+        cashRate = 0.035; // 3.5%
+    }
+
+    // Helper to calculate total for a specific annual growth rate (compounded monthly)
+    function getFutureValue(principal, monthly, annualRate, t) {
+        const r = annualRate / 12; // Monthly interest rate
+        const n = t * 12;          // Total number of months
+        
+        const lumpSumGrowth = principal * Math.pow(1 + r, n);
+        const monthlyAnnuity = monthly * ((Math.pow(1 + r, n) - 1) / r);
+        
+        return lumpSumGrowth + monthlyAnnuity;
+    }
+
+    const totalPutAway = P + (PMT * 12 * years);
+    const totalInSavings = getFutureValue(P, PMT, cashRate, years);
+    const totalInvested = getFutureValue(P, PMT, investRate, years);
+    const difference = totalInvested - totalInSavings;
+
+    return {
+        putAway: Math.round(totalPutAway),
+        savings: Math.round(totalInSavings),
+        invested: Math.round(totalInvested),
+        diff: Math.round(difference)
+    };
 }
 
     </script>
