@@ -554,6 +554,40 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     animation-delay: 2s; /* Waits nearly a second for dramatic effect */
 }
 
+/* Realism Section Formatting */
+.realism-check-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e6df;
+    border-radius: 12px;
+}
+
+.realism-title {
+    font-size: 1.2rem;
+    color: #1F3A29;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.realism-text {
+    font-size: 0.95rem;
+    color: #4a5448;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.realism-verdict {
+    background-color: #f7fbf6;
+    border-left: 4px solid var(--green);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    color: #1c3d17;
+    line-height: 1.5;
+}
+
 /* Make it crisp on smaller screens */
 @media (max-width: 480px) {
     .selection-badge {
@@ -695,10 +729,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="fade-in-element delay-rest">
 
-    <div class="pitch-banner">
-        <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
-        <p>At just <strong>£65 with your quiz discount</strong>, my beginner's investing workshop isn't a cost —it's the best investment you will ever make.</p>
-    </div>
+    
 
     <div class="table-responsive">
         <table class="projections-table">
@@ -748,6 +779,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </tbody>
         </table>
     </div>
+    </div>
+   
+   <div class="realism-check-container">
+    <h3 class="realism-title">Are these figures realistic?</h3>
+    <p class="realism-text">
+        Yes, and to be completely honest, they are likely to be <strong>underestimates</strong> to keep you entirely on the safe side. 
+    </p>
+    <p class="realism-text">
+        When I made this system, I assumed a middle-of-the-road percentage growth for a balanced approach. In reality, the global stock market has historically performed even better than this over long periods. I purposely keep the numbers conservative because it is always better to be pleasantly surprised by your actual wealth later on, rather than over-promising now.
+    </p>
+    <p class="realism-text">
+        It is worth noting that investing for the long-term (5 years or more) gives a much higher chance of success so that you see out the inevitable dips along the way. I'll explain more about this and show you examples during my workshop. 
+    </p>
+    <div class="realism-verdict">
+        <p style="margin: 0;">
+            <strong>The Bottom Line:</strong> The massive difference you see in your results isn't clever math trickery - it is simply the power of compounding returns.
+        </p>
+    </div>
+</div>
+
+<div class="pitch-banner">
+        <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
+        <p>At just <strong>£65 with your quiz discount</strong>, my beginner's investing workshop isn't a cost —it's the best investment you will ever make.</p>
     </div>
 
     <div class="value-bullets">
@@ -802,10 +856,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </div>
 
-    <div class="compliance-footer">
-        <p>*<strong>Calculation Assumptions:</strong> Savings calculations assume an easy-access account yielding a consistent 3.5% annually. Investment growth potential calculations scale conservatively based on your stated risk selection: Low Risk figures utilize 4.5% (predominantly fixed-income bonds mixed with limited equities), Medium Risk projections utilize 6.0% (a balanced 50/50 baseline split), and High Risk profiles utilize 7.5% (100% global equity trackers). Actual long-term historical performance of tracking benchmarks like Vanguard LifeStrategy 100% Equity have averaged roughly 10.2% annualised returns since inception in 2011, meaning calculations are designed conservatively.</p>
-        <p><strong>Disclaimer:</strong> This tool generates educational illustrations for comparison purposes only and does not constitute formal personal financial advice. Stock market values fluctuate; your capital is at risk, and you may get back less than you put in. Past performance does not guarantee future results.</p>
-    </div>
+    <div class="compliance-footer" style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #eef2ed; font-size: 11px; color: #828c80; line-height: 1.6; text-align: left;">
+    
+    <p style="margin: 0 0 8px 0; font-weight: 700; color: #1F3A29; font-size: 12px;">How we worked out your figures:</p>
+    
+    <ul style="margin: 0 0 15px 0; padding-left: 18px; color: #555;">
+        <li style="margin-bottom: 6px;">
+            <strong>Leaving it in cash:</strong> I assumed your bank pays on average <strong>3.5% interest a year</strong>. In the real world, bank rates go up and down and rarely stay this high for decades. If you used a standard current account, I assumed a tiny <strong>0.5% interest</strong>, and Premium Bonds were worked out at <strong>2.5%</strong>.
+        </li>
+        <li style="margin-bottom: 6px;">
+            <strong>Low Risk Investment:</strong> Worked out at <strong>4.5% growth a year</strong>. This is a very cautious mix made up mostly of secure government and company loans (bonds), with just a small splash of company shares.
+        </li>
+        <li style="margin-bottom: 6px;">
+            <strong>Medium Risk Investment:</strong> Worked out at <strong>6% growth a year</strong>. This is a balanced, middle-of-the-road 50/50 split between secure loans and company shares. 
+        </li>
+        <li style="margin-bottom: 6px;">
+            <strong>High Risk Investment:</strong> Worked out at <strong>7.5% growth a year</strong>. This puts 100% of your money into company shares to chase maximum growth. Real figures for this are often higher but I decided to use conservative figures to be on the safe side.
+        </li>
+        <li style="margin-bottom: 6px;">
+            <strong>Why these are safe assumptions:</strong> To give you an idea of real life, a popular high-growth fund like the <em>Vanguard LifeStrategy 100% Fund</em> has actually made an average of roughly <strong>10.2% growth every year</strong> since it started in 2011. I intentionally used 7.5% instead of 10.2% because it is always safer to under-promise and over-deliver.
+        </li>
+    </ul>
+
+    <p style="margin: 0 0 8px 0; font-weight: 700; color: #1F3A29; font-size: 12px;">The Important Legal Bit:</p>
+    
+    <ul style="margin: 0; padding-left: 18px; color: #555;">
+        <li style="margin-bottom: 6px;">
+            This calculator is just a helpful tool to show you how compound interest works. It is for educational purposes only and is <strong>not official financial advice</strong>. 
+        </li>
+        <li style="margin-bottom: 6px;">
+            Unlike a bank account, investments can go down as well as up. Your capital is at risk, meaning you could get back less money than you originally put in.
+        </li>
+        <li style="margin-bottom: 0;">
+            Just because the stock market has done brilliantly in the past does not completely guarantee it will do the exact same thing in the future.
+        </li>
+    </ul>
+
+    <p style="margin: 15px 0 0 0; text-align: center; color: #aaa; font-size: 10px;">Sent via reallifemoney.co.uk</p>
+</div>
 </div>
 
         </form>
