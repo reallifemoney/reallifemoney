@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz — Real Life Money</title>
+    <meta name="description" content="Find out how much more your money could grow if you invested compared to leaving it in savings accounts.">
+    <link rel="icon" type="image/webp" href="/logo-circle.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'"
+    >
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TZ542GMS');</script>
+<!-- End Google Tag Manager -->
+<!-- Meta Pixel Code -->
+
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+    <script>
+        
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '248586408143097');
+    fbq('track', 'PageView');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18128232153"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18128232153');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
+    /></noscript>
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </noscript>
+
+    <style>
+        :root {
+            --mint:    #eef8eb;
+            --purple:  #8c52ff;
+            --orange:  #ff914d;
+            --yellow:  #ffde59;
+            --green:   #71c558;
+            --ink:     #1a1a1a;
+            --text:    --ink;
+            --muted:   #6b6b6b;
+            --rule:    #daecd6;
+            --white:   #ffffff;
+        }
+        
+        *, *::before, *::after { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Lexend', Helvetica, Arial, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background: var(--mint);
+            color: var(--ink);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Progress Bar Wrapper */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background-color: var(--rule);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--purple);
+            transition: width 0.4s ease;
+        }
+
+        /* Main App Card Container */
+        .quiz-box {
+            max-width: 550px;
+            width: 100%;
+            margin-top: 80px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .step-card {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .step-card.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            color: var(--ink);
+        }
+
+        /* Form Layout Tools */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid var(--rule);
+            background: var(--white);
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            color: var(--ink);
+        }
+
+        .option-btn:hover {
+            border-color: var(--purple);
+            background-color: var(--white);
+        }
+
+        /* Numerical Inputs Wrapper */
+        .currency-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 16px 20px 16px 40px;
+            border: 2px solid var(--ink);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 400;
+            background: var(--white);
+            color: var(--ink);
+            outline: none;
+        }
+
+        .text-input:focus {
+            border-color: var(--purple);
+        }
+
+        /* Lead Capture Styling specifics */
+        .brand-logo {
+            display: block;
+            max-width: 240px;
+            height: auto;
+            margin: 0 auto 40px auto;
+        }
+
+        .capture-input {
+            padding-left: 20px !important;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .action-btn, .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background-color: var(--purple);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .action-btn:hover, .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .success-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        /* Styling for the structured benefits list layout */
+.benefits-list {
+    text-align: left;
+    margin: 0 auto 30px auto;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+/* Custom CSS Green Tick Badges */
+.checkmark-badge {
+    background-color: #d1f4cb; /* Soft crisp mint background */
+    color: var(--green);       /* Your sharp green color asset */
+    font-weight: bold;
+    font-size: 0.9rem;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.benefit-item p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 400;
+}
+
+.benefit-item p strong {
+    font-weight: 600;
+    color: #000000;
+}
+
+
+/* Center text inside all option and pill buttons */
+.option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* For the grid layout of amount buttons */
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+/* Style for the back button link */
+.back-btn {
+    display: block;
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: center;
+}
+.back-btn:hover {
+    color: #333;
+}
+
+/* Styling for the success page redirect button */
+.course-cta-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--green); /* Highlights the next action in success green */
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-sizing: border-box;
+}
+
+.course-cta-btn:hover {
+    opacity: 0.95;
+    transform: translateY(-1px); /* Slight organic lift on hover */
+}
+
+/* Core Styling Updates for Results Framework */
+.results-box {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.big-money-headline {
+    font-size: 3.5rem;
+    color: var(--green);
+    font-weight: 800;
+    margin: 10px 0;
+    letter-spacing: -1px;
+}
+
+.pre-header {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.post-header {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+.pitch-banner {
+    background: #f4faf2;
+    border-left: 4px solid var(--green);
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.pitch-banner blockquote {
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1c3d17;
+}
+
+/* Responsive Table Infrastructure Layout */
+.table-responsive {
+    overflow-x: auto;
+    margin-bottom: 35px;
+    border: 1px solid #eef2ed;
+    border-radius: 12px;
+}
+
+.projections-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.projections-table th {
+    background-color: #f7fbf6;
+    padding: 12px 14px;
+    font-weight: 600;
+    border-bottom: 2px solid #e2ece0;
+}
+
+.projections-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f0f5ef;
+}
+
+.row-label {
+    font-weight: 500;
+    background-color: #fafdfa;
+    width: 28%;
+}
+
+.highlight-row {
+    background-color: #f9fdf8;
+}
+
+.difference-row {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.difference-row td {
+    color: var(--white) !important;
+}
+
+/* Value Offer Formatting Elements */
+.value-bullets {
+    text-align: left;
+    margin-bottom: 35px;
+}
+
+.value-bullets h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.value-bullets ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.value-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    line-height: 1.5;
+}
+
+.bullet-icon {
+    font-size: 1.4rem;
+    line-shrink: 0;
+}
+
+/* Fine Print Styles */
+.compliance-footer {
+    font-size: 0.78rem;
+    color: #828c80;
+    text-align: left;
+    line-height: 1.6;
+    margin-top: 40px;
+    border-top: 1px solid #e6ece5;
+    padding-top: 20px;
+}
+.compliance-footer p {
+    margin-bottom: 12px;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZ542GMS"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="quiz-box">
+        <form id="scoreappForm">
+
+
+        <div class="step-card active" data-step="1">
+    <h2>How much cash do you have to invest now?</h2>
+    <div class="options-list amount-grid">
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 0); logvideoclick()">£0</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 100); logvideoclick()">£100</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 300); logvideoclick()">£300</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 500); logvideoclick()">£500</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 1000); logvideoclick()">£1,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 3000); logvideoclick()">£3,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 5000); logvideoclick()">£5,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 10000); logvideoclick()">£10,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="revealCustomInput('lumpSum')">Other</button>
+    </div>
+    
+    <div id="custom-lumpSum-container" style="display: none; margin-top: 15px;">
+        <div class="currency-wrapper">
+            <span class="currency-symbol">£</span>
+            <input type="number" id="lumpSumInput" class="text-input" placeholder="0" min="0">
+        </div>
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('lumpSumInput', 'lumpSum'); logvideoclick()">Continue</button>
+    </div>
+</div>
+
+
+
+<div class="step-card" data-step="2">
+    <h2>Where is that cash sitting now?</h2>
+    <div class="options-list">
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Current Account'); logsneakpeekclick()">Current Account</button>
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Savings Account'); logsneakpeekclick()">Savings Account</button>
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Premium Bonds'); logsneakpeekclick()">Premium Bonds</button>
+        <button type="button" class="option-btn" onclick="revealCustomInput('cashLocation')">Other</button>
+    </div>
+
+
+    <div id="custom-cashLocation-container" style="display: none; margin-top: 15px;">
+        <input type="text" id="cashLocationInput" class="text-input" placeholder="Where is it sitting?" style="width: 100%; box-sizing: border-box; padding: 12px;">
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('cashLocationInput', 'cashLocation'); logsneakpeekclick()">Continue</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+</div>
+
+<div class="step-card" data-step="3">
+    <h2>How much extra could you invest per month?</h2>
+    <div class="options-list amount-grid">
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 50); logbuttonclick()">£50</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 100); logbuttonclick()">£100</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 200); logbuttonclick()">£200</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 300); logbuttonclick()">£300</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 500); logbuttonclick()">£500</button>
+        <button type="button" class="option-btn amount-pill" onclick="revealCustomInput('monthlySavings')">Other</button>
+    </div>
+
+    <div id="custom-monthlySavings-container" style="display: none; margin-top: 15px;">
+        <div class="currency-wrapper">
+            <span class="currency-symbol">£</span>
+            <input type="number" id="monthlyInput" class="text-input" placeholder="0" min="0">
+        </div>
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('monthlyInput', 'monthlySavings'); logbuttonclick()">Continue</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+</div>
+
+<div class="step-card" data-step="4">
+    <h2>With investing, do you consider yourself a risk taker?</h2>
+    <div class="options-list">
+        <button type="button" class="option-btn" onclick="nextOptionStep('Low Risk');logcourseselection();">Low risk (prefer stability and modest growth)</button>
+        <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk');logcourseselection();">Medium risk (comfortable with some up and downs)</button>
+        <button type="button" class="option-btn" onclick="nextOptionStep('High Risk');logcourseselection();">High risk (priority is to maximise growth)</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+</div>
+
+            <div class="step-card" data-step="5" style="padding-bottom: 100px;margin-top: -80px;">
+    <img src="get-bristol-investing.webp" alt="Get Bristol Investing" class="brand-logo">
+    <h2>Where should I send your results?</h2>
+    <p style="padding-bottom: 15px"><strong>You will receive:</strong></p>
+    
+    <div class="benefits-list">
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Your money's potential:</strong> See how much more your money could grow if invested vs left in a savings account.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>£10 workshop discount:</strong> Secure an exclusive discount voucher code sent straight to your inbox.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Slide previews:</strong> A glance into my investing workshop - see a handful of the slides you'll learn from.</p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>Game rules:</strong> Learn about the interactive games played live during my Bristol workshops.</p>
+        </div>
+        
+    </div>
+    
+    <div class="input-group">
+        <input type="text" id="firstName" onfocus="lognamefieldfocus()" placeholder="First Name" required class="text-input capture-input">
+    </div>
+    <div class="input-group">
+        <input type="email" id="email" placeholder="Email Address" required class="text-input capture-input">
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+</div>
+
+    <div class="step-card results-box" data-step="6">
+    
+    <div class="headline-container">
+        <p class="pre-header">Your 30-Year Growth Potential</p>
+        <h2 class="big-money-headline">£<span id="displayDiff30">226,126</span></h2>
+        <p class="post-header"><strong>More money in your pocket</strong> by investing your cash instead of leaving it stuck in a savings account.</p>
+    </div>
+
+    <div class="pitch-banner">
+        <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
+        <p>At just <strong>£65 with your quiz discount</strong>, learning how to capture this growth potential isn't an expense—it's the highest-returning financial asset check you will make this year.</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="projections-table">
+            <thead>
+                <tr>
+                    <th>Timeline</th>
+                    <th>3 years</th>
+                    <th>5 years</th>
+                    <th>10 years</th>
+                    <th>20 years</th>
+                    <th>30 years</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-label">Total put away</td>
+                    <td>£<span id="putAway3">12,200</span></td>
+                    <td>£<span id="putAway5">17,000</span></td>
+                    <td>£<span id="putAway10">29,000</span></td>
+                    <td>£<span id="putAway20">53,000</span></td>
+                    <td>£<span id="putAway30">77,000</span></td>
+                </tr>
+                <tr>
+                    <td class="row-label">Left where it is (Savings)</td>
+                    <td>£<span id="savings3">13,526</span></td>
+                    <td>£<span id="savings5">20,191</span></td>
+                    <td>£<span id="savings10">40,907</span></td>
+                    <td>£<span id="savings20">105,459</span></td>
+                    <td>£<span id="savings30">216,123</span></td>
+                </tr>
+                <tr class="highlight-row">
+                    <td class="row-label">Total if invested</td>
+                    <td>£<span id="invested3">14,530</span></td>
+                    <td>£<span id="invested5">22,750</span></td>
+                    <td>£<span id="invested10">51,935</span></td>
+                    <td>£<span id="invested20">169,978</span></td>
+                    <td>£<span id="invested30">442,249</span></td>
+                </tr>
+                <tr class="difference-row">
+                    <td class="row-label">Gain from investing</td>
+                    <td><strong>£<span id="diff3">1,004</span></strong></td>
+                    <td><strong>£<span id="diff5">2,559</span></strong></td>
+                    <td><strong>£<span id="diff10">11,027</span></strong></td>
+                    <td><strong>£<span id="diff20">64,519</span></strong></td>
+                    <td><strong>£<span id="diff30_table">226,126</span></strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="value-bullets">
+        <h3>What you get inside the Workshop:</h3>
+        <ul>
+            <li>
+                <span class="bullet-icon">🎓</span>
+                <div>
+                    <strong>Expert, Qualified Guidance:</strong> 
+                    Led in plain English by a professional maths teacher and qualified financial advisor. Zero confusing industry jargon.
+                </div>
+            </li>
+            <li>
+                <span class="bullet-icon">🎲</span>
+                <div>
+                    <strong>Gamified, Interactive Learning:</strong> 
+                    No mind-numbing slide sheets. Learn mechanics actively via our custom interactive workshop card games.
+                </div>
+            </li>
+            <li>
+                <span class="bullet-icon">💬</span>
+                <div>
+                    <strong>Lifetime Circle Community Access:</strong> 
+                    Get immediate entry into our private, invite-only WhatsApp group to share fund tips, discuss strategies, and get direct Ask-Me-Anything access to answers.
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <a href="https://reallifemoney.co.uk/investing-course?=quiz" class="course-cta-btn">
+        Secure Your Workshop Space For £65 Now →
+    </a>
+
+    <div class="compliance-footer">
+        <p>*<strong>Calculation Assumptions:</strong> Savings calculations assume an easy-access account yielding a consistent 3.5% annually. Investment growth potential calculations scale conservatively based on your stated risk selection: Low Risk figures utilize 4.5% (predominantly fixed-income bonds mixed with limited equities), Medium Risk projections utilize 6.0% (a balanced 50/50 baseline split), and High Risk profiles utilize 7.5% (100% global equity trackers). Actual long-term historical performance of tracking benchmarks like Vanguard LifeStrategy 100% Equity have averaged roughly 10.2% annualised returns since inception in 2011, meaning calculations are designed conservatively.</p>
+        <p><strong>Disclaimer:</strong> This tool generates educational illustrations for comparison purposes only and does not constitute formal personal financial advice. Stock market values fluctuate; your capital is at risk, and you may get back less than you put in. Past performance does not guarantee future results.</p>
+    </div>
+</div>
+
+        </form>
+    </div>
+
+    <script>
+ let currentStep = 1;
+const totalSteps = 5; // Updated total steps to account for the new cash location card
+const answers = {};
+
+function updateProgressBar() {
+    const percentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+    document.getElementById('progressBar').style.width = `${Math.min(percentage, 100)}%`;
+}
+
+// Automatically processes instant tap choices for lump sums and monthly amounts
+function handlePillSelection(dataKey, amount) {
+    answers[dataKey] = "£" + amount;
+    advanceStep();
+}
+
+// Automatically processes instant tap choices for cash location
+function handleLocationSelection(location) {
+    answers.cashLocation = location;
+    advanceStep();
+}
+
+// Smoothly reveals the correct typed input box when a user taps an "Other" option
+function revealCustomInput(trackKey) {
+    document.getElementById(`custom-${trackKey}-container`).style.display = 'block';
+}
+
+// Validates and processes typed input allocations
+function validateCustomInput(inputId, dataKey) {
+    const inputEl = document.getElementById(inputId);
+    if (!inputEl.value || (inputEl.type === 'number' && inputEl.value < 0)) {
+        inputEl.reportValidity();
+        return;
+    }
+    
+    // Format numeric values with currency symbols, leave text strings clean
+    if (inputEl.type === 'number') {
+        answers[dataKey] = "£" + inputEl.value;
+    } else {
+        answers[dataKey] = inputEl.value;
+    }
+    
+    advanceStep();
+}
+
+// Handles data selection from the risk profile tracks
+function nextOptionStep(selectedAnswer) {
+    answers.riskProfile = selectedAnswer;
+    advanceStep();
+}
+
+function advanceStep() {
+    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+    currentStep++;
+    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+    updateProgressBar();
+}
+
+document.getElementById('scoreappForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const submitButton = document.getElementById('submitBtn');
+    const firstName = document.getElementById('firstName').value;
+    const email = document.getElementById('email').value;
+
+    // FLATTEN THE PAYLOAD: Includes the new cashLocation variable mapping
+    const payload = {
+        firstName: firstName,
+        email: email,
+        url: window.location.href + `?quiz=potential&risk=${encodeURIComponent(answers.riskProfile || '')}`,
+        lumpSum: answers.lumpSum || "Not provided",
+        cashLocation: answers.cashLocation || "Not provided",
+        monthlySavings: answers.monthlySavings || "Not provided",
+        riskProfile: answers.riskProfile || "Not provided"
+    };
+
+    submitButton.textContent = "Submitting...";
+    submitButton.disabled = true;
+
+    try {
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbwrPT-ar-7FvR1kvs4x8-AD2BLvsWrtZUYNouqYKUzimgZqRijYwOMUNvk5kf16_WCaMw/exec';
+
+        await fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        // Display success confirmation card
+        document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+        currentStep++;
+        document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+
+    } catch (error) {
+        console.error("Quiz submission framework failure:", error);
+        submitButton.textContent = "Error, try again";
+        submitButton.disabled = false;
+    }
+});
+
+
+// All logging scripts
+
+  let sent = false;
+  const pageEntryTime = Date.now();
+  let maxScroll = 0;
+  // Initialize these globally
+  let ctaClicked = "No";
+  let videoClicked = "No";
+  let courseSelected = "No";
+  let sneakPeekClicked = "No";      // Added tracking variable
+  let nameFieldFocused = "No";      // Added tracking variable
+
+  window.addEventListener('scroll', () => {
+    const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+    if (scrolled > maxScroll) maxScroll = scrolled;
+  }, { passive: true });
+
+  function logbuttonclick() { ctaClicked = "Yes"; }
+  function logvideoclick() { videoClicked = "Yes"; }
+  function logcourseselection() { courseSelected = "Yes"; }
+  function logsneakpeekclick() { sneakPeekClicked = "Yes"; } // Added tracking function
+  function lognamefieldfocus() { nameFieldFocused = "Yes"; } // Added tracking function
+
+  function sendFinalData() {
+    if (sent) return;
+    sent = true;
+
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      ctaClicked: ctaClicked,
+      videoClicked: videoClicked,
+      courseSelected: courseSelected,
+      sneakPeekClicked: sneakPeekClicked, // Added to payload
+      nameFieldFocused: nameFieldFocused, // Added to payload
+      url: window.location.href
+    };
+
+    // This is the most reliable way to send to Google
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
+  }
+
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendFinalData();
+  });
+  window.addEventListener('pagehide', sendFinalData);
+
+
+
+// Function to handle moving backwards in the multi-step form
+function goBackStep() {
+    if (currentStep > 1) {
+        // Hide current step
+        document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
+        
+        // Decrement step counter
+        currentStep--;
+        
+        // Show previous step
+        document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+        
+        // Re-calculate progress bar position
+        updateProgressBar();
+
+        // Optional: Hide custom "Other" textboxes if they go back so it resets beautifully
+        const containers = ['lumpSum', 'cashLocation', 'monthlySavings'];
+        containers.forEach(track => {
+            const el = document.getElementById(`custom-${track}-container`);
+            if (el) el.style.display = 'none';
+        });
+    }
+}
+
+function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
+    // Clean inputs (removes £ symbols and commas)
+    const P = parseFloat(lumpSumRaw.replace(/[^\d.]/g, '')) || 0;
+    const PMT = parseFloat(monthlyRaw.replace(/[^\d.]/g, '')) || 0;
+    
+    // Assign investment rate based on user's selected risk profile
+    let investRate = 0.06; // Default to Medium (6.0%)
+    if (riskChoice === "Low Risk") investRate = 0.045;
+    if (riskChoice === "High Risk") investRate = 0.075;
+    
+    // Baseline cash/savings growth rate assumption (3.5%)
+    const cashRate = 0.035; 
+
+    // Helper to calculate total for a specific annual growth rate
+    function getFutureValue(principal, monthly, annualRate, t) {
+        const r = annualRate / 12; // Monthly interest rate
+        const n = t * 12;          // Total number of months
+        
+        const lumpSumGrowth = principal * Math.pow(1 + r, n);
+        const monthlyAnnuity = monthly * ((Math.pow(1 + r, n) - 1) / r);
+        
+        return lumpSumGrowth + monthlyAnnuity;
+    }
+
+    const totalPutAway = P + (PMT * 12 * years);
+    const totalInSavings = getFutureValue(P, PMT, cashRate, years);
+    const totalInvested = getFutureValue(P, PMT, investRate, years);
+    const difference = totalInvested - totalInSavings;
+
+    return {
+        putAway: Math.round(totalPutAway),
+        savings: Math.round(totalInSavings),
+        invested: Math.round(totalInvested),
+        diff: Math.round(difference)
+    };
+}
+
+    </script>
+</body>
+</html>
