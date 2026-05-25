@@ -15,6 +15,15 @@
       media="print" 
       onload="this.media='all'"
     >
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      // Replace 'YOUR_PUBLIC_KEY' with the actual Public Key from your EmailJS Account Dashboard
+      emailjs.init({
+        publicKey: "FaZMs4M-HnEtpdw3G",
+      });
+   })();
+</script>
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -904,6 +913,21 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         document.getElementById('savings30').textContent  = res30.savings.toLocaleString();
         document.getElementById('invested30').textContent = res30.invested.toLocaleString();
 
+        // 3b. Inject the user's raw input choices into the summary badges
+        if(document.getElementById('summaryLumpSum')) document.getElementById('summaryLumpSum').textContent  = answers.lumpSum || "£0";
+        if(document.getElementById('summaryLocation')) document.getElementById('summaryLocation').textContent = answers.cashLocation || "Unset";
+        if(document.getElementById('summaryMonthly')) document.getElementById('summaryMonthly').textContent  = answers.monthlySavings || "£0";
+        if(document.getElementById('summaryRisk')) document.getElementById('summaryRisk').textContent     = answers.riskProfile || "Unset";
+
+        // 3c. Trigger EmailJS to deliver the results direct to their inbox
+        const emailParams = {
+            firstName: firstName,
+            email: email,
+            difference_30_years: res30.diff.toLocaleString()
+        };
+
+        await emailjs.send('service_7hn83cm', 'template_g5nbo46', emailParams);
+
         // 4. Smoothly shift view to display the calculated success screen results (Explicitly Step 6)
         document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
         currentStep = 6; 
@@ -992,7 +1016,6 @@ function goBackStep() {
     }
 }
 
-// Automated Projection Algorithm
 // Automated Projection Algorithm with Dynamic Cash Location Baselines
 function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
     // Clean inputs (removes £ symbols, commas, and whitespace)
