@@ -305,6 +305,27 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     color: #333;
 }
 
+/* Styling for the success page redirect button */
+.course-cta-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--green); /* Highlights the next action in success green */
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    box-sizing: border-box;
+}
+
+.course-cta-btn:hover {
+    opacity: 0.95;
+    transform: translateY(-1px); /* Slight organic lift on hover */
+}
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -432,7 +453,9 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             <div class="step-card" data-step="6" class="success-box">
                 <h2 style="color: var(--green);">Details submitted ✔</h2>
                 <p>Thank you! I will run the numbers and send everything over shorly.</p>
-                
+                <a href="https://reallifemoney.co.uk/investing-course?=quiz" class="course-cta-btn">
+        Explore the Investing Workshops
+    </a>
             </div>
 
         </form>
