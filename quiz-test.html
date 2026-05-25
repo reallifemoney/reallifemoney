@@ -402,12 +402,18 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 
 .projections-table td {
     padding: 14px;
-    border-bottom: 1px solid #f0f5ef;
+    border: 1px solid #e0e6df;
 }
 
 .row-label {
     font-weight: 500;
     background-color: #fafdfa;
+    width: 28%;
+}
+
+.row-label-gain {
+    font-weight: 500;
+    background-color: var(--green);
     width: 28%;
 }
 
@@ -422,6 +428,7 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 
 .difference-row td {
     color: var(--white) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Value Offer Formatting Elements */
@@ -467,6 +474,54 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 }
 .compliance-footer p {
     margin-bottom: 12px;
+}
+
+/* User Selections Summary Badges Layout */
+.user-selections-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f7fbf6;
+    border-radius: 12px;
+    border: 1px solid #eef2ed;
+}
+
+.selection-badge {
+    flex: 1;
+    min-width: 130px;
+    background: var(--white);
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border: 1px solid #e2ece0;
+    text-align: center;
+}
+
+.badge-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #657362;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.badge-value {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1c3d17;
+}
+
+/* Make it crisp on smaller screens */
+@media (max-width: 480px) {
+    .selection-badge {
+        min-width: 45%; /* Drops smoothly into a clean 2x2 grid on mobile */
+    }
 }
 
         @keyframes fadeIn {
@@ -600,14 +655,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="step-card results-box" data-step="6">
     
     <div class="headline-container">
-        <p class="pre-header">Your 30-Year Growth Potential</p>
+        <p class="pre-header">YOU COULD HAVE...</p>
         <h2 class="big-money-headline">£<span id="displayDiff30">226,126</span></h2>
-        <p class="post-header"><strong>More money in your pocket</strong> by investing your cash instead of leaving it stuck in a savings account.</p>
+        <p class="post-header"><strong>more money in your pocket</strong> by investing your cash instead of leaving it where it is.</p>
     </div>
 
     <div class="pitch-banner">
         <blockquote>"The best time to start investing was yesterday. The second best time is today."</blockquote>
-        <p>At just <strong>£65 with your quiz discount</strong>, learning how to capture this growth potential isn't an expense—it's the highest-returning financial asset check you will make this year.</p>
+        <p>At just <strong>£65 with your quiz discount</strong>, learning how to capture this growth potential isn't a cost —it's the best investment you will ever make.</p>
     </div>
 
     <div class="table-responsive">
@@ -632,7 +687,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <td>£<span id="putAway30">77,000</span></td>
                 </tr>
                 <tr>
-                    <td class="row-label">Left where it is (Savings)</td>
+                    <td class="row-label">Left where it is</td>
                     <td>£<span id="savings3">13,526</span></td>
                     <td>£<span id="savings5">20,191</span></td>
                     <td>£<span id="savings10">40,907</span></td>
@@ -648,7 +703,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <td>£<span id="invested30">442,249</span></td>
                 </tr>
                 <tr class="difference-row">
-                    <td class="row-label">Gain from investing</td>
+                    <td class="row-label-gain">Gain from investing</td>
                     <td><strong>£<span id="diff3">1,004</span></strong></td>
                     <td><strong>£<span id="diff5">2,559</span></strong></td>
                     <td><strong>£<span id="diff10">11,027</span></strong></td>
@@ -665,30 +720,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>
                 <span class="bullet-icon">🎓</span>
                 <div>
-                    <strong>Expert, Qualified Guidance:</strong> 
-                    Led in plain English by a professional maths teacher and qualified financial advisor. Zero confusing industry jargon.
+                    <strong>Expert, qualified teacher:</strong> 
+                    Led in plain English by a professional maths teacher and qualified financial advisor. I also say no to confusing industry jargon.
                 </div>
             </li>
             <li>
                 <span class="bullet-icon">🎲</span>
                 <div>
-                    <strong>Gamified, Interactive Learning:</strong> 
-                    No mind-numbing slide sheets. Learn mechanics actively via our custom interactive workshop card games.
+                    <strong>Gamified, interactive learning:</strong> 
+                    Not just sitting and listening. Learn  actively via my custom interactive workshop games.
                 </div>
             </li>
             <li>
                 <span class="bullet-icon">💬</span>
                 <div>
-                    <strong>Lifetime Circle Community Access:</strong> 
-                    Get immediate entry into our private, invite-only WhatsApp group to share fund tips, discuss strategies, and get direct Ask-Me-Anything access to answers.
+                    <strong>Lifetime community access:</strong> 
+                    Get immediate entry into my private, attendees-only WhatsApp group to receive tips, ask any questions and share ideas with other like-minded individuals.
                 </div>
             </li>
         </ul>
     </div>
 
     <a href="https://reallifemoney.co.uk/investing-course?=quiz" class="course-cta-btn">
-        Secure Your Workshop Space For £65 Now →
+        Secure your workshop space →
     </a>
+
+    <div class="user-selections-summary">
+    <div class="selection-badge">
+        <span class="badge-label">Lump Sum</span>
+        <span class="badge-value" id="summaryLumpSum">£0</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Cash Kept In</span>
+        <span class="badge-value" id="summaryLocation">Not provided</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Monthly Savings</span>
+        <span class="badge-value" id="summaryMonthly">£0</span>
+    </div>
+    <div class="selection-badge">
+        <span class="badge-label">Risk Profile</span>
+        <span class="badge-value" id="summaryRisk">Not provided</span>
+    </div>
+</div>
 
     <div class="compliance-footer">
         <p>*<strong>Calculation Assumptions:</strong> Savings calculations assume an easy-access account yielding a consistent 3.5% annually. Investment growth potential calculations scale conservatively based on your stated risk selection: Low Risk figures utilize 4.5% (predominantly fixed-income bonds mixed with limited equities), Medium Risk projections utilize 6.0% (a balanced 50/50 baseline split), and High Risk profiles utilize 7.5% (100% global equity trackers). Actual long-term historical performance of tracking benchmarks like Vanguard LifeStrategy 100% Equity have averaged roughly 10.2% annualised returns since inception in 2011, meaning calculations are designed conservatively.</p>
@@ -919,20 +993,29 @@ function goBackStep() {
 }
 
 // Automated Projection Algorithm
+// Automated Projection Algorithm with Dynamic Cash Location Baselines
 function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
-    // Clean inputs (removes £ symbols and commas)
+    // Clean inputs (removes £ symbols, commas, and whitespace)
     const P = parseFloat(lumpSumRaw.replace(/[^\d.]/g, '')) || 0;
     const PMT = parseFloat(monthlyRaw.replace(/[^\d.]/g, '')) || 0;
     
-    // Assign investment rate based on user's selected risk profile
+    // 1. Assign investment rate based on user's selected risk profile
     let investRate = 0.06; // Default to Medium (6.0%)
     if (riskChoice === "Low Risk") investRate = 0.045;
     if (riskChoice === "High Risk") investRate = 0.075;
     
-    // Baseline cash/savings growth rate assumption (3.5%)
-    const cashRate = 0.035; 
+    // 2. DYNAMICALLY assign cash baseline rate based on what they chose in Step 2 (answers.cashLocation)
+    let cashRate = 0.035; // Default fallback to Savings (3.5%)
+    
+    if (answers.cashLocation === "Current Account") {
+        cashRate = 0.005; // 0.5%
+    } else if (answers.cashLocation === "Premium Bonds") {
+        cashRate = 0.025; // 2.5%
+    } else if (answers.cashLocation === "Savings Account") {
+        cashRate = 0.035; // 3.5%
+    }
 
-    // Helper to calculate total for a specific annual growth rate
+    // Helper to calculate total for a specific annual growth rate (compounded monthly)
     function getFutureValue(principal, monthly, annualRate, t) {
         const r = annualRate / 12; // Monthly interest rate
         const n = t * 12;          // Total number of months
