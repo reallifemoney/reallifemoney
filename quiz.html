@@ -318,14 +318,14 @@
         <div class="step-card active" data-step="1">
     <h2>How much cash do you have to invest now?</h2>
     <div class="options-list amount-grid">
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 0)">£0</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 100)">£100</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 300)">£300</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 500)">£500</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 1000)">£1,000</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 3000)">£3,000</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 5000)">£5,000</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 10000)">£10,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 0); logvideoclick()">£0</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 100); logvideoclick()">£100</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 300); logvideoclick()">£300</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 500); logvideoclick()">£500</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 1000); logvideoclick()">£1,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 3000); logvideoclick()">£3,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 5000); logvideoclick()">£5,000</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('lumpSum', 10000); logvideoclick()">£10,000</button>
         <button type="button" class="option-btn amount-pill" onclick="revealCustomInput('lumpSum')">Other</button>
     </div>
     
@@ -343,9 +343,9 @@
 <div class="step-card" data-step="2">
     <h2>Where is that cash sitting now?</h2>
     <div class="options-list">
-        <button type="button" class="option-btn" onclick="handleLocationSelection('Current Account')">Current Account</button>
-        <button type="button" class="option-btn" onclick="handleLocationSelection('Savings Account')">Savings Account</button>
-        <button type="button" class="option-btn" onclick="handleLocationSelection('Premium Bonds')">Premium Bonds</button>
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Current Account'); logsneakpeekclick()">Current Account</button>
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Savings Account'); logsneakpeekclick()">Savings Account</button>
+        <button type="button" class="option-btn" onclick="handleLocationSelection('Premium Bonds'); logsneakpeekclick()">Premium Bonds</button>
         <button type="button" class="option-btn" onclick="revealCustomInput('cashLocation')">Other</button>
     </div>
 
@@ -360,11 +360,11 @@
 <div class="step-card" data-step="3">
     <h2>How much extra could you invest per month?</h2>
     <div class="options-list amount-grid">
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 50)">£50</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 100)">£100</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 200)">£200</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 300)">£300</button>
-        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 500)">£500</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 50); logbuttonclick()">£50</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 100); logbuttonclick()">£100</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 200); logbuttonclick()">£200</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 300); logbuttonclick()">£300</button>
+        <button type="button" class="option-btn amount-pill" onclick="handlePillSelection('monthlySavings', 500); logbuttonclick()">£500</button>
         <button type="button" class="option-btn amount-pill" onclick="revealCustomInput('monthlySavings')">Other</button>
     </div>
 
@@ -373,7 +373,7 @@
             <span class="currency-symbol">£</span>
             <input type="number" id="monthlyInput" class="text-input" placeholder="0" min="0">
         </div>
-        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('monthlyInput', 'monthlySavings')">Continue</button>
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('monthlyInput', 'monthlySavings'); logbuttonclick()">Continue</button>
     </div>
     <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
@@ -381,9 +381,9 @@
 <div class="step-card" data-step="4">
     <h2>With investing, do you consider yourself a risk taker?</h2>
     <div class="options-list">
-        <button type="button" class="option-btn" onclick="nextOptionStep('Low Risk')">Low risk (prefer stability and modest growth)</button>
-        <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk')">Medium risk (comfortable with some up and downs)</button>
-        <button type="button" class="option-btn" onclick="nextOptionStep('High Risk')">High risk (priority is to maximise growth)</button>
+        <button type="button" class="option-btn" onclick="nextOptionStep('Low Risk');logcourseselection();">Low risk (prefer stability and modest growth)</button>
+        <button type="button" class="option-btn" onclick="nextOptionStep('Medium Risk');logcourseselection();">Medium risk (comfortable with some up and downs)</button>
+        <button type="button" class="option-btn" onclick="nextOptionStep('High Risk');logcourseselection();">High risk (priority is to maximise growth)</button>
     </div>
     <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
@@ -414,7 +414,7 @@
     </div>
     
     <div class="input-group">
-        <input type="text" id="firstName" placeholder="First Name" required class="text-input capture-input">
+        <input type="text" id="firstName" onfocus="lognamefieldfocus()" placeholder="First Name" required class="text-input capture-input">
     </div>
     <div class="input-group">
         <input type="email" id="email" placeholder="Email Address" required class="text-input capture-input">
@@ -533,7 +533,7 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         submitButton.disabled = false;
     }
 });
-<<<<<<< HEAD
+
 
 // All logging scripts
 
@@ -584,7 +584,7 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
   });
   window.addEventListener('pagehide', sendFinalData);
 
-=======
+
 
 // Function to handle moving backwards in the multi-step form
 function goBackStep() {
@@ -609,7 +609,7 @@ function goBackStep() {
         });
     }
 }
->>>>>>> 8833bcc884982303e67f7bcb8410e4f2f4780148
+
     </script>
 </body>
 </html>
