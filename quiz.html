@@ -314,6 +314,7 @@
     <div class="quiz-box">
         <form id="scoreappForm">
 
+
         <div class="step-card active" data-step="1">
     <h2>How much cash do you have to invest now?</h2>
     <div class="options-list amount-grid">
@@ -333,9 +334,11 @@
             <span class="currency-symbol">£</span>
             <input type="number" id="lumpSumInput" class="text-input" placeholder="0" min="0">
         </div>
-        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('lumpSumInput', 'lumpSum')">Continue</button>
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('lumpSumInput', 'lumpSum'); logvideoclick()">Continue</button>
     </div>
 </div>
+
+
 
 <div class="step-card" data-step="2">
     <h2>Where is that cash sitting now?</h2>
@@ -346,9 +349,10 @@
         <button type="button" class="option-btn" onclick="revealCustomInput('cashLocation')">Other</button>
     </div>
 
+
     <div id="custom-cashLocation-container" style="display: none; margin-top: 15px;">
         <input type="text" id="cashLocationInput" class="text-input" placeholder="Where is it sitting?" style="width: 100%; box-sizing: border-box; padding: 12px;">
-        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('cashLocationInput', 'cashLocation')">Continue</button>
+        <button type="button" class="action-btn" style="margin-top: 10px;" onclick="validateCustomInput('cashLocationInput', 'cashLocation'); logsneakpeekclick()">Continue</button>
     </div>
     <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
 </div>
@@ -529,6 +533,58 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         submitButton.disabled = false;
     }
 });
+<<<<<<< HEAD
+
+// All logging scripts
+
+  let sent = false;
+  const pageEntryTime = Date.now();
+  let maxScroll = 0;
+  // Initialize these globally
+  let ctaClicked = "No";
+  let videoClicked = "No";
+  let courseSelected = "No";
+  let sneakPeekClicked = "No";      // Added tracking variable
+  let nameFieldFocused = "No";      // Added tracking variable
+
+  window.addEventListener('scroll', () => {
+    const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+    if (scrolled > maxScroll) maxScroll = scrolled;
+  }, { passive: true });
+
+  function logbuttonclick() { ctaClicked = "Yes"; }
+  function logvideoclick() { videoClicked = "Yes"; }
+  function logcourseselection() { courseSelected = "Yes"; }
+  function logsneakpeekclick() { sneakPeekClicked = "Yes"; } // Added tracking function
+  function lognamefieldfocus() { nameFieldFocused = "Yes"; } // Added tracking function
+
+  function sendFinalData() {
+    if (sent) return;
+    sent = true;
+
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      ctaClicked: ctaClicked,
+      videoClicked: videoClicked,
+      courseSelected: courseSelected,
+      sneakPeekClicked: sneakPeekClicked, // Added to payload
+      nameFieldFocused: nameFieldFocused, // Added to payload
+      url: window.location.href
+    };
+
+    // This is the most reliable way to send to Google
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
+  }
+
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendFinalData();
+  });
+  window.addEventListener('pagehide', sendFinalData);
+
+=======
 
 // Function to handle moving backwards in the multi-step form
 function goBackStep() {
@@ -553,6 +609,7 @@ function goBackStep() {
         });
     }
 }
+>>>>>>> 8833bcc884982303e67f7bcb8410e4f2f4780148
     </script>
 </body>
 </html>
