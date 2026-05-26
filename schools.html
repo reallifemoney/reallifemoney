@@ -531,4 +531,98 @@
                 </div>
 
                 <div class="card" style="border: 1px solid var(--sage-green); background-color: var(--light-mint);">
-                    <span style="color: var(--sage-green); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1
+                    <span style="color: var(--sage-green); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Bonus Integration</span>
+                    <h3 style="margin-top: 5px; font-size: 24px;">Teachers' Pension Session</h3>
+                    <p style="margin-bottom: 15px;"><strong>Format:</strong> Bonus 60-minute standalone masterclass—open broadly to up to 30 members of staff simultaneously.</p>
+                    <ul style="margin-left: 20px;">
+                        <li style="margin-bottom: 8px;">Completely accessible to all school staff—not restricted purely to core course attendees.</li>
+                        <li style="margin-bottom: 8px;">Demystifies how the Teachers' Pension Scheme works, mapping real scenarios and career projection trends.</li>
+                        <li style="margin-bottom: 8px;">Designed entirely as a practical, active walkthrough rather than a passive text lecture.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin: 60px 0 20px 0; color: var(--forest-green);">Flexible Pricing Models</h3>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3>MODEL A<br>Fully Funded</h3>
+                    <div class="price-value">£100 <span style="font-size:12px; font-weight:normal; color:var(--charcoal);">/ person</span></div>
+                    <p style="font-size: 14px;">School pays per attendee after the course. Covers both investing sessions for up to 12 people, and the bonus TPS session is included for up to 30 staff members (meaning an additional 18 people join the pension session free of charge).</p>
+                </div>
+                <div class="price-card">
+                    <h3>MODEL B<br>TPS Only</h3>
+                    <div class="price-value">£20 <span style="font-size:12px; font-weight:normal; color:var(--charcoal);">/ person</span></div>
+                    <p style="font-size: 14px;">The school funds the stand-alone Teachers' Pension Scheme masterclass block (up to 30 people maximum). Staff can choose to buy into the separate investment tracks privately if desired.</p>
+                </div>
+                <div class="price-card">
+                    <h3>MODEL C<br>Subsidised</h3>
+                    <div class="price-value">Co-funded</div>
+                    <p style="font-size: 14px;">Decide on an custom proportional split between the school budget and staff contributions. This creates low financial outlay for the school while ensuring staff have skin in the game.</p>
+                </div>
+                <div class="price-card">
+                    <h3>MODEL D<br>Course Promotion</h3>
+                    <div class="price-value">£0 <span style="font-size:12px; font-weight:normal; color:var(--charcoal);">to the trust</span></div>
+                    <p style="font-size: 14px;">School provides a classroom space and promotes the course details internally. The core cost passes entirely to individual staff members at a special rate of £85 per person.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="text-align: center; background-color: var(--forest-green); color: #ffffff;">
+        <div class="container">
+            <h2>Bring Real Life Money to your staffroom</h2>
+            <p style="max-width: 650px; margin: 15px auto 35px auto; opacity: 0.9;">Secure your school's slot or discuss coordinating a bespoke financial wellbeing pathway matching your upcoming training profiles.</p>
+            <button class="btn" style="padding: 16px 36px; font-size: 18px;" onclick="openContactModal()">Connect with our founder now</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="text-align: center;">
+            <p style="margin-bottom: 10px; font-weight: 600;">Real life money</p>
+            <p style="opacity: 0.7; font-size: 12px; max-width: 800px; margin: 0 auto;">Disclaimer: Calculations and structural courses are organized purely for objective personal financial development and educational background insight tracking. We do not provide specialized individual regulated investment advice profiles.</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="contactModal" onclick="closeContactModalOverlay(event)">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeContactModal()">&times;</span>
+            <h2>Let's discuss your school's needs</h2>
+            <p style="margin-bottom: 20px; color: #657362;">Reach out directly to verify available dates or ask questions about our course delivery models.</p>
+            
+            <a href="mailto:leo@reallifemoney.co.uk" class="contact-channel">
+                ✉️ Email: leo@reallifemoney.co.uk
+            </a>
+            
+            <a href="https://wa.me/447123456789" target="_blank" class="contact-channel" style="background-color: #e8f7e6; border-color: #a3e099;">
+                💬 Call / WhatsApp: +44 7123 456789
+            </a>
+            
+            <p style="font-size: 11px; color: #999; margin-top: 15px;">We reply to all school enquiries within one business day.</p>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('contactModal');
+
+        function openContactModal() {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+        }
+
+        function closeContactModal() {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        function closeContactModalOverlay(event) {
+            if (event.target === modal) {
+                closeContactModal();
+            }
+        }
+    </script>
+</body>
+</html>
