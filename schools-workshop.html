@@ -1272,7 +1272,7 @@ font-style: italic;
         }
 
         .card {
-            background-color: var(--mint);
+            background-color: white;
             border: 1px solid black;
             padding: 30px;
             border-radius: 12px;
@@ -1287,7 +1287,7 @@ font-style: italic;
 
         /* Stats panel */
         .stats-banner {
-            background-color: var(--mint);
+            background-color: white;
             border: 1px solid black;
             border-radius: 16px;
             padding: 40px;
@@ -1433,6 +1433,7 @@ font-style: italic;
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
+            
         }
 
         .modal-box {
@@ -1486,7 +1487,7 @@ font-style: italic;
 <!-- NAV -->
 <nav>
     <a class="nav-logo" href="/">
-      <img src="/get-bristol-investing.webp" alt="Real Life Money" style="height: 70px; width: auto;">
+      <img src="/get-bristol-investing.webp" alt="Real Life Money" style="height: 100px; width: auto;">
     </a>
     <a class="nav-cta" href="javascript:void(0)" onclick="openContactModal()">Make enquiry →</a>
 </nav>
@@ -2252,20 +2253,28 @@ document.getElementById('employerForm').addEventListener('submit', function(e) {
   });
 }); // This was likely the bracket you were missing!
 
+
+
+
 function openContactModal() {
-    // Fetch the element at the exact moment the button is clicked
     const modal = document.getElementById('contactModal');
     
+    // 1. Make it structurally visible
     modal.style.display = 'flex';
+    
+    // 2. Wait a split second for the browser to redraw before changing opacity
     setTimeout(() => {
         modal.style.opacity = '1';
-    }, 10);
+    }, 20); 
 }
 
 function closeContactModal() {
     const modal = document.getElementById('contactModal');
     
+    // 1. Fade out smoothly
     modal.style.opacity = '0';
+    
+    // 2. Hide structurally after the 300ms CSS transition completes
     setTimeout(() => {
         modal.style.display = 'none';
     }, 300);
@@ -2273,7 +2282,6 @@ function closeContactModal() {
 
 function closeContactModalOverlay(event) {
     const modal = document.getElementById('contactModal');
-    
     if (event.target === modal) {
         closeContactModal();
     }
