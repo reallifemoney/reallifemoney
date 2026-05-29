@@ -2252,27 +2252,32 @@ document.getElementById('employerForm').addEventListener('submit', function(e) {
   });
 }); // This was likely the bracket you were missing!
 
-const modal = document.getElementById('contactModal');
+function openContactModal() {
+    // Fetch the element at the exact moment the button is clicked
+    const modal = document.getElementById('contactModal');
+    
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
 
-        function openContactModal() {
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-            }, 10);
-        }
+function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
 
-        function closeContactModal() {
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-
-        function closeContactModalOverlay(event) {
-            if (event.target === modal) {
-                closeContactModal();
-            }
-        }
+function closeContactModalOverlay(event) {
+    const modal = document.getElementById('contactModal');
+    
+    if (event.target === modal) {
+        closeContactModal();
+    }
+}
 
 </script>
 <div id="cookie-toast" class="cookie-toast">
