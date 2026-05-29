@@ -1266,17 +1266,18 @@ font-style: italic;
         }
 
         .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+    display: grid;
+    /* Changed minmax from 450px to 300px so it fits mobile viewports */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
 
-        .card {
-            background-color: white;
-            border: 1px solid black;
-            padding: 30px;
-            border-radius: 12px;
-        }
+/* Optional: If you want these two specific cards to look wider on desktop screens */
+@media (min-width: 768px) {
+    .grid-3 {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    }
+}
 
         .card h3 {
             color: var(--green);
@@ -1788,7 +1789,7 @@ font-style: italic;
             <h2 class="section-title">The Complete Course Proposal</h2>
             <p class="section-subtitle">A balanced, highly practical format designed around school time constraints.</p>
 
-            <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));">
+            <div class="grid-3">
                 <div class="card">
                     <span style="color: var(--sage-green); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Core Pathway</span>
                     <h3 style="margin-top: 5px; font-size: 24px;">Investing Course</h3>
