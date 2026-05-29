@@ -1359,6 +1359,19 @@ body {
   transition: 0.2s;
 }
 
+.select-btn-sold {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--orange);
+  background-color: var(--orange);
+  color: red;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
 
 
 .date-card.selected .select-btn {
@@ -2930,7 +2943,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
             </div>
           </div>
-          <button class="select-btn">SOLD OUT</button>
+          <button class="select-btn-sold">SOLD OUT</button>
         </div>
 
         <div class="date-card" id="card-july" onclick="selectDateStep('July', 'Wed 1st & 8th July', '6:30pm – 8:00pm');logcourseselection();">
