@@ -64,6 +64,13 @@ body {
     --muted:   #6b6b6b;
     --rule:    #daecd6;
     --white:   #ffffff;
+    --forest-green: #1f3a29;
+    --sage-green: #4a8240;
+    --light-mint: #f4faf2;
+    --cream: #fafdfa;
+    --charcoal: #2c3e2b;
+    --border-color: #cbdcc7;
+    --gold: #f4b41a;
   }
  
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1265,14 +1272,14 @@ font-style: italic;
         }
 
         .card {
-            background-color: var(--cream);
-            border: 1px solid var(--border-color);
+            background-color: var(--green);
+            border: 1px solid black;
             padding: 30px;
             border-radius: 12px;
         }
 
         .card h3 {
-            color: var(--forest-green);
+            color: var(--green);
             margin-bottom: 15px;
             font-size: 20px;
             font-weight: 600;
@@ -1280,8 +1287,8 @@ font-style: italic;
 
         /* Stats panel */
         .stats-banner {
-            background-color: var(--cream);
-            border: 1px solid var(--border-color);
+            background-color: var(--green);
+            border: 1px solid black;
             border-radius: 16px;
             padding: 40px;
             margin-bottom: 50px;
@@ -1296,14 +1303,14 @@ font-style: italic;
 
         .stat-box h4 {
             font-size: 48px;
-            color: var(--forest-green);
+            color: var(--green);
             margin-bottom: 5px;
             font-weight: 800;
         }
 
         .stat-box p {
             font-size: 14px;
-            color: var(--charcoal);
+            color: black;
             font-weight: 500;
         }
 
@@ -1479,9 +1486,9 @@ font-style: italic;
 <!-- NAV -->
 <nav>
     <a class="nav-logo" href="/">
-      <img src="/logo.webp" alt="Real Life Money" style="height: 70px; width: auto;">
+      <img src="/get-bristol-investing.webp" alt="Real Life Money" style="height: 70px; width: auto;">
     </a>
-    <a class="nav-cta" href="javascript:void(0)" onclick="togglePopup()">Make enquiry →</a>
+    <a class="nav-cta" href="javascript:void(0)" onclick="openContactModal()">Make enquiry →</a>
 </nav>
  
 <!-- HERO -->
@@ -1700,7 +1707,7 @@ font-style: italic;
 </section>
 
 <!-- SESSIONS -->
-<section class="section-padding white-bg">
+<section id="options" class="section-padding white-bg">
         <div class="container">
             <h2 class="section-title">The Complete Course Proposal</h2>
             <p class="section-subtitle">A balanced, highly practical format designed around school time constraints.</p>
@@ -1905,7 +1912,7 @@ font-style: italic;
 <!-- FOOTER -->
 <footer>
   <p>
-    <strong style="color:rgba(255,255,255,0.55)">Real Life Money</strong> · Bristol ·
+    <strong style="color:black">Real Life Money</strong> · Bristol ·
     Financial education, not regulated financial advice. All content is general and educational in nature.<br>
     <a href="/contact">Contact</a> · <a href="/privacy">Privacy</a>
   </p>
