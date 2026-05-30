@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7-Week Content Schedule — Real Life Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint: #eef8eb; --purple: #8c52ff; --orange: #ff914d;
+  --yellow: #ffde59; --green: #71c558; --ink: #1a1a1a;
+  --muted: #6b6b6b; --rule: #daecd6; --white: #fff;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Lexend',sans-serif; background:var(--mint); color:var(--ink); font-weight:300; }
+
+.header {
+  background:var(--ink); padding:48px 48px 40px; position:relative; overflow:hidden;
+}
+.header::before {
+  content:''; position:absolute; width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle,rgba(140,82,255,0.18),transparent 70%);
+  top:-100px; right:-80px;
+}
+.header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; }
+.logo { display:flex; align-items:center; gap:10px; }
+.logo-dots { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+.ld { width:9px; height:9px; border-radius:50%; }
+.logo-name { font-size:15px; font-weight:500; color:rgba(255,255,255,0.6); }
+.header-title { font-size:clamp(28px,4vw,52px); font-weight:700; color:#fff; letter-spacing:-1.5px; line-height:1.05; margin-bottom:12px; }
+.header-title span { color:var(--yellow); }
+.header-sub { font-size:15px; font-weight:300; color:rgba(255,255,255,0.45); max-width:560px; line-height:1.6; margin-bottom:32px; }
+.header-pills { display:flex; gap:12px; flex-wrap:wrap; }
+.pill {
+  display:flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+  border-radius:100px; padding:8px 16px;
+  font-size:12px; font-weight:400; color:rgba(255,255,255,0.6);
+}
+.pill-dot { width:6px; height:6px; border-radius:50%; }
+
+/* LEGEND */
+.legend {
+  padding:20px 48px; background:var(--white);
+  border-bottom:1px solid var(--rule);
+  display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.legend-title { font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-right:8px; }
+.leg { display:flex; align-items:center; gap:7px; font-size:12px; font-weight:400; color:var(--muted); }
+.leg-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+/* WEEKS */
+.weeks { padding:32px 48px 64px; }
+.week-block { margin-bottom:28px; }
+.week-header {
+  display:flex; align-items:center; gap:14px; margin-bottom:14px;
+}
+.week-num {
+  background:var(--ink); color:#fff;
+  font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
+  padding:5px 14px; border-radius:100px;
+}
+.week-theme {
+  font-size:13px; font-weight:400; color:var(--muted); font-style:italic;
+}
+
+.days-grid {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:10px;
+}
+
+.day-card {
+  background:var(--white); border:1px solid var(--rule);
+  border-radius:12px; overflow:hidden;
+  transition:transform 0.15s, box-shadow 0.15s;
+}
+.day-card:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+
+.day-header {
+  padding:10px 14px 8px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid var(--rule);
+}
+.day-name { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.day-num { font-size:11px; font-weight:400; color:var(--muted); }
+
+.day-type {
+  display:inline-flex; align-items:center; gap:5px;
+  margin:10px 14px 6px;
+  font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase;
+  padding:3px 9px; border-radius:100px;
+}
+
+.day-body { padding:0 14px 14px; }
+.day-title { font-size:13px; font-weight:500; color:var(--ink); line-height:1.4; margin-bottom:6px; }
+.day-hook { font-size:11px; font-weight:300; color:var(--muted); line-height:1.5; margin-bottom:8px; }
+
+.coin-flag {
+  display:flex; align-items:center; gap:5px;
+  font-size:10px; font-weight:600; color:#b8930a;
+  background:#fffbe8; border:1px solid #f0d060;
+  border-radius:6px; padding:4px 9px; width:fit-content;
+}
+
+/* Platform badges */
+.platforms { display:flex; gap:5px; margin-top:8px; }
+.plat {
+  font-size:9px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+  padding:2px 7px; border-radius:100px; border:1px solid;
+}
+.plat-ig { background:#fce4ec; border-color:#f48fb1; color:#880e4f; }
+.plat-li { background:#e3f2fd; border-color:#90caf9; color:#0d47a1; }
+.plat-tk { background:#f3e5f5; border-color:#ce93d8; color:#4a148c; }
+
+/* Type colours */
+.type-myth { background:#f3eeff; color:var(--purple); border:none; }
+.type-teacher { background:#fff4ee; color:var(--orange); border:none; }
+.type-invest { background:#f0faed; color:#2c6b1a; border:none; }
+.type-personal { background:#fffbe8; color:#b8930a; border:none; }
+.type-tps { background:#e8f4fd; color:#1565c0; border:none; }
+
+@media (max-width:900px) {
+  .days-grid { grid-template-columns:1fr 1fr; }
+  .weeks, .legend, .header { padding-left:24px; padding-right:24px; }
+}
+@media (max-width:500px) {
+  .days-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-dots">
+        <div class="ld" style="background:#ffde59"></div>
+        <div class="ld" style="background:#8c52ff"></div>
+        <div class="ld" style="background:#71c558"></div>
+        <div class="ld" style="background:#ff914d"></div>
+      </div>
+      <span class="logo-name">Real Life Money</span>
+    </div>
+  </div>
+  <h1 class="header-title">7-Week Content<br><span>Schedule</span></h1>
+  <p class="header-sub">One post per school day. 35 posts. Filmed in your classroom, 5 minutes each morning. Every post ends with the coin flip giveaway.</p>
+  <div class="header-pills">
+    <div class="pill"><span class="pill-dot" style="background:var(--purple)"></span>35 posts total</div>
+    <div class="pill"><span class="pill-dot" style="background:var(--green)"></span>5 mins per morning</div>
+    <div class="pill"><span class="pill-dot" style="background:var(--yellow)"></span>Coin flip every post</div>
+    <div class="pill"><span class="pill-dot" style="background:var(--orange)"></span>IG + LinkedIn + TikTok</div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-title">Content type</span>
+  <div class="leg"><div class="leg-dot" style="background:#8c52ff"></div>Myth bust</div>
+  <div class="leg"><div class="leg-dot" style="background:#ff914d"></div>Teacher/personal</div>
+  <div class="leg"><div class="leg-dot" style="background:#71c558"></div>Investing content</div>
+  <div class="leg"><div class="leg-dot" style="background:#b8930a"></div>Opinion/story</div>
+  <div class="leg"><div class="leg-dot" style="background:#1565c0"></div>TPS/pension</div>
+</div>
+
+<div class="weeks">
+
+<!-- WEEK 1 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 1</div>
+    <div class="week-theme">Introduce yourself — who is this guy and why should I watch?</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 1</span></div>
+      <div class="day-type type-personal">Personal</div>
+      <div class="day-body">
+        <div class="day-title">Why does a maths teacher make investing content?</div>
+        <div class="day-hook">Your origin story in 60 seconds. Financial adviser → teacher → this. Set the tone immediately — casual, classroom, lanyard on.</div>
+        <div class="coin-flag">🪙 Coin flip #1 — running tally begins</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 2</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"You need loads of money to start investing"</div>
+        <div class="day-hook">Bust it in 30 seconds. You can start with £1. Name drop Vanguard, Freetrade. High shareability — everyone thinks this.</div>
+        <div class="coin-flag">🪙 Coin flip #2</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 3</span></div>
+      <div class="day-type type-teacher">Teacher</div>
+      <div class="day-body">
+        <div class="day-title">I asked my year 9s what they knew about investing. Here's what they said.</div>
+        <div class="day-hook">Read out the actual answers (get permission or keep vague). Funny + sad + makes the point for you. Very relatable for teacher audience.</div>
+        <div class="coin-flag">🪙 Coin flip #3</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 4</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">What actually is an ISA? (Under 60 seconds)</div>
+        <div class="day-hook">Individual Savings Account. The wrapper. The tax-free magic. Draw it on the whiteboard behind you. Simple and useful.</div>
+        <div class="coin-flag">🪙 Coin flip #4</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 5</span></div>
+      <div class="day-type type-personal">Story</div>
+      <div class="day-body">
+        <div class="day-title">My most embarrassing money mistake (before I knew better)</div>
+        <div class="day-hook">Vulnerable, funny, human. This type of post gets shared more than anything. Builds trust immediately.</div>
+        <div class="coin-flag">🪙 Coin flip #5 — Friday energy</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 2 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 2</div>
+    <div class="week-theme">Core investing concepts — taught like a lesson, not a lecture</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 6</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">The one chart that made me start investing at 22</div>
+        <div class="day-hook">Compound interest drawn on your whiteboard. £100/month from 22 vs 32. The gap is shocking. Hold up the numbers to camera.</div>
+        <div class="coin-flag">🪙 Coin flip #6</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 7</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"Investing is gambling"</div>
+        <div class="day-hook">The actual difference. Gambling = zero sum. Investing = owning a slice of real businesses. Use the casino vs owning a casino analogy.</div>
+        <div class="coin-flag">🪙 Coin flip #7</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 8</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">What is a fund? Explained using a swimming pool</div>
+        <div class="day-hook">Your swimming pool analogy from the course. Public pool vs private pool. Genuinely the best explanation — do it to camera.</div>
+        <div class="coin-flag">🪙 Coin flip #8</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 9</span></div>
+      <div class="day-type type-teacher">Teacher</div>
+      <div class="day-body">
+        <div class="day-title">"Staff meeting was about behaviour policy. Nobody mentioned our pension."</div>
+        <div class="day-hook">Dry, relatable, funny. LinkedIn gold. Pivot to: here's what your TPS is actually worth. Short and punchy.</div>
+        <div class="coin-flag">🪙 Coin flip #9</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 10</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">Stocks and Shares ISA vs Cash ISA — which one?</div>
+        <div class="day-hook">Write both on the whiteboard. Simple comparison. "Cash ISA: your money sits there. Stocks & Shares ISA: your money works." Call to action at end.</div>
+        <div class="coin-flag">🪙 Coin flip #10 — double figures!</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 3 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 3</div>
+    <div class="week-theme">Teacher niche — go deep on the audience most likely to book</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 11</span></div>
+      <div class="day-type type-tps">TPS</div>
+      <div class="day-body">
+        <div class="day-title">How much is the Teachers' Pension actually worth?</div>
+        <div class="day-hook">Work it out on the board. Employer contribution + your contribution + final value. Most teachers have never seen this number. Shock factor.</div>
+        <div class="coin-flag">🪙 Coin flip #11</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 12</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"Cash in the bank is safe money"</div>
+        <div class="day-hook">Inflation is eating it. £10,000 in 2015 buys what today? Real numbers. Draw the shrinking bar on the whiteboard. Unsettling but necessary.</div>
+        <div class="coin-flag">🪙 Coin flip #12</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 13</span></div>
+      <div class="day-type type-personal">Personal</div>
+      <div class="day-body">
+        <div class="day-title">Why I left financial advice to become a teacher</div>
+        <div class="day-hook">The real story. What you saw in financial services. Why it bothered you. What you want to do about it. Authentic and builds deep trust.</div>
+        <div class="coin-flag">🪙 Coin flip #13</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 14</span></div>
+      <div class="day-type type-tps">TPS</div>
+      <div class="day-body">
+        <div class="day-title">Final salary vs career average — what changed and why it matters</div>
+        <div class="day-hook">Pre and post 2015 TPS. Draw the two on the board. Quick, clear, essential knowledge for every teacher under 40.</div>
+        <div class="coin-flag">🪙 Coin flip #14</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 15</span></div>
+      <div class="day-type type-teacher">Teacher</div>
+      <div class="day-body">
+        <div class="day-title">30-second Friday fact — halfway through term energy</div>
+        <div class="day-hook">Casual, quick, fun. Something like: "Did you know you can open a Stocks and Shares ISA with your lunch money?" Lean into the Friday vibe.</div>
+        <div class="coin-flag">🪙 Coin flip #15 — halfway!</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 4 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 4</div>
+    <div class="week-theme">Opinion and debate — be a bit bolder, spark conversation</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 16</span></div>
+      <div class="day-type type-personal">Opinion</div>
+      <div class="day-body">
+        <div class="day-title">Unpopular opinion: most finance influencers are making things worse</div>
+        <div class="day-hook">Overcomplicated content, fear-based, promotes active trading. You do the opposite. Say it calmly, back it up, don't be aggressive.</div>
+        <div class="coin-flag">🪙 Coin flip #16</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 17</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">Index funds vs actively managed — the boring truth</div>
+        <div class="day-hook">Most actively managed funds don't beat the index. The data is clear. Explain it simply. Mention S&P 500 tracker. Write the comparison on the board.</div>
+        <div class="coin-flag">🪙 Coin flip #17</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 18</span></div>
+      <div class="day-type type-personal">Opinion</div>
+      <div class="day-body">
+        <div class="day-title">Should you pay off your mortgage or invest? My actual view.</div>
+        <div class="day-hook">Nuanced, honest, doesn't give a definitive answer (because it depends) but gives a framework. Great LinkedIn post too. Invites debate.</div>
+        <div class="coin-flag">🪙 Coin flip #18</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 19</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"I'll wait until the market calms down before investing"</div>
+        <div class="day-hook">Time in the market beats timing the market. Use a simple example. Anyone who waited for calm in 2020 missed the recovery. Classic and important.</div>
+        <div class="coin-flag">🪙 Coin flip #19</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 20</span></div>
+      <div class="day-type type-teacher">Teacher</div>
+      <div class="day-body">
+        <div class="day-title">Behind the scenes — setting up for an evening course</div>
+        <div class="day-hook">Film yourself putting out the tables and card games before a course. Authentic, builds anticipation, shows the real product. No polish needed.</div>
+        <div class="coin-flag">🪙 Coin flip #20</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 5 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 5</div>
+    <div class="week-theme">Practical and actionable — "do this today" energy</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 21</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">The Vanguard LifeStrategy funds — what are they and should you use one?</div>
+        <div class="day-hook">One of the most Googled investing questions. Simple, honest answer. 80/20 explained. No financial advice disclaimer — just education.</div>
+        <div class="coin-flag">🪙 Coin flip #21</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 22</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">What is risk tolerance and how do you figure out yours?</div>
+        <div class="day-hook">Give a quick 3-question framework on the whiteboard. What's your timeframe? How would you react if your pot halved? What's the money for? Practical.</div>
+        <div class="coin-flag">🪙 Coin flip #22</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 23</span></div>
+      <div class="day-type type-tps">TPS</div>
+      <div class="day-body">
+        <div class="day-title">Can you take your teachers pension early? The honest answer.</div>
+        <div class="day-hook">Yes but penalties apply. Actuarially reduced. Walk through how much you lose per year early. Questions about this come up constantly.</div>
+        <div class="coin-flag">🪙 Coin flip #23</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 24</span></div>
+      <div class="day-type type-personal">Story</div>
+      <div class="day-body">
+        <div class="day-title">A course attendee messaged me to say they'd made their first investment. Here's what happened.</div>
+        <div class="day-hook">Tell the story (anonymised if needed). Emotional payoff. This is why you do it. Very shareable, especially in teacher communities.</div>
+        <div class="coin-flag">🪙 Coin flip #24</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 25</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"Premium bonds are a great investment"</div>
+        <div class="day-hook">They're not bad, but they're not investing. Expected return is roughly 4.4% tax-free — which sounds good until you compare to a stocks ISA over 20 years.</div>
+        <div class="coin-flag">🪙 Coin flip #25</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 6 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 6</div>
+    <div class="week-theme">Broaden the reach — content that travels beyond your core audience</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 26</span></div>
+      <div class="day-type type-personal">Opinion</div>
+      <div class="day-body">
+        <div class="day-title">The advice gap — why rich people get financial advice and everyone else gets YouTube</div>
+        <div class="day-hook">Your core thesis. Say it plainly, say it boldly. This is the whole reason you exist. LinkedIn will love this. Write it as a text post for LinkedIn, reel for IG.</div>
+        <div class="coin-flag">🪙 Coin flip #26</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 27</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">What would £200/month invested for 30 years look like?</div>
+        <div class="day-hook">Show the maths on the board. At 7% avg return = ~£227,000. At 5% = ~£166,000. Make it relatable. "That's less than a Netflix and a coffee a day."</div>
+        <div class="coin-flag">🪙 Coin flip #27</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 28</span></div>
+      <div class="day-type type-teacher">Teacher</div>
+      <div class="day-body">
+        <div class="day-title">Things I teach in my evening course that I wish I'd been taught at school</div>
+        <div class="day-hook">List format — say 5 things to camera quickly. Relatable for literally everyone. "Compound interest. ISAs. What a bond is. How funds work. What your pension is actually worth." Boom.</div>
+        <div class="coin-flag">🪙 Coin flip #28</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 29</span></div>
+      <div class="day-type type-invest">Investing</div>
+      <div class="day-body">
+        <div class="day-title">Three things to check before you invest in anything</div>
+        <div class="day-hook">Charges (OCF/TER). What's in it. How long you can leave it. Write on whiteboard. Actionable, practical, shareable. The kind of post that gets saved.</div>
+        <div class="coin-flag">🪙 Coin flip #29</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 30</span></div>
+      <div class="day-type type-personal">Personal</div>
+      <div class="day-body">
+        <div class="day-title">My first ever investment — what I bought and what happened</div>
+        <div class="day-hook">Personal, honest, slightly embarrassing ideally. Everyone loves origin stories. Keep it human — didn't have to be a triumph.</div>
+        <div class="coin-flag">🪙 Coin flip #30</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WEEK 7 -->
+<div class="week-block">
+  <div class="week-header">
+    <div class="week-num">Week 7</div>
+    <div class="week-theme">Convert — make people want to come to the course or book a 1:1</div>
+  </div>
+  <div class="days-grid">
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Monday</span><span class="day-num">Day 31</span></div>
+      <div class="day-type type-personal">Story</div>
+      <div class="day-body">
+        <div class="day-title">What happens inside my evening investing course (the honest version)</div>
+        <div class="day-hook">Walk through a session. The card game. The questions. The moment people get it. Show the classroom. Humanise the experience. Not a sales pitch — a story.</div>
+        <div class="coin-flag">🪙 Coin flip #31</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Tuesday</span><span class="day-num">Day 32</span></div>
+      <div class="day-type type-tps">TPS</div>
+      <div class="day-body">
+        <div class="day-title">TPS + ISA — how they work together to build real wealth</div>
+        <div class="day-hook">Your pension covers the floor. Your ISA builds on top. Draw the two layers. This framing is really compelling for teachers in their 30s and 40s.</div>
+        <div class="coin-flag">🪙 Coin flip #32</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Wednesday</span><span class="day-num">Day 33</span></div>
+      <div class="day-type type-myth">Myth bust</div>
+      <div class="day-body">
+        <div class="day-title">"I'll start investing when I earn more"</div>
+        <div class="day-hook">The maths on starting now vs waiting 5 years — even with small amounts — is devastating. Whiteboard. Numbers. The cost of waiting is the message.</div>
+        <div class="coin-flag">🪙 Coin flip #33</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Thursday</span><span class="day-num">Day 34</span></div>
+      <div class="day-type type-personal">Reflection</div>
+      <div class="day-body">
+        <div class="day-title">7 weeks of posting — what I've learned (and the coin tally reveal)</div>
+        <div class="day-hook">Meta-post. Share what content worked. What surprised you. Show the coin tally. Announce if there was a winner. Ask what content people want next. Perfect reassessment moment.</div>
+        <div class="coin-flag">🪙 Coin flip #34 — grand tally reveal</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-header"><span class="day-name">Friday</span><span class="day-num">Day 35</span></div>
+      <div class="day-type type-teacher">CTA</div>
+      <div class="day-body">
+        <div class="day-title">If you've been watching these and thinking "I should do something" — here's the thing.</div>
+        <div class="day-hook">Gentle, warm CTA. Not pushy. "I run a course. It's 3 evenings. It's £75. Link in bio." Then the coin flip. Let the 7 weeks of trust do the work.</div>
+        <div class="coin-flag">🪙 Coin flip #35 — final one, make it count</div>
+        <div class="platforms"><span class="plat plat-ig">IG</span><span class="plat plat-li">LinkedIn</span><span class="plat plat-tk">TikTok</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIPS -->
+<div style="background:var(--ink);border-radius:16px;padding:32px 36px;margin-top:8px;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);margin-bottom:16px;">Tips for every post</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">The coin flip</div>
+      <div style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.6;">Always end on it. Keep a running tally on screen. "Attempt 12, wins so far: 1." The suspense is the hook that brings people back.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">LinkedIn vs Instagram</div>
+      <div style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.6;">Don't cross-post directly. On LinkedIn, rewrite as a text story with the key point first. The algorithm rewards native text posts, not repurposed Reels.</div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;">The classroom setting</div>
+      <div style="font-size:12px;font-weight:300;color:rgba(255,255,255,0.5);line-height:1.6;">Don't tidy it up too much. The whiteboard, the lanyard, the morning rush energy — that's the differentiator. Nobody else has this setting.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end weeks -->
+
+</body>
+</html>
