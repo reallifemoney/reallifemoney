@@ -351,10 +351,10 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 }
 
 .big-money-headline {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: var(--green);
-    font-weight: 800;
-    margin: 10px 0;
+    font-weight: 700;
+    margin: 8px 0;
     letter-spacing: -1px;
 }
 
@@ -727,7 +727,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="benefit-item">
             <span class="checkmark-badge">✔</span>
-            <p><strong>PDF with workshop preview and £10 discount</strong></p>
+            <p><strong>PDF with workshop preview</strong></p>
+        </div>
+        <div class="benefit-item">
+            <span class="checkmark-badge">✔</span>
+            <p><strong>£10 workshop discount</strong></p>
         </div>
     
         
@@ -746,12 +750,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="step-card results-box" data-step="6">
     
-    <div class="headline-container fade-in-element">
-        <p class="pre-header delay-headline">By investing, you could have</p>
-        <h2 class="big-money-headline delay-1-5s">£<span id="displayDiff3">226,126</span> extra in 3 years</h2>
-        <h2 class="big-money-headline delay-2-5s">£<span id="displayDiff10">226,126</span> extra in 10 years</h2>
-        <h2 class="big-money-headline delay-3-5s">£<span id="displayDiff30">226,126</span> extra in 30 years</h2>
-        <p class="post-header delay-rest">and I will teach you how.</p>
+    <div class="headline-container">
+        <p class="pre-header fade-in-element delay-headline">By investing, you could have</p>
+        <h2 class="big-money-headline fade-in-element delay-1-5s">£<span id="displayDiff3">226,126</span></h2><p class="fade-in-element delay-1-5s"> extra in 3 years</p>
+        <h2 class="big-money-headline fade-in-element delay-2-5s">£<span id="displayDiff10">226,126</span></h2><p class="fade-in-element delay-2-5s"> extra in 10 years</p>
+        <h2 class="big-money-headline fade-in-element delay-3-5s">£<span id="displayDiff30">226,126</span> extra in 30 years</h2><p class="fade-in-element delay-3-5s"> extra in 30 years</p>
+        <p class="post-header fade-in-element delay-rest">and I will teach you how.</p>
     </div>
 
     <div class="fade-in-element delay-rest">
@@ -1003,7 +1007,7 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
         riskProfile: answers.riskProfile || "Not provided"
     };
 
-    submitButton.textContent = "Submitting...";
+    submitButton.textContent = "Calculating...";
     submitButton.disabled = true;
 
     try {
