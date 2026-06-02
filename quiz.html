@@ -553,8 +553,32 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
     animation-delay: 0.5s; /* Pops up almost instantly after scroll */
 }
 
+.delay-1s {
+    animation-delay: 1.0s; /* Pops up almost instantly after scroll */
+}
+
+.delay-1.5s {
+    animation-delay: 1.5s; /* Pops up almost instantly after scroll */
+}
+
+.delay-2.0s {
+    animation-delay: 2.0s; /* Pops up almost instantly after scroll */
+}
+
+.delay-2.5s {
+    animation-delay: 2.5s; /* Pops up almost instantly after scroll */
+}
+
+.delay-3.0s {
+    animation-delay: 3.0s; /* Pops up almost instantly after scroll */
+}
+
+.delay-3.5s {
+    animation-delay: 3.5s; /* Pops up almost instantly after scroll */
+}
+
 .delay-rest {
-    animation-delay: 2s; /* Waits nearly a second for dramatic effect */
+    animation-delay: 4s; /* Waits nearly a second for dramatic effect */
 }
 
 /* Realism Section Formatting */
@@ -689,26 +713,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="step-card" data-step="5" style="padding-bottom: 100px;margin-top: -80px;">
     <img src="get-bristol-investing.webp" alt="Get Bristol Investing" class="brand-logo">
-    <h2>Your results are on the next screen!</h2>
+    <h2>Ready! Enter your details for instant results...</h2>
     <p style="padding-bottom: 15px"><strong>You will receive:</strong></p>
     
     <div class="benefits-list">
         <div class="benefit-item">
             <span class="checkmark-badge">✔</span>
-            <p><strong>Your money's potential:</strong> See how much more your money could grow if invested vs left in a savings account.</p>
+            <p><strong>Your money's potential</strong></p>
         </div>
         <div class="benefit-item">
             <span class="checkmark-badge">✔</span>
-            <p><strong>£10 workshop discount:</strong> Secure an exclusive discount voucher code sent straight to your inbox.</p>
+            <p><strong>£10 workshop discount</strong></p>
         </div>
         <div class="benefit-item">
             <span class="checkmark-badge">✔</span>
-            <p><strong>Slide previews:</strong> A glance into my investing workshop - see a handful of the slides you'll learn from.</p>
+            <p><strong>Workshop preview</strong></p>
         </div>
-        <div class="benefit-item">
-            <span class="checkmark-badge">✔</span>
-            <p><strong>Game rules:</strong> Learn about the interactive games played live during my Bristol workshops.</p>
-        </div>
+        
         
     </div>
     
@@ -719,15 +740,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input type="email" id="email" placeholder="Email Address" required class="text-input capture-input">
     </div>
 
-    <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+    <button type="submit" class="submit-btn" id="submitBtn">See results</button>
 </div>
 
     <div class="step-card results-box" data-step="6">
     
-    <div class="headline-container fade-in-element delay-headline">
-        <p class="pre-header">YOU COULD HAVE...</p>
-        <h2 class="big-money-headline">£<span id="displayDiff30">226,126</span></h2>
-        <p class="post-header"><strong>more money in your pocket</strong> by investing your cash instead of leaving it where it is.</p>
+    <div class="headline-container fade-in-element">
+        <p class="pre-header delay-headline">By investing, you could have</p>
+        <h2 class="big-money-headline delay-1.5s">£<span id="displayDiff3">226,126</span> extra in 3 years</h2>
+        <h2 class="big-money-headline delay-2.5s">£<span id="displayDiff10">226,126</span> extra in 10 years</h2>
+        <h2 class="big-money-headline delay-3.5s">£<span id="displayDiff30">226,126</span> extra in 30 years</h2>
+        <p class="post-header delay-rest">and I will teach you how.</p>
     </div>
 
     <div class="fade-in-element delay-rest">
@@ -1002,6 +1025,8 @@ document.getElementById('scoreappForm').addEventListener('submit', async functio
 
         // 3. Inject the results dynamically into the main headline spans
         document.getElementById('displayDiff30').textContent = res30.diff.toLocaleString();
+        document.getElementById('displayDiff3').textContent = res3.diff.toLocaleString();
+        document.getElementById('displayDiff10').textContent = res10.diff.toLocaleString();
         document.getElementById('diff30_table').textContent  = res30.diff.toLocaleString();
         
         // Populate 3 Year Data Column
