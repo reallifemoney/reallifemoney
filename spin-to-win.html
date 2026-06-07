@@ -6,14 +6,24 @@
     <title>Get Bristol Investing - Daily Spin Wheel</title>
     <style>
         :root {
-            --purple: #7B2CBF;
             --light-bg: #F4F9F4;
             --dark-text: #222;
+            --mint:    #eef8eb;
+    --purple:  #8c52ff;
+    --orange:  #ff914d;
+    --yellow:  #ffde59;
+    --green:   #71c558;
+    --ink:     #1a1a1a;
+    --text:    #2e2e2e;
+    --muted:   #6b6b6b;
+    --rule:    #daecd6;
+    --white:   #ffffff;
+    --darkgreen: #1F3A29;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
+            background-color: var(--darkgreen);
             color: var(--dark-text);
             display: flex;
             flex-direction: column;
@@ -29,7 +39,7 @@
             text-align: center;
             max-width: 500px;
             width: 100%;
-            background: white;
+            background: var(--darkgreen);
             padding: 30px;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.05);
@@ -161,14 +171,18 @@
 
     // Define the slices precisely matching your requested breakdown
     const segments = [
-        { label: '£5 Off', value: 5, color: '#9d4edd' },
-        { label: '£10 Off', value: 10, color: '#7b2cbf' },
-        { label: '£5 Off', value: 5, color: '#5a189a' },
-        { label: '£20 Off', value: 20, color: '#3c096c' },
-        { label: '£10 Off', value: 10, color: '#9d4edd' },
-        { label: '£5 Off', value: 5, color: '#7b2cbf' },
-        { label: '£30 Off', value: 30, color: '#240046' }, // Only one £30 spot
-        { label: '£20 Off', value: 20, color: '#5a189a' }
+        { label: '£5 off', value: 5, color: 'var(--mint)' },
+        { label: '£10 off', value: 10, color: 'var(--purple)' },
+        { label: '£5 off', value: 5, color: 'var(--mint)' },
+        { label: '£20 off', value: 20, color: 'var(--yellow)' },
+        { label: '£10 off', value: 10, color: 'var(--purple)' },
+        { label: '£5 off', value: 5, color: 'var(--mint)' },
+        { label: '£30 off', value: 30, color: 'var(--green)' }, // Only one £30 spot
+        { label: '£20 off', value: 20, color: 'var(--yellow)' },
+        { label: '£5 off', value: 5, color: 'var(--mint)' },
+        { label: '£10 off', value: 10, color: 'var(--purple)' },
+        { label: '£5 off', value: 5, color: 'var(--mint)' },
+        { label: '£10 off', value: 10, color: 'var(--purple)' }
     ];
 
     const totalSegments = segments.length;
