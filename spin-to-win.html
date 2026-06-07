@@ -230,22 +230,28 @@
     const totalSegments = segments.length;
     const arc = (2 * Math.PI) / totalSegments;
 
-    function drawWheel() {
+       function drawWheel() {
         const radius = canvas.width / 2;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < totalSegments; i++) {
             const angle = i * arc;
-            ctx.fillStyle = segments[i].color;
             
+            // 1. Draw and Fill the Segment Wedge
+            ctx.fillStyle = segments[i].color;
             ctx.beginPath();
             ctx.moveTo(radius, radius);
             ctx.arc(radius, radius, radius, angle, angle + arc, false);
             ctx.lineTo(radius, radius);
             ctx.fill();
 
+            // 2. Crisp 1px Black Border Outline
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // 3. Render Text Inside Segments safely with high contrast styling
             ctx.save();
-            // Handle visual contrast balances for clean readable text labels dynamically
             ctx.fillStyle = (segments[i].color === '#8c52ff' || segments[i].color === '#ff914d') ? "#ffffff" : "#1a1a1a";
             
             ctx.font = "bold 11px 'Segoe UI', sans-serif";
