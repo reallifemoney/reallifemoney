@@ -80,6 +80,7 @@
             width: 320px;
             height: 320px;
             margin: 0 auto 30px auto;
+            padding: 10px;
         }
 
         .pointer {
@@ -160,13 +161,13 @@
   <div class="container-logo">
     <!-- Centered Logo Image Component -->
     <div style="text-align: center; margin-bottom: 20px;">
-        <img src="get-bristol-investing.webp" alt="Get Bristol Investing Logo" style="max-width: 140px; width: 100%; height: auto; display: inline-block;">
+        <img src="get-bristol-investing.webp" alt="Get Bristol Investing Logo" style="max-width: 200px; width: 100%; height: auto; display: inline-block;">
     </div>
     </div>
 
 
 <div class="container-wheel">
-    <p class="subtitle">Spin the wheel to unlock an exclusive workshop perk! (1 spin per day)</p>
+    <h1>Click the button to try your luck!</h1>
 
     <div class="wheel-wrapper">
         <div class="pointer"></div>
@@ -200,31 +201,31 @@
     // 26 Segments structured perfectly matching your breakdown targets
     const segments = [
         { type: 'cash',   label: '£20 off',    value: 20,       color: '#71c558' }, // 1x £20 (Green)
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' }, // Loser (Orange)
-        { type: 'snack',  label: 'Free Snack', value: 'SNACK',   color: '#ffde59' }, // 1x Snack (Yellow)
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' }, // Loser (Orange)
+        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 1x Snack (Yellow)
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'cash',   label: '£10 off',    value: 10,       color: '#8c52ff' }, // 1x £10 (Purple)
-        { type: 'respin', label: '+1 Spin',    value: 'RESPIN', color: '#eef8eb' }, // 1x Respin (Mint)
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 1x Respin (Mint)
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 1x £5 (Darker Mint)
-        { type: 'snack',  label: 'Free Snack', value: 'SNACK',   color: '#ffde59' }, // 2x Snack
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
-        { type: 'respin', label: '+1 Spin',    value: 'RESPIN', color: '#eef8eb' }, // 2x Respin
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
+        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 2x Snack
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 2x Respin
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'cash',   label: '£10 off',    value: 10,       color: '#8c52ff' }, // 2x £10
-        { type: 'snack',  label: 'Free Snack', value: 'SNACK',   color: '#ffde59' }, // 3x Snack
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
+        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 3x Snack
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 2x £5
-        { type: 'respin', label: '+1 Spin',    value: 'RESPIN', color: '#eef8eb' }, // 3x Respin
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
-        { type: 'snack',  label: 'Free Snack', value: 'SNACK',   color: '#ffde59' }, // 4x Snack
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
-        { type: 'respin', label: '+1 Spin',    value: 'RESPIN', color: '#eef8eb' }, // 4x Respin
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 3x Respin
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
+        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 4x Snack
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 4x Respin
         { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 3x £5
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' },
-        { type: 'snack',  label: 'Free Snack', value: 'SNACK',   color: '#ffde59' }, // 5x Snack
-        { type: 'respin', label: '+1 Spin',    value: 'RESPIN', color: '#eef8eb' }, // 5x Respin
-        { type: 'retry',  label: 'Try Again',   value: 0,        color: '#ff914d' }  // 10x Total Loser Check
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
+        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 5x Snack
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 5x Respin
+        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' }  // 10x Total Loser Check
     ];
 
     const totalSegments = segments.length;
@@ -254,7 +255,7 @@
             ctx.save();
             ctx.fillStyle = (segments[i].color === '#8c52ff' || segments[i].color === '#ff914d') ? "#ffffff" : "#1a1a1a";
             
-            ctx.font = "bold 11px 'Segoe UI', sans-serif";
+            ctx.font = "500 13px 'Lexend', sans-serif";
             ctx.translate(radius, radius);
             ctx.rotate(angle + arc / 2);
             ctx.textAlign = "right";
