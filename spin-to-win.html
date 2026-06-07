@@ -52,6 +52,8 @@
             width: 100%;
             background: var(--darkgreen);
             padding: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
@@ -80,7 +82,7 @@
             width: 320px;
             height: 320px;
             margin: 0 auto 30px auto;
-            padding: 10px;
+            
         }
 
         .pointer {
@@ -216,16 +218,12 @@
         { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 3x Snack
         { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 2x £5
+        { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 2x £5
         { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 3x Respin
         { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
-        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 4x Snack
         { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
-        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 4x Respin
-        { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 3x £5
-        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
-        { type: 'snack',  label: 'Free snack', value: 'SNACK',   color: '#ffde59' }, // 5x Snack
-        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 5x Respin
-        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' }  // 10x Total Loser Check
+        { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }
+ 
     ];
 
     const totalSegments = segments.length;
