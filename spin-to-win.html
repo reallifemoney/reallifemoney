@@ -9,16 +9,16 @@
             --light-bg: #F4F9F4;
             --dark-text: #222;
             --mint:    #eef8eb;
-    --purple:  #8c52ff;
-    --orange:  #ff914d;
-    --yellow:  #ffde59;
-    --green:   #71c558;
-    --ink:     #1a1a1a;
-    --text:    #2e2e2e;
-    --muted:   #6b6b6b;
-    --rule:    #daecd6;
-    --white:   #ffffff;
-    --darkgreen: #1F3A29;
+            --purple:  #8c52ff;
+            --orange:  #ff914d;
+            --yellow:  #ffde59;
+            --green:   #71c558;
+            --ink:     #1a1a1a;
+            --text:    #2e2e2e;
+            --muted:   #6b6b6b;
+            --rule:    #daecd6;
+            --white:   #ffffff;
+            --darkgreen: #1F3A29;
         }
 
         body {
@@ -39,20 +39,21 @@
             text-align: center;
             max-width: 500px;
             width: 100%;
-            background: var(--darkgreen);
+            background: #ffffff; /* Changed to white container so text and layout pop beautifully against dark green body */
             padding: 30px;
             border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
         h1 {
             color: var(--purple);
             margin-bottom: 5px;
             font-size: 24px;
+            margin-top: 0;
         }
 
         p.subtitle {
-            color: #666;
+            color: #555;
             margin-bottom: 25px;
             font-size: 15px;
         }
@@ -98,6 +99,8 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(123, 44, 191, 0.3);
             transition: all 0.2s ease;
+            width: 100%;
+            max-width: 250px;
         }
 
         .btn:hover:not(:disabled) {
@@ -169,25 +172,25 @@
     const resultBox = document.getElementById('resultBox');
     const lockoutMsg = document.getElementById('lockoutMsg');
 
-    // Define the slices precisely matching your requested breakdown
+    // Mapped precisely matching requested slices and color foundations
     const segments = [
-        { label: '£5 off', value: 5, color: 'var(--mint)' },
-        { label: '£10 off', value: 10, color: 'var(--purple)' },
-        { label: '£5 off', value: 5, color: 'var(--mint)' },
-        { label: '£20 off', value: 20, color: 'var(--yellow)' },
-        { label: '£10 off', value: 10, color: 'var(--purple)' },
-        { label: '£5 off', value: 5, color: 'var(--mint)' },
-        { label: '£30 off', value: 30, color: 'var(--green)' }, // Only one £30 spot
-        { label: '£20 off', value: 20, color: 'var(--yellow)' },
-        { label: '£5 off', value: 5, color: 'var(--mint)' },
-        { label: '£10 off', value: 10, color: 'var(--purple)' },
-        { label: '£5 off', value: 5, color: 'var(--mint)' },
-        { label: '£10 off', value: 10, color: 'var(--purple)' }
+        { label: '£5 off', value: 5, color: '#eef8eb' }, // var(--mint)
+        { label: '£10 off', value: 10, color: '#8c52ff' }, // var(--purple)
+        { label: '£5 off', value: 5, color: '#eef8eb' },
+        { label: '£20 off', value: 20, color: '#ffde59' }, // var(--yellow)
+        { label: '£10 off', value: 10, color: '#8c52ff' },
+        { label: '£5 off', value: 5, color: '#eef8eb' },
+        { label: '£30 off', value: 30, color: '#71c558' }, // var(--green)
+        { label: '£20 off', value: 20, color: '#ffde59' },
+        { label: '£5 off', value: 5, color: '#eef8eb' },
+        { label: '£10 off', value: 10, color: '#8c52ff' },
+        { label: '£5 off', value: 5, color: '#eef8eb' },
+        { label: '£10 off', value: 10, color: '#8c52ff' }
     ];
 
     const totalSegments = segments.length;
-    const arc = Math.PI / (totalSegments / 2);
-    let currentRotation = 0;
+    const arc = (2 * Math.PI) / totalSegments;
+    let currentRotationDegrees = 0;
 
     // Draw the static visual sections of the wheel
     function drawWheel() {
@@ -204,19 +207,24 @@
             ctx.lineTo(radius, radius);
             ctx.fill();
 
-            // Render Text Inside Segments
+            // Render Text Inside Segments safely with high contrast styling
             ctx.save();
-            ctx.fillStyle = "white";
-            ctx.font = "bold 16px sans-serif";
+            
+            // Contrast rule: If segment is purple, use white text. Otherwise, use dark ink text.
+            ctx.fillStyle = (segments[i].color === '#8c52ff') ? "#ffffff" : "#1a1a1a";
+            
+            ctx.font = "bold 14px 'Segoe UI', sans-serif";
             ctx.translate(radius, radius);
             ctx.rotate(angle + arc / 2);
             ctx.textAlign = "right";
-            ctx.fillText(segments[i].label, radius - 20, 5);
+            
+            // Adjusted metrics to keep text from spilling off canvas edge
+            ctx.fillText(segments[i].label, radius - 25, 5);
             ctx.restore();
         }
     }
 
-    // Helper: Generates thematic but cryptic crypto-secure styled strings
+    // Generates unique, high-intent specific discount combinations
     function generateUnpredictableCode(discountVal) {
         const financeWords = ['COMPOUND', 'GROWTH', 'POTENTIAL', 'ASSET', 'PORTFOLIO', 'INTEREST', 'DIVIDEND'];
         const bristolWords = ['BRIS', 'CLIFTON', 'TEMPLE', 'HARBOUR', 'AVON'];
@@ -224,7 +232,7 @@
         const word1 = bristolWords[Math.floor(Math.random() * bristolWords.length)];
         const word2 = financeWords[Math.floor(Math.random() * financeWords.length)];
         
-        // Un-guessable unique alphanumeric tag appended to the end
+        // Random 4-digit token to maintain anti-guess uniqueness tracking thresholds
         const cryptoString = Math.random().toString(36).substring(2, 6).toUpperCase();
         
         return `${word1}-${word2}-${discountVal}${cryptoString}`;
@@ -232,13 +240,12 @@
 
     function checkDailyLockout() {
         const lastSpinDate = localStorage.getItem('last_spin_date');
-        const todayStr = new Date().toDateString(); // Matches simply on the literal calendar date calendar track
+        const todayStr = new Date().toDateString();
 
         if (lastSpinDate === todayStr) {
             spinBtn.disabled = true;
             spinBtn.style.display = 'none';
             
-            // Calculate hours left until midnight to show a countdown standard
             const now = new Date();
             const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
             const hoursLeft = Math.ceil((midnight - now) / (1000 * 60 * 60));
@@ -256,37 +263,38 @@
         spinBtn.disabled = true;
         resultBox.style.display = 'none';
 
-        // Choose a random segment to land on dynamically
+        // Choose a random segment index
         const targetedSegmentIndex = Math.floor(Math.random() * totalSegments);
         
-        // Calculate the rotation required to align the target with the 12 o'clock pointer
+        // Calculate raw position values relative to standard canvas 0-radian drawing baseline (3 o'clock)
         const degreesPerSegment = 360 / totalSegments;
         const targetAngleDegrees = (targetedSegmentIndex * degreesPerSegment) + (degreesPerSegment / 2);
+        
+        // To make target sit under 12 o'clock pointer (270° position), adjust math mapping
         const physicalCorrection = 270 - targetAngleDegrees; 
         
-        // Add 5 full visual spins to hide the exact target destination mechanics
+        // Add full dramatic momentum turns plus correction target angles
         const finalRotationDegrees = (360 * 5) + physicalCorrection;
         
         canvas.style.transform = `rotate(${finalRotationDegrees}deg)`;
 
-        // Handle calculation logic safely in parallel tracking timelines
         setTimeout(() => {
             const prize = segments[targetedSegmentIndex];
             
-            // Lock out the user right away for the day
+            // Persist checkout lockout instantly
             localStorage.setItem('last_spin_date', new Date().toDateString());
 
-            // Render and display their unique code
+            // Output winning results to layout components
             document.getElementById('rewardAmount').innerText = prize.label;
             document.getElementById('codeDisplay').innerText = generateUnpredictableCode(prize.value);
             resultBox.style.display = 'block';
             
-            // Re-verify interface styling limits
-            checkDailyLockout();
-        }, 4000); // Transitions align with 4s CSS settings exactly
+            // Disable button without layout-shifting layout containers instantly
+            spinBtn.innerText = "Spun Today";
+        }, 4000);
     }
 
-    // Initialize layout immediately on view load
+    // Initialize core layouts safely
     drawWheel();
     checkDailyLockout();
 </script>
