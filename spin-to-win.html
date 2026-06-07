@@ -49,11 +49,9 @@
          .container-wheel {
             text-align: center;
             max-width: 500px;
-            width: 100%;
+            width: 95%;
             background: var(--darkgreen);
             padding: 30px;
-            margin-left: 10px;
-            margin-right: 10px;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
@@ -169,11 +167,11 @@
 
 
 <div class="container-wheel">
-    <h1>Click the button to try your luck!</h1>
+    <h1 style="padding-bottom: 20px">Click the button to try your luck!</h1>
 
     <div class="wheel-wrapper">
         <div class="pointer"></div>
-        <canvas id="wheelCanvas" width="320" height="320"></canvas>
+        <canvas id="wheelCanvas" width="350" height="350"></canvas>
     </div>
 
     <button id="spinBtn" class="btn" onclick="spinWheel()">Spin the Wheel</button>
@@ -221,7 +219,6 @@
         { type: 'cash',   label: '£5 off',     value: 5,        color: '#daecd6' }, // 2x £5
         { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }, // 3x Respin
         { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
-        { type: 'retry',  label: 'Bad luck',   value: 0,        color: '#ff914d' },
         { type: 'respin', label: 'Free spin',    value: 'RESPIN', color: '#eef8eb' }
  
     ];
@@ -253,7 +250,7 @@
             ctx.save();
             ctx.fillStyle = (segments[i].color === '#8c52ff' || segments[i].color === '#ff914d') ? "#ffffff" : "#1a1a1a";
             
-            ctx.font = "500 13px 'Lexend', sans-serif";
+            ctx.font = "600 15px 'Lexend', sans-serif";
             ctx.translate(radius, radius);
             ctx.rotate(angle + arc / 2);
             ctx.textAlign = "right";
