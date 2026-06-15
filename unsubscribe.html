@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribed | Real Life Money</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #334155;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .logo {
+            max-width: 160px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #f0fdf4;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.25rem auto;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #0f172a;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #1e293b;
+        }
+
+        .footer-text {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Simple loading spinner states */
+        #loading-state {
+            display: block;
+        }
+        #success-state {
+            display: none;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0f172a;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(3600deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <img src="real-life-money.png" alt="Real Life Money Logo" class="logo">
+
+        <div id="loading-state">
+            <div class="spinner"></div>
+            <h1>Processing request...</h1>
+            <p>We are updating your subscription preferences. One moment please.</p>
+        </div>
+
+        <div id="success-state">
+            <div class="success-icon">✓</div>
+            <h1>Successfully Unsubscribed</h1>
+            <p>Your email preference has been updated. You will no longer receive automated notifications, workshop alerts, or quiz updates from us.</p>
+            
+            <div class="divider"></div>
+            
+            <a href="https://reallifemoney.co.uk" class="btn">Return to Homepage</a>
+            <span class="footer-text">Did you click this by mistake? Simply register your email again on our main page to restore your alerts.</span>
+        </div>
+    </div>
+
+    <script>
+        // Simulates the operational delay of updating a database layout
+        setTimeout(function() {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('success-state').style.display = 'block';
+        }, 1200);
+
+        let sent = false;
+  const pageEntryTime = Date.now();
+  let maxScroll = 0;
+  // Initialize these globally
+  let ctaClicked = "No";
+  let videoClicked = "No";
+  let courseSelected = "No";
+  let sneakPeekClicked = "No";      // Added tracking variable
+  let nameFieldFocused = "No";      // Added tracking variable
+
+  window.addEventListener('scroll', () => {
+    const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+    if (scrolled > maxScroll) maxScroll = scrolled;
+  }, { passive: true });
+
+  function logbuttonclick() { ctaClicked = "Yes"; }
+  function logvideoclick() { videoClicked = "Yes"; }
+  function logcourseselection() { courseSelected = "Yes"; }
+  function logsneakpeekclick() { sneakPeekClicked = "Yes"; } // Added tracking function
+  function lognamefieldfocus() { nameFieldFocused = "Yes"; } // Added tracking function
+
+  function sendFinalData() {
+    if (sent) return;
+    sent = true;
+
+    const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+
+    const logData = {
+      timeSpent: timeSpent,
+      scrollDepth: maxScroll + "%",
+      ctaClicked: ctaClicked,
+      videoClicked: videoClicked,
+      courseSelected: courseSelected,
+      sneakPeekClicked: sneakPeekClicked, // Added to payload
+      nameFieldFocused: nameFieldFocused, // Added to payload
+      url: window.location.href
+    };
+
+    // This is the most reliable way to send to Google
+    navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
+  }
+
+  window.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') sendFinalData();
+  });
+  window.addEventListener('pagehide', sendFinalData);
+
+    </script>
+
+</body>
+</html>
