@@ -3712,27 +3712,24 @@ function handleReserve(e) {
         course_timings: selectedTimings
     };
 
-    // 1. Send Email to YOU
-    emailjs.send('service_7hn83cm', 'template_g5nbo46', templateParams)
-        .then(() => {
-            // 2. Send Confirmation to CUSTOMER
-            return emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams);
-        })
-        .then(() => {
-            // 3. Success! Show Step 3
-            document.getElementById('step-2').style.opacity = '0.3';
-            document.getElementById('step-2').style.pointerEvents = 'none';
-            document.getElementById('step-3').style.display = 'block';
-            
-            window.scrollTo({
-                top: document.getElementById('step-3').offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }, (error) => {
-            alert("Something went wrong. Please WhatsApp me directly!");
-            btn.innerText = "Confirm Reservation";
-            btn.disabled = false;
+    // Send Confirmation to CUSTOMER (You are now BCC'd via EmailJS template settings)
+emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams)
+    .then(() => {
+        // Success! Show Step 3
+        document.getElementById('step-2').style.opacity = '0.3';
+        document.getElementById('step-2').style.pointerEvents = 'none';
+        document.getElementById('step-3').style.display = 'block';
+        
+        window.scrollTo({
+            top: document.getElementById('step-3').offsetTop - 100,
+            behavior: 'smooth'
         });
+    }, (error) => {
+        console.error("EmailJS Error details:", error); // Logs the exact error to help us debug if needed
+        alert("Something went wrong. Please WhatsApp me directly!");
+        btn.innerText = "Confirm Reservation";
+        btn.disabled = false;
+    });
 }
 
 function payLater() {
