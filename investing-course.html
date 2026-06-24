@@ -2739,104 +2739,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="newsletter-signup-section" style="background-color: #ffffff; padding: 100px 20px;">
-    <div class="newsletter-container" style="max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 60px;">
-        
-        <div class="newsletter-image-column" style="flex: 1;">
-            <img src="simply-investing.webp" alt="Real Life Money Monthly Newsletter Cover" style="width: 100%; max-width: 250px; height: auto; border-radius: 12px; box-shadow: 0 15px 40px black;">
-        </div>
-
-        <div class="newsletter-content-column" style="flex: 1;">
-            <span class="badge" style="display: inline-block; background-color: #eef8eb; color: #25D366; padding: 6px 16px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;">
-                FREE INSIDER PERKS
-            </span>
-            <h2 style="font-family: 'Lexend', sans-serif; font-size: 2.5rem; color: #1a1a1a; margin-bottom: 20px; line-height: 1.2;">
-                Join the community: Get tips, discounts, and more
-            </h2>
-            <p style="font-size: 1.2rem; color: #6b6b6b; margin-bottom: 30px; line-height: 1.6;">
-                Investing is easier with the right help. Subscribe to my newsletter "Simply Investing" and enjoy these exclusive benefits sent straight to your inbox:
-            </p>
-
-            <ul class="benefits-list" style="list-style: none; padding: 0; margin-bottom: 40px;">
-                <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
-                    <span style="color: #25D366;">✓</span> Learning is better together: discount code for booking a course with a friend.
-                </li>
-                <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
-                    <span style="color: #25D366;">✓</span> Monthly jargon-busting articles, tips and updates.
-                </li>
-                
-                 <li style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; font-size: 1.1rem; color: #2e2e2e; font-weight: 500;">
-                    <span style="color: #25D366;">✓</span> VIP first access: know before new course dates are announced.
-                </li>
-            </ul>
-
-            <form id="newsletter-form" style="display: flex; gap: 15px;">
-                <input type="text" name="firstName" placeholder="First Name" required style="flex: 1; padding: 18px 24px; border: 2px solid #daecd6; border-radius: 12px; font-size: 1.1rem; font-family: inherit; transition: border-color 0.3s ease;">
-                <input type="email" name="email" placeholder="Email Address" required style="flex: 1; padding: 18px 24px; border: 2px solid #daecd6; border-radius: 12px; font-size: 1.1rem; font-family: inherit; transition: border-color 0.3s ease;">
-                <button type="submit" style="padding: 18px 40px; background-color: #8c52ff; color: #ffffff; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease; white-space: nowrap;">
-                    Join for free
-                </button>
-            </form>
-            
-            <p style="font-size: 0.9rem; color: #a1a1a1; margin-top: 15px; text-align: left;">
-                I respect your inbox. One newsletter a month, strictly giving value.
-            </p>
-        </div>
-
-    </div>
-</section>
-
-<style>
-    .newsletter-form input:focus {
-        border-color: #8c52ff;
-        outline: none;
-    }
-    .newsletter-form button:hover {
-        background-color: #7a46e0;
-    }
-    
-   /* Mobile Responsiveness */
-@media (max-width: 900px) {
-    .newsletter-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 0 15px; /* Keeps everything away from the phone screen edges */
-        box-sizing: border-box;
-    }
-    
-    .newsletter-content-column {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    /* FIX: Force the form wrapper to stack items vertically */
-    #newsletter-form {
-        flex-direction: column !important;
-        gap: 12px !important;
-        width: 100% !important;
-    }
-
-    /* FIX: Prevent the inputs from pushing out wider than the screen */
-    #newsletter-form input, 
-    #newsletter-form button {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box; /* Includes the padding in the width calculation */
-    }
-
-    .newsletter-image-column img {
-        max-width: 260px; /* Slightly smaller so it looks great on small phones */
-        margin: 0 auto 30px auto;
-    }
-
-    .benefits-list li {
-        justify-content: flex-start; /* Aligns checkboxes nicely on mobile left-to-right */
-        text-align: left;
-    }
-}
-
-</style>
-
 
 <!-- ABOUT -->
 <section class="about-sec">
@@ -2923,28 +2825,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="booking-grid">
         
 
-        <div class="date-card" id="card-june" onclick="selectDateStep('June', 'Thu 11th & 18th June', '6:30pm – 8:00pm');logcourseselection();">
-          <span class="badge-sold">Sold out</span>
-          <div class="date-title">June 2026</div>
-          <div class="date-meta">
-            <div class="date-meta-row">📅 Thu 11th & 18th June</div>
-            <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-            <div class="date-meta-row">
-              <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-june" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-            </div>
-          </div>
-          <button class="select-btn-sold">SOLD OUT</button>
-        </div>
+      
 
         <div class="date-card" id="card-july" onclick="selectDateStep('July', 'Mon 29th June & Wed 8th July', '7:00pm - 8:30pm & 6:30pm – 8:00pm');logcourseselection();">
           <span class="badge">Limited spaces</span>
@@ -2975,6 +2856,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="date-meta">
             <div class="date-meta-row">📅 Wed 12th & 19th August</div>
             <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+            <div class="date-meta-row">
+              <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-june" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
+            </div>
+          </div>
+          <button class="select-btn">Select these dates</button>
+        </div>
+
+        <div class="date-card" id="card-september" onclick="selectDateStep('September', 'Mon 14th & 21st September', '6:45pm – 8:15pm');logcourseselection();">
+          <span class="badge">Limited spaces</span>
+          <div class="date-title">September 2026</div>
+          <div class="date-meta">
+            <div class="date-meta-row">📅 Mon 14th & 21st September</div>
+            <div class="date-meta-row">🕡 6:45pm – 8:15pm</div>
             <div class="date-meta-row">
               <button class="venue-trigger" id="venueTrigger-june" aria-expanded="false">
           📍 Brooklands Park Community Centre
