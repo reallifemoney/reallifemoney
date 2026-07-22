@@ -1277,6 +1277,32 @@ body {
   margin-top: 8px;
 }
 
+.date-card-hero {
+  background: var(--white);
+  border: 2px solid var(--rule);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+
+
+.date-card-hero:hover {
+  border-color: var(--purple);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(140, 82, 255, 0.1);
+}
+
+.date-card-hero.selected {
+  border-color: var(--purple);
+  background: #f8f5ff;
+}
+
 .date-card {
   background: var(--white);
   border: 2px solid var(--rule);
@@ -2431,10 +2457,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       Two evenings in Bristol.<br>A lifetime of 
       <span style="color:var(--green)">confidence.</span>
     </h1>
-    <p class="hero-subheadline">Highly rated and engaging workshops that will take you from beginner to clicking invest.</p>
+    <p class="hero-subheadline">Highly rated workshops that will take you from beginner to clicking invest in two engaging sessions.</p>
 
-    <div class="date-card" style="margin-bottom:25px">
-    <span class="badge-hero">Tickets selling fast</span>
+    <div class="date-card-hero" style="margin-bottom:25px">
     <div class="date-meta">
       <div class="date-meta-row">📅 Weds 12th &amp; 19th August</div>
       <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
