@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beginner's Guide to Investing — Real Life Money</title>
-<meta name="description" content="Ready to start investing? My Bristol-based beginner course breaks down investing into 3 simple evenings. Learn how to use an ISA, choose funds, and grow your wealth without the headache. Book your spot now!">
+<meta name="description" content="Ready to start investing? My Bristol-based beginner workshop breaks down investing into 3 simple evenings. Learn how to use an ISA, choose funds, and grow your wealth without the headache. Book your spot now!">
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1288,6 +1288,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 500px;
+  color: black;
 }
 
 
@@ -2459,11 +2460,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </h1>
     <p class="hero-subheadline">Highly rated workshops that will take you from beginner to clicking invest in two engaging sessions.</p>
 
-    <div class="date-card-hero" style="margin-bottom:25px">
+    <div class="date-card-hero" style="margin-bottom:25px" onclick="selectDateStep('August', 'Wed 12th & 19th August', '6:30pm – 8:00pm');logcourseselection();">
     <div class="date-meta">
       <div class="date-meta-row">📅 Weds 12th &amp; 19th August</div>
       <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
-      <div class="date-meta-row">💷 &pound;75 per course</div>
+      <div class="date-meta-row">💷 &pound;75 per person</div>
       <div class="date-meta-row">
         <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
           📍 Brooklands Park Community Centre
@@ -2479,8 +2480,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="date-card-actions">
-        <button class="select-btn-hero" id="btn-may-hero" onclick="logcourseselection(); selectDate('may');">Register</button>
-        <a href="#book" onclick="logbuttonclick()">View other dates</a>
+        <button class="select-btn-hero" id="btn-may-hero">Register</button>
+        <button href="#book">View other dates</button>
     </div>
     </div>
     
@@ -2507,7 +2508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <div class="mini-explanation">
             <h3>Confidence increase, guaranteed.</h3>
-            <p>If you finish this course and don't feel more empowered about investing — let me know for a full refund.</p>
+            <p>If you finish this workshop and don't feel more empowered about investing — let me know for a full refund.</p>
         </div>
         
         <div class="mini-visual">
@@ -3352,7 +3353,7 @@ window.selectDate = function(month) {
   // 2. Update the Title
   const modalTitle = document.getElementById('modal-course-title');
   if (modalTitle) {
-    modalTitle.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Course";
+    modalTitle.innerText = "Booking for " + month.charAt(0).toUpperCase() + month.slice(1) + " Workshop";
   }
 
   // 3. The Iframe Injection
@@ -3590,7 +3591,7 @@ function selectDateStep(month, times, timings) {
     selectedTimes = times;
     selectedTimings = timings;
     
-    document.getElementById('display-date').innerText = month + " course";
+    document.getElementById('display-date').innerText = month + " workshop";
     document.getElementById('display-times').innerText = times;
     document.getElementById('display-timings').innerText = selectedTimings;
     document.getElementById('step-2').style.display = 'block';
