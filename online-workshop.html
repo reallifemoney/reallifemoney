@@ -45,17 +45,18 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .nav-cta:hover{opacity:.92;}
 
 /* HERO */
-.hero{padding:72px 0 56px;position:relative;}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+.hero{padding:72px 0 56px;position:relative;text-align:center;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;justify-items:center;}
 .hero h1{font-size:48px;letter-spacing:-.01em;}
 .hero h1 span{color:var(--purple);}
-.hero p.lede{font-size:19px;color:var(--text);max-width:52ch;margin:20px 0 28px;}
-.hero-cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.hero p.lede{font-size:19px;color:var(--text);max-width:52ch;margin:20px auto 28px;}
+.hero p span{color:var(--purple);}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;}
 .hero-note{font-size:14px;color:var(--muted);margin-top:14px;}
 .hero-badge{position:absolute;top:-14px;right:24px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14px;padding:8px 16px;border-radius:100px;transform:rotate(4deg);box-shadow:0 6px 16px rgba(0,0,0,.08);}
-.hero-visual{background:var(--white);border-radius:24px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.08);}
+.hero-visual{background:var(--white);border-radius:24px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.08);width:100%;}
 .hero-visual img{border-radius:16px;}
-.stat-strip{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;}
+.stat-strip{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
 .stat-strip div{min-width:110px;}
 .stat-strip strong{display:block;font-size:26px;color:var(--ink);}
 .stat-strip span{font-size:13px;color:var(--muted);}
@@ -194,7 +195,7 @@ footer a{color:#ddd;text-decoration:underline;}
       <div>
         <span class="eyebrow">Investing workshop</span>
         <h1>From beginner to invest in two <span>engaging </span>sessions.</h1>
-        
+        <p class="lede">Learn how to grow your money in a <span>safe and nurturing</span> environment.</p>
         <div class="hero-cta-row">
           <button class="btn btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Register</button>
           
