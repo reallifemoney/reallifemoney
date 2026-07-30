@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginner's Guide to Investing (Online) — Real Life Money</title>
+<meta name="description" content="Learn to invest with confidence from your own sofa. My live online workshop breaks investing down into 2 simple evenings — ISAs, funds, and building wealth without the jargon. £75. Book your spot.">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+  /* PLACEHOLDER — swap in your real EmailJS public key */
+  (function(){ if (window.emailjs) emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); })();
+</script>
+
+<style>
+:root{
+  --mint:#eef8eb; --purple:#8c52ff; --orange:#ff914d; --yellow:#ffde59;
+  --green:#71c558; --ink:#1a1a1a; --text:#2e2e2e; --muted:#6b6b6b;
+  --rule:#daecd6; --white:#ffffff;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--mint);color:var(--text);font-family:'Lexend',Helvetica,Arial,sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+h1,h2,h3,h4{font-weight:700;color:var(--ink);line-height:1.15;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);background:#f2e9ff;padding:6px 14px;border-radius:100px;margin-bottom:16px;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:16px;padding:15px 28px;border-radius:100px;border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--purple);color:#fff;box-shadow:0 8px 24px rgba(140,82,255,.35);}
+.btn-primary:hover{box-shadow:0 12px 28px rgba(140,82,255,.45);}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(113,197,88,.35);}
+.btn-outline{background:transparent;color:var(--ink);border:2px solid var(--ink);}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:40;background:rgba(238,248,235,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;}
+.nav-logo img{height:56px;width:auto;}
+.nav-cta{background:var(--purple);color:#fff;font-weight:600;font-size:15px;padding:12px 22px;border-radius:100px;cursor:pointer;}
+.nav-cta:hover{opacity:.92;}
+
+/* HERO */
+.hero{padding:72px 0 56px;position:relative;}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+.hero h1{font-size:48px;letter-spacing:-.01em;}
+.hero h1 span{color:var(--purple);}
+.hero p.lede{font-size:19px;color:var(--text);max-width:52ch;margin:20px 0 28px;}
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.hero-note{font-size:14px;color:var(--muted);margin-top:14px;}
+.hero-badge{position:absolute;top:-14px;right:24px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14px;padding:8px 16px;border-radius:100px;transform:rotate(4deg);box-shadow:0 6px 16px rgba(0,0,0,.08);}
+.hero-visual{background:var(--white);border-radius:24px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.08);}
+.hero-visual img{border-radius:16px;}
+.stat-strip{display:flex;gap:28px;margin-top:28px;flex-wrap:wrap;}
+.stat-strip div{min-width:110px;}
+.stat-strip strong{display:block;font-size:26px;color:var(--ink);}
+.stat-strip span{font-size:13px;color:var(--muted);}
+
+/* SECTION SHELL */
+section{padding:80px 0;}
+.section-head{text-align:center;max-width:640px;margin:0 auto 48px;}
+.section-head h2{font-size:34px;}
+.section-head p{color:var(--muted);font-size:17px;margin-top:12px;}
+
+/* RELATE / PAIN POINTS */
+.relate{background:var(--white);}
+.relate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.tc{background:var(--mint);border-radius:20px;padding:28px;border:1px solid var(--rule);}
+.tc i{color:var(--orange);font-size:22px;margin-bottom:14px;display:block;}
+.tc p.quote{font-size:16px;color:var(--ink);font-style:italic;margin-bottom:14px;}
+.tc p.resolve{font-size:14px;color:var(--muted);}
+.relate-flip{margin-top:40px;text-align:center;background:var(--purple);color:#fff;border-radius:20px;padding:36px;}
+.relate-flip h3{color:#fff;font-size:22px;margin-bottom:8px;}
+.relate-flip p{color:#eee;max-width:60ch;margin:0 auto;}
+
+/* VIDEO */
+.video-sec{text-align:center;}
+.video-trigger{position:relative;max-width:720px;margin:0 auto;border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:0 20px 50px rgba(0,0,0,.12);}
+.video-trigger img{width:100%;display:block;}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:84px;height:84px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .2s ease;}
+.video-trigger:hover .play-btn{transform:translate(-50%,-50%) scale(1.08);}
+.play-btn i{color:var(--purple);font-size:28px;margin-left:5px;}
+
+/* REVIEWS */
+.reviews{background:var(--ink);}
+.reviews .section-head h2, .reviews .section-head p{color:#fff;}
+.reviews .section-head p{color:#bbb;}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.cred{background:#262626;border-radius:20px;padding:30px;border:1px solid #3a3a3a;}
+.cred .stars{color:var(--yellow);font-size:15px;margin-bottom:14px;}
+.cred p.quote{color:#f2f2f2;font-size:17px;line-height:1.6;margin-bottom:20px;}
+.cred .who{display:flex;align-items:center;gap:12px;}
+.cred .avatar{width:42px;height:42px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.cred .who-name{color:#fff;font-weight:600;font-size:14px;}
+.cred .who-role{color:#999;font-size:13px;}
+
+/* WHAT YOU GET */
+.get{background:var(--white);}
+.week-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:28px;}
+.det-card{background:var(--mint);border:1px solid var(--rule);border-radius:20px;padding:32px;}
+.det-card .wk-label{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:13px;padding:5px 14px;border-radius:100px;margin-bottom:16px;}
+.det-card h3{font-size:22px;margin-bottom:14px;}
+.det-card ul{list-style:none;}
+.det-card li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15.5px;color:var(--text);}
+.det-card li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+.perk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.perk{background:var(--ink);color:#fff;border-radius:20px;padding:30px;}
+.perk i{font-size:26px;color:var(--yellow);margin-bottom:14px;display:block;}
+.perk h4{color:#fff;font-size:18px;margin-bottom:8px;}
+.perk p{color:#ccc;font-size:14.5px;}
+
+/* COURSE SELECT */
+.select-sec{background:var(--mint);}
+.sess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.sess-card{background:#fff;border:2px solid var(--rule);border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
+.sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
+.sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+.sess-card h3{font-size:21px;margin-bottom:6px;}
+.sess-card .time{color:var(--muted);font-size:14px;margin-bottom:6px;}
+.sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:14px 0;}
+.sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
+.select-btn{display:block;width:100%;text-align:center;background:var(--purple);color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
+.select-btn:hover{opacity:.92;}
+
+#step-2, #step-3{display:none;max-width:560px;margin:48px auto 0;background:#fff;border-radius:20px;padding:36px;border:1px solid var(--rule);}
+#step-2 h3{font-size:22px;margin-bottom:6px;}
+#step-2 .step-sub{color:var(--muted);font-size:15px;margin-bottom:24px;}
+#step-2 .step-sub strong{color:var(--ink);}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.field input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--rule);font-family:inherit;font-size:15px;background:var(--mint);}
+.field input:focus{outline:none;border-color:var(--purple);}
+.success-header{text-align:center;}
+.success-icon{width:64px;height:64px;border-radius:50%;background:#eafaea;color:var(--green);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;}
+.pay-options{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
+.pay-now-link{background:var(--green);color:#fff;font-weight:600;padding:15px;border-radius:100px;text-align:center;}
+.pay-later-link{background:transparent;border:2px solid var(--ink);color:var(--ink);font-weight:600;padding:13px;border-radius:100px;text-align:center;cursor:pointer;}
+.whatsapp-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:12px 20px;border-radius:100px;margin-top:16px;}
+
+/* FAQ */
+.faq{background:#fff;}
+.faq-list{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--rule);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:22px 4px;cursor:pointer;font-weight:600;font-size:16.5px;color:var(--ink);}
+.faq-q i{transition:transform .25s ease;color:var(--purple);}
+.faq-item.open .faq-q i{transform:rotate(45deg);}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-answer p{padding:0 4px 22px;color:var(--muted);font-size:15.5px;max-width:65ch;}
+
+/* FOOTER */
+footer{background:var(--ink);color:#aaa;padding:44px 0;text-align:center;font-size:14px;}
+footer a{color:#ddd;text-decoration:underline;}
+
+/* MODALS */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.active, .modal-overlay[style*="flex"]{display:flex;}
+.video-box{position:relative;width:100%;max-width:860px;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:16/9;}
+.video-box iframe{width:100%;height:100%;border:none;}
+.modal-close{position:absolute;top:-42px;right:0;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;}
+
+/* RESPONSIVE */
+@media (max-width:860px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:34px;}
+  .relate-grid,.week-grid,.rev-grid,.perk-grid,.sess-grid{grid-template-columns:1fr;}
+  .hero-badge{position:static;display:inline-block;margin-bottom:16px;transform:none;}
+  section{padding:56px 0;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <a class="nav-logo" href="/">
+      <img src="/logo.webp" alt="Real Life Money" style="height:56px;width:auto;">
+    </a>
+    <a class="nav-cta" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Book your place →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Online · Live with Leo · 2 evenings</span>
+        <h1>Learn to invest with confidence — <span>without leaving your sofa.</span></h1>
+        <p class="lede">From beginner to clicking invest in two engaging online sessions.</p>
+        <div class="hero-cta-row">
+          <button class="btn btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">See next available date →</button>
+          <button class="btn btn-outline" onclick="openVideo();logvideoclick();">▶ Watch the intro</button>
+        </div>
+        <p class="hero-note">£75 per person · Live over Zoom · Small groups</p>
+        
+      </div>
+      <div class="hero-visual">
+        <span class="hero-badge">Next date below ↓</span>
+        <img src="/online-workshop-hero.webp" alt="Beginner's Guide to Investing — online workshop">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOES THIS SOUND FAMILIAR -->
+<section class="relate">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>You know you should be investing. You just don't know where to start.</h2>
+      <p>I hear some version of this from almost everyone who joins the workshop.</p>
+    </div>
+    <div class="relate-grid">
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"I've got savings just sitting in the bank losing value to inflation, but investing feels like a different language."</p>
+        <p class="resolve">We start from zero — no assumed knowledge, no jargon left unexplained.</p>
+      </div>
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"Every app and article tells me something different. I don't know who to trust."</p>
+        <p class="resolve">I'm a qualified financial advisor and maths teacher — I'll show you the actual principles, not a stock tip.</p>
+      </div>
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"I'm scared of losing money because I don't understand what I'm doing."</p>
+        <p class="resolve">By the end of session two, you'll know exactly how to open an ISA, what to put in it, and why.</p>
+      </div>
+    </div>
+    <div class="relate-flip">
+      <h3>Two evenings. That's genuinely all it takes.</h3>
+      <p>You'll leave with a clear, personal plan you understand and actually trust — built live, on screen, with me.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">30 seconds of me</span>
+      <h2>Hear why I built this course</h2>
+    </div>
+    <div class="video-trigger" onclick="openVideo();logvideoclick();">
+      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
+      <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="background:#3a2e57;color:#d9c4ff;">What people say</span>
+      <h2>Don't take my word for it</h2>
+      <p>Real feedback from people who've sat in the workshop — swap these for your real review quotes.</p>
+    </div>
+    <div class="rev-grid">
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. I went from being completely overwhelmed to opening my first Stocks & Shares ISA the same week."</p>
+        <div class="who"><div class="avatar">S</div><div><div class="who-name">Sarah, Bristol</div><div class="who-role">Workshop participant</div></div></div>
+      </div>
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. Leo explains things so clearly. No fluff, no sales pitch, just real, practical guidance."</p>
+        <div class="who"><div class="avatar">J</div><div><div class="who-name">James</div><div class="who-role">Workshop participant</div></div></div>
+      </div>
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. Best money I've spent this year. I finally understand what I'm doing with my savings."</p>
+        <div class="who"><div class="avatar">P</div><div><div class="who-name">Priya</div><div class="who-role">Workshop participant</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="get">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What's included</span>
+      <h2>Here's exactly what you get</h2>
+    </div>
+    <div class="week-grid">
+      <div class="det-card">
+        <span class="wk-label">Session 1</span>
+        <h3>The foundations</h3>
+        <ul>
+          <li>Why investing beats saving over the long term (with real numbers)</li>
+          <li>ISAs explained properly — Stocks & Shares vs Cash, and which is right for you</li>
+          <li>Risk, reward, and how to think about market ups and downs without panicking</li>
+          <li>The mistakes almost every beginner makes — and how to avoid them</li>
+        </ul>
+      </div>
+      <div class="det-card">
+        <span class="wk-label">Session 2</span>
+        <h3>Putting it into practice</h3>
+        <ul>
+          <li>How to actually choose funds — without needing to pick individual stocks</li>
+          <li>Building a portfolio that matches your goals and timeline</li>
+          <li>Live walkthrough: opening and setting up your account, step by step</li>
+          <li>Your personal next steps — leave with an actual plan, not just theory</li>
+        </ul>
+      </div>
+    </div>
+    <div class="perk-grid">
+      <div class="perk">
+        <i class="fa-solid fa-comments"></i>
+        <h4>Ongoing support from me</h4>
+        <p>The course doesn't end when session two does. You can message me directly with questions, any time.</p>
+      </div>
+      <div class="perk">
+        <i class="fa-brands fa-whatsapp"></i>
+        <h4>Exclusive WhatsApp group</h4>
+        <p>Join a private group of like-minded people on the same journey — swap questions, wins, and encouragement.</p>
+      </div>
+      <div class="perk">
+        <i class="fa-solid fa-file-lines"></i>
+        <h4>Notes after every session</h4>
+        <p>Full written notes and slides land in your inbox after each evening, so nothing gets forgotten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE SELECT -->
+<section class="select-sec" id="courses">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Pick your dates</span>
+      <h2>Choose your workshop</h2>
+      <p>Each workshop runs live over Zoom across two evenings, 6:30pm – 8:00pm. £75 for both sessions.</p>
+    </div>
+
+    <div class="sess-grid">
+      <div class="sess-card">
+        <div class="month">September 2026</div>
+        <h3>Tue 8th &amp; 15th Sept</h3>
+        <div class="time">6:30pm – 8:00pm, live online</div>
+        <div class="price">£75</div>
+        <div class="spots">Only 12 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 8th &amp; 15th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+      </div>
+      <div class="sess-card">
+        <div class="month">September 2026</div>
+        <h3>Wed 23rd &amp; 30th Sept</h3>
+        <div class="time">6:30pm – 8:00pm, live online</div>
+        <div class="price">£75</div>
+        <div class="spots">Only 12 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('September', 'Wed 23rd &amp; 30th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+      </div>
+      <div class="sess-card">
+        <div class="month">October 2026</div>
+        <h3>Mon 5th &amp; 12th Oct</h3>
+        <div class="time">7:00pm – 8:30pm, live online</div>
+        <div class="price">£75</div>
+        <div class="spots">Only 12 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('October', 'Mon 5th &amp; 12th October', '7:00pm – 8:30pm'); logcourseselection();">Select this date</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: DETAILS FORM -->
+    <div id="step-2">
+      <h3>Reserve your place</h3>
+      <p class="step-sub">You're booking the <strong id="display-date"></strong>, <span id="display-times"></span> (<span id="display-timings"></span>). Fill in your details below and I'll confirm by email.</p>
+      <form onsubmit="handleReserve(event)">
+        <div class="field">
+          <label for="res-name">Full name</label>
+          <input type="text" id="res-name" required onfocus="lognamefieldfocus()">
+        </div>
+        <div class="field">
+          <label for="res-email">Email address</label>
+          <input type="email" id="res-email" required>
+        </div>
+        <div class="field">
+          <label for="res-phone">Phone number</label>
+          <input type="tel" id="res-phone" required>
+        </div>
+        <button type="submit" class="select-btn" onclick="logbuttonclick()">Confirm Reservation</button>
+      </form>
+    </div>
+
+    <!-- STEP 3: PAYMENT -->
+    <div id="step-3">
+      <div class="success-header">
+        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+        <h2>You're reserved! 🎉</h2>
+        <p style="color:var(--ink);margin-top:10px;">Check your email for confirmation. Last step — secure your seat with payment.</p>
+        <div class="pay-options">
+          <!-- PLACEHOLDER — replace href with your real Stripe Payment Link for this date -->
+          <a href="https://buy.stripe.com/YOUR_PAYMENT_LINK" target="_blank" class="pay-now-link">Pay now — £75 →</a>
+          <button class="pay-later-link" onclick="payLater()">I'll pay in a few days</button>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:14px;">Seats are only fully secured once payment is received.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Do I need any experience to join? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>None at all — this course is built for complete beginners. If you've never opened an investment account before, you're exactly who this is for.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How is the online version different from the in-person workshop? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>Same content, same live teaching from me, just over Zoom instead of in a room in Bristol. It's a smaller group so there's still plenty of room for questions.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What if I can't make one of the live sessions? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>Every session is recorded and sent to you afterwards, so you won't miss anything even if you have to drop off partway through.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Will you tell me exactly what to invest in? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>I'll teach you how to make that decision confidently yourself — the principles behind fund selection, risk, and account types — rather than handing you a stock tip. This is financial education, not regulated advice.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How do I pay, and when? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>Once you reserve your place you'll get a secure Stripe payment link. You can pay straight away, or let me know if you'd like a few days — your seat is fully secured once payment lands.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What do I need on the night? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer"><p>Just a laptop or phone with Zoom, a notepad, and about 90 minutes of your evening. A Zoom link is sent ahead of each session.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Real Life Money — Beginner's Guide to Investing (Online) · Any questions? <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20online%20investing%20course...">WhatsApp me</a></p>
+  </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div id="videoModal" class="modal-overlay">
+  <div class="video-box">
+    <button class="modal-close" onclick="closeVideo()">&times;</button>
+    <iframe src="https://player.vimeo.com/video/1181290406" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+// ---- FAQ accordion (adapted from existing site) ----
+function toggle(questionEl) {
+  const item = questionEl.closest('.faq-item');
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+// ---- Scroll reveal ----
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity .55s ease, transform .55s ease';
+  obs.observe(el);
+});
+
+// ---- Video modal ----
+function openVideo() { document.getElementById('videoModal').style.display = 'flex'; }
+function closeVideo() {
+  document.getElementById('videoModal').style.display = 'none';
+  const iframe = document.querySelector('#videoModal iframe');
+  const tempSrc = iframe.src; iframe.src = tempSrc;
+}
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('videoModal');
+  if (event.target === modal) closeVideo();
+});
+
+// ---- Booking flow (same logic/functions as existing site) ----
+let selectedMonth = "", selectedTimes = "", selectedTimings = "";
+
+function selectDateStep(month, times, timings) {
+  selectedMonth = month; selectedTimes = times; selectedTimings = timings;
+  document.getElementById('display-date').innerText = month + " workshop";
+  document.getElementById('display-times').innerText = times;
+  document.getElementById('display-timings').innerText = timings;
+  document.getElementById('step-2').style.display = 'block';
+  document.getElementById('step-3').style.display = 'none';
+  window.scrollTo({ top: document.getElementById('step-2').offsetTop - 100, behavior: 'smooth' });
+}
+
+function handleReserve(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.innerText = "Confirming, please wait...";
+  btn.disabled = true;
+
+  const templateParams = {
+    name: document.getElementById('res-name').value,
+    email: document.getElementById('res-email').value,
+    phone: document.getElementById('res-phone').value,
+    course_date: selectedMonth,
+    course_times: selectedTimes,
+    course_timings: selectedTimings
+  };
+
+  emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams)
+    .then(() => {
+      document.getElementById('step-2').style.opacity = '0.3';
+      document.getElementById('step-2').style.pointerEvents = 'none';
+      document.getElementById('step-3').style.display = 'block';
+      window.scrollTo({ top: document.getElementById('step-3').offsetTop - 100, behavior: 'smooth' });
+    }, (error) => {
+      console.error("EmailJS Error details:", error);
+      alert("Something went wrong. Please WhatsApp me directly!");
+      btn.innerText = "Confirm Reservation";
+      btn.disabled = false;
+    });
+}
+
+function payLater() {
+  const step3 = document.getElementById('step-3');
+  step3.innerHTML = `
+    <div class="success-header">
+      <div class="success-icon" style="background:#fff9e6;color:#f39c12;border-color:#f39c12;">⏳</div>
+      <h2>Reservation pending</h2>
+      <p style="color:var(--ink);margin-top:10px;">No problem at all!</p>
+      <p style="font-size:14px;color:var(--muted);margin-top:15px;line-height:1.4;">
+        I'll reach out in a few days to see if you're ready to confirm and pay.<br><br>
+        Please note: seats are only fully secured once you've made payment.
+      </p>
+      <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20online%20investing%20course..." target="_blank" class="whatsapp-btn">
+        <svg viewBox="0 0 448 512" width="18" height="18" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.8-16.6-14.8-27.8-33.2-31.1-38.8-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        Any questions? Send me a WhatsApp
+      </a>
+      <a href="#" class="select-btn" style="display:inline-block;margin-top:20px;background:var(--green);text-decoration:none;" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to the top</a>
+    </div>`;
+}
+
+// ---- Logging / tracking (same pattern as existing site) ----
+let sent = false;
+const pageEntryTime = Date.now();
+let maxScroll = 0;
+let ctaClicked = "No", videoClicked = "No", courseSelected = "No", nameFieldFocused = "No";
+
+window.addEventListener('scroll', () => {
+  const scrolled = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+  if (scrolled > maxScroll) maxScroll = scrolled;
+}, { passive: true });
+
+function logbuttonclick() { ctaClicked = "Yes"; }
+function logvideoclick() { videoClicked = "Yes"; }
+function logcourseselection() { courseSelected = "Yes"; }
+function lognamefieldfocus() { nameFieldFocused = "Yes"; }
+
+function sendFinalData() {
+  if (sent) return;
+  sent = true;
+  const timeSpent = Math.floor((Date.now() - pageEntryTime) / 1000);
+  const logData = {
+    timeSpent, scrollDepth: maxScroll + "%",
+    ctaClicked, videoClicked, courseSelected, nameFieldFocused,
+    url: window.location.href
+  };
+  navigator.sendBeacon('https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec', JSON.stringify(logData));
+}
+window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendFinalData(); });
+window.addEventListener('pagehide', sendFinalData);
+</script>
+
+</body>
+</html>
