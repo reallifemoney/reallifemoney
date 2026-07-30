@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beginner's Guide to Investing (Online) — Real Life Money</title>
+<title>Investing Workshop — Real Life Money</title>
 <meta name="description" content="Learn to invest with confidence from your own sofa. My live online workshop breaks investing down into 2 simple evenings — ISAs, funds, and building wealth without the jargon. £75. Book your spot.">
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -194,14 +194,17 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="hero-grid">
       <div>
         <span class="eyebrow">Investing workshop</span>
-        <h1>From beginner to invest in two <span>engaging </span>sessions.</h1>
-        <p class="lede">Learn how to grow your money in a <span>safe and nurturing</span> environment.</p>
+        <h1>From beginner to clicking invest in two <span>engaging </span>sessions.</h1>
+        <p class="lede">Learn how to grow your money in a <span>safe and nurturing</span> environment. I'm a maths teacher and qualified financial advisor here to help you achieve your goals.</p>
         <div class="hero-cta-row">
           <button class="btn btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Register</button>
           
         </div>
         <p class="hero-note">£75 per person · Live online workshop · Small groups</p>
-        
+        <div class="video-trigger" onclick="openVideo();logvideoclick();">
+      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
+      <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+    </div>
       </div>
     </div>
   </div>
@@ -239,19 +242,6 @@ footer a{color:#ddd;text-decoration:underline;}
   </div>
 </section>
 
-<!-- VIDEO -->
-<section class="video-sec">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">30 seconds of me</span>
-      <h2>Hear why I built this course</h2>
-    </div>
-    <div class="video-trigger" onclick="openVideo();logvideoclick();">
-      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
-      <div class="play-btn"><i class="fa-solid fa-play"></i></div>
-    </div>
-  </div>
-</section>
 
 <!-- REVIEWS -->
 <section class="reviews">
@@ -259,23 +249,42 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="section-head">
       <span class="eyebrow" style="background:#3a2e57;color:#d9c4ff;">What people say</span>
       <h2>Don't take my word for it</h2>
-      <p>Real feedback from people who've sat in the workshop — swap these for your real review quotes.</p>
+      <p>Real feedback from people who've sat in the workshop.</p>
+    </div>
+    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px;">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+        <!-- Google G logo SVG -->
+        <svg width="36" height="36" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-9 20-20 0-1.3-.1-2.7-.4-4z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3-11.3-7.3l-6.6 5.1C9.6 39.6 16.3 44 24 44z"/>
+          <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.2-2.3 4-4.2 5.2l6.2 5.2C40.8 35.2 44 30 44 24c0-1.3-.1-2.7-.4-4z"/>
+        </svg>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px;">Real Life Money</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <div style="color: #fbbc04; font-size: 16px; letter-spacing: 1px;">★★★★★</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">5.0</span>
+            <span style="font-size: 12px; color: var(--muted);">Google Reviews</span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="rev-grid">
       <div class="cred">
         <div class="stars">★★★★★</div>
-        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. I went from being completely overwhelmed to opening my first Stocks & Shares ISA the same week."</p>
-        <div class="who"><div class="avatar">S</div><div><div class="who-name">Sarah, Bristol</div><div class="who-role">Workshop participant</div></div></div>
+        <p class="quote">"I'm not great with sitting in long meetings and taking in lot's of information, however Leo made this much easier through keeping information simple and using games to keep me actively engaged.<br><br>I would highly recommend this course to anyone, as it was simply brilliant."</p>
+        <div class="who"><div class="avatar">D</div><div><div class="who-name">Dan, Bristol</div></div></div>
       </div>
       <div class="cred">
         <div class="stars">★★★★★</div>
-        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. Leo explains things so clearly. No fluff, no sales pitch, just real, practical guidance."</p>
-        <div class="who"><div class="avatar">J</div><div><div class="who-name">James</div><div class="who-role">Workshop participant</div></div></div>
+        <p class="quote">"Having a course with an actual human who completely understands the world of investing, and being able to ask questions there and then, has been amazing to help me understand and build my confidence in the world of investing. Thank you."</p>
+        <div class="who"><div class="avatar">R</div><div><div class="who-name">Rachael</div></div></div>
       </div>
       <div class="cred">
         <div class="stars">★★★★★</div>
-        <p class="quote">"REPLACE WITH REAL QUOTE — e.g. Best money I've spent this year. I finally understand what I'm doing with my savings."</p>
-        <div class="who"><div class="avatar">P</div><div><div class="who-name">Priya</div><div class="who-role">Workshop participant</div></div></div>
+        <p class="quote">"I had a great time doing Leo’s investment course. I found it really engaging and clear to understand.<br><br>I can’t fault the course and am really grateful for Leo delivering this - thank you!"</p>
+        <div class="who"><div class="avatar">L</div><div><div class="who-name">Lucy</div></div></div>
       </div>
     </div>
   </div>
@@ -448,11 +457,27 @@ footer a{color:#ddd;text-decoration:underline;}
 </footer>
 
 <!-- VIDEO MODAL -->
-<div id="videoModal" class="modal-overlay">
-  <div class="video-box">
-    <button class="modal-close" onclick="closeVideo()">&times;</button>
-    <iframe src="https://player.vimeo.com/video/1181290406" allow="autoplay; fullscreen" allowfullscreen></iframe>
-  </div>
+<div id="videoModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;">
+    <div style="position: relative; width: 90%; max-width: 900px;">
+        <span onclick="closeVideo()" style="position: absolute; top: -40px; right: 0; color: white; font-size: 30px; cursor: pointer; font-family: sans-serif;">&times; Close</span>
+        
+        <div style="padding:56.25% 0 0 0;position:relative;">
+             <iframe 
+    id="vimeoPlayer" 
+    src="https://player.vimeo.com/video/1181290406?badge=0&autopause=0&player_id=0&app_id=58479" 
+    frameborder="0" 
+    allow="fullscreen; picture-in-picture" 
+    referrerpolicy="strict-origin-when-cross-origin" 
+    style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+    title="Investing workshop">
+</iframe>
+<script src="https://player.vimeo.com/api/player.js"></script>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <a class="btn-primary" href="#book" style="background-color: var(--green); color: #ffffff !important;" onclick="bookAndClose('leo'); logbuttonclick();">Book your place - £75</a>
+</div>
+
+    </div>
 </div>
 
 <script>
