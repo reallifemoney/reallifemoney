@@ -3621,6 +3621,7 @@ function hideToast() {
 let selectedMonth = "";
 let selectedTimes = "";
 let selectedTimings = "";
+let selectedLocation = "Brooklands Park Community Centre - 2 Clover Wy, Stoke Gifford, Bristol BS34 8AZ";
 
 function selectDateStep(month, times, timings) {
     selectedMonth = month;
@@ -3650,6 +3651,7 @@ function handleReserve(e) {
         phone: document.getElementById('res-phone').value,
         course_date: selectedMonth,
         course_times: selectedTimes,
+        course_location: selectedLocation,
         course_timings: selectedTimings
     };
 
