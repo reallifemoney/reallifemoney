@@ -717,7 +717,7 @@ window.addEventListener('click', function(event) {
 });
 
 // ---- Booking flow (same logic/functions as existing site) ----
-let selectedMonth = "", selectedTimes = "", selectedTimings = "";
+let selectedMonth = "", selectedTimes = "", selectedLocation = "Online - you will receive instructions nearer your workshop date", selectedTimings = "";
 
 function selectDateStep(month, times, timings) {
   selectedMonth = month; selectedTimes = times; selectedTimings = timings;
@@ -741,6 +741,7 @@ function handleReserve(e) {
     phone: document.getElementById('res-phone').value,
     course_date: selectedMonth,
     course_times: selectedTimes,
+    course_location: selectedLocation,
     course_timings: selectedTimings
   };
 
