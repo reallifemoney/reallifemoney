@@ -3,24 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Life Money — Financial Education in Bristol</title>
-    <meta name="description" content="Master your personal finance with Real Life Money. Jargon-free investing courses for individuals, schools and businesses. Join Leo Dennis to gain the confidence to start building your future today. No sales pitches—just clarity.">
+    <title>Courses for Individuals — Real Life Money</title>
+    <meta name="description" content="Choose how you'd like to learn to invest — a live online workshop or an in-person course in Bristol. Jargon-free financial education from Real Life Money.">
     <link rel="icon" type="image/webp" href="/logo-circle.webp">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <meta name="google-site-verification" content="hdYeOaOMhksb9lGQ_sY7og5cU918AneYUkxVT2H3AXk" />
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Real Life Money",
-  "url": "https://reallifemoney.co.uk/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://reallifemoney.co.uk/blog?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -52,7 +38,6 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'AW-18128232153');
 </script>
     <style>
@@ -78,7 +63,6 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             flex-direction: column;
         }
 
-        /* HERO HEADER */
         .home-hero {
             flex: 1;
             display: flex;
@@ -89,44 +73,45 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             padding: 80px 24px;
         }
 
+        .back-link {
+            align-self: flex-start;
+            margin: 0 0 40px;
+            color: var(--ink);
+            opacity: .6;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .back-link:hover { opacity: 1; color: var(--purple); }
+
         .logo-main {
-            height: 120px;
+            height: 90px;
             width: auto;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             animation: fadeIn 0.8s ease;
         }
 
         .home-title {
-            font-size: clamp(40px, 8vw, 72px);
+            font-size: clamp(36px, 7vw, 56px);
             font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 24px;
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+            margin-bottom: 20px;
             max-width: 800px;
         }
 
         .home-subtitle {
-            font-size: clamp(18px, 3vw, 22px);
+            font-size: clamp(17px, 2.5vw, 20px);
             color: #4a4a4a;
             max-width: 600px;
-            margin-bottom: 16px;
+            margin-bottom: 48px;
         }
 
-        .prompt-label {
-            font-size: 15px;
-            font-weight: 600;
-            letter-spacing: .04em;
-            text-transform: uppercase;
-            color: var(--purple);
-            margin: 40px 0 24px;
-        }
-
-        /* OPTION CARDS (Individual / School / Business) */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            max-width: 1000px;
+            max-width: 1080px;
             width: 100%;
         }
 
@@ -150,6 +135,12 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             border-color: var(--purple);
         }
 
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+            display: block;
+        }
+
         .tag {
             display: inline-block;
             background: var(--purple);
@@ -163,12 +154,6 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             letter-spacing: 1px;
         }
 
-        .card-icon {
-            font-size: 32px;
-            margin-bottom: 14px;
-            display: block;
-        }
-
         .card-title {
             font-size: 22px;
             font-weight: 700;
@@ -180,6 +165,7 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             font-size: 14px;
             color: #666;
             margin-bottom: 24px;
+            min-height: 42px;
         }
 
         .btn-go {
@@ -198,54 +184,34 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             background: var(--purple);
         }
 
+        /* COMING SOON (disabled) CARD */
+        .course-card.disabled {
+            cursor: not-allowed;
+            opacity: .6;
+            filter: grayscale(0.4);
+        }
+        .course-card.disabled:hover {
+            transform: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            border-color: var(--rule);
+        }
+        .tag.tag-soon {
+            background: #999;
+        }
+        .course-card.disabled .btn-go {
+            background: #cfcfcf;
+            color: #666;
+        }
+        .course-card.disabled:hover .btn-go {
+            background: #cfcfcf;
+        }
+
         footer {
             padding: 40px;
             text-align: center;
             font-size: 13px;
             color: rgba(0,0,0,0.3);
             border-top: 1px solid var(--rule);
-        }
-
-        .contact-link {
-            color: var(--ink);
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 32px;
-            display: inline-block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .secondary-links {
-            margin-top: 32px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .text-link-btn {
-            text-decoration: none;
-            color: var(--ink);
-            font-size: 15px;
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 100px;
-            border: 1px solid var(--rule);
-            background: rgba(255, 255, 255, 0.5);
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .text-link-btn:hover {
-            background: var(--white);
-            border-color: var(--purple);
-            transform: translateY(-2px);
         }
 
         .footer-nav {
@@ -262,10 +228,14 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 
         .footer-nav a:hover { color: var(--purple); }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 760px) {
             .options-grid { grid-template-columns: 1fr; }
         }
-
     </style>
 </head>
 <body>
@@ -275,46 +245,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
     <section class="home-hero">
+        <a href="/" class="back-link">← Back to home</a>
         <img src="/logo.webp" alt="Real Life Money Logo" class="logo-main">
 
-        <h1 class="home-title">Money doesn't have to be <span style="color: var(--purple)">complicated.</span></h1>
-        <p class="home-subtitle">Straightforward financial education for real people. No jargon, no sales pitches, just clarity.</p>
-
-        <p class="prompt-label">How can I help you?</p>
+        <h1 class="home-title">Which course is right for <span style="color: var(--purple)">you?</span></h1>
+        <p class="home-subtitle">Same practical, jargon-free teaching from Leo — just pick the format that suits you.</p>
 
         <div class="options-grid">
-            <a href="/individuals" class="course-card">
-                <span class="card-icon">🙋</span>
-                <span class="tag">Individual</span>
-                <h2 class="card-title">For myself</h2>
-                <p class="card-meta">Learn to invest and manage your own money with confidence.</p>
-                <div class="btn-go">Explore courses →</div>
+            <a href="/online-workshop" class="course-card">
+                <span class="card-icon">💻</span>
+                <span class="tag">Online</span>
+                <h2 class="card-title">Beginner's Guide to Investing</h2>
+                <p class="card-meta">🖥️ Live online &nbsp;•&nbsp; 🗓️ 2 Evenings &nbsp;•&nbsp; 👥 Small Groups</p>
+                <div class="btn-go">View course details →</div>
             </a>
 
-            <a href="/schools-workshop" class="course-card">
-                <span class="card-icon">🍎</span>
-                <span class="tag">School</span>
-                <h2 class="card-title">For a school</h2>
-                <p class="card-meta">Financial education workshops and assemblies for students.</p>
-                <div class="btn-go">View school options →</div>
+            <a href="/investing-course" class="course-card">
+                <span class="card-icon">📍</span>
+                <span class="tag">In-Person</span>
+                <h2 class="card-title">Beginner's Guide to Investing</h2>
+                <p class="card-meta">📍 Bristol &nbsp;•&nbsp; 🗓️ 2 Evenings &nbsp;•&nbsp; 👥 Small Groups</p>
+                <div class="btn-go">View course details →</div>
             </a>
 
-            <a href="/employers" class="course-card">
-                <span class="card-icon">🏢</span>
-                <span class="tag">Business</span>
-                <h2 class="card-title">For a business</h2>
-                <p class="card-meta">Financial wellbeing workshops for your team or employees.</p>
-                <div class="btn-go">View for business →</div>
-            </a>
+            <div class="course-card disabled" aria-disabled="true">
+                <span class="card-icon">🌅</span>
+                <span class="tag tag-soon">Coming Soon</span>
+                <h2 class="card-title">Retirement Planning</h2>
+                <p class="card-meta">A jargon-free guide to planning for retirement with confidence.</p>
+                <div class="btn-go">Coming soon</div>
+            </div>
         </div>
-
-        <div class="secondary-links">
-            <a href="/blog" class="text-link-btn">
-                <span>📖</span> Read the Blog
-            </a>
-        </div>
-
-        <a href="/contact" class="contact-link">Have a question? Contact Leo</a>
     </section>
 
     <footer>
