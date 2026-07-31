@@ -80,8 +80,8 @@ section{padding:80px 0;}
 
 /* ABOUT */
 .about-sec{background:var(--white);}
-.about-sec h2 span{color:var(--purple);}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.about-sec h2 span{color:var(--green);}
+.about-grid{display:flex;flex-direction:column;align-items:center;gap:40px;max-width:760px;margin:0 auto;}
 .about-photo{border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.1);margin-bottom:24px;width:100%;}
 .about-text p{font-size:16px;color:var(--text);margin-bottom:16px;}
 .social-row{display:flex;gap:14px;margin-bottom:20px;}
@@ -103,7 +103,7 @@ section{padding:80px 0;}
 
 /* REVIEWS */
 .reviews{background:var(--mint);}
-.reviews .section-head h2, .reviews .section-head p{color:#fff;}
+.reviews .section-head h2, .reviews .section-head p{color:black;}
 .reviews .section-head p{color:#bbb;}
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .cred{background:#fff;border-radius:20px;padding:30px;border:1px solid #3a3a3a;}
@@ -266,8 +266,8 @@ footer a{color:#ddd;text-decoration:underline;}
 <section class="about-sec">
   <div class="wrap">
     <div class="section-head" style="margin-bottom:40px;">
-      <span class="eyebrow" style="background:#eafbe6;color:var(--green);">About me</span>
-      <h2>"This is <span>no boring webinar</span> — it's a genuinely interactive workshop."</h2>
+      <span class="eyebrow">About me</span>
+      <h2>"This is no boring webinar — it's a <span>genuinely interactive</span> workshop."</h2>
     </div>
     <div class="about-grid">
       <div class="about-text">
@@ -284,7 +284,7 @@ footer a{color:#ddd;text-decoration:underline;}
 <section class="reviews">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow" style="background:#3a2e57;color:#d9c4ff;">What people say</span>
+      <span class="eyebrow">What people say</span>
       <h2>Don't take my word for it</h2>
       <p>Real feedback from people who've sat in the workshop.</p>
     </div>
