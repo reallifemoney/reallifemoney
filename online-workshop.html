@@ -60,11 +60,12 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .stat-strip div{min-width:110px;}
 .stat-strip strong{display:block;font-size:26px;color:var(--ink);}
 .stat-strip span{font-size:13px;color:var(--muted);}
-.date-card-hero{background:var(--white);border:2px solid var(--rule);border-radius:16px;padding:20px;text-align:left;transition:all .3s ease;cursor:pointer;position:relative;width:100%;max-width:500px;color:#000;font-size:13px;}
+.date-card-hero{background:var(--white);border:2px solid var(--rule);border-radius:16px;padding:20px;text-align:left;transition:all .3s ease;cursor:pointer;position:relative;width:100%;max-width:500px;color:#000;font-size:13px;margin:0 auto 25px;}
 .date-card-hero:hover{border-color:var(--purple);transform:translateY(-4px);box-shadow:0 12px 24px rgba(140,82,255,.1);}
 .date-meta{display:flex;flex-direction:column;gap:6px;margin:10px 0 16px;}
 .date-meta-row{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px;}
 .view-other-dates {text-align: center;width: 100%;display: block;background: none;font-family: 'Lexend', sans-serif;border: none;padding-top: 30px;}
+.date-card-hero .btn-primary,.date-card-hero .view-other-dates{width:100%;text-align:center;}
 
 /* SECTION SHELL */
 section{padding:80px 0;}
@@ -252,11 +253,9 @@ footer a{color:#ddd;text-decoration:underline;}
         <p class="lede">I'm a maths teacher and qualified financial advisor here to help you achieve your goals.</p>
         <div class="date-card-hero" style="margin-bottom:25px">
     <div class="date-meta">
-      <p>Next workshop:</p>
-      <div class="date-meta-row">📅 Tue 1st &amp; 8th September</div>
-      <div class="date-meta-row">🕡 6:30pm – 8:00pm</div>
+      <h2>Next online workshop:</h2>
+      <div class="date-meta-row">📅 Tue 1st &amp; 8th September (18:30 - 20:00)</div>
       <div class="date-meta-row">💷 &pound;75 per person</div>
-      <div class="date-meta-row">💻 Interactive online workshop</div>
     </div>
     <div style="display: flex; flex-direction: column;">
         <button class="btn btn-primary" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Register</button>
