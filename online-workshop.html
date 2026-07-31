@@ -78,6 +78,24 @@ section{padding:80px 0;}
 .relate-flip h3{color:#fff;font-size:22px;margin-bottom:8px;}
 .relate-flip p{color:#eee;max-width:60ch;margin:0 auto;}
 
+/* ABOUT */
+.about-sec{background:var(--white);}
+.about-quote{max-width:760px;margin:0 auto 56px;text-align:center;}
+.about-quote i.quote-mark{color:var(--purple);font-size:28px;margin-bottom:14px;display:block;}
+.about-quote p{font-size:26px;font-weight:600;color:var(--ink);line-height:1.4;}
+.about-quote p span{color:var(--purple);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.about-photo{border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.1);margin-bottom:24px;width:100%;}
+.about-text p{font-size:16px;color:var(--text);margin-bottom:16px;}
+.social-row{display:flex;gap:14px;margin-bottom:20px;}
+.social-row a{width:38px;height:38px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:15px;border:1px solid var(--rule);}
+.social-row a:hover{background:var(--purple);color:#fff;}
+.creds-list{display:flex;flex-direction:column;gap:18px;}
+.cred-item{display:flex;gap:16px;align-items:flex-start;background:var(--mint);border:1px solid var(--rule);border-radius:16px;padding:18px 20px;}
+.cred-item .ico{font-size:24px;line-height:1;}
+.cred-item strong{display:block;font-size:15.5px;color:var(--ink);margin-bottom:3px;}
+.cred-item span{font-size:14px;color:var(--muted);}
+
 /* VIDEO */
 .video-sec{text-align:center;}
 .video-trigger{position:relative;max-width:500px;margin:0 auto;border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:0 20px 50px rgba(0,0,0,.12);}
@@ -198,8 +216,8 @@ footer a{color:#ddd;text-decoration:underline;}
     </a>
       <div>
         <span class="eyebrow">Investing workshop</span>
-        <h1>From beginner to clicking invest in two <span>engaging </span>sessions.</h1>
-        <p class="lede">Learn how to grow your money in a <span>safe and nurturing</span> environment. I'm a maths teacher and qualified financial advisor here to help you achieve your goals.</p>
+        <h1>From beginner to clicking invest in two <span>engaging </span>and <span>nurturing </span>sessions.</h1>
+        <p class="lede">I'm a maths teacher and qualified financial advisor here to help you achieve your goals.</p>
         <div class="hero-cta-row">
           <button class="btn btn-primary" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Register</button>
           
@@ -242,6 +260,39 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="relate-flip">
       <h3>Two evenings. That's genuinely all it takes.</h3>
       <p>You'll leave with a clear, personal plan you understand and actually trust — built live, on screen, with me.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="about-sec">
+  <div class="wrap">
+    <div class="about-quote">
+      <i class="fa-solid fa-quote-left quote-mark"></i>
+      <p>This is <span>no boring webinar</span> — it's a genuinely interactive workshop.</p>
+    </div>
+    <div class="section-head" style="margin-bottom:40px;">
+      <span class="eyebrow" style="background:#eafbe6;color:var(--green);">About me</span>
+      <h2>This is <span>no boring webinar</span> — it's a genuinely interactive workshop.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/leo-dennis-004ab797" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/leodennis94" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/18o1Qape2m/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <img src="leo-help.webp" alt="Leo Dennis" class="about-photo">
+        <p>Before teaching, I worked in financial advice — and noticed most clients had little idea how investing worked and relied entirely on us. Most people don't have that luxury. Financial literacy isn't taught in schools, and proper advice is expensive and hard to access. That gap is why I built Real Life Money.</p>
+        <p>I'm a big believer in learning through enjoyment. These are serious topics, but I want you to leave not just having learned a lot — but having actually enjoyed yourself too.</p>
+      </div>
+      <div class="creds-list">
+        <div class="cred-item"><div class="ico">🎓</div><div><strong>Qualified Financial Adviser</strong><span>Several years in financial services, working directly with clients</span></div></div>
+        <div class="cred-item"><div class="ico">📐</div><div><strong>Secondary School Maths Teacher</strong><span>Experienced at explaining complex ideas in plain, accessible language</span></div></div>
+        <div class="cred-item"><div class="ico">🚫</div><div><strong>Nothing to sell you</strong><span>No products, no commissions, no upsells — ever</span></div></div>
+        <div class="cred-item"><div class="ico">📍</div><div><strong>Based in Bristol</strong><span>Live online, small-group teaching wherever you are</span></div></div>
+      </div>
     </div>
   </div>
 </section>
