@@ -191,6 +191,23 @@ footer a{color:#ddd;text-decoration:underline;}
 .video-box iframe{width:100%;height:100%;border:none;}
 .modal-close{position:absolute;top:-42px;right:0;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;}
 
+/* STICKY BOTTOM BAR */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--white);border-top:1.5px solid var(--rule);box-shadow:0 -10px 28px rgba(0,0,0,.08);transform:translateY(110%);transition:transform .35s ease;}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
+.sticky-text{text-align:center;}
+.sticky-text strong{display:block;font-size:14.5px;color:var(--ink);font-weight:600;}
+.sticky-text span{font-size:12.5px;color:var(--muted);}
+.sticky-btn{background:var(--purple);color:#fff;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px;white-space:nowrap;cursor:pointer;border:none;}
+.sticky-btn:hover{opacity:.92;}
+.sticky-close{position:absolute;top:6px;right:10px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px;line-height:1;}
+@media (max-width:600px){
+  .sticky-inner{padding:10px 40px 10px 16px;gap:10px;}
+  .sticky-text strong{font-size:13.5px;}
+  .sticky-text span{font-size:11.5px;}
+  .sticky-btn{padding:10px 18px;font-size:13px;}
+}
+
 /* RESPONSIVE */
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr;}
@@ -584,6 +601,18 @@ footer a{color:#ddd;text-decoration:underline;}
   </div>
 </footer>
 
+<!-- STICKY BOTTOM BAR -->
+<div class="sticky-cta" id="stickyCta">
+  <button class="sticky-close" aria-label="Dismiss" onclick="dismissStickyCta()">&times;</button>
+  <div class="sticky-inner">
+    <div class="sticky-text">
+      <strong>Next workshop: Tue 8th &amp; 15th September</strong>
+      <span>6:30pm – 8:00pm online · £75 · Only 12 spots</span>
+    </div>
+    <button class="sticky-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Reserve your spot →</button>
+  </div>
+</div>
+
 <!-- VIDEO MODAL -->
 <div id="videoModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;">
     <div style="position: relative; width: 90%; max-width: 900px;">
@@ -639,6 +668,41 @@ document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => 
   el.style.transition = 'opacity .55s ease, transform .55s ease';
   obs.observe(el);
 });
+
+// ---- Sticky bottom bar ----
+(function(){
+  const bar = document.getElementById('stickyCta');
+  const coursesSection = document.getElementById('courses');
+  const heroEl = document.querySelector('.hero');
+  if (!bar || !coursesSection || !heroEl) return;
+ 
+  if (sessionStorage.getItem('stickyCtaDismissed') === 'true') return;
+ 
+  let coursesVisible = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { coursesVisible = entry.isIntersecting; });
+    updateBar();
+  }, { threshold: 0.15 });
+  io.observe(coursesSection);
+ 
+  function updateBar() {
+    const pastHero = window.scrollY > heroEl.offsetHeight;
+    if (pastHero && !coursesVisible) {
+      bar.classList.add('show');
+    } else {
+      bar.classList.remove('show');
+    }
+  }
+ 
+  window.addEventListener('scroll', updateBar, { passive: true });
+  window.addEventListener('load', updateBar);
+})();
+ 
+function dismissStickyCta() {
+  const bar = document.getElementById('stickyCta');
+  bar.classList.remove('show');
+  sessionStorage.setItem('stickyCtaDismissed', 'true');
+}
 
 // ---- Video modal ----
 function openVideo() { document.getElementById('videoModal').style.display = 'flex'; }
