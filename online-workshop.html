@@ -171,6 +171,22 @@ section{padding:80px 0;}
 .pay-now-link{background:var(--green);color:#fff;font-weight:600;padding:15px;border-radius:100px;text-align:center;}
 .pay-later-link{background:transparent;border:2px solid var(--ink);color:var(--ink);font-weight:600;padding:13px;border-radius:100px;text-align:center;cursor:pointer;}
 .whatsapp-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:12px 20px;border-radius:100px;margin-top:16px;}
+.stripe-trust-container {text-align: left;margin-top: 25px;padding-left: 5px;}
+.secure-text {font-size: 0.95rem;color: #4a4a4a;margin: 0 0 14px 0;}
+.payment-logos {display: flex;align-items: center;justify-content: flex-start;gap: 15px;}
+
+/* Style the icons like clean, slate-gray text */
+.payment-logos i {
+    font-size: 32px; /* Uniform height lock */
+    color: #6b6b6b;  /* Slate gray matching your text */
+    opacity: 0.75;
+    transition: all 0.2s ease;
+}
+
+.payment-logos i:hover {
+    color: #8c52ff;  /* Turns your brand purple when hovered! */
+    opacity: 1;
+}
 
 /* FAQ */
 .faq{background:#fff;}
@@ -503,9 +519,20 @@ footer a{color:#ddd;text-decoration:underline;}
         <h2>You're reserved! 🎉</h2>
         <p style="color:var(--ink);margin-top:10px;">Check your email for confirmation. Last step — secure your seat with payment.</p>
         <div class="pay-options">
-          <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" class="pay-now-link">Pay now →</a>
+          <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" class="pay-now-link">Pay now via Stripe →</a>
           
         </div>
+        <div class="stripe-trust-container">
+    <p class="secure-text">
+        <span>🔒</span> Secure checkout powered by Stripe
+    </p>
+    <div class="payment-logos">
+        <i class="fa-brands fa-cc-visa" title="Visa"></i>
+        <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+        <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
+        <i class="fa-brands fa-cc-google-pay" title="Google Pay"></i> 
+    </div>
+</div>
         <p style="font-size:13px;color:var(--muted);margin-top:14px;">Seats are only fully secured once payment is received.</p>
       </div>
     </div>
