@@ -175,6 +175,10 @@ section{padding:80px 0;}
 .faq-item.open .faq-q i{transform:rotate(45deg);}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease;}
 .faq-answer p{padding:0 4px 22px;color:var(--muted);font-size:15.5px;max-width:65ch;}
+.faq-answer p .highlight{color:var(--ink);font-weight:600;}
+.faq-footer{max-width:760px;margin:36px auto 0;text-align:center;padding-top:28px;border-top:1px solid var(--rule);}
+.faq-footer p{color:var(--muted);font-size:15px;}
+.faq-footer a{color:var(--purple);font-weight:600;text-decoration:underline;}
 
 /* FOOTER */
 footer{background:var(--ink);color:#aaa;padding:44px 0;text-align:center;font-size:14px;}
@@ -425,20 +429,20 @@ footer a{color:#ddd;text-decoration:underline;}
         <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
       <div class="sess-card">
-        <div class="month">September 2026</div>
-        <h3>Wed 23rd &amp; 30th Sept</h3>
+        <div class="month">October 2026</div>
+        <h3>Wed 7th &amp; 14th Oct</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
         <div class="price">£75</div>
         <div class="spots">Only 12 spots per group</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Wed 23rd &amp; 30th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
       <div class="sess-card">
-        <div class="month">October 2026</div>
-        <h3>Mon 5th &amp; 12th Oct</h3>
-        <div class="time">7:00pm – 8:30pm, live online</div>
+        <div class="month">November 2026</div>
+        <h3>Mon 9th &amp; 16th Nov</h3>
+        <div class="time">6:30pm – 8:00pm, live online</div>
         <div class="price">£75</div>
         <div class="spots">Only 12 spots per group</div>
-        <button class="select-btn" onclick="selectDateStep('October', 'Mon 5th &amp; 12th October', '7:00pm – 8:30pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
     </div>
 
@@ -470,7 +474,6 @@ footer a{color:#ddd;text-decoration:underline;}
         <h2>You're reserved! 🎉</h2>
         <p style="color:var(--ink);margin-top:10px;">Check your email for confirmation. Last step — secure your seat with payment.</p>
         <div class="pay-options">
-          <!-- PLACEHOLDER — replace href with your real Stripe Payment Link for this date -->
           <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" class="pay-now-link">Pay now — £75 →</a>
           
         </div>
@@ -490,36 +493,94 @@ footer a{color:#ddd;text-decoration:underline;}
     </div>
     <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">Do I need any experience to join? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>None at all — this course is built for complete beginners. If you've never opened an investment account before, you're exactly who this is for.</p></div>
+        <div class="faq-q" onclick="toggle(this)">Is this suitable for complete beginners? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>Absolutely — in fact, this course is <span class="highlight">designed specifically for people who feel like they know nothing</span>. Most attendees arrive feeling uncertain or even a little embarrassed about how little they know. That's completely normal, and it's exactly why this course exists.</p>
+          <p>Even if you have a little bit of experience and have dabbled in investing before, you would still get a lot out of this course. It is never a bad thing to have an even better understanding of exactly what you are putting your hard earned cash into.</p>
+          <p>By the end of the course, you'll have a clear picture of how investing works, what your options are, and how to take your first steps with confidence. No prior knowledge needed whatsoever.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">How is the online version different from the in-person workshop? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>Same content, same live teaching from me, just over Zoom instead of in a room in Bristol. It's a smaller group so there's still plenty of room for questions.</p></div>
+        <div class="faq-q" onclick="toggle(this)">What if I can't make the date of the second session? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>My priority is you, so just let me know and we can arrange for you to attend the second session of a different workshop.</p>
+          <p>I run one workshop per month so we can look at booking you in for the following month.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">What if I can't make one of the live sessions? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>Every session is recorded and sent to you afterwards, so you won't miss anything even if you have to drop off partway through.</p></div>
+        <div class="faq-q" onclick="toggle(this)">How much money do I need to get started with investing? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>Less than you probably think. Many investment platforms let you start with <span class="highlight">as little as £1 a month</span>, and some of the most effective long-term strategies involve small, regular contributions rather than large lump sums.</p>
+          <p>The course will walk you through realistic options at every budget level — whether you have £20 a month or £20,000 sitting in a savings account. The most important thing is understanding how it works, not how much you have to start with.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">Will you tell me exactly what to invest in? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>I'll teach you how to make that decision confidently yourself — the principles behind fund selection, risk, and account types — rather than handing you a stock tip. This is financial education, not regulated advice.</p></div>
+        <div class="faq-q" onclick="toggle(this)">Will you tell me what to invest in? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>This course is financial <span class="highlight">education</span>, not financial advice — and that's an important distinction. I won't tell you exactly what to buy, because everyone's situation is different, and recommending specific products is regulated activity that requires an FCA licence.</p>
+          <p>What I will do is give you the knowledge and tools to make those decisions yourself — confidently and independently. By the end you'll understand what to look for, how to compare options, and how to build a simple strategy that suits you. That's worth far more than being told what to do.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">How do I pay, and when? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>Once you reserve your place you'll get a secure Stripe payment link. You can pay straight away, or let me know if you'd like a few days — your seat is fully secured once payment lands.</p></div>
+        <div class="faq-q" onclick="toggle(this)">Is investing risky? Could I lose my money? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>Yes — all investing carries some risk, and anyone who tells you otherwise isn't being straight with you. But <span class="highlight">risk is something you can understand, manage and plan around</span> — and that's a big part of what this course covers.</p>
+          <p>We'll look at how risk and potential return are linked, why time in the market matters so much, and how to build a simple portfolio that matches your own comfort level. Most people leave realising that doing nothing — keeping all your money in cash — carries its own very real risk too.</p>
+        </div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggle(this)">What do I need on the night? <i class="fa-solid fa-plus"></i></div>
-        <div class="faq-answer"><p>Just a laptop or phone with Zoom, a notepad, and about 90 minutes of your evening. A Zoom link is sent ahead of each session.</p></div>
+        <div class="faq-q" onclick="toggle(this)">What will I actually walk away knowing how to do? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>By the end of the two sessions you'll understand <span class="highlight">why investing matters, how the main asset classes work, what ISAs and pensions are actually doing for you</span>, and how to explore and compare real investment funds.</p>
+          <p>More importantly, you'll feel confident enough to open an investment account, make a decision, and actually get started — rather than putting it off for another year. One of my recent attendees said they wished they'd done it 20 years ago. You don't have to feel that way.</p>
+        </div>
       </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">Who are you and why should I trust you? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>Fair question. I'm Leo — a secondary school maths teacher and <span class="highlight">qualified financial adviser</span>. I spent years in financial services realising that only the already wealthy can afford financial advice and most of us just have to muddle through. Inevitably, we either make costly mistakes or we don't take action that could maximise the potential of our money. That gap bothered me, so I built Real Life Money to do something about it.</p>
+          <p>I always wanted to help people, as I know that gives me most satisfaction in my life. Being a Maths teacher is incredibly rewarding, but Real Life Money was setup to try and help adults navigate this scary and complicated world of personal finance.</p>
+          <p>I'm not trying to sell you anything. There are no products, no referral fees, no follow-up sales calls. Just two evenings of practical, honest financial education from someone who has seen both sides — the advice industry and the classroom.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How is this different from just watching YouTube videos? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>YouTube is great, but it's also overwhelming — thousands of videos, conflicting advice, no way to ask questions, and no guarantee the person talking actually knows what they're doing.</p>
+          <p>This workshop gives you <span class="highlight">a structured, sequenced learning experience in a small group</span> where you can ask any question you like without feeling judged. Every attendee so far has said that being able to ask questions as we went was one of the most valuable parts. That's something no video can give you.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What does the course actually involve — is it just a lecture? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>Not at all. The sessions are deliberately <span class="highlight">interactive and practical</span> — think investment simulations, group activities, and hands-on exploration of real platforms and funds, not someone reading off slides at you.</p>
+          <p>Groups are kept small (maximum 12 people) so there's plenty of time for discussion and questions. The aim is for it to feel more like a conversation than a classroom — approachable, engaging, and genuinely useful.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">What if I have questions after the course? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>It's completely natural to have more questions once you start putting things into practice — that's a good sign it's all clicking into place. You're welcome to <span class="highlight">get in touch by email</span> with general questions after the course.</p>
+          <p>If you'd like more personalised support, I also offer one-to-one financial education sessions where we can go deeper on your specific situation at your own pace.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggle(this)">How much does it cost and what's included? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-answer">
+          <p>The course is <span class="highlight">£75 per person</span> for two sessions — that's two evenings of 90 minutes each, in a small group of no more than 12 people.</p>
+          <p>There are no hidden costs, no upsells, and nothing to buy afterwards. Just straightforward financial education at a price that reflects the fact that this stuff should be accessible to everyone — not just people who can afford a financial adviser.</p>
+        </div>
+      </div>
+    </div>
+    <div class="faq-footer">
+      <p>Still got a question that's not answered here? Feel free to <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20online%20investing%20course...">get in touch</a> — no question is too basic and there's genuinely no such thing as a silly question when it comes to your money.</p>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>Real Life Money — Beginner's Guide to Investing (Online) · Any questions? <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20online%20investing%20course...">WhatsApp me</a></p>
+    <p>Real Life Money — Online investing workshop · Any questions? <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20have%20a%20question%20about%20the%20online%20investing%20course...">WhatsApp me</a></p>
   </div>
 </footer>
 
