@@ -149,10 +149,10 @@ section{padding:80px 0;}
 .sess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .sess-card{background:#fff;border:2px solid var(--rule);border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
 .sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
-.sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:15px;}
+.sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:20px;}
 .sess-card h3{font-size:21px;margin-bottom:8px;}
 .sess-card .time .location{color:var(--ink);font-size:15px;margin-bottom:8px;}
-.sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:14px 0;}
+.sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:20px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
 .select-btn:hover{opacity:.92;}
@@ -469,6 +469,7 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="section-head">
       <span class="eyebrow">Pick your dates</span>
       <h2>Choose your workshop</h2>
+      
     </div>
 
     <!-- Filter Pills -->
@@ -481,9 +482,10 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="sess-grid">
       <!-- IN-PERSON WORKSHOP (BRISTOL) -->
       <div class="sess-card" data-category="in-person">
+        <div class="month">IN-PERSON (BRISTOL)</div>
         <h3>Weds 12th &amp; 19th August</h3>
         <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre (Bristol)
+          📍 Brooklands Park Community Centre
           <div class="venue-popover" id="venuePopover-may" role="tooltip">
             <div class="popover-name">Brooklands Park Community Centre</div>
             <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
@@ -499,6 +501,7 @@ footer a{color:#ddd;text-decoration:underline;}
       </div>
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
+        <div class="month">ONLINE</div>
         <h3>Tue 1st &amp; 8th September</h3>
         <div class="location">🖥️ Live online<br></div>
         <div class="time">🕙 6:30pm – 8:00pm</div>
@@ -547,7 +550,7 @@ footer a{color:#ddd;text-decoration:underline;}
       </div>
     </div>
   </div>
-</section>
+
 
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
