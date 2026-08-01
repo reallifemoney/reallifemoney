@@ -154,13 +154,15 @@ section{padding:80px 0;}
 .sess-card .time{color:var(--muted);font-size:14px;margin-bottom:6px;}
 .sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:14px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
-.select-btn{display:block;width:100%;text-align:center;background:var(--purple);color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
+.select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
 .select-btn:hover{opacity:.92;}
 .filter-container {display: flex;justify-content: center;gap: 10px;margin-bottom: 30px;flex-wrap: wrap;}
 .filter-pill {background-color: #ffffff;color: #000000;border: 2px solid #000000;border-radius: 50px;padding: 8px 20px;font-size: 0.95rem;font-weight: 600;cursor: pointer;transition: all 0.2s ease-in-out;}
 .filter-pill:hover:not(.active) {border-color: var(--green, #2e7d32);color: var(--green, #2e7d32);}
 .filter-pill.active {background-color: var(--green, #2e7d32);color: #ffffff;border-color: var(--green, #2e7d32);}
 .sess-card.is-hidden {display: none !important;}
+.venue-trigger {display: inline-flex;align-items: center;gap: 6px;cursor: pointer;position: relative;color: #374151;font-size: 15px;text-decoration: underline;text-decoration-style: dotted;text-underline-offset: 3px;text-decoration-color: #9ca3af;border: none;background: none;padding: 0;font-family: inherit;}
+.venue-trigger .pin-icon {font-size: 16px;flex-shrink: 0;}
 
 #step-2, #step-3{display:none;max-width:560px;margin:48px auto 0;background:#fff;border-radius:20px;padding:36px;border:1px solid var(--rule);}
 #step-2 h3{font-size:22px;margin-bottom:6px;}
@@ -455,17 +457,38 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="section-head">
       <span class="eyebrow">Pick your dates</span>
       <h2>Choose your workshop</h2>
-      <p>Each workshop runs live across two evenings, 6:30pm – 8:00pm. £75 for both sessions.</p>
+      <p>🖥️ Live online </p>
+      <p>📍 In-person (Bristol) - </p>
+      <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
     </div>
 
     <!-- Filter Pills -->
     <div class="filter-container">
-      <button class="filter-pill active" onclick="filterWorkshops('all', this)">View All</button>
+      <button class="filter-pill active" onclick="filterWorkshops('all', this)">View all</button>
       <button class="filter-pill" onclick="filterWorkshops('online', this)">Online</button>
-      <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-Person (Bristol)</button>
+      <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-person (Bristol)</button>
     </div>
 
     <div class="sess-grid">
+      <!-- IN-PERSON WORKSHOP (BRISTOL) -->
+      <div class="sess-card" data-category="in-person">
+        <div class="month">August 2026</div>
+        <h3>Weds 12th &amp; 19th Aug</h3>
+        <div class="time">6:30pm – 8:00pm, Bristol</div>
+        <div class="price">£75</div>
+        <div class="spots">Only 12 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+      </div>
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
         <div class="month">September 2026</div>
@@ -479,11 +502,11 @@ footer a{color:#ddd;text-decoration:underline;}
       <!-- IN-PERSON WORKSHOP (BRISTOL) -->
       <div class="sess-card" data-category="in-person">
         <div class="month">September 2026</div>
-        <h3>Thu 17th &amp; 24th Sept</h3>
-        <div class="time">6:30pm – 8:00pm, Bristol Venue</div>
+        <h3>Tue 15th &amp; 22nd Sept</h3>
+        <div class="time">6:45pm – 8:15pm, Bristol</div>
         <div class="price">£75</div>
-        <div class="spots">Only 10 spots per group</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Thu 17th &amp; 24th September (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <div class="spots">Only 12 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September (Bristol)', '6:45pm – 8:15pm'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- ONLINE WORKSHOP -->
@@ -884,6 +907,53 @@ function filterWorkshops(category, element) {
       }
     });
   }
+
+
+  // Venue popovers
+document.querySelectorAll('.venue-trigger').forEach(trigger => {
+  const popover = trigger.querySelector('.venue-popover');
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation(); // prevent card's onclick firing
+    const isOpen = popover.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', isOpen);
+  });
+});
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.venue-popover.open').forEach(p => {
+    p.classList.remove('open');
+    p.closest('.venue-trigger').setAttribute('aria-expanded', false);
+  });
+});
+
+// Copy buttons
+document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText('Brooklands Park Community Centre, 2 Clover Wy, Bristol, BS34 8AZ');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy address';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+});
+
+function toggleHeroVenue() {
+  const popover = document.getElementById('heroVenuePopover');
+  popover.classList.toggle('open');
+  
+  // Optional: Close popover if user clicks anywhere else
+  document.addEventListener('click', function closeOut(e) {
+    if (!e.target.closest('.q-item')) {
+      popover.classList.remove('open');
+      document.removeEventListener('click', closeOut);
+    }
+  });
+}
 </script>
 
 </body>
