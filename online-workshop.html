@@ -496,7 +496,7 @@ footer a{color:#ddd;text-decoration:underline;}
           </div>
         </button>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm', 'Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
       </div>
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
@@ -505,7 +505,7 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="time">6:30pm – 8:00pm</div>
         <div class="location">🖥️ Live online<br></div>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', 'Online'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- IN-PERSON WORKSHOP (BRISTOL) -->
@@ -541,7 +541,7 @@ footer a{color:#ddd;text-decoration:underline;}
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
       <h3>Reserve your place</h3>
-      <p class="step-sub">You're booking the <strong id="display-date"></strong>, <span id="display-times"></span> (<span id="display-timings"></span>). Location: <span id="display-location"></span>. Fill in your details below and I'll confirm by email.</p>
+      <p class="step-sub">Your chosen course:<br> <strong id="display-date"></strong> - <span id="display-times"></span> (<span id="display-timings"></span>)<br><span id="display-location"></span><br><br>Fill in your details below and I'll confirm by email.</p>
       <form onsubmit="handleReserve(event)">
         <div class="field">
           <label for="res-name">Full name</label>
