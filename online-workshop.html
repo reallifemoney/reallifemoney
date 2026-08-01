@@ -554,7 +554,7 @@ footer a{color:#ddd;text-decoration:underline;}
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
       <h3>Reserve your place</h3>
-      <p class="step-sub" style="padding-top:10px"><strong>You are booking:</strong><br> <span id="display-date"></span> - <span id="display-times"></span> (<span id="display-timings"></span>)<br><span id="display-location"></span><br><br>Fill in your details below and I'll confirm by email.</p>
+      <p class="step-sub" style="padding-top:10px"><strong>You are booking:</strong><br><span id="display-times"></span> (<span id="display-timings"></span>)<br><span id="display-location"></span><br><br>Fill in your details below and I'll confirm by email.</p>
       <form onsubmit="handleReserve(event)">
         <div class="field">
           <label for="res-name">Full name</label>
@@ -768,39 +768,55 @@ document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => 
   obs.observe(el);
 });
 
+
 // ---- Sticky bottom bar ----
 (function(){
   const bar = document.getElementById('stickyCta');
-  const coursesSection = document.getElementById('courses');
   const heroEl = document.querySelector('.hero');
   if (!bar || !heroEl) return;
  
-  if (sessionStorage.getItem('stickyCtaDismissed') === 'true') return;
+  // Permanently hidden if dismissed in this or previous sessions
+  if (localStorage.getItem('stickyCtaDismissed') === 'true') return;
  
-  let coursesVisible = false;
+  let sectionVisible = false;
 
-  // Track if the course selection section is currently on screen
-  if (coursesSection) {
+  // Track if #courses, #step-2, or #step-3 are visible on screen
+  const targetSelectors = ['#courses', '#step-2', '#step-3'];
+  const targets = document.querySelectorAll(targetSelectors.join(','));
+
+  if (targets.length > 0) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { coursesVisible = entry.isIntersecting; });
+      // Re-evaluate if any tracked target is currently in view
+      sectionVisible = Array.from(targets).some(target => {
+        const rect = target.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+      });
       updateBar();
-    }, { threshold: 0.15 });
-    io.observe(coursesSection);
+    }, { threshold: 0.1 });
+
+    targets.forEach(target => io.observe(target));
   }
  
   function updateBar() {
-    // Show once user scrolls past 50% of the hero (adjust 0.5 to 300 for fixed 300px trigger)
-    const scrollThreshold = heroEl.offsetHeight * 0.9;
+    // Check local storage again in case it was dismissed mid-session
+    if (localStorage.getItem('stickyCtaDismissed') === 'true') {
+      bar.classList.remove('show');
+      return;
+    }
+
+    // Trigger past 50% of hero height
+    const scrollThreshold = heroEl.offsetHeight * 0.5;
     const pastHeroThreshold = window.scrollY > scrollThreshold;
 
-    if (pastHeroThreshold && !coursesVisible) {
+    // Show only past threshold AND when target sections are not visible
+    if (pastHeroThreshold && !sectionVisible) {
       bar.classList.add('show');
     } else {
       bar.classList.remove('show');
     }
   }
 
-  // Throttle with requestAnimationFrame for smooth trigger while scrolling down
+  // Smooth frame throttling for scroll events
   let ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking) {
@@ -815,10 +831,11 @@ document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => 
   window.addEventListener('load', updateBar);
 })();
 
+// Permanent Dismissal Function (call this on your 'X' button click)
 function dismissStickyCta() {
   const bar = document.getElementById('stickyCta');
   if (bar) bar.classList.remove('show');
-  sessionStorage.setItem('stickyCtaDismissed', 'true');
+  localStorage.setItem('stickyCtaDismissed', 'true');
 }
 
 // ---- Video modal ----
@@ -838,8 +855,8 @@ let selectedMonth = "", selectedTimes = "", selectedLocation = "", selectedTimin
 
 function selectDateStep(month, times, timings, location) {
   selectedMonth = month; selectedTimes = times; selectedTimings = timings; selectedLocation = location;
-  document.getElementById('display-date').innerText = "📅 " + month + " workshop";
-  document.getElementById('display-times').innerText = times;
+  document.getElementById('display-date').innerText = month + " workshop";
+  document.getElementById('display-times').innerText = "📅 " + times;
   document.getElementById('display-timings').innerText = timings;
   document.getElementById('display-location').innerText = location;
   document.getElementById('step-2').style.display = 'block';
