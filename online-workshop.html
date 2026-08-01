@@ -148,7 +148,7 @@ section{padding:80px 0;}
 .select-sec{background:var(--mint);}
 .sess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .sess-card{background:#fff;border:2px solid var(--rule);border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
-.sess-card-waitlist{background: var(--mint) !important;border: 1px dashed var(--purple) !important;border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
+.sess-card-waitlist{background: white !important;border: 2px var(--purple) !important;border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
 .sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
 .sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:20px;}
 .sess-card h3{font-size:21px;margin-bottom:8px;}
@@ -550,7 +550,7 @@ footer a{color:#ddd;text-decoration:underline;}
         <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
       </div>
       <div class="sess-card-waitlist">
-          <h3>Can't make these?</h3>
+          <h3 style="padding-bottom: 15px">Can't make these?</h3>
           <p style="padding-bottom: 15px">I'll email you when new dates are announced.</p>
           <form onsubmit="handleWaitlist(event)">
             <input type="email" id="waitlist-email" class="step-input" placeholder="Your email" required>
@@ -1019,6 +1019,50 @@ function toggleHeroVenue() {
       document.removeEventListener('click', closeOut);
     }
   });
+}
+
+
+// Join waitlist
+
+async function handleWaitlist(event) {
+  // 1. Prevent the page from reloading on form submit
+  event.preventDefault();
+  
+  const emailInput = document.getElementById('waitlist-email');
+  const submitButton = event.target.querySelector('button[type="submit"]');
+  
+  const payload = {
+    email: emailInput.value,
+    url: window.location.href // Automatically grabs the current page URL
+  };
+
+  // Optimistically update the UI to feel lightning fast
+  const originalBtnText = submitButton.textContent;
+  submitButton.textContent = "Saving...";
+  submitButton.disabled = true;
+
+  try {
+    // 2. Send data to your specific Google Web App URL
+    await fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
+      method: 'POST',
+      mode: 'no-cors', // Crucial for handling Google Web App redirects seamlessly
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    // 3. Success state updates
+    submitButton.textContent = "Success! ✔";
+    submitButton.style.background = "#25D366"; // Success green highlight
+    emailInput.value = ""; // Clear the input field
+    
+  } catch (error) {
+    console.error("Waitlist error:", error);
+    submitButton.textContent = "Error, try again";
+    submitButton.disabled = false;
+    submitButton.style.background = originalBtnText;
+  }
 }
 </script>
 
