@@ -148,6 +148,7 @@ section{padding:80px 0;}
 .select-sec{background:var(--mint);}
 .sess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
 .sess-card{background:#fff;border:2px solid var(--rule);border-radius:20px;padding:28px;text-align:center;transition:border-color .15s ease, transform .15s ease;}
+.sess-card-waitlist{background: var(--mint) !important;border: 1px dashed var(--purple) !important;}
 .sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
 .sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:20px;}
 .sess-card h3{font-size:21px;margin-bottom:8px;}
@@ -550,6 +551,15 @@ footer a{color:#ddd;text-decoration:underline;}
       </div>
     </div>
   </div>
+
+  <div class="sess-card-waitlist">
+          <h3>Can't make these?</h3>
+          <p style="padding-bottom: 15px">I'll email you when new dates are announced.</p>
+          <form onsubmit="handleWaitlist(event)">
+            <input type="email" id="waitlist-email" class="step-input" placeholder="Your email" required>
+            <button type="submit" class="select-btn" style="background:var(--green);color:white;">Notify me</button>
+          </form>
+        </div>
 
 
     <!-- STEP 2: DETAILS FORM -->
