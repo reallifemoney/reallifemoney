@@ -760,33 +760,51 @@ document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => 
   const bar = document.getElementById('stickyCta');
   const coursesSection = document.getElementById('courses');
   const heroEl = document.querySelector('.hero');
-  if (!bar || !coursesSection || !heroEl) return;
+  if (!bar || !heroEl) return;
  
   if (sessionStorage.getItem('stickyCtaDismissed') === 'true') return;
  
   let coursesVisible = false;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { coursesVisible = entry.isIntersecting; });
-    updateBar();
-  }, { threshold: 0.15 });
-  io.observe(coursesSection);
+
+  // Track if the course selection section is currently on screen
+  if (coursesSection) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { coursesVisible = entry.isIntersecting; });
+      updateBar();
+    }, { threshold: 0.15 });
+    io.observe(coursesSection);
+  }
  
   function updateBar() {
-    const pastHero = window.scrollY > heroEl.offsetHeight;
-    if (pastHero && !coursesVisible) {
+    // Show once user scrolls past 50% of the hero (adjust 0.5 to 300 for fixed 300px trigger)
+    const scrollThreshold = heroEl.offsetHeight * 0.9;
+    const pastHeroThreshold = window.scrollY > scrollThreshold;
+
+    if (pastHeroThreshold && !coursesVisible) {
       bar.classList.add('show');
     } else {
       bar.classList.remove('show');
     }
   }
- 
-  window.addEventListener('scroll', updateBar, { passive: true });
+
+  // Throttle with requestAnimationFrame for smooth trigger while scrolling down
+  let ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        updateBar();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
   window.addEventListener('load', updateBar);
 })();
- 
+
 function dismissStickyCta() {
   const bar = document.getElementById('stickyCta');
-  bar.classList.remove('show');
+  if (bar) bar.classList.remove('show');
   sessionStorage.setItem('stickyCtaDismissed', 'true');
 }
 
