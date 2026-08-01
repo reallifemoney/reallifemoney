@@ -496,7 +496,7 @@ footer a{color:#ddd;text-decoration:underline;}
           </div>
         </button>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August', '6:30pm – 8:00pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
       </div>
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
@@ -512,27 +512,40 @@ footer a{color:#ddd;text-decoration:underline;}
       <div class="sess-card" data-category="in-person">
         <div class="month">September 2026</div>
         <h3>Tue 15th &amp; 22nd Sept</h3>
-        <div class="time">6:45pm – 8:15pm, Bristol</div>
+        <div class="time">6:45pm – 8:15pm</div>
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre (Bristol)
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September (Bristol)', '6:45pm – 8:15pm', 'Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September', '6:45pm – 8:15pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
         <div class="month">October 2026</div>
         <h3>Wed 7th &amp; 14th Oct</h3>
-        <div class="time">6:30pm – 8:00pm, live online</div>
+        <div class="time">6:30pm – 8:00pm</div>
+        <div class="location">🖥️ Live online<br></div>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
         <div class="month">November 2026</div>
         <h3>Mon 9th &amp; 16th Nov</h3>
-        <div class="time">6:30pm – 8:00pm, live online</div>
+        <div class="time">6:30pm – 8:00pm</div>
+        <div class="location">🖥️ Live online<br></div>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
       </div>
     </div>
   </div>
@@ -541,7 +554,7 @@ footer a{color:#ddd;text-decoration:underline;}
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
       <h3>Reserve your place</h3>
-      <p class="step-sub">Your chosen course:<br> <strong id="display-date"></strong> - <span id="display-times"></span> (<span id="display-timings"></span>)<br><span id="display-location"></span><br><br>Fill in your details below and I'll confirm by email.</p>
+      <p class="step-sub" style="padding-top:10px"><strong>You are booking:</strong><br> <span id="display-date"></span> - <span id="display-times"></span> (<span id="display-timings"></span>)<br><span id="display-location"></span><br><br>Fill in your details below and I'll confirm by email.</p>
       <form onsubmit="handleReserve(event)">
         <div class="field">
           <label for="res-name">Full name</label>
@@ -825,7 +838,7 @@ let selectedMonth = "", selectedTimes = "", selectedLocation = "", selectedTimin
 
 function selectDateStep(month, times, timings, location) {
   selectedMonth = month; selectedTimes = times; selectedTimings = timings; selectedLocation = location;
-  document.getElementById('display-date').innerText = month + " workshop";
+  document.getElementById('display-date').innerText = "📅 " + month + " workshop";
   document.getElementById('display-times').innerText = times;
   document.getElementById('display-timings').innerText = timings;
   document.getElementById('display-location').innerText = location;
