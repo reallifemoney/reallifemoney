@@ -282,7 +282,7 @@ footer a{color:#ddd;text-decoration:underline;}
       <div class="date-meta-row">💷 &pound;75 per person</div>
     </div>
     <div style="display: flex; flex-direction: column;">
-        <button class="btn btn-primary" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Register</button>
+        <button class="btn btn-primary" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', 'Online'); logcourseselection();">Register</button>
         <button class="view-other-dates" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button>
     </div>
     </div>
@@ -496,7 +496,7 @@ footer a{color:#ddd;text-decoration:underline;}
           </div>
         </button>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm', 'Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
       </div>
       <!-- ONLINE WORKSHOP -->
       <div class="sess-card" data-category="online">
@@ -505,7 +505,7 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="time">6:30pm – 8:00pm</div>
         <div class="location">🖥️ Live online<br></div>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', 'Online'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- IN-PERSON WORKSHOP (BRISTOL) -->
@@ -514,7 +514,7 @@ footer a{color:#ddd;text-decoration:underline;}
         <h3>Tue 15th &amp; 22nd Sept</h3>
         <div class="time">6:45pm – 8:15pm, Bristol</div>
         <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September (Bristol)', '6:45pm – 8:15pm'); logcourseselection();">Select this date</button>
+        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September (Bristol)', '6:45pm – 8:15pm', 'Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
       </div>
 
       <!-- ONLINE WORKSHOP -->
@@ -541,7 +541,7 @@ footer a{color:#ddd;text-decoration:underline;}
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
       <h3>Reserve your place</h3>
-      <p class="step-sub">You're booking the <strong id="display-date"></strong>, <span id="display-times"></span> (<span id="display-timings"></span>). Fill in your details below and I'll confirm by email.</p>
+      <p class="step-sub">You're booking the <strong id="display-date"></strong>, <span id="display-times"></span> (<span id="display-timings"></span>). Location: <span id="display-location"></span>. Fill in your details below and I'll confirm by email.</p>
       <form onsubmit="handleReserve(event)">
         <div class="field">
           <label for="res-name">Full name</label>
@@ -803,13 +803,14 @@ window.addEventListener('click', function(event) {
 });
 
 // ---- Booking flow (same logic/functions as existing site) ----
-let selectedMonth = "", selectedTimes = "", selectedLocation = "Online - you will receive instructions nearer your workshop date", selectedTimings = "";
+let selectedMonth = "", selectedTimes = "", selectedLocation = "", selectedTimings = "";
 
-function selectDateStep(month, times, timings) {
-  selectedMonth = month; selectedTimes = times; selectedTimings = timings;
+function selectDateStep(month, times, timings, location) {
+  selectedMonth = month; selectedTimes = times; selectedTimings = timings; selectedLocation = location;
   document.getElementById('display-date').innerText = month + " workshop";
   document.getElementById('display-times').innerText = times;
   document.getElementById('display-timings').innerText = timings;
+  document.getElementById('display-location').innerText = location;
   document.getElementById('step-2').style.display = 'block';
   document.getElementById('step-3').style.display = 'none';
   window.scrollTo({ top: document.getElementById('step-2').offsetTop - 100, behavior: 'smooth' });
