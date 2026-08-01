@@ -151,7 +151,7 @@ section{padding:80px 0;}
 .sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
 .sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
 .sess-card h3{font-size:21px;margin-bottom:6px;}
-.sess-card .time .location{color:var(--ink);font-size:14px;margin-bottom:6px;}
+.sess-card .time .location{color:var(--ink);font-size:15px;margin-bottom:6px;}
 .sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:14px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
@@ -162,7 +162,7 @@ section{padding:80px 0;}
 .filter-pill.active {background-color: var(--green, #2e7d32);color: #ffffff;border-color: var(--green, #2e7d32);}
 .sess-card.is-hidden {display: none !important;}
 .venue-trigger {display: inline-flex;align-items: center;gap: 6px;cursor: pointer;position: relative;color: #374151;font-size: 15px;text-decoration: underline;text-decoration-style: dotted;text-underline-offset: 3px;text-decoration-color: #9ca3af;border: none;background: none;padding: 0;font-family: inherit;}
-.venue-trigger .pin-icon {font-size: 16px;flex-shrink: 0;}
+.venue-trigger .pin-icon {font-size: 15px;flex-shrink: 0;}
 .venue-popover { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(4px); width: 260px; background: #fff; border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.10); opacity: 0; pointer-events: none; transition: opacity 0.18s ease, transform 0.18s ease; z-index: 100; text-align: left; }
 .venue-popover.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
 .venue-popover::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 7px solid transparent; border-top-color: #fff; filter: drop-shadow(0 1px 0 #e5e7eb); }
@@ -469,19 +469,6 @@ footer a{color:#ddd;text-decoration:underline;}
     <div class="section-head">
       <span class="eyebrow">Pick your dates</span>
       <h2>Choose your workshop</h2>
-      <p>🖥️ Live online </p>
-      <p>📍 In-person (Bristol) - </p>
-      <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre (Bristol)
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
     </div>
 
     <!-- Filter Pills -->
@@ -509,7 +496,6 @@ footer a{color:#ddd;text-decoration:underline;}
           </div>
         </button>
         <div class="price">£75</div>
-        <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
       <!-- ONLINE WORKSHOP -->
@@ -517,9 +503,8 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="month">September 2026</div>
         <h3>Tue 1st &amp; 8th Sept</h3>
         <div class="time">6:30pm – 8:00pm</div>
-        <div class="location">🖥️ Live online</div>
+        <div class="location">🖥️ Live online<br></div>
         <div class="price">£75</div>
-        <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
 
@@ -529,7 +514,6 @@ footer a{color:#ddd;text-decoration:underline;}
         <h3>Tue 15th &amp; 22nd Sept</h3>
         <div class="time">6:45pm – 8:15pm, Bristol</div>
         <div class="price">£75</div>
-        <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September (Bristol)', '6:45pm – 8:15pm'); logcourseselection();">Select this date</button>
       </div>
 
@@ -539,7 +523,6 @@ footer a{color:#ddd;text-decoration:underline;}
         <h3>Wed 7th &amp; 14th Oct</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
         <div class="price">£75</div>
-        <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
 
@@ -549,7 +532,6 @@ footer a{color:#ddd;text-decoration:underline;}
         <h3>Mon 9th &amp; 16th Nov</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
         <div class="price">£75</div>
-        <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
     </div>
