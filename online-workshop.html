@@ -156,6 +156,10 @@ section{padding:80px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
 .select-btn:hover{opacity:.92;}
+.filter-container {display: flex;justify-content: center;gap: 10px;margin-bottom: 30px;flex-wrap: wrap;}
+.filter-pill {background-color: #ffffff;color: #000000;border: 2px solid #000000;border-radius: 50px;padding: 8px 20px;font-size: 0.95rem;font-weight: 600;cursor: pointer;transition: all 0.2s ease-in-out;}
+.filter-pill:hover .filter-pill.active {background-color: #000000;color: #ffffff;}
+.sess-card.is-hidden {display: none !important;}
 
 #step-2, #step-3{display:none;max-width:560px;margin:48px auto 0;background:#fff;border-radius:20px;padding:36px;border:1px solid var(--rule);}
 #step-2 h3{font-size:22px;margin-bottom:6px;}
@@ -174,19 +178,8 @@ section{padding:80px 0;}
 .stripe-trust-container {text-align: left;margin-top: 25px;padding-left: 5px;}
 .secure-text {font-size: 0.95rem;color: #4a4a4a;margin: 0 0 14px 0;}
 .payment-logos {display: flex;align-items: center;justify-content: flex-start;gap: 15px;}
-
-/* Style the icons like clean, slate-gray text */
-.payment-logos i {
-    font-size: 32px; /* Uniform height lock */
-    color: #6b6b6b;  /* Slate gray matching your text */
-    opacity: 0.75;
-    transition: all 0.2s ease;
-}
-
-.payment-logos i:hover {
-    color: #8c52ff;  /* Turns your brand purple when hovered! */
-    opacity: 1;
-}
+.payment-logos i {font-size: 32px;color: #6b6b6b;opacity: 0.75;transition: all 0.2s ease;}
+.payment-logos i:hover {color: #8c52ff;opacity: 1;}
 
 /* FAQ */
 .faq{background:#fff;}
@@ -464,8 +457,16 @@ footer a{color:#ddd;text-decoration:underline;}
       <p>Each workshop runs live across two evenings, 6:30pm – 8:00pm. £75 for both sessions.</p>
     </div>
 
+    <!-- Filter Pills -->
+    <div class="filter-container">
+      <button class="filter-pill active" onclick="filterWorkshops('all', this)">View All</button>
+      <button class="filter-pill" onclick="filterWorkshops('online', this)">Online</button>
+      <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-Person (Bristol)</button>
+    </div>
+
     <div class="sess-grid">
-      <div class="sess-card">
+      <!-- ONLINE WORKSHOP -->
+      <div class="sess-card" data-category="online">
         <div class="month">September 2026</div>
         <h3>Tue 1st &amp; 8th Sept</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
@@ -473,7 +474,19 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
-      <div class="sess-card">
+
+      <!-- IN-PERSON WORKSHOP (BRISTOL) -->
+      <div class="sess-card" data-category="in-person">
+        <div class="month">September 2026</div>
+        <h3>Thu 17th &amp; 24th Sept</h3>
+        <div class="time">6:30pm – 8:00pm, Bristol Venue</div>
+        <div class="price">£75</div>
+        <div class="spots">Only 10 spots per group</div>
+        <button class="select-btn" onclick="selectDateStep('September', 'Thu 17th &amp; 24th September (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
+      </div>
+
+      <!-- ONLINE WORKSHOP -->
+      <div class="sess-card" data-category="online">
         <div class="month">October 2026</div>
         <h3>Wed 7th &amp; 14th Oct</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
@@ -481,7 +494,9 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
-      <div class="sess-card">
+
+      <!-- ONLINE WORKSHOP -->
+      <div class="sess-card" data-category="online">
         <div class="month">November 2026</div>
         <h3>Mon 9th &amp; 16th Nov</h3>
         <div class="time">6:30pm – 8:00pm, live online</div>
@@ -490,6 +505,8 @@ footer a{color:#ddd;text-decoration:underline;}
         <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
       </div>
     </div>
+  </div>
+</section>
 
     <!-- STEP 2: DETAILS FORM -->
     <div id="step-2">
@@ -846,6 +863,26 @@ function sendFinalData() {
 }
 window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendFinalData(); });
 window.addEventListener('pagehide', sendFinalData);
+
+
+function filterWorkshops(category, element) {
+    // 1. Update Active Pill Styling
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach(pill => pill.classList.remove('active'));
+    element.classList.add('active');
+
+    // 2. Filter Cards
+    const cards = document.querySelectorAll('.sess-card');
+    cards.forEach(card => {
+      const cardCategory = card.getAttribute('data-category');
+      
+      if (category === 'all' || cardCategory === category) {
+        card.classList.remove('is-hidden');
+      } else {
+        card.classList.add('is-hidden');
+      }
+    });
+  }
 </script>
 
 </body>
