@@ -151,7 +151,7 @@ section{padding:80px 0;}
 .sess-card:hover{border-color:var(--purple);transform:translateY(-4px);}
 .sess-card .month{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
 .sess-card h3{font-size:21px;margin-bottom:6px;}
-.sess-card .time{color:var(--muted);font-size:14px;margin-bottom:6px;}
+.sess-card .time .location{color:var(--ink);font-size:14px;margin-bottom:6px;}
 .sess-card .price{font-size:28px;font-weight:700;color:var(--ink);margin:14px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
@@ -472,7 +472,7 @@ footer a{color:#ddd;text-decoration:underline;}
       <p>🖥️ Live online </p>
       <p>📍 In-person (Bristol) - </p>
       <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
+          📍 Brooklands Park Community Centre (Bristol)
           <div class="venue-popover" id="venuePopover-may" role="tooltip">
             <div class="popover-name">Brooklands Park Community Centre</div>
             <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
@@ -496,7 +496,18 @@ footer a{color:#ddd;text-decoration:underline;}
       <div class="sess-card" data-category="in-person">
         <div class="month">August 2026</div>
         <h3>Weds 12th &amp; 19th Aug</h3>
-        <div class="time">6:30pm – 8:00pm, Bristol</div>
+        <div class="time">6:30pm – 8:00pm</div>
+        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
+          📍 Brooklands Park Community Centre (Bristol)
+          <div class="venue-popover" id="venuePopover-may" role="tooltip">
+            <div class="popover-name">Brooklands Park Community Centre</div>
+            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
+            <div class="popover-actions">
+              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
+              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
+            </div>
+          </div>
+        </button>
         <div class="price">£75</div>
         <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Weds 12th &amp; 19th August (Bristol)', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
@@ -505,7 +516,8 @@ footer a{color:#ddd;text-decoration:underline;}
       <div class="sess-card" data-category="online">
         <div class="month">September 2026</div>
         <h3>Tue 1st &amp; 8th Sept</h3>
-        <div class="time">6:30pm – 8:00pm, live online</div>
+        <div class="time">6:30pm – 8:00pm</div>
+        <div class="location">🖥️ Live online</div>
         <div class="price">£75</div>
         <div class="spots">Only 12 spots per group</div>
         <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm'); logcourseselection();">Select this date</button>
