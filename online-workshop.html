@@ -176,7 +176,7 @@ section{padding:80px 0;}
 .btn-copy:hover { background: #e5e7eb; }
 .btn-copy.copied { color: #16a34a; }
 
-#step-2, #step-3 { display: none; max-width: 560px; width: calc(100% - 20px); margin: 48px auto; background: #fff; border-radius: 20px; padding: 36px 10px; border: 1px solid var(--rule); box-sizing: border-box; }
+#step-2, #step-3 { display: none; max-width: 560px; width: calc(100% - 20px); margin: 48px auto; background: #fff; border-radius: 20px; padding: 36px 20px; border: 1px solid var(--rule); box-sizing: border-box; }
 #step-2 h3{font-size:22px;margin-bottom:6px;}
 #step-2 .step-sub{color:var(--muted);font-size:15px;margin-bottom:24px;}
 #step-2 .step-sub strong{color:var(--ink);}
@@ -762,9 +762,9 @@ const obs = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.perk').forEach(el => {
+document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.outcome-card,.perk').forEach(el => {
   el.style.opacity = '0';
-  el.style.transform = 'translateY(18px)';
+  el.style.transform = 'translateY(25px)';
   el.style.transition = 'opacity .55s ease, transform .55s ease';
   obs.observe(el);
 });
