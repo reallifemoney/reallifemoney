@@ -13,10 +13,34 @@
 
   <!-- Entry screen - shown before anything else -->
   <div class="entry-screen" id="entryScreen">
-    <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
-    <div class="entry-actions">
-      <button class="btn btn-primary" id="entryVerifyBtn">Verify Instagram handle</button>
+
+    <div class="entry-panel" id="entryPanel">
+      <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
+      <p class="entry-tagline">This invitation is personal. Let's confirm it's you.</p>
+
+      <form class="entry-verify-form" id="entryVerifyForm">
+        <div class="entry-input-row">
+          <span class="verify-at">@</span>
+          <input type="text" id="entryHandleInput" placeholder="yourhandle" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary" id="entryVerifyBtn">Verify Instagram handle</button>
+        <span class="verify-bar-error" id="entryVerifyError"></span>
+      </form>
+
+      <div class="entry-divider"><span>or</span></div>
+
       <button class="btn btn-text" id="entryGuestBtn">View as guest</button>
+    </div>
+
+    <!-- Success state - shown briefly after a correct verification -->
+    <div class="entry-success" id="entrySuccess" hidden>
+      <svg class="success-check" viewBox="0 0 80 80" width="80" height="80">
+        <circle class="success-check-circle" cx="40" cy="40" r="36" fill="none" stroke-width="4"/>
+        <path class="success-check-tick" fill="none" stroke-width="5" d="M22 42 L35 55 L58 26"/>
+      </svg>
+      <h2 class="success-heading">You're verified, <span id="entrySuccessHandle">@handle</span></h2>
+      <p class="success-sub">It's genuinely an honour to have you on board. Welcome in.</p>
+      <div class="confetti" id="confetti"></div>
     </div>
   </div>
 
