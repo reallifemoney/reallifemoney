@@ -67,8 +67,12 @@ function launchConfetti() {
   }
 }
 
-entryVerifyForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+entryVerifyBtn.addEventListener("click", handleEntryVerify);
+entryHandleInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") handleEntryVerify();
+});
+
+async function handleEntryVerify() {
   entryVerifyError.textContent = "";
   entryVerifyBtn.disabled = true;
   entryVerifyBtn.textContent = "Checking...";
@@ -98,7 +102,7 @@ entryVerifyForm.addEventListener("submit", async (e) => {
   launchConfetti();
 
   setTimeout(enterApp, 2200);
-});
+}
 
 document.getElementById("entryGuestBtn").addEventListener("click", () => enterApp());
 
