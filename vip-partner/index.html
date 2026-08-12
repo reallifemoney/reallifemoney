@@ -11,26 +11,36 @@
 </head>
 <body>
 
-  <!-- Sticky verification bar - shown until handle is verified -->
-  <div class="verify-bar" id="verifyBar">
-    <div class="verify-bar-inner">
-      <span class="verify-bar-text">You're viewing this as a guest. Verify your Instagram handle to unlock sign-up.</span>
-      <div class="verify-bar-form">
-        <span class="verify-at">@</span>
-        <input type="text" id="handleInput" placeholder="yourhandle" autocomplete="off">
-        <button id="verifyBtn">Verify</button>
-      </div>
-      <span class="verify-bar-error" id="verifyError"></span>
+  <!-- Entry screen - shown before anything else -->
+  <div class="entry-screen" id="entryScreen">
+    <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
+    <div class="entry-actions">
+      <button class="btn btn-primary" id="entryVerifyBtn">Verify Instagram handle</button>
+      <button class="btn btn-text" id="entryGuestBtn">View as guest</button>
     </div>
   </div>
 
-  <div class="carousel-wrap">
-    <header class="brand-header">
-      <img src="vip-partner.png" alt="VIP Partner" class="brand-crown">
-      <span class="brand-name">VIP PARTNER</span>
-    </header>
+  <div id="mainApp" hidden>
 
-    <div class="carousel" id="carousel">
+    <!-- Sticky verification bar - shown until handle is verified -->
+    <div class="verify-bar" id="verifyBar">
+      <div class="verify-bar-inner">
+        <span class="verify-bar-text">You're viewing this as a guest. Verify your Instagram handle to unlock sign-up.</span>
+        <div class="verify-bar-form">
+          <span class="verify-at">@</span>
+          <input type="text" id="handleInput" placeholder="yourhandle" autocomplete="off">
+          <button id="verifyBtn">Verify</button>
+        </div>
+        <span class="verify-bar-error" id="verifyError"></span>
+      </div>
+    </div>
+
+    <div class="carousel-wrap">
+      <header class="brand-header">
+        <img src="vip-partner.png" alt="VIP Partner" class="brand-crown">
+      </header>
+
+      <div class="carousel" id="carousel">
 
       <!-- Slide 1: Welcome -->
       <section class="slide slide-welcome" data-slide="0">
@@ -158,10 +168,11 @@
 
     </div>
 
-    <div class="carousel-nav">
-      <button class="carousel-arrow" id="prevArrow" aria-label="Previous">&#8592;</button>
-      <div class="carousel-dots" id="carouselDots"></div>
-      <button class="carousel-arrow" id="nextArrow" aria-label="Next">&#8594;</button>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="prevArrow" aria-label="Previous">&#8592;</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-arrow" id="nextArrow" aria-label="Next">&#8594;</button>
+      </div>
     </div>
   </div>
 
