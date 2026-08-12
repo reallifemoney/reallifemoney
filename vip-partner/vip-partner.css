@@ -335,3 +335,31 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
   h1{font-size:26px;} h2{font-size:22px;}
   .verify-bar-form input{width:100px;}
 }
+
+
+/* ---------- terms page ---------- */
+.terms-page{min-height:100vh;}
+.terms-wrap{max-width:640px; margin:0 auto; padding:8px 24px 60px;}
+.terms-back{
+  display:inline-block; font-size:13px; font-weight:600; color:var(--dark);
+  text-decoration:none; opacity:0.7; margin-bottom:18px;
+}
+.terms-back:hover{opacity:1;}
+.terms-list{display:flex; flex-direction:column; gap:18px; margin-top:28px;}
+.terms-item{
+  display:flex; gap:16px; align-items:flex-start;
+  background:var(--white); border-radius:var(--radius); padding:20px;
+}
+.terms-icon{
+  flex:0 0 auto; width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:16px; font-weight:700;
+}
+.terms-item h2{font-size:16px; margin:0 0 6px;}
+.terms-item p{font-size:14px; line-height:1.6; color:#3a5544; margin:0;}
+.terms-footer{font-size:13px; color:#5a6f60; text-align:center; margin-top:32px;}
+ 
+@media(max-width:480px){
+  h1{font-size:26px;} h2{font-size:22px;}
+  .verify-bar-form input{width:100px;}
+}
