@@ -14,8 +14,12 @@ let verifiedHandle = null;
 signupForm.classList.add("disabled");
 
 function enterApp() {
-  entryScreen.hidden = true;
-  mainApp.hidden = false;
+  entryScreen.classList.add("fade-out");
+  setTimeout(() => {
+    entryScreen.hidden = true;
+    mainApp.hidden = false;
+    mainApp.classList.add("fade-in");
+  }, 500);
 }
 
 // =================================================================
