@@ -1,19 +1,106 @@
 // =================================================================
-// Entry screen
+// Shared state / elements
 // =================================================================
 const entryScreen = document.getElementById("entryScreen");
+const entryPanel = document.getElementById("entryPanel");
+const entrySuccess = document.getElementById("entrySuccess");
+const entrySuccessHandle = document.getElementById("entrySuccessHandle");
 const mainApp = document.getElementById("mainApp");
+const verifyBar = document.getElementById("verifyBar");
+const signupForm = document.getElementById("signupForm");
+const handleDisplay = document.getElementById("handleDisplay");
 
-function enterApp(focusVerify) {
+let verifiedHandle = null;
+signupForm.classList.add("disabled");
+
+function enterApp() {
   entryScreen.hidden = true;
   mainApp.hidden = false;
-  if (focusVerify) {
-    document.getElementById("handleInput").focus();
+}
+
+// =================================================================
+// Instagram handle lookup - shared by the entry screen and the
+// sticky bar. Expects a table `invited_partners` with a column
+// `instagram_handle`.
+// =================================================================
+async function checkHandle(rawHandle) {
+  const handle = rawHandle.trim().replace(/^@/, "").toLowerCase();
+  if (!handle) return { handle: null, found: false, error: null };
+
+  const { data, error } = await supabaseClient
+    .from("invited_partners")
+    .select("instagram_handle")
+    .ilike("instagram_handle", handle)
+    .maybeSingle();
+
+  return { handle, found: Boolean(data), error };
+}
+
+function markVerified(handle) {
+  verifiedHandle = handle;
+  handleDisplay.textContent = handle;
+  signupForm.classList.remove("disabled");
+  verifyBar.classList.add("hidden");
+}
+
+// =================================================================
+// Entry screen - verify form
+// =================================================================
+const entryVerifyForm = document.getElementById("entryVerifyForm");
+const entryHandleInput = document.getElementById("entryHandleInput");
+const entryVerifyBtn = document.getElementById("entryVerifyBtn");
+const entryVerifyError = document.getElementById("entryVerifyError");
+const confetti = document.getElementById("confetti");
+
+const CONFETTI_COLORS = ["#8c52ff", "#ff914d", "#ffde59", "#71c558"];
+
+function launchConfetti() {
+  confetti.innerHTML = "";
+  const pieces = 18;
+  for (let i = 0; i < pieces; i++) {
+    const dot = document.createElement("span");
+    dot.style.left = `${5 + Math.random() * 90}%`;
+    dot.style.background = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+    dot.style.animationDelay = `${Math.random() * 0.3}s`;
+    dot.style.transform = `rotate(${Math.random() * 360}deg)`;
+    confetti.appendChild(dot);
   }
 }
 
-document.getElementById("entryVerifyBtn").addEventListener("click", () => enterApp(true));
-document.getElementById("entryGuestBtn").addEventListener("click", () => enterApp(false));
+entryVerifyForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  entryVerifyError.textContent = "";
+  entryVerifyBtn.disabled = true;
+  entryVerifyBtn.textContent = "Checking...";
+
+  const { handle, found, error } = await checkHandle(entryHandleInput.value);
+
+  entryVerifyBtn.disabled = false;
+  entryVerifyBtn.textContent = "Verify Instagram handle";
+
+  if (!handle) return;
+
+  if (error) {
+    entryVerifyError.textContent = "Something went wrong - try again in a moment.";
+    return;
+  }
+  if (!found) {
+    entryVerifyError.textContent = "We couldn't find that handle on the invite list.";
+    return;
+  }
+
+  markVerified(handle);
+
+  // celebratory hand-off, then into the carousel
+  entryPanel.hidden = true;
+  entrySuccess.hidden = false;
+  entrySuccessHandle.textContent = `@${handle}`;
+  launchConfetti();
+
+  setTimeout(enterApp, 2200);
+});
+
+document.getElementById("entryGuestBtn").addEventListener("click", () => enterApp());
 
 // =================================================================
 // Carousel
@@ -60,51 +147,34 @@ document.getElementById("readInsteadBtn").addEventListener("click", () => {
 });
 
 // =================================================================
-// Instagram handle verification against Supabase
-// Expects a table `invited_partners` with a column `instagram_handle`
+// Sticky bar verify (guest path - verifying after entering as guest)
 // =================================================================
-const verifyBar = document.getElementById("verifyBar");
 const verifyBtn = document.getElementById("verifyBtn");
 const handleInput = document.getElementById("handleInput");
 const verifyError = document.getElementById("verifyError");
-const signupForm = document.getElementById("signupForm");
-const handleDisplay = document.getElementById("handleDisplay");
-
-let verifiedHandle = null;
-
-signupForm.classList.add("disabled");
 
 verifyBtn.addEventListener("click", async () => {
-  const handle = handleInput.value.trim().replace(/^@/, "").toLowerCase();
-  if (!handle) return;
-
   verifyBtn.disabled = true;
   verifyBtn.textContent = "Checking...";
   verifyError.textContent = "";
 
-  const { data, error } = await supabaseClient
-    .from("invited_partners")
-    .select("instagram_handle")
-    .ilike("instagram_handle", handle)
-    .maybeSingle();
+  const { handle, found, error } = await checkHandle(handleInput.value);
 
   verifyBtn.disabled = false;
   verifyBtn.textContent = "Verify";
+
+  if (!handle) return;
 
   if (error) {
     verifyError.textContent = "Something went wrong - try again in a moment.";
     return;
   }
-
-  if (!data) {
+  if (!found) {
     verifyError.textContent = "We couldn't find that handle on the invite list.";
     return;
   }
 
-  verifiedHandle = handle;
-  handleDisplay.textContent = handle;
-  signupForm.classList.remove("disabled");
-  verifyBar.classList.add("hidden");
+  markVerified(handle);
 });
 
 // =================================================================
