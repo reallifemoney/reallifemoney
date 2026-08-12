@@ -8,7 +8,7 @@
 //    (see supabase-schema.sql for the policies that go with this page).
 // ---------------------------------------------------------------
 
-const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+const SUPABASE_URL = "https://aezdluescnzwqvdpmdvx.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlemRsdWVzY256d3F2ZHBtZHZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1MjAwODYsImV4cCI6MjEwMjA5NjA4Nn0.VIGsHR27MNh144a9FvsFX0s4JHzEIvHp5fW-hyLY5Uk";
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
