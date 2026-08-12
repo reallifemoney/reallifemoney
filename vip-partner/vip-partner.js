@@ -154,6 +154,28 @@ document.getElementById("readInsteadBtn").addEventListener("click", () => {
     </div>`;
 });
 
+const watchVideoBtn = document.getElementById("watchVideoBtn");
+const videoModal = document.getElementById("videoModal");
+const videoModalBackdrop = document.getElementById("videoModalBackdrop");
+const videoModalClose = document.getElementById("videoModalClose");
+const problemVideo = document.getElementById("problemVideo");
+
+function openVideoModal() {
+  videoModal.hidden = false;
+  problemVideo.play();
+}
+function closeVideoModal() {
+  videoModal.hidden = true;
+  problemVideo.pause();
+}
+
+watchVideoBtn.addEventListener("click", openVideoModal);
+videoModalBackdrop.addEventListener("click", closeVideoModal);
+videoModalClose.addEventListener("click", closeVideoModal);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !videoModal.hidden) closeVideoModal();
+});
+
 // =================================================================
 // Sticky bar verify (guest path - verifying after entering as guest)
 // =================================================================
