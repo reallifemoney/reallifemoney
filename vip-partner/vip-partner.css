@@ -220,9 +220,9 @@ body{
 }
 .slide.active{display:block;}
 @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
-
+ 
 .slide-inner{max-width:600px; margin:0 auto;}
-
+ 
 .eyebrow{
   display:inline-block;
   font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
@@ -232,7 +232,7 @@ body{
 h1{font-size:32px; font-weight:800; line-height:1.2; margin:0 0 16px;}
 h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .lead{font-size:16px; line-height:1.6; color:#3a5544; margin-bottom:24px;}
-
+ 
 /* ---------- buttons ---------- */
 .btn{
   font-family:'Lexend',sans-serif; font-weight:600; font-size:15px;
@@ -245,35 +245,92 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .btn-outline:hover{background:var(--dark); color:var(--bg);}
 .btn-text{background:none; color:var(--dark); text-decoration:underline; padding:8px 0;}
 .new-tab-note{font-size:12px; font-weight:400; opacity:0.7;}
-
+ 
 /* ---------- slide 2: problem video ---------- */
 .video-frame{
-  background:var(--dark); border-radius:var(--radius); overflow:hidden; margin-bottom:20px;
+  border-radius:var(--radius); overflow:hidden; margin-bottom:20px;
 }
 .video-frame video{width:100%; display:block;}
-.watch-video-btn{display:flex; align-items:center; gap:16px; width:100%; background:var(--dark); border:none; border-radius:var(--radius); padding:22px 24px; cursor:pointer; text-align:left;}
+.slide-actions{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:24px;}
+ 
+/* ---------- watch video button ---------- */
+.watch-video-btn{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  background:var(--dark);
+  border:none;
+  border-radius:var(--radius);
+  padding:22px 24px;
+  cursor:pointer;
+  text-align:left;
+}
 .watch-video-btn:hover{background:#294d36;}
-.watch-video-icon{flex:0 0 auto; width:48px; height:48px; border-radius:50%; background:var(--orange); color:var(--dark); display:flex; align-items:center; justify-content:center; font-size:16px;}
+.watch-video-icon{
+  flex:0 0 auto;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--orange);
+  color:var(--dark);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
 .watch-video-text{display:flex; flex-direction:column; gap:2px;}
 .watch-video-text strong{color:#fff; font-size:16px;}
 .watch-video-text span:last-child{color:#b9d3c1; font-size:13px;}
-
-.video-modal{position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px;}
+ 
+/* ---------- video modal ---------- */
+.video-modal{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 .video-modal[hidden]{display:none;}
-.video-modal-backdrop{position:absolute; inset:0; background:rgba(31,58,41,0.85);}
-.video-modal-content{position:relative; width:100%; max-width:720px; background:var(--dark); border-radius:var(--radius); overflow:hidden; animation:fadeIn 0.3s ease;}
+.video-modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(31,58,41,0.85);
+}
+.video-modal-content{
+  position:relative;
+  width:100%;
+  max-width:720px;
+  background:var(--dark);
+  border-radius:var(--radius);
+  overflow:hidden;
+  animation:fadeIn 0.3s ease;
+}
 .video-modal-content video{width:100%; display:block;}
-.video-modal-close{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:20px; line-height:1; cursor:pointer; z-index:1;}
+.video-modal-close{
+  position:absolute;
+  top:10px; right:10px;
+  width:34px; height:34px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.15);
+  color:#fff;
+  font-size:20px;
+  line-height:1;
+  cursor:pointer;
+  z-index:1;
+}
 .video-modal-close:hover{background:rgba(255,255,255,0.3);}
-.slide-actions{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:24px;}
-
+ 
 /* ---------- slide 4: what you get ---------- */
 .get-list{list-style:none; padding:0; margin:0 0 28px;}
 .get-list li{
   padding:12px 16px; margin-bottom:8px; background:var(--white);
   border-radius:12px; font-size:15px; border-left:4px solid var(--green);
 }
-
+ 
 .earnings-widget{
   background:var(--white); border-radius:var(--radius); padding:24px;
   border:2px solid var(--yellow);
@@ -289,13 +346,13 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .earnings-arrow{font-size:20px; color:var(--orange); margin:0 4px;}
 .earnings-amount{font-size:36px; font-weight:800; color:var(--dark);}
 .earnings-amount-label{font-size:13px; color:#5a6f60;}
-
+ 
 #earningsChart{width:100%; height:auto; display:block; margin-bottom:8px;}
 #earningsSlider{
   width:100%; accent-color:var(--purple); cursor:pointer;
 }
 .slider-scale{display:flex; justify-content:space-between; font-size:11px; color:#8a9a8f; padding:0 2px;}
-
+ 
 /* ---------- slide 5: steps ---------- */
 .step-list{list-style:none; padding:0; margin:0 0 28px; counter-reset:step;}
 .step-list li{display:flex; gap:16px; margin-bottom:18px; align-items:flex-start;}
@@ -305,7 +362,7 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
   display:flex; align-items:center; justify-content:center;
 }
 .step-list p{margin:4px 0 0; font-size:14px; color:#3a5544;}
-
+ 
 /* ---------- slide 6: sign up ---------- */
 .signup-form{display:flex; flex-direction:column; gap:6px; background:var(--white); padding:24px; border-radius:var(--radius);}
 .signup-form label{font-size:13px; font-weight:600; margin-top:10px;}
@@ -317,10 +374,10 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .signup-form .btn{margin-top:18px;}
 .form-note{font-size:12px; color:#5a6f60; text-align:center; margin-top:10px;}
 .signup-success{background:var(--white); padding:28px; border-radius:var(--radius); border:2px solid var(--green);}
-
+ 
 /* ---------- disabled state while unverified ---------- */
 .signup-form.disabled{opacity:0.5; pointer-events:none; position:relative;}
-
+ 
 /* ---------- carousel nav ---------- */
 .carousel-nav{display:flex; align-items:center; justify-content:center; gap:16px; padding-top:8px;}
 .carousel-arrow{
@@ -330,13 +387,7 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .carousel-dots{display:flex; gap:8px;}
 .carousel-dots span{width:8px; height:8px; border-radius:50%; background:#c6d9c9; display:inline-block;}
 .carousel-dots span.active{background:var(--purple);}
-
-@media(max-width:480px){
-  h1{font-size:26px;} h2{font-size:22px;}
-  .verify-bar-form input{width:100px;}
-}
-
-
+ 
 /* ---------- terms page ---------- */
 .terms-page{min-height:100vh;}
 .terms-wrap{max-width:640px; margin:0 auto; padding:8px 24px 60px;}

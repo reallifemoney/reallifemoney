@@ -154,6 +154,9 @@ document.getElementById("readInsteadBtn").addEventListener("click", () => {
     </div>`;
 });
 
+// =================================================================
+// Intro video modal
+// =================================================================
 const watchVideoBtn = document.getElementById("watchVideoBtn");
 const videoModal = document.getElementById("videoModal");
 const videoModalBackdrop = document.getElementById("videoModalBackdrop");

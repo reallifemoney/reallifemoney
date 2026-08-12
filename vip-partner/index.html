@@ -11,14 +11,14 @@
 <link rel="stylesheet" href="vip-partner.css">
 </head>
 <body>
-
+ 
   <!-- Entry screen - shown before anything else -->
   <div class="entry-screen" id="entryScreen">
-
+ 
     <div class="entry-panel" id="entryPanel">
       <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
       <p class="entry-tagline">This invitation is personal. Let's confirm it's you.</p>
-
+ 
       <div class="entry-verify-form" id="entryVerifyForm">
         <div class="entry-input-row">
           <span class="verify-at">@</span>
@@ -27,12 +27,12 @@
         <button type="button" class="btn btn-primary" id="entryVerifyBtn">Verify Instagram handle</button>
         <span class="verify-bar-error" id="entryVerifyError"></span>
       </div>
-
+ 
       <div class="entry-divider"><span>or</span></div>
-
+ 
       <button class="btn btn-text" id="entryGuestBtn">View as guest</button>
     </div>
-
+ 
     <!-- Success state - shown briefly after a correct verification -->
     <div class="entry-success" id="entrySuccess" hidden>
       <svg class="success-check" viewBox="0 0 80 80" width="80" height="80">
@@ -44,9 +44,9 @@
       <div class="confetti" id="confetti"></div>
     </div>
   </div>
-
+ 
   <div id="mainApp" hidden>
-
+ 
     <!-- Sticky verification bar - shown until handle is verified -->
     <div class="verify-bar" id="verifyBar">
       <div class="verify-bar-inner">
@@ -59,14 +59,14 @@
         <span class="verify-bar-error" id="verifyError"></span>
       </div>
     </div>
-
+ 
     <div class="carousel-wrap">
       <header class="brand-header">
         <img src="vip-partner.png" alt="VIP Partner" class="brand-crown">
       </header>
-
+ 
       <div class="carousel" id="carousel">
-
+ 
       <!-- Slide 1: Welcome -->
       <section class="slide slide-welcome" data-slide="0">
         <div class="slide-inner">
@@ -76,22 +76,20 @@
           <button class="btn btn-primary next-slide">See what that means</button>
         </div>
       </section>
-
+ 
       <!-- Slide 2: The problem -->
       <section class="slide slide-problem" data-slide="1">
         <div class="slide-inner">
           <span class="eyebrow">The problem</span>
           <h2>Most people your followers' age have never been taught this</h2>
           <div class="video-frame" id="videoFrame">
-            <div class="video-frame" id="videoFrame">
-  <button class="watch-video-btn" id="watchVideoBtn">
-    <span class="watch-video-icon">&#9658;</span>
-    <span class="watch-video-text">
-      <strong>Watch the intro</strong>
-      <span>2 minutes, from me</span>
-    </span>
-  </button>
-</div>
+            <button class="watch-video-btn" id="watchVideoBtn">
+              <span class="watch-video-icon">&#9658;</span>
+              <span class="watch-video-text">
+                <strong>Watch the intro</strong>
+                <span>2 minutes, from me</span>
+              </span>
+            </button>
           </div>
           <div class="slide-actions">
             <button class="btn btn-text" id="readInsteadBtn">Prefer to read instead?</button>
@@ -102,7 +100,7 @@
           <button class="btn btn-primary next-slide">Where you come in</button>
         </div>
       </section>
-
+ 
       <!-- Slide 3: Where you come in -->
       <section class="slide slide-where" data-slide="2">
         <div class="slide-inner">
@@ -115,7 +113,7 @@
           <button class="btn btn-primary next-slide">What you'll get</button>
         </div>
       </section>
-
+ 
       <!-- Slide 4: What you get + earnings slider -->
       <section class="slide slide-earnings" data-slide="3">
         <div class="slide-inner">
@@ -128,7 +126,7 @@
             <li><strong>Milestone bonuses</strong> - £50 extra at 20 sign-ups, £100 extra at 50</li>
             <li><strong>Paid monthly</strong> - after the relevant workshop has taken place</li>
           </ul>
-
+ 
           <div class="earnings-widget">
             <div class="earnings-widget-header">
               <span class="earnings-label">Drag to see what your code could earn you</span>
@@ -146,11 +144,11 @@
               <span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span>
             </div>
           </div>
-
+ 
           <button class="btn btn-primary next-slide">How it works</button>
         </div>
       </section>
-
+ 
       <!-- Slide 5: Step by step -->
       <section class="slide slide-steps" data-slide="4">
         <div class="slide-inner">
@@ -165,7 +163,7 @@
           <button class="btn btn-primary next-slide">Sign up</button>
         </div>
       </section>
-
+ 
       <!-- Slide 6: Sign up -->
       <section class="slide slide-signup" data-slide="5">
         <div class="slide-inner">
@@ -174,19 +172,19 @@
           <form id="signupForm" class="signup-form">
             <label for="nameInput">Name</label>
             <input type="text" id="nameInput" name="name" required>
-
+ 
             <label for="emailInput">Email</label>
             <input type="email" id="emailInput" name="email" required>
-
+ 
             <label class="checkbox-row">
               <input type="checkbox" id="termsInput" name="terms" required>
               <span>I accept the <a href="/vip-partner-terms" target="_blank" rel="noopener">VIP Partner terms and conditions</a></span>
             </label>
-
+ 
             <button type="submit" class="btn btn-primary" id="signupSubmit">Sign up - it's free</button>
             <p class="form-note">No payment needed for this step. You'll book your free workshop next.</p>
           </form>
-
+ 
           <div class="signup-success" id="signupSuccess" hidden>
             <h3>You're in, welcome to the programme.</h3>
             <p>Next step is booking your free workshop - your personal discount code unlocks once you've attended.</p>
@@ -196,9 +194,9 @@
           </div>
         </div>
       </section>
-
+ 
     </div>
-
+ 
       <div class="carousel-nav">
         <button class="carousel-arrow" id="prevArrow" aria-label="Previous">&#8592;</button>
         <div class="carousel-dots" id="carouselDots"></div>
@@ -206,17 +204,18 @@
       </div>
     </div>
   </div>
-
+ 
+  <!-- Intro video modal -->
   <div class="video-modal" id="videoModal" hidden>
-  <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
-  <div class="video-modal-content">
-    <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
-    <video controls id="problemVideo">
-      <source src="problem-video.mp4" type="video/mp4">
-    </video>
+    <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+    <div class="video-modal-content">
+      <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+      <video controls id="problemVideo">
+        <source src="problem-video.mp4" type="video/mp4">
+      </video>
+    </div>
   </div>
-</div>
-
+ 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-client.js"></script>
   <script src="vip-partner.js"></script>
