@@ -19,6 +19,31 @@ body{
   min-height:100vh;
 }
 
+/* ---------- entry screen ---------- */
+.entry-screen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:36px;
+  padding:20px;
+  text-align:center;
+  background:var(--bg);
+}
+.entry-logo{
+  width:min(220px, 60vw);
+  height:auto;
+}
+.entry-actions{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+.entry-actions .btn-primary{padding:16px 34px; font-size:16px;}
+.entry-screen[hidden]{display:none;}
+
 /* ---------- sticky verify bar ---------- */
 .verify-bar{
   position:sticky;
@@ -52,13 +77,10 @@ body{
 
 /* ---------- header ---------- */
 .brand-header{
-  display:flex; align-items:center; justify-content:center; gap:10px;
+  display:flex; align-items:center; justify-content:center;
   padding:28px 20px 8px;
 }
-.brand-crown{height:32px; width:auto;}
-.brand-name{
-  font-weight:800; letter-spacing:0.14em; font-size:14px; color:var(--dark);
-}
+.brand-crown{height:40px; width:auto;}
 
 /* ---------- carousel shell ---------- */
 .carousel-wrap{max-width:720px; margin:0 auto; padding-bottom:40px;}
