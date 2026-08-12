@@ -251,6 +251,20 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
   background:var(--dark); border-radius:var(--radius); overflow:hidden; margin-bottom:20px;
 }
 .video-frame video{width:100%; display:block;}
+.watch-video-btn{display:flex; align-items:center; gap:16px; width:100%; background:var(--dark); border:none; border-radius:var(--radius); padding:22px 24px; cursor:pointer; text-align:left;}
+.watch-video-btn:hover{background:#294d36;}
+.watch-video-icon{flex:0 0 auto; width:48px; height:48px; border-radius:50%; background:var(--orange); color:var(--dark); display:flex; align-items:center; justify-content:center; font-size:16px;}
+.watch-video-text{display:flex; flex-direction:column; gap:2px;}
+.watch-video-text strong{color:#fff; font-size:16px;}
+.watch-video-text span:last-child{color:#b9d3c1; font-size:13px;}
+
+.video-modal{position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center; padding:20px;}
+.video-modal[hidden]{display:none;}
+.video-modal-backdrop{position:absolute; inset:0; background:rgba(31,58,41,0.85);}
+.video-modal-content{position:relative; width:100%; max-width:720px; background:var(--dark); border-radius:var(--radius); overflow:hidden; animation:fadeIn 0.3s ease;}
+.video-modal-content video{width:100%; display:block;}
+.video-modal-close{position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:20px; line-height:1; cursor:pointer; z-index:1;}
+.video-modal-close:hover{background:rgba(255,255,255,0.3);}
 .slide-actions{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:24px;}
 
 /* ---------- slide 4: what you get ---------- */
