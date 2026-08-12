@@ -80,7 +80,7 @@ body{
   display:flex; align-items:center; justify-content:center;
   padding:28px 20px 8px;
 }
-.brand-crown{height:40px; width:auto;}
+.brand-crown{height:100px; width:auto;}
 
 /* ---------- carousel shell ---------- */
 .carousel-wrap{max-width:720px; margin:0 auto; padding-bottom:40px;}
