@@ -23,26 +23,145 @@ body{
 .entry-screen{
   min-height:100vh;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:36px;
   padding:20px;
-  text-align:center;
   background:var(--bg);
+  position:relative;
+  overflow:hidden;
 }
-.entry-logo{
-  width:min(220px, 60vw);
-  height:auto;
-}
-.entry-actions{
+.entry-panel{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:14px;
+  gap:22px;
+  text-align:center;
+  max-width:360px;
+  width:100%;
+  animation:fadeIn 0.4s ease;
 }
-.entry-actions .btn-primary{padding:16px 34px; font-size:16px;}
-.entry-screen[hidden]{display:none;}
+.entry-panel[hidden]{display:none;}
+.entry-logo{
+  width:min(320px, 80vw);
+  height:auto;
+}
+.entry-tagline{
+  font-size:14px;
+  color:#3a5544;
+  margin:0;
+}
+.entry-verify-form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+.entry-input-row{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  width:100%;
+  background:var(--white);
+  border:1.5px solid #cfe0d1;
+  border-radius:999px;
+  padding:6px 6px 6px 18px;
+}
+.entry-input-row:focus-within{border-color:var(--purple);}
+.entry-input-row input{
+  border:none;
+  outline:none;
+  background:transparent;
+  font-family:'Lexend',sans-serif;
+  font-size:15px;
+  padding:10px 4px;
+  flex:1;
+  min-width:0;
+}
+.entry-verify-form .btn-primary{width:100%; justify-content:center;}
+.entry-verify-form .verify-bar-error{color:#d9534f; font-size:13px;}
+.entry-divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  color:#8a9a8f;
+  font-size:12px;
+}
+.entry-divider::before, .entry-divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#cfe0d1;
+}
+
+/* ---------- entry success state ---------- */
+.entry-success{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  text-align:center;
+  position:relative;
+}
+.entry-success[hidden]{display:none;}
+.success-check-circle{
+  stroke:var(--green);
+  stroke-dasharray:226;
+  stroke-dashoffset:226;
+  animation:drawCircle 0.5s ease forwards;
+}
+.success-check-tick{
+  stroke:var(--green);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:50;
+  stroke-dashoffset:50;
+  animation:drawTick 0.35s ease forwards 0.45s;
+}
+@keyframes drawCircle{to{stroke-dashoffset:0;}}
+@keyframes drawTick{to{stroke-dashoffset:0;}}
+
+.success-heading{
+  font-size:24px;
+  font-weight:800;
+  margin:6px 0 0;
+  opacity:0;
+  animation:riseIn 0.4s ease forwards 0.75s;
+}
+.success-sub{
+  font-size:14px;
+  color:#3a5544;
+  margin:0;
+  max-width:300px;
+  opacity:0;
+  animation:riseIn 0.4s ease forwards 0.9s;
+}
+@keyframes riseIn{
+  from{opacity:0; transform:translateY(8px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.confetti{
+  position:absolute;
+  inset:-40px 0 auto 0;
+  height:1px;
+  pointer-events:none;
+}
+.confetti span{
+  position:absolute;
+  top:-20px;
+  width:8px;
+  height:8px;
+  border-radius:2px;
+  opacity:0;
+  animation:confettiFall 1.6s ease-in forwards;
+}
+@keyframes confettiFall{
+  0%{opacity:0; transform:translateY(0) rotate(0deg);}
+  10%{opacity:1;}
+  100%{opacity:0; transform:translateY(180px) rotate(220deg);}
+}
 
 /* ---------- sticky verify bar ---------- */
 .verify-bar{
@@ -80,7 +199,7 @@ body{
   display:flex; align-items:center; justify-content:center;
   padding:28px 20px 8px;
 }
-.brand-crown{height:100px; width:auto;}
+.brand-crown{height:auto; width:320px;}
 
 /* ---------- carousel shell ---------- */
 .carousel-wrap{max-width:720px; margin:0 auto; padding-bottom:40px;}
