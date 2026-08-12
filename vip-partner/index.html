@@ -83,9 +83,15 @@
           <span class="eyebrow">The problem</span>
           <h2>Most people your followers' age have never been taught this</h2>
           <div class="video-frame" id="videoFrame">
-            <video controls poster="" id="problemVideo">
-              <source src="problem-video.mp4" type="video/mp4">
-            </video>
+            <div class="video-frame" id="videoFrame">
+  <button class="watch-video-btn" id="watchVideoBtn">
+    <span class="watch-video-icon">&#9658;</span>
+    <span class="watch-video-text">
+      <strong>Watch the intro</strong>
+      <span>2 minutes, from me</span>
+    </span>
+  </button>
+</div>
           </div>
           <div class="slide-actions">
             <button class="btn btn-text" id="readInsteadBtn">Prefer to read instead?</button>
@@ -200,6 +206,16 @@
       </div>
     </div>
   </div>
+
+  <div class="video-modal" id="videoModal" hidden>
+  <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+  <div class="video-modal-content">
+    <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+    <video controls id="problemVideo">
+      <source src="problem-video.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-client.js"></script>
