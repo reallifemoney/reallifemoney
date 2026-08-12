@@ -1,4 +1,21 @@
 // =================================================================
+// Entry screen
+// =================================================================
+const entryScreen = document.getElementById("entryScreen");
+const mainApp = document.getElementById("mainApp");
+
+function enterApp(focusVerify) {
+  entryScreen.hidden = true;
+  mainApp.hidden = false;
+  if (focusVerify) {
+    document.getElementById("handleInput").focus();
+  }
+}
+
+document.getElementById("entryVerifyBtn").addEventListener("click", () => enterApp(true));
+document.getElementById("entryGuestBtn").addEventListener("click", () => enterApp(false));
+
+// =================================================================
 // Carousel
 // =================================================================
 const slides = Array.from(document.querySelectorAll(".slide"));
