@@ -9,7 +9,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 // Define secrets stored in Firebase
-const stripeSecretKey = defineSecret("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");
+const stripeSecretKey = defineSecret("STRIPE_SECRET_KEY");
 const stripeWebhookSecret = defineSecret("STRIPE_WEBHOOK_SECRET");
 const resendApiKey = defineSecret("RESEND_API_KEY");
 const biginClientId = defineSecret("BIGIN_CLIENT_ID");
