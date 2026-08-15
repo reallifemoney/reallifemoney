@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "workshop-booking-system-b791e"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }
