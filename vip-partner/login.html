@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Login | Real Life Money</title>
+<link rel="icon" type="image/webp" href="../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vip-partner.css">
+</head>
+<body>
+
+  <div class="auth-screen">
+    <div class="auth-panel">
+      <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
+      <h1 class="auth-heading">Partner login</h1>
+      <p class="auth-sub">Enter the email you signed up with and we'll send you a login link - no password needed.</p>
+
+      <form id="loginForm" class="auth-form">
+        <label for="loginEmailInput">Email</label>
+        <input type="email" id="loginEmailInput" name="email" required placeholder="you@example.com">
+        <button type="submit" class="btn btn-primary" id="loginSubmit">Send me a login link</button>
+      </form>
+
+      <div class="auth-success" id="loginSuccess" hidden>
+        <svg class="success-check" viewBox="0 0 80 80" width="64" height="64">
+          <circle class="success-check-circle" cx="40" cy="40" r="36" fill="none" stroke-width="4"/>
+          <path class="success-check-tick" fill="none" stroke-width="5" d="M22 42 L35 55 L58 26"/>
+        </svg>
+        <h3>Check your inbox</h3>
+        <p>If that email is on our VIP Partner list, a login link is on its way. It'll take you straight to your dashboard.</p>
+      </div>
+
+      <p class="auth-alt-link"><a href="/vip-partner">Not signed up yet? Join the programme &#8594;</a></p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

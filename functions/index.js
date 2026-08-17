@@ -3,6 +3,8 @@ const { defineSecret } = require("firebase-functions/params");
 const admin = require("firebase-admin");
 const Stripe = require("stripe");
 const { Resend } = require("resend");
+const { createClient } = require("@supabase/supabase-js");
+const crypto = require("crypto");
 
 // Initialize Firebase Admin SDK
 admin.initializeApp();
@@ -15,6 +17,15 @@ const resendApiKey = defineSecret("RESEND_API_KEY");
 const biginClientId = defineSecret("BIGIN_CLIENT_ID");
 const biginClientSecret = defineSecret("BIGIN_CLIENT_SECRET");
 const biginRefreshToken = defineSecret("BIGIN_REFRESH_TOKEN");
+const supabaseServiceRoleKey = defineSecret("SUPABASE_SERVICE_ROLE_KEY");
+
+// Same project the frontend uses (see vip-partner/supabase-client.js) -
+// VIP partner data lives here, accessed server-side with the service_role
+// key so RLS can stay locked down to anon/authenticated.
+const SUPABASE_URL = "https://aezdluescnzwqvdpmdvx.supabase.co";
+function getSupabaseAdmin() {
+  return createClient(SUPABASE_URL, supabaseServiceRoleKey.value());
+}
 
 /**
  * STRIPE WEBHOOK HANDLER
@@ -29,6 +40,7 @@ exports.stripeWebhook = onRequest(
       biginClientId,
       biginClientSecret,
       biginRefreshToken,
+      supabaseServiceRoleKey,
     ],
   },
   async (req, res) => {
@@ -97,7 +109,7 @@ exports.stripeWebhook = onRequest(
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
         });
 
-        // --- STEP C.5: Process referral refund if a promo code was used ---
+        // --- STEP C.5: Process referral refund / VIP partner referral ---
 
 try {
   const discountAmount = session.total_details?.amount_discount || 0;
@@ -142,7 +154,34 @@ try {
           console.warn(`No paymentIntent on file for referrer with code ${usedCode} — skipped refund.`);
         }
       } else {
-        console.warn(`Promo code ${usedCode} used but no matching referrer booking found.`);
+        // Not a regular customer's referral code - check whether it belongs
+        // to a VIP partner instead, and log the usage in Supabase.
+        const supabaseAdmin = getSupabaseAdmin();
+        const { data: partner, error: partnerLookupError } = await supabaseAdmin
+          .from("partners")
+          .select("id, email, discount_code")
+          .eq("discount_code", usedCode)
+          .maybeSingle();
+
+        if (partnerLookupError) {
+          console.error("Error looking up VIP partner by discount code:", partnerLookupError);
+        } else if (partner) {
+          const { error: referralInsertError } = await supabaseAdmin.from("referrals").insert({
+            partner_id: partner.id,
+            discount_code: usedCode,
+            customer_name: fullName,
+            customer_email: customerEmail,
+            stripe_session_id: session.id,
+          });
+
+          if (referralInsertError) {
+            console.error("Error logging VIP partner referral:", referralInsertError);
+          } else {
+            console.log(`VIP partner referral logged for ${partner.email} (code ${usedCode})`);
+          }
+        } else {
+          console.warn(`Promo code ${usedCode} used but no matching referrer booking or VIP partner found.`);
+        }
       }
     } else {
       console.warn("Discount detected but couldn't resolve promotion code from expanded session.");
@@ -469,12 +508,22 @@ exports.getWorkshops = onRequest(
 
 /**
  * VIP PARTNER SIGN-UP
- * Same idea as the paid checkout flow (Bigin CRM sync + confirmation
- * email), but there's no payment involved - partners attend for free.
+ * Saves the partner to the Supabase `partners` table (RLS-locked, written
+ * here with the service_role key), creates a matching Stripe promo code
+ * for their discount code, then syncs to Bigin CRM and sends a
+ * confirmation email - same idea as the paid checkout flow, but there's
+ * no payment involved since partners attend for free.
  */
 exports.vipPartnerSignup = onRequest(
   {
-    secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken],
+    secrets: [
+      resendApiKey,
+      biginClientId,
+      biginClientSecret,
+      biginRefreshToken,
+      supabaseServiceRoleKey,
+      stripeSecretKey,
+    ],
   },
   async (req, res) => {
     res.set("Access-Control-Allow-Origin", "*");
@@ -501,6 +550,46 @@ exports.vipPartnerSignup = onRequest(
       const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
       const lastName = fullName.split(" ").slice(1).join(" ") || "Partner";
       const chosenDate = courseDate || "your chosen workshop";
+      const emailKey = String(email).trim().toLowerCase();
+
+      // --- Save the partner record in Supabase ---
+      const supabaseAdmin = getSupabaseAdmin();
+      const { error: upsertError } = await supabaseAdmin.from("partners").upsert(
+        {
+          name: fullName,
+          email: emailKey,
+          instagram_handle: instagramHandle || "",
+          discount_code: discountCode || "",
+          course_date: chosenDate,
+          attended: false,
+        },
+        { onConflict: "email" }
+      );
+
+      if (upsertError) {
+        console.error("Error saving VIP partner to Supabase:", upsertError);
+        return res.status(500).json({ error: upsertError.message });
+      }
+
+      // --- Create a live Stripe promo code so followers can use it right
+      // away - it stays hidden in the partner's dashboard until attended.
+      if (discountCode) {
+        try {
+          const stripe = new Stripe(stripeSecretKey.value());
+          const coupon = await stripe.coupons.create({
+            amount_off: 1000, // £10 off in pence
+            currency: "gbp",
+            duration: "forever",
+            name: `VIP Partner Coupon for ${firstName}`,
+          });
+          await stripe.promotionCodes.create({
+            promotion: { type: "coupon", coupon: coupon.id },
+            code: discountCode,
+          });
+        } catch (stripeErr) {
+          console.error("Error creating Stripe promo code for VIP partner:", stripeErr);
+        }
+      }
 
       // --- Add/update Contact in Bigin CRM, flagged as a VIP Partner ---
       await createBiginContact(
@@ -584,6 +673,263 @@ exports.vipPartnerSignup = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error processing VIP partner signup:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * Returns the last day of the current calendar month as an ISO date
+ * string (YYYY-MM-DD) - partners are paid monthly on this date.
+ */
+function getNextPayoutDate() {
+  const now = new Date();
+  const lastDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0));
+  return lastDay.toISOString().slice(0, 10);
+}
+
+/**
+ * Tiered earnings for a given number of successful referrals:
+ * £30 for 1-5, £20 for 6-10, £15 for 11+, +£50 bonus at 20, +£100 at 50.
+ * Mirrors the calculator shown on the sign-up page (vip-partner.js).
+ */
+function calcEarnings(n) {
+  if (n <= 0) return 0;
+  let total = 0;
+  total += Math.min(n, 5) * 30;
+  if (n > 5) total += Math.min(n - 5, 5) * 20;
+  if (n > 10) total += (n - 10) * 15;
+  if (n >= 20) total += 50;
+  if (n >= 50) total += 100;
+  return total;
+}
+
+/**
+ * VIP PARTNER - REQUEST LOGIN LINK
+ * Passwordless login: partner submits their email, we generate a
+ * short-lived token stored on their Supabase `partners` row and email
+ * them a link straight into the dashboard.
+ */
+exports.vipPartnerRequestLogin = onRequest(
+  { secrets: [resendApiKey, supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { email } = req.body;
+      if (!email) return res.status(400).json({ error: "Missing email" });
+
+      const emailKey = String(email).trim().toLowerCase();
+      const supabaseAdmin = getSupabaseAdmin();
+      const { data: partner, error } = await supabaseAdmin
+        .from("partners")
+        .select("email")
+        .eq("email", emailKey)
+        .maybeSingle();
+
+      if (error) {
+        console.error("Error looking up VIP partner for login:", error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      // Don't reveal whether the email exists - always respond success.
+      if (!partner) {
+        console.warn(`Login requested for unknown VIP partner email: ${emailKey}`);
+        return res.json({ success: true });
+      }
+
+      const token = crypto.randomBytes(32).toString("hex");
+      const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
+
+      const { error: updateError } = await supabaseAdmin
+        .from("partners")
+        .update({ login_token: token, login_token_expiry: expiresAt })
+        .eq("email", emailKey);
+
+      if (updateError) {
+        console.error("Error saving VIP partner login token:", updateError);
+        return res.status(500).json({ error: updateError.message });
+      }
+
+      const resend = new Resend(resendApiKey.value());
+      const dashboardUrl = `https://reallifemoney.co.uk/vip-partner/dashboard.html?email=${encodeURIComponent(emailKey)}&token=${token}`;
+
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: emailKey,
+        subject: "Your VIP Partner dashboard login link",
+        html: `
+  <!DOCTYPE html>
+  <html>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height:1.6; color:#2e2e2e; background:#eef8eb; padding:20px;">
+    <div style="max-width:520px; margin:0 auto; background:#ffffff; border-radius:24px; border:1px solid #daecd6; padding:30px;">
+      <h1 style="font-size:22px; text-align:center;">Log in to your VIP Partner dashboard</h1>
+      <p>Click the button below to view your referral code, earnings and payout details.</p>
+      <p style="text-align:center; margin:30px 0;">
+        <a href="${dashboardUrl}" style="background:#8c52ff; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:12px; font-weight:bold; display:inline-block;">View my dashboard</a>
+      </p>
+      <p style="font-size:13px; color:#6b6b6b;">This link is valid for 7 days. If you didn't request this, you can ignore this email.</p>
+    </div>
+  </body>
+  </html>
+  `,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error requesting VIP partner login:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * HELPER: verify a dashboard token against a partner's Supabase row
+ */
+async function verifyPartnerToken(supabaseAdmin, email, token) {
+  if (!email || !token) return { valid: false };
+  const emailKey = String(email).trim().toLowerCase();
+
+  const { data: partner, error } = await supabaseAdmin
+    .from("partners")
+    .select("*")
+    .eq("email", emailKey)
+    .maybeSingle();
+
+  if (error || !partner) return { valid: false };
+  if (partner.login_token !== token || !partner.login_token_expiry || Date.now() > partner.login_token_expiry) {
+    return { valid: false };
+  }
+  return { valid: true, partner };
+}
+
+/**
+ * VIP PARTNER - DASHBOARD DATA
+ * Usage count / total earned are computed live from the `referrals`
+ * table so the dashboard always reflects reality; next payout amount
+ * subtracts whatever's already been recorded as paid in `payouts`.
+ */
+exports.vipPartnerDashboard = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+
+    try {
+      const { email, token } = req.query;
+      const supabaseAdmin = getSupabaseAdmin();
+      const { valid, partner } = await verifyPartnerToken(supabaseAdmin, email, token);
+
+      if (!valid) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const { data: referrals, error: referralsError } = await supabaseAdmin
+        .from("referrals")
+        .select("customer_name, created_at")
+        .eq("partner_id", partner.id)
+        .order("created_at", { ascending: false });
+
+      if (referralsError) {
+        console.error("Error fetching VIP partner referrals:", referralsError);
+        return res.status(500).json({ error: referralsError.message });
+      }
+
+      const { data: payouts, error: payoutsError } = await supabaseAdmin
+        .from("payouts")
+        .select("amount")
+        .eq("partner_id", partner.id)
+        .eq("paid", true);
+
+      if (payoutsError) {
+        console.error("Error fetching VIP partner payouts:", payoutsError);
+        return res.status(500).json({ error: payoutsError.message });
+      }
+
+      const usageCount = referrals.length;
+      const totalEarned = calcEarnings(usageCount);
+      const alreadyPaid = (payouts || []).reduce((sum, p) => sum + Number(p.amount || 0), 0);
+      const nextPayoutAmount = Math.max(0, totalEarned - alreadyPaid);
+
+      res.json({
+        name: partner.name,
+        email: partner.email,
+        attended: Boolean(partner.attended),
+        discountCode: partner.attended ? partner.discount_code || "" : "",
+        usageCount,
+        totalEarned,
+        nextPayoutAmount,
+        nextPayoutDate: getNextPayoutDate(),
+        bankDetails:
+          partner.bank_account_name || partner.bank_sort_code || partner.bank_account_number
+            ? {
+                accountName: partner.bank_account_name || "",
+                sortCode: partner.bank_sort_code || "",
+                accountNumber: partner.bank_account_number || "",
+              }
+            : null,
+        referrals: referrals.map((r) => ({
+          customerName: r.customer_name || "Anonymous",
+          createdAt: r.created_at,
+        })),
+      });
+    } catch (err) {
+      console.error("Error fetching VIP partner dashboard:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * VIP PARTNER - UPDATE BANK DETAILS
+ */
+exports.vipPartnerUpdateBankDetails = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { email, token, accountName, sortCode, accountNumber } = req.body;
+      const supabaseAdmin = getSupabaseAdmin();
+      const { valid, partner } = await verifyPartnerToken(supabaseAdmin, email, token);
+
+      if (!valid) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!accountName || !sortCode || !accountNumber) {
+        return res.status(400).json({ error: "Missing bank details" });
+      }
+
+      const { error: updateError } = await supabaseAdmin
+        .from("partners")
+        .update({
+          bank_account_name: String(accountName).trim(),
+          bank_sort_code: String(sortCode).trim(),
+          bank_account_number: String(accountNumber).trim(),
+        })
+        .eq("id", partner.id);
+
+      if (updateError) {
+        console.error("Error updating VIP partner bank details:", updateError);
+        return res.status(500).json({ error: updateError.message });
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error updating VIP partner bank details:", err);
       res.status(500).json({ error: err.message });
     }
   }

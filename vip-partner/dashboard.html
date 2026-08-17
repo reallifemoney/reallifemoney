@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Dashboard | Real Life Money VIP Partner</title>
+<link rel="icon" type="image/webp" href="../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vip-partner.css">
+</head>
+<body>
+
+  <!-- Shown while checking the login link / no valid session -->
+  <div class="auth-screen" id="dashLoading">
+    <div class="auth-panel">
+      <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
+      <p class="auth-sub" id="dashLoadingText">Loading your dashboard...</p>
+    </div>
+  </div>
+
+  <!-- Shown when there's no valid token -->
+  <div class="auth-screen" id="dashInvalid" hidden>
+    <div class="auth-panel">
+      <img src="vip-partner.png" alt="VIP Partner" class="entry-logo">
+      <h1 class="auth-heading">That link's expired</h1>
+      <p class="auth-sub">Login links are only valid for 7 days. Request a fresh one below.</p>
+      <a href="/vip-partner/login.html" class="btn btn-primary">Get a new login link</a>
+    </div>
+  </div>
+
+  <div class="dash-wrap" id="dashboard" hidden>
+    <header class="brand-header">
+      <img src="vip-partner.png" alt="VIP Partner" class="brand-crown">
+    </header>
+
+    <main class="dash-main">
+      <h1 class="dash-greeting">Welcome back, <span id="dashName">Partner</span></h1>
+
+      <!-- Attendance / referral code -->
+      <section class="dash-card" id="dashCodeCard">
+        <span class="dash-card-label">Your referral code</span>
+        <div id="dashCodeAttended" hidden>
+          <div class="dash-code-value" id="dashCode">—</div>
+          <p class="dash-card-note">Share it with your followers - they get £10 off, you get paid for every booking.</p>
+        </div>
+        <div id="dashCodeNotAttended" hidden>
+          <p class="dash-card-note dash-card-note-warning">Attended workshop: <strong>No</strong></p>
+          <p class="dash-card-note">Your referral code will unlock automatically once you've attended your free workshop.</p>
+        </div>
+      </section>
+
+      <!-- Stats grid -->
+      <section class="dash-stats">
+        <div class="dash-stat">
+          <span class="dash-stat-label">Code uses</span>
+          <span class="dash-stat-value" id="dashUsageCount">0</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-label">Total earned</span>
+          <span class="dash-stat-value" id="dashTotalEarned">£0</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-label">Next payout</span>
+          <span class="dash-stat-value" id="dashNextPayoutAmount">£0</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-label">Payout date</span>
+          <span class="dash-stat-value" id="dashNextPayoutDate">—</span>
+        </div>
+      </section>
+
+      <!-- Referral usage history -->
+      <section class="dash-card" id="dashReferralsCard">
+        <span class="dash-card-label">Code uses</span>
+        <p class="dash-card-note" id="dashReferralsEmpty" hidden>No one has used your code yet - once your followers start booking, they'll show up here.</p>
+        <ul class="dash-referral-list" id="dashReferralsList"></ul>
+      </section>
+
+      <!-- Bank details -->
+      <section class="dash-card" id="dashBankCard">
+        <span class="dash-card-label">Bank details</span>
+        <p class="dash-card-note dash-card-note-warning" id="dashBankMissingNote" hidden>
+          You haven't added your bank details yet - add them now so we can pay you when you're due a payout.
+        </p>
+        <p class="dash-card-note" id="dashBankSetNote" hidden>Your bank details are on file. Update them below if anything's changed.</p>
+
+        <form id="bankForm" class="bank-form">
+          <label for="bankAccountName">Account name</label>
+          <input type="text" id="bankAccountName" required>
+
+          <label for="bankSortCode">Sort code</label>
+          <input type="text" id="bankSortCode" placeholder="00-00-00" required>
+
+          <label for="bankAccountNumber">Account number</label>
+          <input type="text" id="bankAccountNumber" placeholder="12345678" required>
+
+          <button type="submit" class="btn btn-primary" id="bankSubmit">Save bank details</button>
+          <span class="bank-form-success" id="bankFormSuccess" hidden>Saved!</span>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

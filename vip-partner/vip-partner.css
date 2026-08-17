@@ -384,6 +384,10 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .signup-success .success-check{margin-bottom:8px;}
 .signup-success h3{margin:0 0 10px;}
 .signup-success p{font-size:14px; color:#3a5544; margin:0 0 8px;}
+.signup-course-link{margin-bottom:20px; width:100%;}
+.signup-login-link{font-size:13px; text-align:center; margin-top:14px;}
+.signup-login-link a{color:var(--purple); font-weight:600; text-decoration:none;}
+.signup-login-link a:hover{text-decoration:underline;}
  
 /* ---------- disabled state while unverified ---------- */
 .signup-form.disabled{opacity:0.5; pointer-events:none; position:relative;}
@@ -419,6 +423,85 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .terms-item h2{font-size:16px; margin:0 0 6px;}
 .terms-item p{font-size:14px; line-height:1.6; color:#3a5544; margin:0;}
 .terms-footer{font-size:13px; color:#5a6f60; text-align:center; margin-top:32px;}
+
+/* ---------- login / dashboard auth screens ---------- */
+.auth-screen{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:20px; background:var(--bg);
+}
+.auth-panel{
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  text-align:center; max-width:380px; width:100%;
+}
+.auth-heading{font-size:24px; margin:0;}
+.auth-sub{font-size:14px; color:#3a5544; margin:0;}
+.auth-form{
+  width:100%; display:flex; flex-direction:column; gap:6px;
+  background:var(--white); padding:24px; border-radius:var(--radius); margin-top:8px;
+}
+.auth-form label{font-size:13px; font-weight:600; text-align:left;}
+.auth-form input{
+  padding:12px 14px; border-radius:10px; border:1.5px solid #cfe0d1;
+  font-family:'Lexend',sans-serif; font-size:15px;
+}
+.auth-form .btn{margin-top:14px;}
+.auth-success{background:var(--white); padding:28px; border-radius:var(--radius); border:2px solid var(--green); margin-top:8px;}
+.auth-success h3{margin:8px 0 10px;}
+.auth-success p{font-size:14px; color:#3a5544; margin:0;}
+.auth-alt-link{font-size:13px; margin-top:6px;}
+.auth-alt-link a{color:var(--purple); font-weight:600; text-decoration:none;}
+.auth-alt-link a:hover{text-decoration:underline;}
+
+/* ---------- dashboard ---------- */
+.dash-wrap{min-height:100vh; padding-bottom:60px;}
+.dash-main{max-width:640px; margin:0 auto; padding:0 20px;}
+.dash-greeting{font-size:26px; margin:10px 0 24px;}
+.dash-card{
+  background:var(--white); border-radius:var(--radius); padding:22px;
+  margin-bottom:20px;
+}
+.dash-card-label{
+  font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;
+  color:#6b6b6b; display:block; margin-bottom:10px;
+}
+.dash-code-value{
+  font-size:26px; font-weight:800; letter-spacing:2px; color:var(--dark);
+  background:var(--bg); border:2px dashed var(--green); border-radius:12px;
+  padding:16px; text-align:center; margin-bottom:10px;
+}
+.dash-card-note{font-size:14px; color:#3a5544; margin:0 0 6px;}
+.dash-card-note-warning{color:#a15b00; font-weight:600;}
+.dash-stats{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-bottom:20px;
+}
+.dash-stat{
+  background:var(--white); border-radius:var(--radius); padding:18px; text-align:center;
+}
+.dash-stat-label{
+  display:block; font-size:12px; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.5px; color:#6b6b6b; margin-bottom:6px;
+}
+.dash-stat-value{font-size:22px; font-weight:800; color:var(--purple);}
+.dash-referral-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px;}
+.dash-referral-item{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg); border-radius:10px; padding:10px 14px; font-size:14px;
+}
+.dash-referral-item span:last-child{color:#6b6b6b; font-size:13px;}
+.bank-form{display:flex; flex-direction:column; gap:6px; margin-top:10px;}
+.bank-form label{font-size:13px; font-weight:600; text-align:left; margin-top:8px;}
+.bank-form input{
+  padding:12px 14px; border-radius:10px; border:1.5px solid #cfe0d1;
+  font-family:'Lexend',sans-serif; font-size:15px;
+}
+.bank-form .btn{margin-top:16px;}
+.bank-form-success{
+  display:inline-block; text-align:center; margin-top:10px; font-weight:700; color:var(--green);
+}
+
+@media(max-width:480px){
+  .dash-stats{grid-template-columns:1fr 1fr;}
+}
  
 @media(max-width:480px){
   h1{font-size:26px;} h2{font-size:22px;}

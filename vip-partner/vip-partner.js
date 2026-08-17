@@ -332,9 +332,8 @@ async function loadCourseDates() {
 loadCourseDates();
 
 // =================================================================
-// Sign-up form -> Supabase (record) + Firebase (email + Bigin CRM)
-// Expects a table `partners` with columns:
-// name, email, instagram_handle, discount_code, attended (bool)
+// Sign-up form -> Firebase (Firestore record + email + Bigin CRM)
+// Saved to the `vip-partners` Firestore collection, keyed by email.
 // =================================================================
 signupForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -349,26 +348,9 @@ signupForm.addEventListener("submit", async (e) => {
   const courseDate = courseDateInput.value;
   const discountCode = generateDiscountCode(verifiedHandle);
 
-  const { error } = await supabaseClient.from("partners").insert({
-    name,
-    email,
-    instagram_handle: verifiedHandle,
-    discount_code: discountCode,
-    course_date: courseDate,
-    attended: false,
-  });
-
-  if (error) {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Sign up - it's free";
-    alert("Something went wrong signing you up - please try again.");
-    return;
-  }
-
-  // Fire off confirmation email + Bigin CRM sync - don't block the success
-  // screen on this, but do log any failure for follow-up.
+  let signupFailed = false;
   try {
-    await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/vipPartnerSignup", {
+    const res = await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/vipPartnerSignup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -379,8 +361,17 @@ signupForm.addEventListener("submit", async (e) => {
         instagramHandle: verifiedHandle,
       }),
     });
+    if (!res.ok) signupFailed = true;
   } catch (err) {
-    console.error("Error notifying VIP partner signup backend:", err);
+    console.error("Error signing up VIP partner:", err);
+    signupFailed = true;
+  }
+
+  if (signupFailed) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Sign up - it's free";
+    alert("Something went wrong signing you up - please try again.");
+    return;
   }
 
   submitBtn.disabled = false;
