@@ -98,9 +98,11 @@ exports.stripeWebhook = onRequest(
         });
 
         // --- STEP C.5: Process referral refund if a promo code was used ---
+
 try {
-  const discounts = session.total_details?.breakdown?.discounts || [];
-  if (discounts.length > 0) {
+  const discountAmount = session.total_details?.amount_discount || 0;
+
+  if (discountAmount > 0) {
     // Retrieve the full session with discount expansion to get the promo code
     const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
       expand: ["discounts.promotion_code"],
@@ -110,7 +112,6 @@ try {
     const usedCode = typeof usedPromo === "object" ? usedPromo.code : null;
 
     if (usedCode) {
-      // Find the referrer's booking by their referral code
       const referrerQuery = await db
         .collection("bookings")
         .where("referralCode", "==", usedCode)
@@ -124,12 +125,11 @@ try {
         if (referrerData.paymentIntent) {
           const refund = await stripe.refunds.create({
             payment_intent: referrerData.paymentIntent,
-            amount: 1000, // £10 in pence
+            amount: 1000,
             reason: "requested_by_customer",
           });
           console.log(`Referral refund issued: £10 to ${referrerData.email} (${refund.id}) for code ${usedCode}`);
 
-          // Log it on their record too, for your own visibility
           await referrerDoc.ref.update({
             referralRefunds: admin.firestore.FieldValue.arrayUnion({
               refundedFor: customerEmail,
@@ -144,6 +144,8 @@ try {
       } else {
         console.warn(`Promo code ${usedCode} used but no matching referrer booking found.`);
       }
+    } else {
+      console.warn("Discount detected but couldn't resolve promotion code from expanded session.");
     }
   }
 } catch (refundErr) {
