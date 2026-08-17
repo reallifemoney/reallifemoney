@@ -838,9 +838,33 @@ async function loadWorkshops() {
       document.getElementById('heroRegisterBtn').style.display = 'none';
     }
 
-    // --- Existing course grid rendering (unchanged) ---
+    // --- Render the full grid of workshop cards ---
     grid.innerHTML = data.workshops.map(w => {
-      // ... your existing card-rendering code stays exactly as-is here
+      const monthLabel = w.category === 'online' ? 'ONLINE' : 'IN-PERSON (BRISTOL)';
+      const locationHtml = w.category === 'online'
+        ? `<div class="location">${w.location}<br></div>`
+        : `<button class="venue-trigger" aria-expanded="false">
+             📍 ${w.venueName}
+             <div class="venue-popover" role="tooltip">
+               <div class="popover-name">${w.venueName}</div>
+               <div class="popover-address">${w.venueAddress}</div>
+               <div class="popover-actions">
+                 <a href="https://maps.google.com/?q=${encodeURIComponent(w.venueName + ' Bristol')}" target="_blank" class="btn-map">Open in Maps</a>
+                 <a href="#" class="btn-copy" data-copy-btn data-address="${w.venueAddress}">Copy address</a>
+               </div>
+             </div>
+           </button>`;
+
+      return `
+        <div class="sess-card" data-category="${w.category}">
+          <div class="month">${monthLabel}</div>
+          <h3>${w.dateLabel}</h3>
+          ${locationHtml}
+          <div class="time">🕙 ${w.times}</div>
+          <div class="price">£${w.price}</div>
+          <button class="select-btn" onclick="selectDateStep('${w.dateLabel}', '${w.dateLabel}', '${w.times}', '${w.category === 'online' ? w.location : '📍 ' + w.venueName}'); logcourseselection();">Select this date</button>
+        </div>
+      `;
     }).join('');
 
     attachVenuePopoverListeners();
