@@ -434,3 +434,29 @@ async function getBiginAccessToken(clientId, clientSecret, refreshToken) {
     return null;
   }
 }
+
+exports.getWorkshops = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+
+    try {
+      const snapshot = await db
+        .collection("workshops")
+        .where("active", "==", true)
+        .orderBy("sortDate", "asc")
+        .get();
+
+      const workshops = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      res.json({ workshops });
+    } catch (err) {
+      console.error("Error fetching workshops:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);

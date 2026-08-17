@@ -521,66 +521,9 @@ footer a{color:#ddd;text-decoration:underline;}
       <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-person (Bristol)</button>
     </div>
 
-    <div class="sess-grid">
-      
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Tue 1st &amp; 8th September</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- IN-PERSON WORKSHOP (BRISTOL) -->
-      <div class="sess-card" data-category="in-person">
-        <div class="month">IN-PERSON (BRISTOL)</div>
-        <h3>Tue 15th &amp; 22nd September</h3>
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-        <div class="time">🕙 6:45pm – 8:15pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September', '6:45pm – 8:15pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Wed 7th &amp; 14th October</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Mon 9th &amp; 16th November</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-      <div class="sess-card-waitlist">
-          <h3 style="padding-bottom: 15px">Can't make these?</h3>
-          <p style="padding-bottom: 15px">I'll email you when new dates are announced.</p>
-          <form onsubmit="handleWaitlist(event)">
-            <input type="email" id="waitlist-email" class="step-input" placeholder="Your email" required>
-            <button type="submit" class="select-btn" style="background:var(--green);color:white;">Notify me</button>
-          </form>
-        </div>
-    </div>
+    <div class="sess-grid" id="sessGrid">
+  <!-- Cards injected here by JS -->
+</div>
   </div>
 
   
@@ -872,6 +815,74 @@ window.addEventListener('click', function(event) {
   const modal = document.getElementById('videoModal');
   if (event.target === modal) closeVideo();
 });
+
+async function loadWorkshops() {
+  const grid = document.getElementById('sessGrid');
+  try {
+    const res = await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/getWorkshops');
+    const data = await res.json();
+
+    grid.innerHTML = data.workshops.map(w => {
+      const monthLabel = w.category === 'online' ? 'ONLINE' : 'IN-PERSON (BRISTOL)';
+      const locationHtml = w.category === 'online'
+        ? `<div class="location">${w.location}<br></div>`
+        : `<button class="venue-trigger" aria-expanded="false">
+             📍 ${w.venueName}
+             <div class="venue-popover" role="tooltip">
+               <div class="popover-name">${w.venueName}</div>
+               <div class="popover-address">${w.venueAddress}</div>
+               <div class="popover-actions">
+                 <a href="https://maps.google.com/?q=${encodeURIComponent(w.venueName + ' Bristol')}" target="_blank" class="btn-map">Open in Maps</a>
+                 <a href="#" class="btn-copy" data-copy-btn data-address="${w.venueAddress}">Copy address</a>
+               </div>
+             </div>
+           </button>`;
+
+      return `
+        <div class="sess-card" data-category="${w.category}">
+          <div class="month">${monthLabel}</div>
+          <h3>${w.dateLabel}</h3>
+          ${locationHtml}
+          <div class="time">🕙 ${w.times}</div>
+          <div class="price">£${w.price}</div>
+          <button class="select-btn" onclick="selectDateStep('${w.dateLabel}', '${w.dateLabel}', '${w.times}', '${w.category === 'online' ? w.location : '📍 ' + w.venueName}'); logcourseselection();">Select this date</button>
+        </div>
+      `;
+    }).join('');
+
+    // Re-attach venue popover listeners since these are new DOM elements
+    attachVenuePopoverListeners();
+  } catch (err) {
+    console.error('Error loading workshops:', err);
+    grid.innerHTML = '<p style="text-align:center;color:var(--muted);">Unable to load dates right now — please WhatsApp me directly.</p>';
+  }
+}
+
+function attachVenuePopoverListeners() {
+  document.querySelectorAll('.venue-trigger').forEach(trigger => {
+    const popover = trigger.querySelector('.venue-popover');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popover.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.address);
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy address';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+}
+
+loadWorkshops();
 
 // ---- Booking flow (same logic/functions as existing site) ----
 let selectedMonth = "", selectedTimes = "", selectedLocation = "", selectedTimings = "";
