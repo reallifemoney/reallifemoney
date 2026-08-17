@@ -10,11 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-  /* PLACEHOLDER — swap in your real EmailJS public key */
-  (function(){ if (window.emailjs) emailjs.init("FaZMs4M-HnEtpdw3G"); })();
-</script>
+
+<script src="https://js.stripe.com/v3/"></script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -223,6 +220,8 @@ section{padding:80px 0;}
 #step-2 h3{font-size:22px;margin-bottom:6px;}
 #step-2 .step-sub{color:var(--muted);font-size:15px;margin-bottom:24px;}
 #step-2 .step-sub strong{color:var(--ink);}
+#checkout-container {max-width: 700px;margin: 0 auto;width: 100%;}
+#step-3 {max-width: 760px !important;background: var(--mint);}
 .field{margin-bottom:16px;}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
 .field input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--rule);font-family:inherit;font-size:15px;background:#fff;}
@@ -321,14 +320,14 @@ footer a{color:#ddd;text-decoration:underline;}
         <div class="date-card-hero" style="margin-bottom:25px">
     <div class="date-meta">
       <h2 style="padding-bottom:10px">Next online workshop:</h2>
-      <div class="date-meta-row">📅 Tue 1st &amp; 8th September (18:30 - 20:00)</div>
-      <div class="date-meta-row">💷 &pound;75 per person</div>
-    </div>
-    <div style="display: flex; flex-direction: column;">
-        <button class="btn btn-primary" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', 'Online'); logcourseselection();">Register</button>
-        <button class="view-other-dates" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button>
-    </div>
-    </div>
+<div class="date-meta-row" id="heroDate">📅 Loading next date...</div>
+<div class="date-meta-row" id="heroPrice">💷 —</div>
+</div>
+<div style="display: flex; flex-direction: column;">
+    <button class="btn btn-primary" id="heroRegisterBtn">Register</button>
+    <button class="view-other-dates" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button>
+</div>
+</div>
         <div class="video-trigger" onclick="openVideo();logvideoclick();">
       <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
       <div class="play-btn"><i class="fa-solid fa-play"></i></div>
@@ -522,66 +521,9 @@ footer a{color:#ddd;text-decoration:underline;}
       <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-person (Bristol)</button>
     </div>
 
-    <div class="sess-grid">
-      
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Tue 1st &amp; 8th September</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 1st &amp; 8th September', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- IN-PERSON WORKSHOP (BRISTOL) -->
-      <div class="sess-card" data-category="in-person">
-        <div class="month">IN-PERSON (BRISTOL)</div>
-        <h3>Tue 15th &amp; 22nd September</h3>
-        <button class="venue-trigger" id="venueTrigger-may" aria-expanded="false">
-          📍 Brooklands Park Community Centre
-          <div class="venue-popover" id="venuePopover-may" role="tooltip">
-            <div class="popover-name">Brooklands Park Community Centre</div>
-            <div class="popover-address">2 Clover Wy<br>Bristol, BS34 8AZ</div>
-            <div class="popover-actions">
-              <a href="https://maps.google.com/?q=Brooklands+Park+Community+Centre+Bristol" target="_blank" class="btn-map">Open in Maps</a>
-              <a href="#" class="btn-copy" data-copy-btn>Copy address</a>
-            </div>
-          </div>
-        </button>
-        <div class="time">🕙 6:45pm – 8:15pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('September', 'Tue 15th &amp; 22nd September', '6:45pm – 8:15pm', '📍 Brooklands Park Community Centre'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Wed 7th &amp; 14th October</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('October', 'Wed 7th &amp; 14th October', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-
-      <!-- ONLINE WORKSHOP -->
-      <div class="sess-card" data-category="online">
-        <div class="month">ONLINE</div>
-        <h3>Mon 9th &amp; 16th November</h3>
-        <div class="location">🖥️ Live online<br></div>
-        <div class="time">🕙 6:30pm – 8:00pm</div>
-        <div class="price">£75</div>
-        <button class="select-btn" onclick="selectDateStep('November', 'Mon 9th &amp; 16th November', '6:30pm – 8:00pm', '🖥️ Live online'); logcourseselection();">Select this date</button>
-      </div>
-      <div class="sess-card-waitlist">
-          <h3 style="padding-bottom: 15px">Can't make these?</h3>
-          <p style="padding-bottom: 15px">I'll email you when new dates are announced.</p>
-          <form onsubmit="handleWaitlist(event)">
-            <input type="email" id="waitlist-email" class="step-input" placeholder="Your email" required>
-            <button type="submit" class="select-btn" style="background:var(--green);color:white;">Notify me</button>
-          </form>
-        </div>
-    </div>
+    <div class="sess-grid" id="sessGrid">
+  <!-- Cards injected here by JS -->
+</div>
   </div>
 
   
@@ -604,34 +546,22 @@ footer a{color:#ddd;text-decoration:underline;}
           <label for="res-phone">Phone number</label>
           <input type="tel" id="res-phone" required>
         </div>
-        <button type="submit" class="select-btn" onclick="logbuttonclick()">Confirm Reservation</button>
+        <div class="field">
+  <label for="res-qty">Number of people</label>
+  <input type="number" id="res-qty" min="1" max="12" value="1" required>
+</div>
+        <button type="submit" class="select-btn" onclick="logbuttonclick()">Proceed to payment</button>
       </form>
     </div>
 
     <!-- STEP 3: PAYMENT -->
     <div id="step-3">
-      <div class="success-header">
-        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
-        <h2>You're reserved! 🎉</h2>
-        <p style="color:var(--ink);margin-top:10px;">Check your email for confirmation. Last step — secure your seat with payment.</p>
-        <div class="pay-options">
-          <a href="https://book.stripe.com/bJe7sL1DQe4k4Cv8DWcbC02" target="_blank" class="pay-now-link">Pay now via Stripe →</a>
-          
-        </div>
-        <div class="stripe-trust-container">
-    <p class="secure-text">
-        <span>🔒</span> Secure checkout powered by Stripe
-    </p>
-    <div class="payment-logos">
-        <i class="fa-brands fa-cc-visa" title="Visa"></i>
-        <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-        <i class="fa-brands fa-cc-apple-pay" title="Apple Pay"></i>
-        <i class="fa-brands fa-cc-google-pay" title="Google Pay"></i> 
-    </div>
+  <div class="success-header">
+    <h2>Complete your booking</h2>
+    <p style="color:var(--ink);margin-top:10px;">Enter your payment details below to secure your seat.</p>
+  </div>
+  <div id="checkout-container"></div>
 </div>
-        <p style="font-size:13px;color:var(--muted);margin-top:14px;">Seats are only fully secured once payment is received.</p>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -886,6 +816,91 @@ window.addEventListener('click', function(event) {
   if (event.target === modal) closeVideo();
 });
 
+async function loadWorkshops() {
+  const grid = document.getElementById('sessGrid');
+  try {
+    const res = await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/getWorkshops');
+    const data = await res.json();
+
+    // --- Populate hero "Next online workshop" section ---
+    const nextOnline = data.workshops.find(w => w.category === 'online');
+    if (nextOnline) {
+      document.getElementById('heroDate').innerText = `📅 ${nextOnline.dateLabel} (${nextOnline.times})`;
+      document.getElementById('heroPrice').innerText = `💷 £${nextOnline.price} per person`;
+
+      const registerBtn = document.getElementById('heroRegisterBtn');
+      registerBtn.onclick = () => {
+        selectDateStep(nextOnline.dateLabel, nextOnline.dateLabel, nextOnline.times, nextOnline.location);
+        logcourseselection();
+      };
+    } else {
+      document.getElementById('heroDate').innerText = 'No upcoming online dates — check other dates below';
+      document.getElementById('heroRegisterBtn').style.display = 'none';
+    }
+
+    // --- Render the full grid of workshop cards ---
+    grid.innerHTML = data.workshops.map(w => {
+      const monthLabel = w.category === 'online' ? 'ONLINE' : 'IN-PERSON (BRISTOL)';
+      const locationHtml = w.category === 'online'
+        ? `<div class="location">${w.location}<br></div>`
+        : `<button class="venue-trigger" aria-expanded="false">
+             📍 ${w.venueName}
+             <div class="venue-popover" role="tooltip">
+               <div class="popover-name">${w.venueName}</div>
+               <div class="popover-address">${w.venueAddress}</div>
+               <div class="popover-actions">
+                 <a href="https://maps.google.com/?q=${encodeURIComponent(w.venueName + ' Bristol')}" target="_blank" class="btn-map">Open in Maps</a>
+                 <a href="#" class="btn-copy" data-copy-btn data-address="${w.venueAddress}">Copy address</a>
+               </div>
+             </div>
+           </button>`;
+
+      return `
+        <div class="sess-card" data-category="${w.category}">
+          <div class="month">${monthLabel}</div>
+          <h3>${w.dateLabel}</h3>
+          ${locationHtml}
+          <div class="time">🕙 ${w.times}</div>
+          <div class="price">£${w.price}</div>
+          <button class="select-btn" onclick="selectDateStep('${w.dateLabel}', '${w.dateLabel}', '${w.times}', '${w.category === 'online' ? w.location : '📍 ' + w.venueName}'); logcourseselection();">Select this date</button>
+        </div>
+      `;
+    }).join('');
+
+    attachVenuePopoverListeners();
+  } catch (err) {
+    console.error('Error loading workshops:', err);
+    document.getElementById('heroDate').innerText = 'Unable to load — please check other dates below';
+    grid.innerHTML = '<p style="text-align:center;color:var(--muted);">Unable to load dates right now — please WhatsApp me directly.</p>';
+  }
+}
+
+function attachVenuePopoverListeners() {
+  document.querySelectorAll('.venue-trigger').forEach(trigger => {
+    const popover = trigger.querySelector('.venue-popover');
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = popover.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', isOpen);
+    });
+  });
+  document.querySelectorAll('[data-copy-btn]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigator.clipboard.writeText(btn.dataset.address);
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy address';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  });
+}
+
+loadWorkshops();
+
 // ---- Booking flow (same logic/functions as existing site) ----
 let selectedMonth = "", selectedTimes = "", selectedLocation = "", selectedTimings = "";
 
@@ -899,34 +914,41 @@ function selectDateStep(month, times, timings, location) {
   window.scrollTo({ top: document.getElementById('step-2').offsetTop - 100, behavior: 'smooth' });
 }
 
-function handleReserve(e) {
+async function handleReserve(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button');
-  btn.innerText = "Confirming, please wait...";
+  btn.innerText = "Loading checkout...";
   btn.disabled = true;
 
-  const templateParams = {
-    name: document.getElementById('res-name').value,
-    email: document.getElementById('res-email').value,
-    phone: document.getElementById('res-phone').value,
-    course_date: selectedMonth,
-    course_times: selectedTimes,
-    course_location: selectedLocation,
-    course_timings: selectedTimings
-  };
+  const quantity = document.getElementById('res-qty').value;
+  const name = document.getElementById('res-name').value;
+  const email = document.getElementById('res-email').value;
+  const phone = document.getElementById('res-phone').value;
+  const courseDate = `${selectedTimes} (${selectedTimings}) — ${selectedLocation}`;
 
-  emailjs.send('service_7hn83cm', 'template_vcghkv4', templateParams)
-    .then(() => {
-      document.getElementById('step-2').style.opacity = '0.3';
-      document.getElementById('step-2').style.pointerEvents = 'none';
-      document.getElementById('step-3').style.display = 'block';
-      window.scrollTo({ top: document.getElementById('step-3').offsetTop - 100, behavior: 'smooth' });
-    }, (error) => {
-      console.error("EmailJS Error details:", error);
-      alert("Something went wrong. Please WhatsApp me directly!");
-      btn.innerText = "Confirm Reservation";
-      btn.disabled = false;
+  try {
+    const response = await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/createCheckoutSession', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ quantity, name, email, phone, courseDate })
     });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Failed to create checkout session');
+
+    document.getElementById('step-2').style.display = 'none';
+    document.getElementById('step-3').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('step-3').offsetTop - 100, behavior: 'smooth' });
+
+    const stripe = Stripe('pk_live_51N5RccG1bVxXIBBZTICT4uoKeaJw9xEUuPm09VWkMA5ndTBGFxWVSZzqIk1qAUUqPakrA5RsN9hsGyCNpbhYLNqc00dqw4dlil'); // TODO: your live publishable key
+    const checkout = await stripe.initEmbeddedCheckout({ clientSecret: data.clientSecret });
+    checkout.mount('#checkout-container');
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong starting checkout. Please WhatsApp me directly!");
+    btn.innerText = "Confirm Reservation";
+    btn.disabled = false;
+  }
 }
 
 function payLater() {
