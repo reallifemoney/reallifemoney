@@ -53,12 +53,15 @@ exports.stripeWebhook = onRequest(
 
     // 2. Process successful checkout payments
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object;
+  const session = event.data.object;
 
-      const customerEmail = session.customer_details?.email;
-      const fullName = session.customer_details?.name || "Customer";
-      const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "").toUpperCase() || "FRIEND";
-      const lastName = fullName.split(" ").slice(1).join(" ") || "Booking";
+  const customerEmail = session.customer_details?.email;
+  const fullName = session.customer_details?.name || "Customer";
+  const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "").toUpperCase() || "FRIEND";
+  const lastName = fullName.split(" ").slice(1).join(" ") || "Booking";
+
+  // Pull course date through from checkout metadata
+  const courseDate = session.metadata?.course_date || "your upcoming session";
 
       try {
         // --- STEP A: Generate Unique Referral Code ---
@@ -106,32 +109,77 @@ exports.stripeWebhook = onRequest(
 
         // --- STEP E: Send Confirmation Email via Resend ---
         await resend.emails.send({
-          from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
-          to: customerEmail,
-          subject: "Booking Confirmed! Here is your unique £10 referral code",
-          html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
-              <h2>Thanks for booking your workshop, ${firstName}!</h2>
-              <p>Your spot is fully confirmed. We're excited to see you there.</p>
-              
-              <div style="background: #f4f4f5; border-left: 4px solid #10b981; padding: 16px; margin: 20px 0;">
-                <h3 style="margin-top: 0;">Your Personal Referral Code:</h3>
-                <p style="font-size: 24px; font-weight: bold; letter-spacing: 2px; color: #059669; margin: 5px 0;">
-                  ${referralCode}
-                </p>
-                <p style="margin-bottom: 0; font-size: 14px;">
-                  Share this code with friends or family! When they use it at checkout:
-                </p>
-                <ul style="font-size: 14px; padding-left: 20px;">
-                  <li><strong>They get £10 off</strong> their workshop ticket.</li>
-                  <li><strong>You get a £10 refund</strong> back to your card for every person who books!</li>
-                </ul>
-              </div>
-              
-              <p>If you have any questions before the session, simply reply to this email.</p>
-            </div>
-          `,
-        });
+  from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+  to: customerEmail,
+  subject: "Booking Confirmed! Here's your referral code 🎉",
+  html: `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
+      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
+      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
+      .content { padding: 0 25px 40px 25px; }
+      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
+      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
+      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
+      @media only screen and (max-width: 480px) {
+        .content { padding: 0 15px 30px 15px; }
+        h1 { font-size: 22px; }
+        .wrapper { padding: 10px 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <img src="https://reallifemoney.co.uk/logo-circle.webp"
+               alt="Real Life Money"
+               style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
+        </div>
+
+        <div class="content">
+          <h1>You're booked, ${firstName}! 🎉</h1>
+          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with your money.</p>
+
+          <div class="date-box">
+            <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
+            <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${courseDate}</p>
+          </div>
+
+          <p>You'll receive a payment invoice and receipt from Stripe separately for your records — no action needed there, it's just confirmation of your payment.</p>
+
+          <div class="code-box">
+            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Personal Referral Code</p>
+            <div class="code-value">${referralCode}</div>
+            <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">
+              Share this with friends or family — <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
+            </p>
+          </div>
+
+          <p style="margin-top: 30px; font-size: 14px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+
+          <p>See you soon!<br><strong>Leo</strong></p>
+        </div>
+
+        <div class="footer">
+          <p>© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center;">
+            This is an automated booking confirmation from Real Life Money.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `,
+});
 
         console.log(`Successfully processed booking & code ${referralCode} for ${customerEmail}`);
       } catch (error) {
@@ -247,10 +295,23 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
       "Content-Type": "application/json",
     };
 
+    // Helper to safely parse a response that might be empty
+    async function safeJson(res) {
+      const text = await res.text();
+      if (!text) return null;
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        console.error("Bigin response was not valid JSON:", text);
+        return null;
+      }
+    }
+
     // --- Step 1: Search for an existing contact with this email ---
     const searchUrl = `${baseUrl}/search?email=${encodeURIComponent(email)}`;
     const searchRes = await fetch(searchUrl, { method: "GET", headers });
-    const searchResult = await searchRes.json();
+    console.log("Bigin search status:", searchRes.status);
+    const searchResult = await safeJson(searchRes);
 
     const existingContact = searchResult?.data?.[0];
 
@@ -273,7 +334,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
         headers,
         body: JSON.stringify(updatePayload),
       });
-      const updateResult = await updateRes.json();
+      const updateResult = await safeJson(updateRes);
       console.log("Bigin API Contact Updated:", JSON.stringify(updateResult));
     } else {
       // --- Step 2b: No existing contact — create a new one ---
@@ -293,7 +354,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
         headers,
         body: JSON.stringify(createPayload),
       });
-      const createResult = await createRes.json();
+      const createResult = await safeJson(createRes);
       console.log("Bigin API Contact Created:", JSON.stringify(createResult));
     }
   } catch (err) {
