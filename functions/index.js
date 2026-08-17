@@ -81,6 +81,56 @@ exports.stripeWebhook = onRequest(
   code: referralCode,
 });
 
+exports.createCheckoutSession = onRequest(
+  { secrets: [stripeSecretKey] },
+  async (req, res) => {
+    // Basic CORS handling
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+    if (req.method !== "POST") {
+      return res.status(405).send("Method Not Allowed");
+    }
+
+    const stripe = new Stripe(stripeSecretKey.value());
+
+    try {
+      const { quantity, name, email, phone, courseDate } = req.body;
+
+      // Clamp quantity to a sane range
+      const qty = Math.max(1, Math.min(12, parseInt(quantity, 10) || 1));
+
+      const session = await stripe.checkout.sessions.create({
+        ui_mode: "embedded",
+        mode: "payment",
+        line_items: [
+          {
+            price: "price_1TQ2JGG1bVxXIBBZ82Esf1ur", // TODO: your live £75 workshop Price ID
+            quantity: qty,
+          },
+        ],
+        allow_promotion_codes: true,
+        customer_email: email,
+        metadata: {
+          full_name: name,
+          phone: phone,
+          course_date: courseDate || "",
+        },
+        return_url: "https://reallifemoney.co.uk/booking-confirmed?session_id={CHECKOUT_SESSION_ID}",
+      });
+
+      res.json({ clientSecret: session.client_secret });
+    } catch (err) {
+      console.error("Error creating checkout session:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
         // --- STEP C: Save Record to Firestore ---
         await db.collection("bookings").doc(session.id).set({
           sessionId: session.id,
