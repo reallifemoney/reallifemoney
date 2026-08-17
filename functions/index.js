@@ -74,9 +74,12 @@ exports.stripeWebhook = onRequest(
         });
 
         await stripe.promotionCodes.create({
-          coupon: coupon.id,
-          code: referralCode,
-        });
+  promotion: {
+    type: "coupon",
+    coupon: coupon.id,
+  },
+  code: referralCode,
+});
 
         // --- STEP C: Save Record to Firestore ---
         await db.collection("bookings").doc(session.id).set({
