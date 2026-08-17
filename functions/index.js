@@ -57,7 +57,7 @@ exports.stripeWebhook = onRequest(
 
   const customerEmail = session.customer_details?.email;
   const fullName = session.customer_details?.name || "Customer";
-  const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "").toUpperCase() || "FRIEND";
+  const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
   const lastName = fullName.split(" ").slice(1).join(" ") || "Booking";
 
   // Pull course date through from checkout metadata
@@ -66,7 +66,7 @@ exports.stripeWebhook = onRequest(
       try {
         // --- STEP A: Generate Unique Referral Code ---
         const random4Digits = Math.floor(1000 + Math.random() * 9000);
-        const referralCode = `${firstName}${random4Digits}`;
+        const referralCode = `${firstName.toUpperCase()}${random4Digits}`;
 
         // --- STEP B: Create Coupon & Promo Code in Stripe ---
         const coupon = await stripe.coupons.create({
@@ -98,14 +98,15 @@ exports.stripeWebhook = onRequest(
 
         // --- STEP D: Add Contact to Bigin CRM ---
         await createBiginContact(
-          firstName,
-          lastName,
-          customerEmail,
-          referralCode,
-          biginClientId.value(),
-          biginClientSecret.value(),
-          biginRefreshToken.value()
-        );
+  firstName,
+  lastName,
+  customerEmail,
+  referralCode,
+  courseDate,
+  biginClientId.value(),
+  biginClientSecret.value(),
+  biginRefreshToken.value()
+);
 
         // --- STEP E: Send Confirmation Email via Resend ---
         await resend.emails.send({
@@ -146,20 +147,20 @@ exports.stripeWebhook = onRequest(
 
         <div class="content">
           <h1>You're booked, ${firstName}! 🎉</h1>
-          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with your money.</p>
+          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with investing.</p>
 
           <div class="date-box">
             <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
             <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${courseDate}</p>
           </div>
 
-          <p>You'll receive a payment invoice and receipt from Stripe separately for your records — no action needed there, it's just confirmation of your payment.</p>
+          <p>You'll receive a payment invoice and receipt from Stripe separately for your records - no action needed there, it's just confirmation of your payment.</p>
 
           <div class="code-box">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Personal Referral Code</p>
             <div class="code-value">${referralCode}</div>
             <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">
-              Share this with friends or family — <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
+              Share this with friends or family - <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
             </p>
           </div>
 
@@ -284,7 +285,7 @@ exports.getBookingDetails = onRequest(
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
-async function createBiginContact(firstName, lastName, email, referralCode, clientId, clientSecret, refreshToken) {
+async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken) {
   try {
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
@@ -295,7 +296,6 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
       "Content-Type": "application/json",
     };
 
-    // Helper to safely parse a response that might be empty
     async function safeJson(res) {
       const text = await res.text();
       if (!text) return null;
@@ -307,16 +307,12 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
       }
     }
 
-    // --- Step 1: Search for an existing contact with this email ---
     const searchUrl = `${baseUrl}/search?email=${encodeURIComponent(email)}`;
     const searchRes = await fetch(searchUrl, { method: "GET", headers });
-    console.log("Bigin search status:", searchRes.status);
     const searchResult = await safeJson(searchRes);
-
     const existingContact = searchResult?.data?.[0];
 
     if (existingContact) {
-      // --- Step 2a: Contact exists — update it with a new note ---
       const existingDescription = existingContact.Description || "";
       const newNote = `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
 
@@ -325,6 +321,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
           {
             id: existingContact.id,
             Description: existingDescription + newNote,
+            Course: courseDate,
           },
         ],
       };
@@ -337,7 +334,6 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
       const updateResult = await safeJson(updateRes);
       console.log("Bigin API Contact Updated:", JSON.stringify(updateResult));
     } else {
-      // --- Step 2b: No existing contact — create a new one ---
       const createPayload = {
         data: [
           {
@@ -345,6 +341,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
             Last_Name: lastName,
             Email: email,
             Description: `Workshop attendee. Unique Referral Code: ${referralCode}`,
+            Course: courseDate,
           },
         ],
       };
