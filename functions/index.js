@@ -92,9 +92,63 @@ exports.stripeWebhook = onRequest(
           email: customerEmail,
           fullName: fullName,
           referralCode: referralCode,
+          paymentIntent: session.payment_intent,
           amountTotal: session.amount_total,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
         });
+
+        // --- STEP C.5: Process referral refund if a promo code was used ---
+try {
+  const discounts = session.total_details?.breakdown?.discounts || [];
+  if (discounts.length > 0) {
+    // Retrieve the full session with discount expansion to get the promo code
+    const fullSession = await stripe.checkout.sessions.retrieve(session.id, {
+      expand: ["discounts.promotion_code"],
+    });
+
+    const usedPromo = fullSession.discounts?.[0]?.promotion_code;
+    const usedCode = typeof usedPromo === "object" ? usedPromo.code : null;
+
+    if (usedCode) {
+      // Find the referrer's booking by their referral code
+      const referrerQuery = await db
+        .collection("bookings")
+        .where("referralCode", "==", usedCode)
+        .limit(1)
+        .get();
+
+      if (!referrerQuery.empty) {
+        const referrerDoc = referrerQuery.docs[0];
+        const referrerData = referrerDoc.data();
+
+        if (referrerData.paymentIntent) {
+          const refund = await stripe.refunds.create({
+            payment_intent: referrerData.paymentIntent,
+            amount: 1000, // £10 in pence
+            reason: "requested_by_customer",
+          });
+          console.log(`Referral refund issued: £10 to ${referrerData.email} (${refund.id}) for code ${usedCode}`);
+
+          // Log it on their record too, for your own visibility
+          await referrerDoc.ref.update({
+            referralRefunds: admin.firestore.FieldValue.arrayUnion({
+              refundedFor: customerEmail,
+              refundId: refund.id,
+              amount: 1000,
+              date: new Date().toISOString(),
+            }),
+          });
+        } else {
+          console.warn(`No paymentIntent on file for referrer with code ${usedCode} — skipped refund.`);
+        }
+      } else {
+        console.warn(`Promo code ${usedCode} used but no matching referrer booking found.`);
+      }
+    }
+  }
+} catch (refundErr) {
+  console.error("Error processing referral refund:", refundErr);
+}
 
         // --- STEP D: Add Contact to Bigin CRM ---
         await createBiginContact(
