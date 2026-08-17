@@ -104,7 +104,7 @@ exports.stripeWebhook = onRequest(
 
         // --- STEP E: Send Confirmation Email via Resend ---
         await resend.emails.send({
-          from: "Real Life Money <workshops@reallifemoney.co.uk>",
+          from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
           to: customerEmail,
           subject: "Booking Confirmed! Here is your unique £10 referral code",
           html: `
@@ -150,30 +150,61 @@ async function createBiginContact(firstName, lastName, email, referralCode, clie
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
 
-    const url = "https://www.zohoapis.eu/bigin/v1/Contacts";
-
-    const payload = {
-      data: [
-        {
-          First_Name: firstName,
-          Last_Name: lastName,
-          Email: email,
-          Description: `Workshop attendee. Unique Referral Code: ${referralCode}`,
-        },
-      ],
+    const baseUrl = "https://www.zohoapis.eu/bigin/v1/Contacts";
+    const headers = {
+      Authorization: `Zoho-oauthtoken ${accessToken}`,
+      "Content-Type": "application/json",
     };
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Authorization: `Zoho-oauthtoken ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    // --- Step 1: Search for an existing contact with this email ---
+    const searchUrl = `${baseUrl}/search?email=${encodeURIComponent(email)}`;
+    const searchRes = await fetch(searchUrl, { method: "GET", headers });
+    const searchResult = await searchRes.json();
 
-    const result = await response.json();
-    console.log("Bigin API Contact Result:", JSON.stringify(result));
+    const existingContact = searchResult?.data?.[0];
+
+    if (existingContact) {
+      // --- Step 2a: Contact exists — update it with a new note ---
+      const existingDescription = existingContact.Description || "";
+      const newNote = `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
+
+      const updatePayload = {
+        data: [
+          {
+            id: existingContact.id,
+            Description: existingDescription + newNote,
+          },
+        ],
+      };
+
+      const updateRes = await fetch(baseUrl, {
+        method: "PUT",
+        headers,
+        body: JSON.stringify(updatePayload),
+      });
+      const updateResult = await updateRes.json();
+      console.log("Bigin API Contact Updated:", JSON.stringify(updateResult));
+    } else {
+      // --- Step 2b: No existing contact — create a new one ---
+      const createPayload = {
+        data: [
+          {
+            First_Name: firstName,
+            Last_Name: lastName,
+            Email: email,
+            Description: `Workshop attendee. Unique Referral Code: ${referralCode}`,
+          },
+        ],
+      };
+
+      const createRes = await fetch(baseUrl, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(createPayload),
+      });
+      const createResult = await createRes.json();
+      console.log("Bigin API Contact Created:", JSON.stringify(createResult));
+    }
   } catch (err) {
     console.error("Failed to push contact to Bigin:", err);
   }
