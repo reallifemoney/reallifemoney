@@ -195,6 +195,44 @@ exports.createCheckoutSession = onRequest(
   }
 );
 
+exports.getBookingDetails = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+
+    const sessionId = req.query.session_id;
+    if (!sessionId) {
+      return res.status(400).json({ error: "Missing session_id" });
+    }
+
+    try {
+      const doc = await db.collection("bookings").doc(sessionId).get();
+
+      if (!doc.exists) {
+        // Webhook likely hasn't processed yet — tell frontend to retry
+        return res.status(202).json({ status: "pending" });
+      }
+
+      const data = doc.data();
+      res.json({
+        status: "complete",
+        fullName: data.fullName,
+        referralCode: data.referralCode,
+        email: data.email,
+      });
+    } catch (err) {
+      console.error("Error fetching booking details:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed — Real Life Money</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+  --mint:#eef8eb; --purple:#8c52ff; --orange:#ff914d; --yellow:#ffde59;
+  --green:#71c558; --ink:#1a1a1a; --text:#2e2e2e; --muted:#6b6b6b;
+  --rule:#daecd6; --white:#ffffff;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--mint);
+  color:var(--text);
+  font-family:'Lexend',Helvetica,Arial,sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+}
+h1,h2,h3{font-weight:700;color:var(--ink);line-height:1.2;}
+.wrap{width:100%;max-width:600px;}
+.logo-row{text-align:center;margin-bottom:28px;}
+.logo-row img{height:64px;width:auto;margin:0 auto;}
+
+.card{
+  background:var(--white);
+  border-radius:24px;
+  padding:44px 36px;
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
+  text-align:center;
+}
+
+.tick-wrap{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--green);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;margin:0 auto 22px;
+  animation:pop .5s cubic-bezier(.25,1.5,.5,1) both;
+}
+@keyframes pop{
+  0%{transform:scale(0);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+
+h1{font-size:26px;margin-bottom:10px;}
+h1 span{color:var(--green);}
+.sub{color:var(--muted);font-size:16px;max-width:42ch;margin:0 auto 32px;}
+
+.loading{padding:40px 0;color:var(--muted);font-size:15px;}
+.loading i{color:var(--purple);margin-right:8px;}
+
+.error-box{
+  background:#fff4f0;border:1px solid #ffd8c9;border-radius:14px;
+  padding:20px;color:var(--text);font-size:14.5px;
+}
+
+.details{display:none;}
+
+.code-block{
+  background:var(--mint);
+  border:2px dashed var(--purple);
+  border-radius:18px;
+  padding:24px 20px;
+  margin:8px 0 28px;
+  text-align:left;
+}
+.code-block .label{
+  font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--purple);margin-bottom:10px;display:block;
+}
+.code-value{
+  font-size:28px;font-weight:800;letter-spacing:3px;color:var(--ink);
+  background:var(--white);border-radius:10px;padding:12px 16px;
+  text-align:center;margin-bottom:14px;
+  border:1px solid var(--rule);
+  word-break:break-all;
+}
+.copy-btn{
+  width:100%;background:var(--purple);color:#fff;font-weight:600;font-size:14.5px;
+  border:none;border-radius:100px;padding:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .15s ease;
+}
+.copy-btn:hover{opacity:.9;}
+.copy-btn.copied{background:var(--green);}
+
+.referral-explain{
+  text-align:left;font-size:14.5px;color:var(--text);
+  background:transparent;padding:0;margin-top:8px;
+}
+.referral-explain p{margin-bottom:10px;}
+.referral-explain ul{list-style:none;margin:14px 0;}
+.referral-explain li{
+  position:relative;padding-left:26px;margin-bottom:10px;color:var(--text);
+}
+.referral-explain li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
+.referral-explain li strong{color:var(--ink);}
+
+.divider{height:1px;background:var(--rule);margin:28px 0;}
+
+.next-line{font-size:15px;color:var(--text);margin-bottom:24px;}
+.next-line strong{color:var(--ink);}
+
+.whatsapp-btn{
+  display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;
+  font-weight:600;padding:12px 22px;border-radius:100px;font-size:14.5px;
+}
+
+footer{text-align:center;margin-top:24px;font-size:13.5px;color:var(--muted);}
+footer a{color:var(--purple);font-weight:600;text-decoration:underline;}
+
+@media (max-width:480px){
+  .card{padding:32px 22px;border-radius:20px;}
+  h1{font-size:22px;}
+  .code-value{font-size:22px;letter-spacing:2px;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="logo-row">
+    <img src="/logo.webp" alt="Real Life Money">
+  </div>
+
+  <div class="card">
+    <div class="tick-wrap"><i class="fa-solid fa-check"></i></div>
+
+    <div id="loadingState" class="loading">
+      <i class="fa-solid fa-spinner fa-spin"></i> Confirming your booking...
+    </div>
+
+    <div id="errorState" class="error-box" style="display:none;">
+      Your payment went through, but we're just waiting on the final confirmation to load. If this doesn't update in a minute, drop me a WhatsApp and I'll sort it personally — no need to worry, your spot is booked.
+    </div>
+
+    <div id="details" class="details">
+      <h1 id="heading">You're booked, <span id="firstNameSpan"></span>! 🎉</h1>
+      <p class="sub">I'm genuinely looking forward to helping you get started — you've just taken the first real step towards feeling confident with your money.</p>
+
+      <div class="code-block">
+        <span class="label">Your personal referral code</span>
+        <div class="code-value" id="referralCode">—</div>
+        <button class="copy-btn" id="copyBtn" onclick="copyCode()">
+          <i class="fa-regular fa-copy"></i> Copy code
+        </button>
+        <div class="referral-explain">
+          <p>Share this with friends or family — everyone wins:</p>
+          <ul>
+            <li><strong>They get £10 off</strong> their workshop ticket when they use it at checkout.</li>
+            <li><strong>You get £10 back</strong> on your card for every person who books with your code.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="next-line"><strong>What happens next:</strong> keep an eye on your inbox — I've sent your confirmation and referral code there too, along with everything you need for the session.</p>
+
+      <a href="https://wa.me/447939887950?text=Hi%20Leo,%20I%20just%20booked%20the%20workshop!" target="_blank" class="whatsapp-btn">
+        <svg viewBox="0 0 448 512" width="16" height="16" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.8-16.6-14.8-27.8-33.2-31.1-38.8-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.6 5.6-9.3 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+        Any questions? WhatsApp me
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Real Life Money — <a href="/">Back to homepage</a></p>
+  </footer>
+</div>
+
+<script>
+const FUNCTION_BASE = "https://us-central1-workshop-booking-system-b791e.cloudfunctions.net";
+
+function getSessionId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("session_id");
+}
+
+function copyCode() {
+  const code = document.getElementById("referralCode").innerText;
+  navigator.clipboard.writeText(code);
+  const btn = document.getElementById("copyBtn");
+  btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+  btn.classList.add("copied");
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy code';
+    btn.classList.remove("copied");
+  }, 2000);
+}
+
+async function pollBookingDetails(sessionId, attempt = 1) {
+  const maxAttempts = 10; // ~20 seconds of polling
+  try {
+    const res = await fetch(`${FUNCTION_BASE}/getBookingDetails?session_id=${encodeURIComponent(sessionId)}`);
+    const data = await res.json();
+
+    if (res.status === 202 || data.status === "pending") {
+      if (attempt < maxAttempts) {
+        setTimeout(() => pollBookingDetails(sessionId, attempt + 1), 2000);
+      } else {
+        showError();
+      }
+      return;
+    }
+
+    if (data.status === "complete") {
+      showDetails(data);
+    } else {
+      showError();
+    }
+  } catch (err) {
+    console.error("Error fetching booking details:", err);
+    if (attempt < maxAttempts) {
+      setTimeout(() => pollBookingDetails(sessionId, attempt + 1), 2000);
+    } else {
+      showError();
+    }
+  }
+}
+
+function showDetails(data) {
+  document.getElementById("loadingState").style.display = "none";
+  document.getElementById("details").style.display = "block";
+
+  const firstName = (data.fullName || "").split(" ")[0] || "there";
+  document.getElementById("firstNameSpan").innerText = firstName;
+  document.getElementById("referralCode").innerText = data.referralCode || "—";
+}
+
+function showError() {
+  document.getElementById("loadingState").style.display = "none";
+  document.getElementById("errorState").style.display = "block";
+}
+
+const sessionId = getSessionId();
+if (!sessionId) {
+  showError();
+} else {
+  pollBookingDetails(sessionId);
+}
+</script>
+
+</body>
+</html>
