@@ -169,7 +169,7 @@ exports.createCheckoutSession = onRequest(
       const qty = Math.max(1, Math.min(12, parseInt(quantity, 10) || 1));
 
       const session = await stripe.checkout.sessions.create({
-        ui_mode: "embedded",
+        ui_mode: "embedded_page",
         mode: "payment",
         line_items: [
           {
