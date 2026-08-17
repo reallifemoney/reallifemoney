@@ -164,7 +164,7 @@ exports.stripeWebhook = onRequest(
             </p>
           </div>
 
-          <p style="margin-top: 30px; font-size: 14px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+          <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
           <p>See you soon!<br><strong>Leo</strong></p>
         </div>
