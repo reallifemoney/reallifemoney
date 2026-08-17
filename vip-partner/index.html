@@ -155,10 +155,10 @@
           <span class="eyebrow">How it works</span>
           <h2>Four steps, start to finish</h2>
           <ol class="step-list">
-            <li><span class="step-num">1</span><div><strong>Sign up below</strong><p>Takes 30 seconds. No payment - this step is just you saying yes.</p></div></li>
-            <li><span class="step-num">2</span><div><strong>Book your free workshop</strong><p>Pick a date that works, same as any attendee.</p></div></li>
-            <li><span class="step-num">3</span><div><strong>Attend and film</strong><p>Experience it, capture whatever feels real, share it however suits your audience.</p></div></li>
-            <li><span class="step-num">4</span><div><strong>Your code goes live</strong><p>Once you've attended, your personal discount code unlocks and you can start earning.</p></div></li>
+            <li><span class="step-num">1</span><div><strong>Sign up and choose your free course date</strong><p>Takes 30 seconds. No payment - just tell us which workshop date suits you.</p></div></li>
+            <li><span class="step-num">2</span><div><strong>Attend and enjoy</strong><p>Come along as my guest, experience the workshop for yourself, and film whatever feels honest.</p></div></li>
+            <li><span class="step-num">3</span><div><strong>Share your code</strong><p>Once you've attended, your personal discount code unlocks so you can share it with your followers.</p></div></li>
+            <li><span class="step-num">4</span><div><strong>Receive cash</strong><p>Get paid monthly for every follower who books using your code.</p></div></li>
           </ol>
           <button class="btn btn-primary next-slide">Sign up</button>
         </div>
@@ -172,25 +172,32 @@
           <form id="signupForm" class="signup-form">
             <label for="nameInput">Name</label>
             <input type="text" id="nameInput" name="name" required>
- 
+
             <label for="emailInput">Email</label>
             <input type="email" id="emailInput" name="email" required>
- 
+
+            <label for="courseDateInput">Which free workshop date works for you?</label>
+            <select id="courseDateInput" name="courseDate" required disabled>
+              <option value="">Loading dates...</option>
+            </select>
+
             <label class="checkbox-row">
               <input type="checkbox" id="termsInput" name="terms" required>
               <span>I accept the <a href="/vip-partner/vip-partner-terms" target="_blank" rel="noopener">VIP Partner terms and conditions</a></span>
             </label>
- 
+
             <button type="submit" class="btn btn-primary" id="signupSubmit">Sign up - it's free</button>
-            <p class="form-note">No payment needed for this step. You'll book your free workshop next.</p>
+            <p class="form-note">No payment needed for this step. You'll get an email confirming your workshop date.</p>
           </form>
- 
+
           <div class="signup-success" id="signupSuccess" hidden>
+            <svg class="success-check" viewBox="0 0 80 80" width="64" height="64">
+              <circle class="success-check-circle" cx="40" cy="40" r="36" fill="none" stroke-width="4"/>
+              <path class="success-check-tick" fill="none" stroke-width="5" d="M22 42 L35 55 L58 26"/>
+            </svg>
             <h3>You're in, welcome to the programme.</h3>
-            <p>Next step is booking your free workshop - your personal discount code unlocks once you've attended.</p>
-            <a href="/investing-course" target="_blank" rel="noopener" class="btn btn-primary">
-              Book your workshop &#8599; <span class="new-tab-note">(opens in a new tab)</span>
-            </a>
+            <p>You're booked in for <strong id="signupSuccessDate"></strong> - keep an eye on your inbox, a confirmation email is on its way.</p>
+            <p>Your personal discount code unlocks once you've attended, so you'll be ready to start earning straight after the workshop.</p>
           </div>
         </div>
       </section>

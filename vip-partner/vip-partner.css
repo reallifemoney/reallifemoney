@@ -241,7 +241,7 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 }
 .btn-primary{background:var(--purple); color:#fff;}
 .btn-primary:hover{background:#7a3cf0;}
-.btn-outline{background:transparent; color:var(--dark); border:2px solid var(--dark);}
+.btn-outline{background:transparent; color:var(--dark); border:2px solid var(--dark); margin-bottom:20px; text-align:center; justify-content:center;}
 .btn-outline:hover{background:var(--dark); color:var(--bg);}
 .btn-text{background:none; color:var(--dark); text-decoration:underline; padding:8px 0;}
 .new-tab-note{font-size:12px; font-weight:400; opacity:0.7;}
@@ -325,11 +325,16 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .video-modal-close:hover{background:rgba(255,255,255,0.3);}
  
 /* ---------- slide 4: what you get ---------- */
-.get-list{list-style:none; padding:0; margin:0 0 28px;}
-.get-list li{
-  padding:12px 16px; margin-bottom:8px; background:var(--white);
-  border-radius:12px; font-size:15px; border-left:4px solid var(--green);
+.get-list{
+  list-style:none; padding:0; margin:0 0 28px;
+  background:var(--white); border:2px solid var(--green); border-radius:var(--radius);
+  overflow:hidden;
 }
+.get-list li{
+  padding:14px 18px; font-size:15px;
+  border-bottom:1px solid #e3f0df;
+}
+.get-list li:last-child{border-bottom:none;}
  
 .earnings-widget{
   background:var(--white); border-radius:var(--radius); padding:24px;
@@ -366,14 +371,19 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 /* ---------- slide 6: sign up ---------- */
 .signup-form{display:flex; flex-direction:column; gap:6px; background:var(--white); padding:24px; border-radius:var(--radius);}
 .signup-form label{font-size:13px; font-weight:600; margin-top:10px;}
-.signup-form input[type="text"], .signup-form input[type="email"]{
+.signup-form input[type="text"], .signup-form input[type="email"], .signup-form select{
   padding:12px 14px; border-radius:10px; border:1.5px solid #cfe0d1; font-family:'Lexend',sans-serif; font-size:15px;
+  background:#fff;
 }
+.signup-form select:disabled{color:#8a9a8f;}
 .checkbox-row{display:flex; align-items:flex-start; gap:8px; font-weight:400 !important; font-size:13px !important; margin-top:14px;}
 .checkbox-row input{margin-top:3px;}
 .signup-form .btn{margin-top:18px;}
 .form-note{font-size:12px; color:#5a6f60; text-align:center; margin-top:10px;}
-.signup-success{background:var(--white); padding:28px; border-radius:var(--radius); border:2px solid var(--green);}
+.signup-success{background:var(--white); padding:28px; border-radius:var(--radius); border:2px solid var(--green); text-align:center;}
+.signup-success .success-check{margin-bottom:8px;}
+.signup-success h3{margin:0 0 10px;}
+.signup-success p{font-size:14px; color:#3a5544; margin:0 0 8px;}
  
 /* ---------- disabled state while unverified ---------- */
 .signup-form.disabled{opacity:0.5; pointer-events:none; position:relative;}
@@ -413,4 +423,9 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 @media(max-width:480px){
   h1{font-size:26px;} h2{font-size:22px;}
   .verify-bar-form input{width:100px;}
+
+  .btn{width:100%; justify-content:center; text-align:center;}
+  .slide-actions{flex-direction:column; align-items:stretch;}
+  .slide-actions .btn-text{align-self:center;}
+  .btn-outline{flex-direction:column; gap:2px; padding:14px 18px;}
 }

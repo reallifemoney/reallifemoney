@@ -300,7 +300,39 @@ slider.addEventListener("input", updateEarnings);
 updateEarnings();
 
 // =================================================================
-// Sign-up form -> Supabase
+// Workshop dates - populate the sign-up dropdown from the same
+// getWorkshops endpoint the main course page uses
+// =================================================================
+const courseDateInput = document.getElementById("courseDateInput");
+
+async function loadCourseDates() {
+  try {
+    const res = await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/getWorkshops");
+    const data = await res.json();
+    const workshops = data.workshops || [];
+
+    if (!workshops.length) {
+      courseDateInput.innerHTML = '<option value="">No dates available - contact Leo</option>';
+      return;
+    }
+
+    courseDateInput.innerHTML = '<option value="">Select a date...</option>' + workshops.map(w => {
+      const locationLabel = w.category === "online" ? w.location : `📍 ${w.venueName}`;
+      const label = `${w.dateLabel} (${w.times}) — ${locationLabel}`;
+      return `<option value="${label.replace(/"/g, "&quot;")}">${label}</option>`;
+    }).join("");
+  } catch (err) {
+    console.error("Error loading workshop dates:", err);
+    courseDateInput.innerHTML = '<option value="">Unable to load dates - contact Leo</option>';
+  } finally {
+    courseDateInput.disabled = false;
+  }
+}
+
+loadCourseDates();
+
+// =================================================================
+// Sign-up form -> Supabase (record) + Firebase (email + Bigin CRM)
 // Expects a table `partners` with columns:
 // name, email, instagram_handle, discount_code, attended (bool)
 // =================================================================
@@ -314,6 +346,7 @@ signupForm.addEventListener("submit", async (e) => {
 
   const name = document.getElementById("nameInput").value.trim();
   const email = document.getElementById("emailInput").value.trim();
+  const courseDate = courseDateInput.value;
   const discountCode = generateDiscountCode(verifiedHandle);
 
   const { error } = await supabaseClient.from("partners").insert({
@@ -321,17 +354,39 @@ signupForm.addEventListener("submit", async (e) => {
     email,
     instagram_handle: verifiedHandle,
     discount_code: discountCode,
+    course_date: courseDate,
     attended: false,
   });
 
-  submitBtn.disabled = false;
-  submitBtn.textContent = "Sign up - it's free";
-
   if (error) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Sign up - it's free";
     alert("Something went wrong signing you up - please try again.");
     return;
   }
 
+  // Fire off confirmation email + Bigin CRM sync - don't block the success
+  // screen on this, but do log any failure for follow-up.
+  try {
+    await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/vipPartnerSignup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        courseDate,
+        discountCode,
+        instagramHandle: verifiedHandle,
+      }),
+    });
+  } catch (err) {
+    console.error("Error notifying VIP partner signup backend:", err);
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Sign up - it's free";
+
+  document.getElementById("signupSuccessDate").textContent = courseDate;
   signupForm.hidden = true;
   document.getElementById("signupSuccess").hidden = false;
 });

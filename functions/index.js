@@ -341,7 +341,7 @@ exports.getBookingDetails = onRequest(
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
-async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken) {
+async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false) {
   try {
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
@@ -370,7 +370,9 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
 
     if (existingContact) {
       const existingDescription = existingContact.Description || "";
-      const newNote = `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
+      const newNote = vipPartner
+        ? `\nVIP Partner sign-up. Course date: ${courseDate} (${new Date().toISOString()})`
+        : `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
 
       const updatePayload = {
         data: [
@@ -378,6 +380,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             id: existingContact.id,
             Description: existingDescription + newNote,
             Course: courseDate,
+            ...(vipPartner ? { VIP_Partner: "Yes" } : {}),
           },
         ],
       };
@@ -396,8 +399,11 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             First_Name: firstName,
             Last_Name: lastName,
             Email: email,
-            Description: `Workshop attendee. Unique Referral Code: ${referralCode}`,
+            Description: vipPartner
+              ? `VIP Partner sign-up. Referral Code: ${referralCode}`
+              : `Workshop attendee. Unique Referral Code: ${referralCode}`,
             Course: courseDate,
+            ...(vipPartner ? { VIP_Partner: "Yes" } : {}),
           },
         ],
       };
@@ -456,6 +462,128 @@ exports.getWorkshops = onRequest(
       res.json({ workshops });
     } catch (err) {
       console.error("Error fetching workshops:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * VIP PARTNER SIGN-UP
+ * Same idea as the paid checkout flow (Bigin CRM sync + confirmation
+ * email), but there's no payment involved - partners attend for free.
+ */
+exports.vipPartnerSignup = onRequest(
+  {
+    secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken],
+  },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+    if (req.method !== "POST") {
+      return res.status(405).send("Method Not Allowed");
+    }
+
+    const resend = new Resend(resendApiKey.value());
+
+    try {
+      const { name, email, courseDate, discountCode, instagramHandle } = req.body;
+
+      if (!email || !name) {
+        return res.status(400).json({ error: "Missing name or email" });
+      }
+
+      const fullName = String(name).trim();
+      const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
+      const lastName = fullName.split(" ").slice(1).join(" ") || "Partner";
+      const chosenDate = courseDate || "your chosen workshop";
+
+      // --- Add/update Contact in Bigin CRM, flagged as a VIP Partner ---
+      await createBiginContact(
+        firstName,
+        lastName,
+        email,
+        discountCode || "",
+        chosenDate,
+        biginClientId.value(),
+        biginClientSecret.value(),
+        biginRefreshToken.value(),
+        true
+      );
+
+      // --- Send confirmation email, bcc'd to Leo ---
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: email,
+        bcc: "leo@reallifemoney.co.uk",
+        subject: "You're a VIP Partner! Here's what's next 🎉",
+        html: `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
+      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
+      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
+      .content { padding: 0 25px 40px 25px; }
+      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
+      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
+      @media only screen and (max-width: 480px) {
+        .content { padding: 0 15px 30px 15px; }
+        h1 { font-size: 22px; }
+        .wrapper { padding: 10px 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <img src="https://reallifemoney.co.uk/logo-circle.webp"
+               alt="Real Life Money"
+               style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
+        </div>
+
+        <div class="content">
+          <h1>Welcome to the programme, ${firstName}! 🎉</h1>
+          <p>You're officially signed up as a VIP Partner - genuinely excited to have you on board. No payment needed for this bit, you're coming along as my guest.</p>
+
+          <div class="date-box">
+            <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
+            <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${chosenDate}</p>
+          </div>
+
+          <p>Your personal discount code unlocks once you've attended - I'll send that over separately so your followers can start getting £10 off.</p>
+
+          <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+
+          <p>See you soon!<br><strong>Leo</strong></p>
+        </div>
+
+        <div class="footer">
+          <p>© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center;">
+            This is an automated VIP Partner sign-up confirmation from Real Life Money.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `,
+      });
+
+      console.log(`VIP Partner signup processed for ${email} (${instagramHandle || "no handle"})`);
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing VIP partner signup:", err);
       res.status(500).json({ error: err.message });
     }
   }
