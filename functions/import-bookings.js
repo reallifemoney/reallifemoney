@@ -1,10 +1,9 @@
 const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
 
-
-// Initialize Firebase Admin with your explicit Project ID
 if (!admin.apps.length) {
   admin.initializeApp({
-    projectId: 'workshop-booking-system-b791e'
+    credential: admin.credential.cert(serviceAccount)
   });
 }
 
