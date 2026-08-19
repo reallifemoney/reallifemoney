@@ -106,8 +106,9 @@ exports.stripeWebhook = onRequest(
           sessionId: session.id,
           email: customerEmail,
           fullName: fullName,
-          rourseDate: courseDate,
-          ceferralCode: referralCode,
+          courseDate: courseDate,
+          workshop: courseDate,
+          referralCode: referralCode,
           paymentIntent: session.payment_intent,
           amountTotal: session.amount_total,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -211,74 +212,9 @@ try {
         await resend.emails.send({
   from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
   to: customerEmail,
+  bcc: "leo@reallifemoney.co.uk",
   subject: "Booking Confirmed! Here's your referral code 🎉",
-  html: `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
-      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
-      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
-      .content { padding: 0 25px 40px 25px; }
-      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
-      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
-      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
-      @media only screen and (max-width: 480px) {
-        .content { padding: 0 15px 30px 15px; }
-        h1 { font-size: 22px; }
-        .wrapper { padding: 10px 5px; }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="header">
-          <img src="https://reallifemoney.co.uk/logo-circle.webp"
-               alt="Real Life Money"
-               style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
-        </div>
-
-        <div class="content">
-          <h1>You're booked, ${firstName}! 🎉</h1>
-          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with investing.</p>
-
-          <div class="date-box">
-            <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
-            <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${courseDate}</p>
-          </div>
-
-          <p>You'll receive a payment invoice and receipt from Stripe separately for your records - no action needed there, it's just confirmation of your payment.</p>
-
-          <div class="code-box">
-            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Personal Referral Code</p>
-            <div class="code-value">${referralCode}</div>
-            <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">
-              Share this with friends or family - <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
-            </p>
-          </div>
-
-          <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
-
-          <p>See you soon!<br><strong>Leo</strong></p>
-        </div>
-
-        <div class="footer">
-          <p>© 2026 Real Life Money | Bristol, UK</p>
-          <p style="font-size: 11px; color: #666; text-align: center;">
-            This is an automated booking confirmation from Real Life Money.
-          </p>
-        </div>
-      </div>
-    </div>
-  </body>
-  </html>
-  `,
+  html: bookingConfirmationEmailHtml(firstName, courseDate, referralCode),
 });
 
         console.log(`Successfully processed booking & code ${referralCode} for ${customerEmail}`);
@@ -382,6 +318,80 @@ exports.getBookingDetails = onRequest(
 );
 
 /**
+ * HELPER: HTML for the workshop booking confirmation email (shared by
+ * the Stripe webhook and the admin manual-booking endpoint).
+ */
+function bookingConfirmationEmailHtml(firstName, courseDate, referralCode) {
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
+      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
+      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
+      .content { padding: 0 25px 40px 25px; }
+      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
+      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
+      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
+      @media only screen and (max-width: 480px) {
+        .content { padding: 0 15px 30px 15px; }
+        h1 { font-size: 22px; }
+        .wrapper { padding: 10px 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <img src="https://reallifemoney.co.uk/logo-circle.webp"
+               alt="Real Life Money"
+               style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
+        </div>
+
+        <div class="content">
+          <h1>You're booked, ${firstName}! 🎉</h1>
+          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with investing.</p>
+
+          <div class="date-box">
+            <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
+            <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${courseDate}</p>
+          </div>
+
+          <p>You'll receive a payment invoice and receipt from Stripe separately for your records - no action needed there, it's just confirmation of your payment.</p>
+
+          <div class="code-box">
+            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Personal Referral Code</p>
+            <div class="code-value">${referralCode}</div>
+            <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">
+              Share this with friends or family - <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
+            </p>
+          </div>
+
+          <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+
+          <p>See you soon!<br><strong>Leo</strong></p>
+        </div>
+
+        <div class="footer">
+          <p>© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center;">
+            This is an automated booking confirmation from Real Life Money.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+}
+
+/**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
 async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false) {
@@ -423,7 +433,9 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             id: existingContact.id,
             Description: existingDescription + newNote,
             Course: courseDate,
-            ...(vipPartner ? { VIP_Partner: "Yes" } : {}),
+            ...(vipPartner
+              ? { vip_partner: "Yes", vip_code: referralCode }
+              : { referral_code: referralCode }),
           },
         ],
       };
@@ -446,7 +458,9 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
               ? `VIP Partner sign-up. Referral Code: ${referralCode}`
               : `Workshop attendee. Unique Referral Code: ${referralCode}`,
             Course: courseDate,
-            ...(vipPartner ? { VIP_Partner: "Yes" } : {}),
+            ...(vipPartner
+              ? { vip_partner: "Yes", vip_code: referralCode }
+              : { referral_code: referralCode }),
           },
         ],
       };
@@ -1059,6 +1073,7 @@ exports.adminDashboard = onRequest(
           email: b.email || "",
           referralCode: b.referralCode || "",
           courseDate: b.courseDate || "",
+          workshop: b.workshop || b.courseDate || "",
           amountTotal: b.amountTotal || 0,
           createdAt: b.createdAt ? b.createdAt.toDate().toISOString() : null,
         };
@@ -1232,6 +1247,88 @@ exports.adminInvitePartner = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error inviting VIP partner:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - MANUALLY ADD A BOOKING
+ * Lets Leo record a booking taken outside Stripe (e.g. bank transfer,
+ * in person) without needing to open Firestore directly. Mirrors the
+ * Stripe webhook's booking logic: generates a referral code, saves the
+ * booking, syncs the contact to Bigin, and optionally emails the
+ * confirmation (bcc'd to Leo).
+ */
+exports.adminAddBooking = onRequest(
+  { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, fullName, email, courseDate, amountTotal, sendEmail } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const name = String(fullName || "").trim();
+      const customerEmail = String(email || "").trim().toLowerCase();
+      if (!name || !customerEmail) {
+        return res.status(400).json({ error: "Missing name or email" });
+      }
+
+      const firstName = name.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
+      const lastName = name.split(" ").slice(1).join(" ") || "Booking";
+      const chosenDate = String(courseDate || "").trim() || "your upcoming session";
+      const amount = Math.round(Number(amountTotal) * 100) || 0;
+
+      const random4Digits = Math.floor(1000 + Math.random() * 9000);
+      const referralCode = `${firstName.toUpperCase()}${random4Digits}`;
+
+      const bookingRef = db.collection("bookings").doc(`manual_${Date.now()}`);
+      await bookingRef.set({
+        sessionId: bookingRef.id,
+        email: customerEmail,
+        fullName: name,
+        courseDate: chosenDate,
+        workshop: chosenDate,
+        referralCode: referralCode,
+        paymentIntent: null,
+        amountTotal: amount,
+        manualEntry: true,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      await createBiginContact(
+        firstName,
+        lastName,
+        customerEmail,
+        referralCode,
+        chosenDate,
+        biginClientId.value(),
+        biginClientSecret.value(),
+        biginRefreshToken.value()
+      );
+
+      if (sendEmail !== false) {
+        const resend = new Resend(resendApiKey.value());
+        await resend.emails.send({
+          from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+          to: customerEmail,
+          bcc: "leo@reallifemoney.co.uk",
+          subject: "Booking Confirmed! Here's your referral code 🎉",
+          html: bookingConfirmationEmailHtml(firstName, chosenDate, referralCode),
+        });
+      }
+
+      res.json({ success: true, referralCode });
+    } catch (err) {
+      console.error("Error adding manual booking:", err);
       res.status(500).json({ error: err.message });
     }
   }

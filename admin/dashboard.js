@@ -112,7 +112,7 @@ function renderBookings() {
     tr.innerHTML = `
       <td>${b.fullName}</td>
       <td>${b.email}</td>
-      <td>${b.courseDate || "—"}</td>
+      <td>${b.workshop || b.courseDate || "—"}</td>
       <td>${b.referralCode || "—"}</td>
       <td>${formatCurrency(b.amountTotal / 100)}</td>
       <td>${formatDateTime(b.createdAt)}</td>
@@ -120,6 +120,57 @@ function renderBookings() {
     tbody.appendChild(tr);
   });
 }
+
+// =================================================================
+// Manual booking form
+// =================================================================
+const bookingForm = document.getElementById("bookingForm");
+
+document.getElementById("newBookingBtn").addEventListener("click", () => {
+  bookingForm.hidden = false;
+  bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+document.getElementById("bkCancelBtn").addEventListener("click", () => {
+  bookingForm.hidden = true;
+  bookingForm.reset();
+});
+
+bookingForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById("bkSubmit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Adding...";
+
+  const payload = {
+    token: currentToken,
+    fullName: document.getElementById("bkFullName").value.trim(),
+    email: document.getElementById("bkEmail").value.trim(),
+    courseDate: document.getElementById("bkCourseDate").value.trim(),
+    amountTotal: Number(document.getElementById("bkAmount").value) || 0,
+    sendEmail: document.getElementById("bkSendEmail").checked,
+  };
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminAddBooking`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Request failed");
+
+    bookingForm.hidden = true;
+    bookingForm.reset();
+    document.getElementById("bkSendEmail").checked = true;
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error adding manual booking:", err);
+    alert("Something went wrong adding that booking - please try again.");
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Add booking";
+});
 
 // =================================================================
 // Workshops tab: list, participants, edit, sold out
@@ -133,7 +184,7 @@ function renderWorkshops() {
 
   allWorkshops.forEach((w) => {
     const label = workshopLabel(w);
-    const participants = allBookings.filter((b) => b.courseDate === label);
+    const participants = allBookings.filter((b) => (b.workshop || b.courseDate) === label);
 
     const card = document.createElement("div");
     card.className = "admin-workshop";

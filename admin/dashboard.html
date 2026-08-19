@@ -71,6 +71,27 @@
             <tbody></tbody>
           </table>
         </div>
+
+        <button class="btn btn-outline" id="newBookingBtn">+ Add manual booking</button>
+
+        <form id="bookingForm" class="bank-form admin-form" hidden>
+          <label for="bkFullName">Full name</label>
+          <input type="text" id="bkFullName" required>
+
+          <label for="bkEmail">Email</label>
+          <input type="email" id="bkEmail" required>
+
+          <label for="bkCourseDate">Workshop</label>
+          <input type="text" id="bkCourseDate" placeholder="Tue 1st &amp; 8th September (6:30pm – 8:00pm) — 🖥️ Live online">
+
+          <label for="bkAmount">Amount paid (£)</label>
+          <input type="number" id="bkAmount" value="75" min="0" step="0.01">
+
+          <label class="checkbox-row"><input type="checkbox" id="bkSendEmail" checked><span>Email the customer their booking confirmation &amp; referral code</span></label>
+
+          <button type="submit" class="btn btn-primary" id="bkSubmit">Add booking</button>
+          <button type="button" class="btn btn-text" id="bkCancelBtn">Cancel</button>
+        </form>
       </section>
 
       <!-- Workshops tab: add/edit, participants, sold out -->
