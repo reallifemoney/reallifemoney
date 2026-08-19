@@ -1,8 +1,11 @@
 const admin = require('firebase-admin');
 
-// Initialize Firebase Admin (uses default project config or service account)
+
+// Initialize Firebase Admin with your explicit Project ID
 if (!admin.apps.length) {
-  admin.initializeApp();
+  admin.initializeApp({
+    projectId: 'workshop-booking-system-b791e'
+  });
 }
 
 const db = admin.firestore();
