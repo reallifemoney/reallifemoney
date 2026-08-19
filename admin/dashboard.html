@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Real Life Money</title>
+<link rel="icon" type="image/webp" href="../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vip-partner/vip-partner.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- Shown while checking the login link / no valid session -->
+  <div class="auth-screen" id="dashLoading">
+    <div class="auth-panel">
+      <p class="auth-sub">Loading admin dashboard...</p>
+    </div>
+  </div>
+
+  <!-- Shown when there's no valid token -->
+  <div class="auth-screen" id="dashInvalid" hidden>
+    <div class="auth-panel">
+      <h1 class="auth-heading">That link's expired</h1>
+      <p class="auth-sub">Login links are only valid for 7 days. Request a fresh one below.</p>
+      <a href="/admin/login.html" class="btn btn-primary">Get a new login link</a>
+    </div>
+  </div>
+
+  <div class="dash-wrap" id="dashboard" hidden>
+    <header class="brand-header admin-header">
+      <h1>Admin Dashboard</h1>
+    </header>
+
+    <main class="dash-main admin-main">
+
+      <!-- Summary -->
+      <section class="dash-stats">
+        <div class="dash-stat">
+          <span class="dash-stat-label">Total bookings</span>
+          <span class="dash-stat-value" id="sumBookings">0</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-label">Total revenue</span>
+          <span class="dash-stat-value" id="sumRevenue">£0</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-label">Total VIP partners</span>
+          <span class="dash-stat-value" id="sumPartners">0</span>
+        </div>
+      </section>
+
+      <!-- Tabs -->
+      <nav class="admin-tabs" id="adminTabs">
+        <button class="admin-tab active" data-tab="bookings">Bookings</button>
+        <button class="admin-tab" data-tab="workshops">Workshops</button>
+        <button class="admin-tab" data-tab="partners">VIP Partners</button>
+      </nav>
+
+      <!-- Bookings tab: history + revenue -->
+      <section class="dash-card admin-panel active" id="panel-bookings">
+        <span class="dash-card-label">Booking history</span>
+        <p class="dash-card-note" id="bookingsEmpty" hidden>No bookings yet.</p>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="bookingsTable">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Workshop</th><th>Code</th><th>Amount</th><th>Date</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Workshops tab: add/edit, participants, sold out -->
+      <section class="dash-card admin-panel" id="panel-workshops">
+        <span class="dash-card-label">Workshops</span>
+        <div id="workshopsList"></div>
+
+        <button class="btn btn-outline" id="newWorkshopBtn">+ Add new workshop</button>
+
+        <form id="workshopForm" class="bank-form admin-form" hidden>
+          <input type="hidden" id="wsId">
+          <label for="wsDateLabel">Date label</label>
+          <input type="text" id="wsDateLabel" placeholder="Tue 1st &amp; 8th September" required>
+
+          <label for="wsSortDate">Sort date (YYYY-MM-DD)</label>
+          <input type="text" id="wsSortDate" placeholder="2026-09-01" required>
+
+          <label for="wsTimes">Times</label>
+          <input type="text" id="wsTimes" placeholder="6:30pm – 8:00pm" required>
+
+          <label for="wsCategory">Category</label>
+          <select id="wsCategory">
+            <option value="online">Online</option>
+            <option value="in-person">In-person</option>
+          </select>
+
+          <label for="wsLocation">Location (online only)</label>
+          <input type="text" id="wsLocation" placeholder="🖥️ Live online">
+
+          <label for="wsVenueName">Venue name (in-person only)</label>
+          <input type="text" id="wsVenueName">
+
+          <label for="wsVenueAddress">Venue address (in-person only)</label>
+          <input type="text" id="wsVenueAddress">
+
+          <label for="wsPrice">Price (£)</label>
+          <input type="number" id="wsPrice" value="75" required>
+
+          <label class="checkbox-row"><input type="checkbox" id="wsActive" checked><span>Active (visible to customers)</span></label>
+          <label class="checkbox-row"><input type="checkbox" id="wsSoldOut"><span>Sold out</span></label>
+
+          <button type="submit" class="btn btn-primary" id="wsSubmit">Save workshop</button>
+          <button type="button" class="btn btn-text" id="wsCancelBtn">Cancel</button>
+        </form>
+      </section>
+
+      <!-- VIP Partners tab: list + invite -->
+      <section class="dash-card admin-panel" id="panel-partners">
+        <span class="dash-card-label">VIP partners</span>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="partnersTable">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Instagram</th><th>Code</th><th>Attended</th><th>Uses</th><th>Earned</th><th>Next payout</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <span class="dash-card-label" style="margin-top:22px;">Invite a new VIP partner</span>
+        <form id="inviteForm" class="bank-form admin-form">
+          <label for="inviteHandle">Instagram handle</label>
+          <input type="text" id="inviteHandle" placeholder="handle (without @)" required>
+          <button type="submit" class="btn btn-primary" id="inviteSubmit">Add to invite list</button>
+          <span class="bank-form-success" id="inviteSuccess" hidden>Added!</span>
+        </form>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

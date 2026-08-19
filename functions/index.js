@@ -27,6 +27,9 @@ function getSupabaseAdmin() {
   return createClient(SUPABASE_URL, supabaseServiceRoleKey.value());
 }
 
+// Sole admin dashboard user - no separate allow-list table needed.
+const ADMIN_EMAIL = "leo@reallifemoney.co.uk";
+
 /**
  * STRIPE WEBHOOK HANDLER
  */
@@ -103,7 +106,8 @@ exports.stripeWebhook = onRequest(
           sessionId: session.id,
           email: customerEmail,
           fullName: fullName,
-          referralCode: referralCode,
+          rourseDate: courseDate,
+          ceferralCode: referralCode,
           paymentIntent: session.payment_intent,
           amountTotal: session.amount_total,
           createdAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -652,6 +656,12 @@ exports.vipPartnerSignup = onRequest(
 
           <p>Your personal discount code unlocks once you've attended - I'll send that over separately so your followers can start getting £10 off.</p>
 
+          <div class="date-box">
+            <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Partner Dashboard</p>
+            <p style="margin: 0 0 16px 0; font-size: 14px;">Track your referral code, sign-ups and earnings any time.</p>
+            <a href="https://reallifemoney.co.uk/vip-partner/login.html" style="background:#8c52ff; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:12px; font-weight:bold; display:inline-block;">Log in to my dashboard</a>
+          </div>
+
           <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
           <p>See you soon!<br><strong>Leo</strong></p>
@@ -930,6 +940,298 @@ exports.vipPartnerUpdateBankDetails = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error updating VIP partner bank details:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN DASHBOARD
+ * Single admin (leo@reallifemoney.co.uk) - passwordless login same as
+ * VIP partners, but the token lives in Firestore (`adminSessions`)
+ * instead of a partners row, since there's no admin allow-list table.
+ */
+exports.adminRequestLogin = onRequest(
+  { secrets: [resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { email } = req.body;
+      const emailKey = String(email || "").trim().toLowerCase();
+
+      // Don't reveal whether the email matches - always respond success.
+      if (emailKey !== ADMIN_EMAIL) {
+        console.warn(`Admin login requested for non-admin email: ${emailKey}`);
+        return res.json({ success: true });
+      }
+
+      const token = crypto.randomBytes(32).toString("hex");
+      const expiresAt = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
+
+      await db.collection("adminSessions").doc(token).set({
+        email: ADMIN_EMAIL,
+        expiresAt,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const resend = new Resend(resendApiKey.value());
+      const dashboardUrl = `https://reallifemoney.co.uk/admin/dashboard.html?token=${token}`;
+
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: ADMIN_EMAIL,
+        subject: "Your admin dashboard login link",
+        html: `
+  <!DOCTYPE html>
+  <html>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height:1.6; color:#2e2e2e; background:#eef8eb; padding:20px;">
+    <div style="max-width:520px; margin:0 auto; background:#ffffff; border-radius:24px; border:1px solid #daecd6; padding:30px;">
+      <h1 style="font-size:22px; text-align:center;">Log in to the admin dashboard</h1>
+      <p style="text-align:center; margin:30px 0;">
+        <a href="${dashboardUrl}" style="background:#8c52ff; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:12px; font-weight:bold; display:inline-block;">Open dashboard</a>
+      </p>
+      <p style="font-size:13px; color:#6b6b6b;">This link is valid for 7 days.</p>
+    </div>
+  </body>
+  </html>
+  `,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error requesting admin login:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * HELPER: verify an admin dashboard token against Firestore
+ */
+async function verifyAdminToken(token) {
+  if (!token) return false;
+  const doc = await db.collection("adminSessions").doc(String(token)).get();
+  if (!doc.exists) return false;
+  const data = doc.data();
+  if (!data.expiresAt || Date.now() > data.expiresAt) return false;
+  return true;
+}
+
+/**
+ * ADMIN - DASHBOARD DATA
+ * Returns everything the dashboard needs in one call: summary totals,
+ * recent bookings, all workshops, and all VIP partners with their
+ * live usage/earnings (mirrors the partner dashboard's calcEarnings()).
+ */
+exports.adminDashboard = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+
+    try {
+      const { token } = req.query;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      // --- Bookings (Firestore) ---
+      const bookingsSnap = await db
+        .collection("bookings")
+        .orderBy("createdAt", "desc")
+        .limit(1000)
+        .get();
+
+      const bookings = bookingsSnap.docs.map((doc) => {
+        const b = doc.data();
+        return {
+          id: doc.id,
+          fullName: b.fullName || "",
+          email: b.email || "",
+          referralCode: b.referralCode || "",
+          courseDate: b.courseDate || "",
+          amountTotal: b.amountTotal || 0,
+          createdAt: b.createdAt ? b.createdAt.toDate().toISOString() : null,
+        };
+      });
+
+      const totalBookings = bookings.length;
+      const totalRevenue = bookings.reduce((sum, b) => sum + (b.amountTotal || 0), 0) / 100;
+
+      // --- Workshops (Firestore) ---
+      const workshopsSnap = await db.collection("workshops").orderBy("sortDate", "asc").get();
+      const workshops = workshopsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+      // --- VIP partners (Supabase) ---
+      const supabaseAdmin = getSupabaseAdmin();
+      const { data: partners, error: partnersError } = await supabaseAdmin
+        .from("partners")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (partnersError) {
+        console.error("Error fetching partners for admin dashboard:", partnersError);
+        return res.status(500).json({ error: partnersError.message });
+      }
+
+      const { data: referrals, error: referralsError } = await supabaseAdmin
+        .from("referrals")
+        .select("partner_id");
+
+      if (referralsError) {
+        console.error("Error fetching referrals for admin dashboard:", referralsError);
+        return res.status(500).json({ error: referralsError.message });
+      }
+
+      const { data: payouts, error: payoutsError } = await supabaseAdmin
+        .from("payouts")
+        .select("partner_id, amount")
+        .eq("paid", true);
+
+      if (payoutsError) {
+        console.error("Error fetching payouts for admin dashboard:", payoutsError);
+        return res.status(500).json({ error: payoutsError.message });
+      }
+
+      const usageByPartner = {};
+      (referrals || []).forEach((r) => {
+        usageByPartner[r.partner_id] = (usageByPartner[r.partner_id] || 0) + 1;
+      });
+      const paidByPartner = {};
+      (payouts || []).forEach((p) => {
+        paidByPartner[p.partner_id] = (paidByPartner[p.partner_id] || 0) + Number(p.amount || 0);
+      });
+
+      const vipPartners = (partners || []).map((p) => {
+        const usageCount = usageByPartner[p.id] || 0;
+        const totalEarned = calcEarnings(usageCount);
+        const alreadyPaid = paidByPartner[p.id] || 0;
+        return {
+          id: p.id,
+          name: p.name,
+          email: p.email,
+          instagramHandle: p.instagram_handle || "",
+          discountCode: p.discount_code || "",
+          courseDate: p.course_date || "",
+          attended: Boolean(p.attended),
+          usageCount,
+          totalEarned,
+          nextPayoutAmount: Math.max(0, totalEarned - alreadyPaid),
+          createdAt: p.created_at,
+        };
+      });
+
+      res.json({
+        summary: {
+          totalBookings,
+          totalRevenue,
+          totalVipPartners: vipPartners.length,
+        },
+        bookings,
+        workshops,
+        vipPartners,
+      });
+    } catch (err) {
+      console.error("Error fetching admin dashboard:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - ADD / EDIT / MARK SOLD OUT A WORKSHOP
+ * Pass an `id` to update an existing workshop doc, omit it to create a
+ * new one. Same fields the site's getWorkshops endpoint reads.
+ */
+exports.adminSaveWorkshop = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id, ...fields } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const workshop = {
+        dateLabel: String(fields.dateLabel || "").trim(),
+        times: String(fields.times || "").trim(),
+        category: fields.category === "in-person" ? "in-person" : "online",
+        location: String(fields.location || "").trim(),
+        venueName: String(fields.venueName || "").trim(),
+        venueAddress: String(fields.venueAddress || "").trim(),
+        price: Number(fields.price) || 0,
+        sortDate: String(fields.sortDate || "").trim(),
+        active: fields.active !== false,
+        soldOut: Boolean(fields.soldOut),
+      };
+
+      if (!workshop.dateLabel || !workshop.sortDate) {
+        return res.status(400).json({ error: "Missing dateLabel or sortDate" });
+      }
+
+      if (id) {
+        await db.collection("workshops").doc(String(id)).set(workshop, { merge: true });
+      } else {
+        await db.collection("workshops").add(workshop);
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error saving workshop:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - INVITE A NEW VIP PARTNER (Instagram allow-list)
+ */
+exports.adminInvitePartner = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, instagramHandle } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const handle = String(instagramHandle || "").trim().replace(/^@/, "").toLowerCase();
+      if (!handle) return res.status(400).json({ error: "Missing Instagram handle" });
+
+      const supabaseAdmin = getSupabaseAdmin();
+      const { error } = await supabaseAdmin.from("invited_partners").insert({ instagram_handle: handle });
+
+      if (error) {
+        console.error("Error inviting VIP partner:", error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error inviting VIP partner:", err);
       res.status(500).json({ error: err.message });
     }
   }

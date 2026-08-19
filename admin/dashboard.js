@@ -1,0 +1,294 @@
+const FUNCTIONS_BASE = "https://us-central1-workshop-booking-system-b791e.cloudfunctions.net";
+
+const dashLoading = document.getElementById("dashLoading");
+const dashInvalid = document.getElementById("dashInvalid");
+const dashboard = document.getElementById("dashboard");
+
+let currentToken = null;
+let allBookings = [];
+let allWorkshops = [];
+
+// =================================================================
+// Resolve the admin session token: prefer the URL (?token=) since
+// that's freshest, falling back to localStorage for repeat visits.
+// =================================================================
+function getToken() {
+  const params = new URLSearchParams(window.location.search);
+  let token = params.get("token");
+
+  if (token) {
+    localStorage.setItem("adminToken", token);
+    window.history.replaceState({}, "", window.location.pathname);
+  } else {
+    token = localStorage.getItem("adminToken");
+  }
+
+  return token;
+}
+
+function showInvalid() {
+  localStorage.removeItem("adminToken");
+  dashLoading.hidden = true;
+  dashInvalid.hidden = false;
+}
+
+function formatCurrency(n) {
+  return `£${Number(n || 0).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+}
+
+function formatDateTime(isoString) {
+  if (!isoString) return "";
+  return new Date(isoString).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+// Same composite label used at checkout (course.html / vip-partner.js)
+// so bookings can be matched back to the workshop they were made for.
+function workshopLabel(w) {
+  const locationLabel = w.category === "online" ? (w.location || "") : `📍 ${w.venueName || ""}`;
+  return `${w.dateLabel} (${w.times}) — ${locationLabel}`;
+}
+
+async function loadDashboard() {
+  currentToken = getToken();
+
+  if (!currentToken) {
+    showInvalid();
+    return;
+  }
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDashboard?token=${encodeURIComponent(currentToken)}`);
+    if (!res.ok) {
+      showInvalid();
+      return;
+    }
+    const data = await res.json();
+    renderDashboard(data);
+  } catch (err) {
+    console.error("Error loading admin dashboard:", err);
+    showInvalid();
+  }
+}
+
+function renderDashboard(data) {
+  document.getElementById("sumBookings").textContent = data.summary.totalBookings;
+  document.getElementById("sumRevenue").textContent = formatCurrency(data.summary.totalRevenue);
+  document.getElementById("sumPartners").textContent = data.summary.totalVipPartners;
+
+  allBookings = data.bookings || [];
+  allWorkshops = data.workshops || [];
+
+  renderBookings();
+  renderWorkshops();
+  renderPartners(data.vipPartners || []);
+
+  dashLoading.hidden = true;
+  dashboard.hidden = false;
+}
+
+// =================================================================
+// Tabs
+// =================================================================
+document.getElementById("adminTabs").addEventListener("click", (e) => {
+  const btn = e.target.closest(".admin-tab");
+  if (!btn) return;
+
+  document.querySelectorAll(".admin-tab").forEach((b) => b.classList.toggle("active", b === btn));
+  document.querySelectorAll(".admin-panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${btn.dataset.tab}`));
+});
+
+// =================================================================
+// Bookings tab (history + per-booking revenue)
+// =================================================================
+function renderBookings() {
+  const tbody = document.querySelector("#bookingsTable tbody");
+  const emptyNote = document.getElementById("bookingsEmpty");
+
+  tbody.innerHTML = "";
+  emptyNote.hidden = allBookings.length > 0;
+
+  allBookings.forEach((b) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${b.fullName}</td>
+      <td>${b.email}</td>
+      <td>${b.courseDate || "—"}</td>
+      <td>${b.referralCode || "—"}</td>
+      <td>${formatCurrency(b.amountTotal / 100)}</td>
+      <td>${formatDateTime(b.createdAt)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// =================================================================
+// Workshops tab: list, participants, edit, sold out
+// =================================================================
+const workshopForm = document.getElementById("workshopForm");
+const wsCategory = document.getElementById("wsCategory");
+
+function renderWorkshops() {
+  const list = document.getElementById("workshopsList");
+  list.innerHTML = "";
+
+  allWorkshops.forEach((w) => {
+    const label = workshopLabel(w);
+    const participants = allBookings.filter((b) => b.courseDate === label);
+
+    const card = document.createElement("div");
+    card.className = "admin-workshop";
+    card.innerHTML = `
+      <div class="admin-workshop-header">
+        <div>
+          <strong>${w.dateLabel}</strong> - ${w.times}
+          ${w.soldOut ? '<span class="admin-badge admin-badge-warning">Sold out</span>' : ""}
+          ${w.active === false ? '<span class="admin-badge">Inactive</span>' : ""}
+        </div>
+        <div class="admin-workshop-actions">
+          <button class="btn btn-text admin-edit-btn" data-id="${w.id}">Edit</button>
+          <button class="btn btn-text admin-participants-btn" data-id="${w.id}">Participants (${participants.length})</button>
+        </div>
+      </div>
+      <ul class="admin-participants-list" id="participants-${w.id}" hidden>
+        ${participants.length
+          ? participants.map((p) => `<li>${p.fullName} - ${p.email}</li>`).join("")
+          : "<li>No one's booked yet.</li>"}
+      </ul>
+    `;
+    list.appendChild(card);
+  });
+
+  list.querySelectorAll(".admin-edit-btn").forEach((btn) =>
+    btn.addEventListener("click", () => openWorkshopForm(btn.dataset.id))
+  );
+  list.querySelectorAll(".admin-participants-btn").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(`participants-${btn.dataset.id}`);
+      el.hidden = !el.hidden;
+    })
+  );
+}
+
+function openWorkshopForm(id) {
+  const w = id ? allWorkshops.find((x) => x.id === id) : null;
+
+  document.getElementById("wsId").value = w ? w.id : "";
+  document.getElementById("wsDateLabel").value = w ? w.dateLabel || "" : "";
+  document.getElementById("wsSortDate").value = w ? w.sortDate || "" : "";
+  document.getElementById("wsTimes").value = w ? w.times || "" : "";
+  wsCategory.value = w ? w.category || "online" : "online";
+  document.getElementById("wsLocation").value = w ? w.location || "" : "";
+  document.getElementById("wsVenueName").value = w ? w.venueName || "" : "";
+  document.getElementById("wsVenueAddress").value = w ? w.venueAddress || "" : "";
+  document.getElementById("wsPrice").value = w ? w.price || 75 : 75;
+  document.getElementById("wsActive").checked = w ? w.active !== false : true;
+  document.getElementById("wsSoldOut").checked = w ? Boolean(w.soldOut) : false;
+
+  workshopForm.hidden = false;
+  workshopForm.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("newWorkshopBtn").addEventListener("click", () => openWorkshopForm(null));
+document.getElementById("wsCancelBtn").addEventListener("click", () => {
+  workshopForm.hidden = true;
+  workshopForm.reset();
+});
+
+workshopForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById("wsSubmit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Saving...";
+
+  const payload = {
+    token: currentToken,
+    id: document.getElementById("wsId").value || undefined,
+    dateLabel: document.getElementById("wsDateLabel").value.trim(),
+    sortDate: document.getElementById("wsSortDate").value.trim(),
+    times: document.getElementById("wsTimes").value.trim(),
+    category: wsCategory.value,
+    location: document.getElementById("wsLocation").value.trim(),
+    venueName: document.getElementById("wsVenueName").value.trim(),
+    venueAddress: document.getElementById("wsVenueAddress").value.trim(),
+    price: Number(document.getElementById("wsPrice").value),
+    active: document.getElementById("wsActive").checked,
+    soldOut: document.getElementById("wsSoldOut").checked,
+  };
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminSaveWorkshop`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Request failed");
+
+    workshopForm.hidden = true;
+    workshopForm.reset();
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error saving workshop:", err);
+    alert("Something went wrong saving the workshop - please try again.");
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Save workshop";
+});
+
+// =================================================================
+// VIP Partners tab: table + invite form
+// =================================================================
+function renderPartners(partners) {
+  const tbody = document.querySelector("#partnersTable tbody");
+  tbody.innerHTML = "";
+
+  partners.forEach((p) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${p.name}</td>
+      <td>${p.email}</td>
+      <td>${p.instagramHandle || "—"}</td>
+      <td>${p.discountCode || "—"}</td>
+      <td>${p.attended ? "Yes" : "No"}</td>
+      <td>${p.usageCount}</td>
+      <td>${formatCurrency(p.totalEarned)}</td>
+      <td>${formatCurrency(p.nextPayoutAmount)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+const inviteForm = document.getElementById("inviteForm");
+const inviteSubmit = document.getElementById("inviteSubmit");
+const inviteSuccess = document.getElementById("inviteSuccess");
+
+inviteForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  inviteSubmit.disabled = true;
+  inviteSubmit.textContent = "Adding...";
+  inviteSuccess.hidden = true;
+
+  const instagramHandle = document.getElementById("inviteHandle").value.trim();
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminInvitePartner`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, instagramHandle }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+
+    inviteForm.reset();
+    inviteSuccess.hidden = false;
+  } catch (err) {
+    console.error("Error inviting VIP partner:", err);
+    alert("Something went wrong adding that invite - please try again.");
+  }
+
+  inviteSubmit.disabled = false;
+  inviteSubmit.textContent = "Add to invite list";
+});
+
+loadDashboard();

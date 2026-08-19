@@ -309,7 +309,7 @@ async function loadCourseDates() {
   try {
     const res = await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/getWorkshops");
     const data = await res.json();
-    const workshops = data.workshops || [];
+    const workshops = (data.workshops || []).filter(w => !w.soldOut);
 
     if (!workshops.length) {
       courseDateInput.innerHTML = '<option value="">No dates available - contact Leo</option>';

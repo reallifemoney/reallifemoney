@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login | Real Life Money</title>
+<link rel="icon" type="image/webp" href="../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../vip-partner/vip-partner.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="auth-screen">
+    <div class="auth-panel">
+      <h1 class="auth-heading">Admin login</h1>
+      <p class="auth-sub">Enter your admin email and we'll send you a login link - no password needed.</p>
+
+      <form id="loginForm" class="auth-form">
+        <label for="loginEmailInput">Email</label>
+        <input type="email" id="loginEmailInput" name="email" required placeholder="you@example.com">
+        <button type="submit" class="btn btn-primary" id="loginSubmit">Send me a login link</button>
+      </form>
+
+      <div class="auth-success" id="loginSuccess" hidden>
+        <h3>Check your inbox</h3>
+        <p>If that email has admin access, a login link is on its way.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

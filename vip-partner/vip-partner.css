@@ -388,10 +388,14 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
 .signup-login-link{font-size:13px; text-align:center; margin-top:14px;}
 .signup-login-link a{color:var(--purple); font-weight:600; text-decoration:none;}
 .signup-login-link a:hover{text-decoration:underline;}
+.signup-success-login-btn{width:100%; justify-content:center; margin-top:18px;}
  
 /* ---------- disabled state while unverified ---------- */
 .signup-form.disabled{opacity:0.5; pointer-events:none; position:relative;}
  
+/* ---------- next-slide buttons: full width of their section ---------- */
+.next-slide{width:100%; justify-content:center;}
+
 /* ---------- carousel nav ---------- */
 .carousel-nav{display:flex; align-items:center; justify-content:center; gap:16px; padding-top:8px;}
 .carousel-arrow{
