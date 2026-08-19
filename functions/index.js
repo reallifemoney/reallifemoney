@@ -392,6 +392,93 @@ function bookingConfirmationEmailHtml(firstName, courseDate, referralCode) {
 }
 
 /**
+ * HELPER: HTML for the "your VIP code is now live" email, sent when
+ * an admin marks a partner as attended.
+ */
+function vipPartnerAttendedEmailHtml(firstName, discountCode) {
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
+      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
+      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
+      .content { padding: 0 25px 40px 25px; }
+      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
+      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
+      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
+      .earnings-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 20px; margin: 25px 0; }
+      .earnings-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
+      .earnings-row strong { color: #8c52ff; }
+      .link-box { background: #f4f0ff; border-radius: 16px; padding: 18px; margin: 25px 0; text-align: center; }
+      .link-box a { color: #8c52ff; font-weight: bold; word-break: break-all; }
+      .ad-notice { background: #fff8e6; border: 1px solid #f0d878; border-radius: 16px; padding: 16px 18px; margin: 25px 0; font-size: 14px; }
+      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
+      @media only screen and (max-width: 480px) {
+        .content { padding: 0 15px 30px 15px; }
+        h1 { font-size: 22px; }
+        .wrapper { padding: 10px 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <img src="https://reallifemoney.co.uk/logo-circle.webp"
+               alt="Real Life Money"
+               style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
+        </div>
+
+        <div class="content">
+          <h1>You're live, ${firstName}! 🎉</h1>
+          <p>Thanks so much for coming along to the workshop - it was great having you there. Your VIP Partner discount code is now active, so you can start sharing it with friends, family and followers straight away.</p>
+
+          <div class="code-box">
+            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Live Discount Code</p>
+            <div class="code-value">${discountCode}</div>
+            <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">Anyone who uses it gets <strong>£10 off</strong> their workshop booking.</p>
+          </div>
+
+          <div class="earnings-box">
+            <p style="margin: 0 0 12px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">What you earn</p>
+            <div class="earnings-row"><span>First 5 sign-ups</span><strong>£30 each</strong></div>
+            <div class="earnings-row"><span>Next 5 sign-ups (6-10)</span><strong>£20 each</strong></div>
+            <div class="earnings-row"><span>Every sign-up after that</span><strong>£15 each</strong></div>
+            <div class="earnings-row"><span>Plus bonuses at 20 and 50 sign-ups</span><strong>£50 / £100</strong></div>
+          </div>
+
+          <div class="link-box">
+            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Send your followers here to book</p>
+            <a href="https://reallifemoney.co.uk/investing-course">reallifemoney.co.uk/investing-course</a>
+          </div>
+
+          <div class="ad-notice">
+            📢 <strong>One important thing:</strong> any content you post about Real Life Money (stories, posts, reels) needs to include <strong>#ad</strong> in the caption - it's a legal requirement for paid partnerships, so please don't forget it.
+          </div>
+
+          <p style="margin-top: 30px; font-size: 15px;">You can track sign-ups and earnings any time from your partner dashboard. If you've got any questions, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+
+          <p>Thanks again - excited to see what you do with it!<br><strong>Leo</strong></p>
+        </div>
+
+        <div class="footer">
+          <p>© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center;">
+            This is an automated VIP Partner update from Real Life Money.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+}
+
+/**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
 async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false) {
@@ -1117,6 +1204,21 @@ exports.adminDashboard = onRequest(
         return res.status(500).json({ error: payoutsError.message });
       }
 
+      const { data: invitedPartnersRaw, error: invitedError } = await supabaseAdmin
+        .from("invited_partners")
+        .select("*");
+
+      if (invitedError) {
+        console.error("Error fetching invited partners for admin dashboard:", invitedError);
+        return res.status(500).json({ error: invitedError.message });
+      }
+
+      const invitedPartners = (invitedPartnersRaw || []).map((i) => ({
+        id: i.id,
+        instagramHandle: i.instagram_handle || "",
+        createdAt: i.created_at || null,
+      }));
+
       const usageByPartner = {};
       (referrals || []).forEach((r) => {
         usageByPartner[r.partner_id] = (usageByPartner[r.partner_id] || 0) + 1;
@@ -1154,6 +1256,7 @@ exports.adminDashboard = onRequest(
         bookings,
         workshops,
         vipPartners,
+        invitedPartners,
       });
     } catch (err) {
       console.error("Error fetching admin dashboard:", err);
@@ -1215,6 +1318,36 @@ exports.adminSaveWorkshop = onRequest(
 );
 
 /**
+ * ADMIN - DELETE A WORKSHOP
+ */
+exports.adminDeleteWorkshop = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      await db.collection("workshops").doc(String(id)).delete();
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting workshop:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
  * ADMIN - INVITE A NEW VIP PARTNER (Instagram allow-list)
  */
 exports.adminInvitePartner = onRequest(
@@ -1247,6 +1380,71 @@ exports.adminInvitePartner = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error inviting VIP partner:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - MARK A VIP PARTNER AS ATTENDED
+ * Flips `attended` to true on their Supabase row (this is what makes
+ * their discount code visible/usable per the signup flow) and emails
+ * them their now-live code plus the earnings tiers, booking link and
+ * the #ad disclosure reminder.
+ */
+exports.adminMarkPartnerAttended = onRequest(
+  { secrets: [supabaseServiceRoleKey, resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      const supabaseAdmin = getSupabaseAdmin();
+      const { data: partner, error: fetchError } = await supabaseAdmin
+        .from("partners")
+        .select("*")
+        .eq("id", id)
+        .maybeSingle();
+
+      if (fetchError) {
+        console.error("Error fetching VIP partner:", fetchError);
+        return res.status(500).json({ error: fetchError.message });
+      }
+      if (!partner) return res.status(404).json({ error: "Partner not found" });
+
+      const { error: updateError } = await supabaseAdmin
+        .from("partners")
+        .update({ attended: true })
+        .eq("id", id);
+
+      if (updateError) {
+        console.error("Error marking VIP partner attended:", updateError);
+        return res.status(500).json({ error: updateError.message });
+      }
+
+      const firstName = String(partner.name || "").trim().split(" ")[0] || "there";
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: partner.email,
+        bcc: "leo@reallifemoney.co.uk",
+        subject: "Your VIP discount code is live! 🎉",
+        html: vipPartnerAttendedEmailHtml(firstName, partner.discount_code || ""),
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error marking VIP partner attended:", err);
       res.status(500).json({ error: err.message });
     }
   }
@@ -1329,6 +1527,86 @@ exports.adminAddBooking = onRequest(
       res.json({ success: true, referralCode });
     } catch (err) {
       console.error("Error adding manual booking:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - EDIT AN EXISTING BOOKING
+ * Updates the editable fields on a booking doc - referral code, Bigin
+ * sync and email are only handled on creation, not here.
+ */
+exports.adminUpdateBooking = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id, fullName, email, courseDate, amountTotal, referralCode } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      const name = String(fullName || "").trim();
+      const customerEmail = String(email || "").trim().toLowerCase();
+      if (!name || !customerEmail) {
+        return res.status(400).json({ error: "Missing name or email" });
+      }
+
+      const chosenDate = String(courseDate || "").trim() || "your upcoming session";
+
+      await db.collection("bookings").doc(String(id)).set(
+        {
+          fullName: name,
+          email: customerEmail,
+          courseDate: chosenDate,
+          workshop: chosenDate,
+          referralCode: String(referralCode || "").trim(),
+          amountTotal: Math.round(Number(amountTotal) * 100) || 0,
+        },
+        { merge: true }
+      );
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error updating booking:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - DELETE A BOOKING
+ */
+exports.adminDeleteBooking = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      await db.collection("bookings").doc(String(id)).delete();
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting booking:", err);
       res.status(500).json({ error: err.message });
     }
   }

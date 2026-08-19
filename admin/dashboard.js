@@ -81,6 +81,7 @@ function renderDashboard(data) {
   renderBookings();
   renderWorkshops();
   renderPartners(data.vipPartners || []);
+  renderInvitedPartners(data.invitedPartners || []);
 
   dashLoading.hidden = true;
   dashboard.hidden = false;
@@ -116,20 +117,61 @@ function renderBookings() {
       <td>${b.referralCode || "—"}</td>
       <td>${formatCurrency(b.amountTotal / 100)}</td>
       <td>${formatDateTime(b.createdAt)}</td>
+      <td>
+        <button class="btn btn-text admin-booking-edit-btn" data-id="${b.id}">Edit</button>
+        <button class="btn btn-text admin-booking-delete-btn" data-id="${b.id}">Delete</button>
+      </td>
     `;
     tbody.appendChild(tr);
   });
+
+  tbody.querySelectorAll(".admin-booking-edit-btn").forEach((btn) =>
+    btn.addEventListener("click", () => openBookingForm(btn.dataset.id))
+  );
+  tbody.querySelectorAll(".admin-booking-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deleteBooking(btn.dataset.id))
+  );
+}
+
+async function deleteBooking(id) {
+  if (!confirm("Delete this booking? This can't be undone.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeleteBooking`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting booking:", err);
+    alert("Something went wrong deleting that booking - please try again.");
+  }
 }
 
 // =================================================================
 // Manual booking form
 // =================================================================
 const bookingForm = document.getElementById("bookingForm");
+const bkSendEmailRow = document.getElementById("bkSendEmailRow");
 
-document.getElementById("newBookingBtn").addEventListener("click", () => {
+function openBookingForm(id) {
+  const b = id ? allBookings.find((x) => x.id === id) : null;
+
+  document.getElementById("bkId").value = b ? b.id : "";
+  document.getElementById("bkFullName").value = b ? b.fullName || "" : "";
+  document.getElementById("bkEmail").value = b ? b.email || "" : "";
+  document.getElementById("bkCourseDate").value = b ? b.workshop || b.courseDate || "" : "";
+  document.getElementById("bkAmount").value = b ? (b.amountTotal || 0) / 100 : 75;
+  document.getElementById("bkSubmit").textContent = b ? "Save changes" : "Add booking";
+  bkSendEmailRow.hidden = Boolean(b);
+
   bookingForm.hidden = false;
   bookingForm.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+}
+
+document.getElementById("newBookingBtn").addEventListener("click", () => openBookingForm(null));
 document.getElementById("bkCancelBtn").addEventListener("click", () => {
   bookingForm.hidden = true;
   bookingForm.reset();
@@ -138,9 +180,10 @@ document.getElementById("bkCancelBtn").addEventListener("click", () => {
 bookingForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const id = document.getElementById("bkId").value;
   const submitBtn = document.getElementById("bkSubmit");
   submitBtn.disabled = true;
-  submitBtn.textContent = "Adding...";
+  submitBtn.textContent = id ? "Saving..." : "Adding...";
 
   const payload = {
     token: currentToken,
@@ -148,11 +191,16 @@ bookingForm.addEventListener("submit", async (e) => {
     email: document.getElementById("bkEmail").value.trim(),
     courseDate: document.getElementById("bkCourseDate").value.trim(),
     amountTotal: Number(document.getElementById("bkAmount").value) || 0,
-    sendEmail: document.getElementById("bkSendEmail").checked,
   };
+  if (id) {
+    payload.id = id;
+    payload.referralCode = allBookings.find((x) => x.id === id)?.referralCode || "";
+  } else {
+    payload.sendEmail = document.getElementById("bkSendEmail").checked;
+  }
 
   try {
-    const res = await fetch(`${FUNCTIONS_BASE}/adminAddBooking`, {
+    const res = await fetch(`${FUNCTIONS_BASE}/${id ? "adminUpdateBooking" : "adminAddBooking"}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -164,12 +212,12 @@ bookingForm.addEventListener("submit", async (e) => {
     document.getElementById("bkSendEmail").checked = true;
     await loadDashboard();
   } catch (err) {
-    console.error("Error adding manual booking:", err);
-    alert("Something went wrong adding that booking - please try again.");
+    console.error("Error saving booking:", err);
+    alert("Something went wrong saving that booking - please try again.");
   }
 
   submitBtn.disabled = false;
-  submitBtn.textContent = "Add booking";
+  submitBtn.textContent = id ? "Save changes" : "Add booking";
 });
 
 // =================================================================
@@ -198,6 +246,7 @@ function renderWorkshops() {
         <div class="admin-workshop-actions">
           <button class="btn btn-text admin-edit-btn" data-id="${w.id}">Edit</button>
           <button class="btn btn-text admin-participants-btn" data-id="${w.id}">Participants (${participants.length})</button>
+          <button class="btn btn-text admin-delete-btn" data-id="${w.id}">Delete</button>
         </div>
       </div>
       <ul class="admin-participants-list" id="participants-${w.id}" hidden>
@@ -218,6 +267,26 @@ function renderWorkshops() {
       el.hidden = !el.hidden;
     })
   );
+  list.querySelectorAll(".admin-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deleteWorkshop(btn.dataset.id))
+  );
+}
+
+async function deleteWorkshop(id) {
+  if (!confirm("Delete this workshop? This can't be undone.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeleteWorkshop`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting workshop:", err);
+    alert("Something went wrong deleting that workshop - please try again.");
+  }
 }
 
 function openWorkshopForm(id) {
@@ -305,7 +374,48 @@ function renderPartners(partners) {
       <td>${p.usageCount}</td>
       <td>${formatCurrency(p.totalEarned)}</td>
       <td>${formatCurrency(p.nextPayoutAmount)}</td>
+      <td>${p.attended ? "" : `<button class="btn btn-text admin-attended-btn" data-id="${p.id}">Mark attended</button>`}</td>
     `;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll(".admin-attended-btn").forEach((btn) =>
+    btn.addEventListener("click", () => markPartnerAttended(btn.dataset.id, btn))
+  );
+}
+
+async function markPartnerAttended(id, btn) {
+  if (!confirm("Mark this partner as attended? This activates their discount code and emails them their welcome pack.")) return;
+
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminMarkPartnerAttended`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error marking partner attended:", err);
+    alert("Something went wrong marking that partner as attended - please try again.");
+    btn.disabled = false;
+    btn.textContent = "Mark attended";
+  }
+}
+
+function renderInvitedPartners(invited) {
+  const tbody = document.querySelector("#invitedTable tbody");
+  const emptyNote = document.getElementById("invitedEmpty");
+
+  tbody.innerHTML = "";
+  emptyNote.hidden = invited.length > 0;
+
+  invited.forEach((i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${i.instagramHandle || "—"}</td>`;
     tbody.appendChild(tr);
   });
 }

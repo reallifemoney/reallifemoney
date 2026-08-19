@@ -66,7 +66,7 @@
         <div class="admin-table-wrap">
           <table class="admin-table" id="bookingsTable">
             <thead>
-              <tr><th>Name</th><th>Email</th><th>Workshop</th><th>Code</th><th>Amount</th><th>Date</th></tr>
+              <tr><th>Name</th><th>Email</th><th>Workshop</th><th>Code</th><th>Amount</th><th>Date</th><th></th></tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -75,6 +75,7 @@
         <button class="btn btn-outline" id="newBookingBtn">+ Add manual booking</button>
 
         <form id="bookingForm" class="bank-form admin-form" hidden>
+          <input type="hidden" id="bkId">
           <label for="bkFullName">Full name</label>
           <input type="text" id="bkFullName" required>
 
@@ -87,7 +88,7 @@
           <label for="bkAmount">Amount paid (£)</label>
           <input type="number" id="bkAmount" value="75" min="0" step="0.01">
 
-          <label class="checkbox-row"><input type="checkbox" id="bkSendEmail" checked><span>Email the customer their booking confirmation &amp; referral code</span></label>
+          <label class="checkbox-row" id="bkSendEmailRow"><input type="checkbox" id="bkSendEmail" checked><span>Email the customer their booking confirmation &amp; referral code</span></label>
 
           <button type="submit" class="btn btn-primary" id="bkSubmit">Add booking</button>
           <button type="button" class="btn btn-text" id="bkCancelBtn">Cancel</button>
@@ -144,7 +145,7 @@
         <div class="admin-table-wrap">
           <table class="admin-table" id="partnersTable">
             <thead>
-              <tr><th>Name</th><th>Email</th><th>Instagram</th><th>Code</th><th>Attended</th><th>Uses</th><th>Earned</th><th>Next payout</th></tr>
+              <tr><th>Name</th><th>Email</th><th>Instagram</th><th>Code</th><th>Attended</th><th>Uses</th><th>Earned</th><th>Next payout</th><th></th></tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -157,6 +158,17 @@
           <button type="submit" class="btn btn-primary" id="inviteSubmit">Add to invite list</button>
           <span class="bank-form-success" id="inviteSuccess" hidden>Added!</span>
         </form>
+
+        <span class="dash-card-label" style="margin-top:22px;">Invited (awaiting sign-up)</span>
+        <p class="dash-card-note" id="invitedEmpty" hidden>No pending invites.</p>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="invitedTable">
+            <thead>
+              <tr><th>Instagram</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
     </main>
