@@ -413,6 +413,8 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
       .earnings-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 20px; margin: 25px 0; }
       .earnings-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
       .earnings-row strong { color: #8c52ff; }
+      .login-box { background: #eef8eb; border: 1px solid #71c558; border-radius: 24px; padding: 20px; margin: 25px 0; text-align: center; }
+      .login-box a { display: inline-block; margin-top: 8px; background: #8c52ff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: bold; }
       .link-box { background: #f4f0ff; border-radius: 16px; padding: 18px; margin: 25px 0; text-align: center; }
       .link-box a { color: #8c52ff; font-weight: bold; word-break: break-all; }
       .ad-notice { background: #fff8e6; border: 1px solid #f0d878; border-radius: 16px; padding: 16px 18px; margin: 25px 0; font-size: 14px; }
@@ -435,7 +437,8 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
 
         <div class="content">
           <h1>You're live, ${firstName}! 🎉</h1>
-          <p>Thanks so much for coming along to the workshop - it was great having you there. Your VIP Partner discount code is now active, so you can start sharing it with friends, family and followers straight away.</p>
+          <p>Thanks so much for coming along to the workshop - it was great having you there.</p>
+          <p>Your VIP Partner discount code is now active, so you can start sharing it with friends, family and followers straight away.</p>
 
           <div class="code-box">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Live Discount Code</p>
@@ -444,11 +447,17 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
           </div>
 
           <div class="earnings-box">
-            <p style="margin: 0 0 12px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">What you earn</p>
-            <div class="earnings-row"><span>First 5 sign-ups</span><strong>£30 each</strong></div>
-            <div class="earnings-row"><span>Next 5 sign-ups (6-10)</span><strong>£20 each</strong></div>
-            <div class="earnings-row"><span>Every sign-up after that</span><strong>£15 each</strong></div>
-            <div class="earnings-row"><span>Plus bonuses at 20 and 50 sign-ups</span><strong>£50 / £100</strong></div>
+            <p style="margin: 0 0 16px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">What you earn</p>
+            <div class="earnings-row"><span>First 5 code uses</span><strong>£30 each</strong></div>
+            <div class="earnings-row"><span>Next 5 code uses (6-10)</span><strong>£20 each</strong></div>
+            <div class="earnings-row"><span>Every code use after that</span><strong>£15 each</strong></div>
+            <div class="earnings-row"><span>Plus bonuses at 20 and 50 code uses</span><strong>£50 / £100</strong></div>
+          </div>
+
+          <div class="login-box">
+            <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Track your code uses &amp; earnings</p>
+            <p style="margin: 0; font-size: 14px;">Log in any time to see your dashboard.</p>
+            <a href="https://reallifemoney.co.uk/vip-partner/login.html">Log in to my dashboard</a>
           </div>
 
           <div class="link-box">
@@ -460,7 +469,7 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
             📢 <strong>One important thing:</strong> any content you post about Real Life Money (stories, posts, reels) needs to include <strong>#ad</strong> in the caption - it's a legal requirement for paid partnerships, so please don't forget it.
           </div>
 
-          <p style="margin-top: 30px; font-size: 15px;">You can track sign-ups and earnings any time from your partner dashboard. If you've got any questions, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
+          <p style="margin-top: 30px; font-size: 15px;">You can track code uses and earnings any time from your partner dashboard. If you've got any questions, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
           <p>Thanks again - excited to see what you do with it!<br><strong>Leo</strong></p>
         </div>
@@ -1380,6 +1389,42 @@ exports.adminInvitePartner = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error inviting VIP partner:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - DELETE AN INVITED PARTNER (Instagram allow-list)
+ */
+exports.adminDeleteInvitedPartner = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      const supabaseAdmin = getSupabaseAdmin();
+      const { error } = await supabaseAdmin.from("invited_partners").delete().eq("id", id);
+
+      if (error) {
+        console.error("Error deleting invited VIP partner:", error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting invited VIP partner:", err);
       res.status(500).json({ error: err.message });
     }
   }

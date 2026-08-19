@@ -415,9 +415,33 @@ function renderInvitedPartners(invited) {
 
   invited.forEach((i) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${i.instagramHandle || "—"}</td>`;
+    tr.innerHTML = `
+      <td>${i.instagramHandle || "—"}</td>
+      <td><button class="btn btn-text admin-invited-delete-btn" data-id="${i.id}">Delete</button></td>
+    `;
     tbody.appendChild(tr);
   });
+
+  tbody.querySelectorAll(".admin-invited-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deleteInvitedPartner(btn.dataset.id))
+  );
+}
+
+async function deleteInvitedPartner(id) {
+  if (!confirm("Remove this invite? They'll no longer be able to sign up as a VIP partner.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeleteInvitedPartner`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting invited partner:", err);
+    alert("Something went wrong removing that invite - please try again.");
+  }
 }
 
 const inviteForm = document.getElementById("inviteForm");
