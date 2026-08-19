@@ -71,7 +71,7 @@ exports.stripeWebhook = onRequest(
   const session = event.data.object;
 
   const customerEmail = session.customer_details?.email;
-  const fullName = session.customer_details?.name || "Customer";
+  const fullName = session.metadata?.full_name || session.customer_details?.name || "Customer";
   const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
   const lastName = fullName.split(" ").slice(1).join(" ") || "Booking";
 
@@ -81,7 +81,7 @@ exports.stripeWebhook = onRequest(
       try {
         // --- STEP A: Generate Unique Referral Code ---
         const random4Digits = Math.floor(1000 + Math.random() * 9000);
-        const referralCode = `${firstName.toUpperCase()}${random4Digits}`;
+        const referralCode = `${firstName.toUpperCase().slice(0, 4)}${random4Digits}`;
 
         // --- STEP B: Create Coupon & Promo Code in Stripe ---
         const coupon = await stripe.coupons.create({
@@ -1288,7 +1288,7 @@ exports.adminAddBooking = onRequest(
       const amount = Math.round(Number(amountTotal) * 100) || 0;
 
       const random4Digits = Math.floor(1000 + Math.random() * 9000);
-      const referralCode = `${firstName.toUpperCase()}${random4Digits}`;
+      const referralCode = `${firstName.toUpperCase().slice(0, 4)}${random4Digits}`;
 
       const bookingRef = db.collection("bookings").doc(`manual_${Date.now()}`);
       await bookingRef.set({
