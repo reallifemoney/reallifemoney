@@ -346,7 +346,6 @@ signupForm.addEventListener("submit", async (e) => {
   const name = document.getElementById("nameInput").value.trim();
   const email = document.getElementById("emailInput").value.trim();
   const courseDate = courseDateInput.value;
-  const discountCode = generateDiscountCode(verifiedHandle);
 
   let signupFailed = false;
   try {
@@ -357,7 +356,6 @@ signupForm.addEventListener("submit", async (e) => {
         name,
         email,
         courseDate,
-        discountCode,
         instagramHandle: verifiedHandle,
       }),
     });
@@ -381,12 +379,3 @@ signupForm.addEventListener("submit", async (e) => {
   signupForm.hidden = true;
   document.getElementById("signupSuccess").hidden = false;
 });
-
-function generateDiscountCode(handle) {
-  const clean = handle.replace(/[^a-z0-9]/gi, "").toUpperCase().slice(0, 10);
-  const suffix = Math.floor(1000 + Math.random() * 9000);
-  return `${clean}${suffix}`;
-  // Note: the code is stored now but should stay hidden in the UI
-  // until `attended` is flipped to true - the dashboard (built later)
-  // is where a partner would actually see it.
-}

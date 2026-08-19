@@ -540,7 +540,7 @@ exports.vipPartnerSignup = onRequest(
     const resend = new Resend(resendApiKey.value());
 
     try {
-      const { name, email, courseDate, discountCode, instagramHandle } = req.body;
+      const { name, email, courseDate, instagramHandle } = req.body;
 
       if (!email || !name) {
         return res.status(400).json({ error: "Missing name or email" });
@@ -549,6 +549,7 @@ exports.vipPartnerSignup = onRequest(
       const fullName = String(name).trim();
       const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
       const lastName = fullName.split(" ").slice(1).join(" ") || "Partner";
+      const discountCode = firstName.toUpperCase().slice(0, 4);
       const chosenDate = courseDate || "your chosen workshop";
       const emailKey = String(email).trim().toLowerCase();
 
@@ -834,7 +835,7 @@ exports.vipPartnerDashboard = onRequest(
 
       const { data: referrals, error: referralsError } = await supabaseAdmin
         .from("referrals")
-        .select("customer_name, created_at")
+        .select("created_at")
         .eq("partner_id", partner.id)
         .order("created_at", { ascending: false });
 
@@ -877,7 +878,6 @@ exports.vipPartnerDashboard = onRequest(
               }
             : null,
         referrals: referrals.map((r) => ({
-          customerName: r.customer_name || "Anonymous",
           createdAt: r.created_at,
         })),
       });

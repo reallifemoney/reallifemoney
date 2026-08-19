@@ -56,7 +56,7 @@ function renderReferrals(referrals) {
   referrals.forEach((r) => {
     const item = document.createElement("li");
     item.className = "dash-referral-item";
-    item.innerHTML = `<span>${r.customerName || "Anonymous"}</span><span>${formatDateTime(r.createdAt)}</span>`;
+    item.textContent = formatDateTime(r.createdAt);
     list.appendChild(item);
   });
 }
