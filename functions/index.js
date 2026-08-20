@@ -663,7 +663,7 @@ exports.vipPartnerSignup = onRequest(
       const fullName = String(name).trim();
       const firstName = fullName.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Friend";
       const lastName = fullName.split(" ").slice(1).join(" ") || "Partner";
-      const discountCode = firstName.toUpperCase().slice(0, 4);
+      const discountCode = `${firstName.replace(/[^a-zA-Z]/g, "").toUpperCase().slice(0, 4).padEnd(4, "X")}${Math.floor(1000 + Math.random() * 9000)}`;
       const chosenDate = courseDate || "your chosen workshop";
       const emailKey = String(email).trim().toLowerCase();
 
