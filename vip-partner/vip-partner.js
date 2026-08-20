@@ -145,13 +145,31 @@ renderCarousel();
 // =================================================================
 // "Read instead" toggle for the problem slide
 // =================================================================
-document.getElementById("readInsteadBtn").addEventListener("click", () => {
-  const frame = document.getElementById("videoFrame");
-  frame.innerHTML = `
-    <div class="read-instead">
-      <p>Most people leave school able to do algebra, but not able to read a payslip, compare a savings account, or understand what a pension actually does for them. That gap isn't a lack of intelligence - it's a lack of anyone ever sitting down and explaining it properly, in plain English, with no jargon and no sales pitch.</p>
-      <p>That's the whole reason the workshop exists.</p>
-    </div>`;
+const videoFrame = document.getElementById("videoFrame");
+const originalVideoFrameHTML = videoFrame.innerHTML;
+let showingText = false;
+
+document.getElementById("readInsteadBtn").addEventListener("click", (e) => {
+  showingText = !showingText;
+
+  if (showingText) {
+    videoFrame.innerHTML = `
+      <div class="read-instead">
+        <p>Hey I'm Leo! I'm a maths teacher and qualified financial advisor on a mission to help normal people understand investing.<br><br>
+My ultimate goal is to help as many people as I can to feel confident with investing and managing their money.<br><br>
+I've written an investing workshop that is super engaging, that is incredibly practical but also has a nurturing and gentle environment.<br><br>
+I know my workshop is really amazing - I just need others to realise that too.<br><br>
+I've spent hundreds on meta ads but had no success since it's all down to trust.<br><br>
+So I want you to experience my workshop first hand (at no cost) so that you trust me and can pass that trust onto your loyal followers.<br><br>
+Read on to find out the finer details, but in my eyes everyone wins - I get more attendees, your followers get discounted investing confidence, and you get FREE investing confidence plus a side income.<br><br>
+I'd much rather the money in you and your followers pockets than meta or google.<br><br>
+So carry on through the steps and let me know if you've got any questions - I look forward to working together to make everyone a winner! </p>
+      </div>`;
+    e.target.textContent = "Watch the video instead";
+  } else {
+    videoFrame.innerHTML = originalVideoFrameHTML;
+    e.target.textContent = "Prefer to read instead?";
+  }
 });
 
 // =================================================================
