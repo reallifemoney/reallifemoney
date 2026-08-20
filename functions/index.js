@@ -198,7 +198,7 @@ try {
         const supabaseAdmin = getSupabaseAdmin();
         const { data: partner, error: partnerLookupError } = await supabaseAdmin
           .from("partners")
-          .select("id, email, discount_code")
+          .select("id, name, email, discount_code")
           .eq("discount_code", usedCode)
           .maybeSingle();
 
@@ -219,6 +219,18 @@ try {
             console.error("Error logging VIP partner referral:", referralInsertError);
           } else {
             console.log(`VIP partner referral logged for ${partner.email} (code ${usedCode})`);
+            try {
+              const partnerFirstName = String(partner.name || "").trim().split(" ")[0] || "there";
+              await resend.emails.send({
+                from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+                to: partner.email,
+                bcc: "leo@reallifemoney.co.uk",
+                subject: "Someone just used your VIP code! 🎉",
+                html: vipPartnerReferralUsedEmailHtml(partnerFirstName),
+              });
+            } catch (partnerEmailErr) {
+              console.error("Error emailing VIP partner about referral use:", partnerEmailErr);
+            }
           }
         } else {
           console.warn(`Promo code ${usedCode} used but no matching referrer booking or VIP partner found.`);
@@ -852,13 +864,38 @@ exports.vipPartnerSignup = onRequest(
 );
 
 /**
- * Returns the last day of the current calendar month as an ISO date
- * string (YYYY-MM-DD) - partners are paid monthly on this date.
+ * Returns the last day of NEXT calendar month as an ISO date string
+ * (YYYY-MM-DD) - payouts are only run for referrals whose workshop
+ * has already passed, so this gives a buffer month to process them.
  */
 function getNextPayoutDate() {
   const now = new Date();
-  const lastDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0));
+  const lastDay = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 2, 0));
   return lastDay.toISOString().slice(0, 10);
+}
+
+/**
+ * HTML for the "someone used your code" email sent to a VIP partner
+ * every time a referral is logged - links straight to their dashboard
+ * for the full up-to-date picture rather than including numbers here.
+ */
+function vipPartnerReferralUsedEmailHtml(firstName) {
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height:1.6; color:#2e2e2e; background:#eef8eb; padding:20px;">
+    <div style="max-width:520px; margin:0 auto; background:#ffffff; border-radius:24px; border:1px solid #daecd6; padding:30px;">
+      <h1 style="font-size:22px; text-align:center;">Someone just used your code, ${firstName}! 🎉</h1>
+      <p>One of your followers has booked a workshop with your discount code - nice work!</p>
+      <p style="text-align:center; margin:30px 0;">
+        <a href="https://reallifemoney.co.uk/vip-partner/login.html" style="background:#8c52ff; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:12px; font-weight:bold; display:inline-block;">View my dashboard</a>
+      </p>
+      <p style="font-size:13px; color:#6b6b6b;">Log in any time to see your full code use history, earnings and next payout.</p>
+    </div>
+  </body>
+  </html>
+  `;
 }
 
 /**
@@ -1027,14 +1064,15 @@ exports.vipPartnerDashboard = onRequest(
         return res.status(500).json({ error: payoutsError.message });
       }
 
-      // Uses shown to the partner include everyone who's signed up with
-      // their code; earnings/payout only count referrals whose workshop
-      // date has passed, to make sure the person actually attended.
+      // Total earned reflects immediately across all referrals; the next
+      // payout only counts referrals whose workshop date has passed (so
+      // the person's actually attended) minus what's already been paid.
       const usageCount = referrals.length;
+      const totalEarned = calcEarnings(usageCount);
       const payableCount = referrals.filter((r) => isWorkshopDatePassed(r.workshop_date)).length;
-      const totalEarned = calcEarnings(payableCount);
+      const payableEarned = calcEarnings(payableCount);
       const alreadyPaid = (payouts || []).reduce((sum, p) => sum + Number(p.amount || 0), 0);
-      const nextPayoutAmount = Math.max(0, totalEarned - alreadyPaid);
+      const nextPayoutAmount = Math.max(0, payableEarned - alreadyPaid);
 
       res.json({
         name: partner.name,
@@ -1044,7 +1082,7 @@ exports.vipPartnerDashboard = onRequest(
         usageCount,
         totalEarned,
         nextPayoutAmount,
-        nextPayoutDate: getNextPayoutDate(),
+        nextPayoutDate: nextPayoutAmount > 0 ? getNextPayoutDate() : null,
         bankDetails:
           partner.bank_account_name || partner.bank_sort_code || partner.bank_account_number
             ? {
@@ -1299,8 +1337,10 @@ exports.adminDashboard = onRequest(
 
       const vipPartners = (partners || []).map((p) => {
         const usageCount = usageByPartner[p.id] || 0;
-        const totalEarned = calcEarnings(payableByPartner[p.id] || 0);
+        const totalEarned = calcEarnings(usageCount);
+        const payableEarned = calcEarnings(payableByPartner[p.id] || 0);
         const alreadyPaid = paidByPartner[p.id] || 0;
+        const nextPayoutAmount = Math.max(0, payableEarned - alreadyPaid);
         return {
           id: p.id,
           name: p.name,
@@ -1311,7 +1351,8 @@ exports.adminDashboard = onRequest(
           attended: Boolean(p.attended),
           usageCount,
           totalEarned,
-          nextPayoutAmount: Math.max(0, totalEarned - alreadyPaid),
+          nextPayoutAmount,
+          nextPayoutDate: nextPayoutAmount > 0 ? getNextPayoutDate() : null,
           createdAt: p.created_at,
         };
       });
