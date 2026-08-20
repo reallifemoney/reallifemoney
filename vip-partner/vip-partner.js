@@ -161,8 +161,8 @@ I've written an investing workshop that is super engaging, that is incredibly pr
 I know my workshop is really amazing - I just need others to realise that too.<br><br>
 I've spent hundreds on meta ads but had no success since it's all down to trust.<br><br>
 So I want you to experience my workshop first hand (at no cost) so that you trust me and can pass that trust onto your loyal followers.<br><br>
-Read on to find out the finer details, but in my eyes everyone wins - I get more attendees, your followers get discounted investing confidence, and you get FREE investing confidence plus a side income.<br><br>
-I'd much rather the money in you and your followers pockets than meta or google.<br><br>
+The way I see it, everyone wins - I get more attendees, your followers get discounted investing confidence, and you get FREE investing confidence plus a side income.<br><br>
+I'd much rather the money in you and your followers' pockets than Meta or Google's.<br><br>
 So carry on through the steps and let me know if you've got any questions - I look forward to working together to make everyone a winner! </p>
       </div>`;
     e.target.textContent = "Watch the video instead";
