@@ -757,7 +757,7 @@ exports.vipPartnerSignup = onRequest(
 
         <div class="content">
           <h1>Welcome to the programme, ${firstName}! 🎉</h1>
-          <p>You're officially signed up as a VIP Partner - genuinely excited to have you on board. No payment needed for this bit, you're coming along as my guest.</p>
+          <p>You're officially signed up as a VIP Partner - genuinely excited to have you on board. No payment needed for the workshop, you're coming along as my guest.</p>
 
           <div class="date-box">
             <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
