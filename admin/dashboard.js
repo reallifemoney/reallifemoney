@@ -374,7 +374,10 @@ function renderPartners(partners) {
       <td>${p.usageCount}</td>
       <td>${formatCurrency(p.totalEarned)}</td>
       <td>${formatCurrency(p.nextPayoutAmount)}</td>
-      <td>${p.attended ? "" : `<button class="btn btn-text admin-attended-btn" data-id="${p.id}">Mark attended</button>`}</td>
+      <td>
+        ${p.attended ? "" : `<button class="btn btn-text admin-attended-btn" data-id="${p.id}">Mark attended</button>`}
+        <button class="btn btn-text admin-partner-delete-btn" data-id="${p.id}">Delete</button>
+      </td>
     `;
     tbody.appendChild(tr);
   });
@@ -382,6 +385,26 @@ function renderPartners(partners) {
   tbody.querySelectorAll(".admin-attended-btn").forEach((btn) =>
     btn.addEventListener("click", () => markPartnerAttended(btn.dataset.id, btn))
   );
+  tbody.querySelectorAll(".admin-partner-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deletePartner(btn.dataset.id))
+  );
+}
+
+async function deletePartner(id) {
+  if (!confirm("Delete this VIP partner? This removes their referral history and payouts too - this can't be undone.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeletePartner`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting VIP partner:", err);
+    alert("Something went wrong deleting that partner - please try again.");
+  }
 }
 
 async function markPartnerAttended(id, btn) {

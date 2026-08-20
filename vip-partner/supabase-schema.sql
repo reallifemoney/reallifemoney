@@ -30,6 +30,9 @@ create table if not exists partners (
 );
 
 -- One row per booking made with a VIP partner's discount code.
+-- workshop_date is the referred customer's chosen workshop date
+-- (from the workshops collection's sortDate field) - payouts only
+-- count a referral once this date has passed, to confirm attendance.
 create table if not exists referrals (
   id uuid primary key default gen_random_uuid(),
   partner_id uuid not null references partners(id) on delete cascade,
@@ -37,8 +40,13 @@ create table if not exists referrals (
   customer_name text,
   customer_email text,
   stripe_session_id text unique,
+  workshop_date date,
   created_at timestamptz not null default now()
 );
+
+-- Safe to re-run: adds the column if this table already existed
+-- before workshop_date was introduced.
+alter table referrals add column if not exists workshop_date date;
 
 -- One row per payout actually made to a partner.
 create table if not exists payouts (

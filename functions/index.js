@@ -30,6 +30,40 @@ function getSupabaseAdmin() {
 // Sole admin dashboard user - no separate allow-list table needed.
 const ADMIN_EMAIL = "leo@reallifemoney.co.uk";
 
+// Same composite label used at checkout/sign-up (course.html,
+// vip-partner.js, admin/dashboard.js workshopLabel()) - lets us match
+// a booking's free-text courseDate back to a workshop doc's sortDate.
+function workshopLabelFor(w) {
+  const locationLabel = w.category === "online" ? (w.location || "") : `📍 ${w.venueName || ""}`;
+  return `${w.dateLabel} (${w.times}) — ${locationLabel}`;
+}
+
+/**
+ * HELPER: look up a workshop's sortDate (YYYY-MM-DD) from its
+ * composite label, so VIP partner referrals can record the date the
+ * referred customer is actually attending - used to hold off payouts
+ * until that date has passed.
+ */
+async function getWorkshopSortDateForLabel(label) {
+  if (!label) return null;
+  const snap = await db.collection("workshops").get();
+  for (const doc of snap.docs) {
+    if (workshopLabelFor(doc.data()) === label) return doc.data().sortDate || null;
+  }
+  return null;
+}
+
+/**
+ * HELPER: has a workshop date (YYYY-MM-DD) already passed? Referrals
+ * with no recorded workshop_date are treated as payable (legacy rows
+ * created before this field existed).
+ */
+function isWorkshopDatePassed(dateStr) {
+  if (!dateStr) return true;
+  const today = new Date().toISOString().slice(0, 10);
+  return dateStr <= today;
+}
+
 /**
  * STRIPE WEBHOOK HANDLER
  */
@@ -171,12 +205,14 @@ try {
         if (partnerLookupError) {
           console.error("Error looking up VIP partner by discount code:", partnerLookupError);
         } else if (partner) {
+          const workshopDate = await getWorkshopSortDateForLabel(courseDate);
           const { error: referralInsertError } = await supabaseAdmin.from("referrals").insert({
             partner_id: partner.id,
             discount_code: usedCode,
             customer_name: fullName,
             customer_email: customerEmail,
             stripe_session_id: session.id,
+            workshop_date: workshopDate,
           });
 
           if (referralInsertError) {
@@ -448,10 +484,10 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
 
           <div class="earnings-box">
             <p style="margin: 0 0 16px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">What you earn</p>
-            <div class="earnings-row"><span>First 5 code uses</span><strong>£30 each</strong></div>
-            <div class="earnings-row"><span>Next 5 code uses (6-10)</span><strong>£20 each</strong></div>
-            <div class="earnings-row"><span>Every code use after that</span><strong>£15 each</strong></div>
-            <div class="earnings-row"><span>Plus bonuses at 20 and 50 code uses</span><strong>£50 / £100</strong></div>
+            <div class="earnings-row"><span>First 5 code uses: </span><strong>£30 each</strong></div>
+            <div class="earnings-row"><span>Next 5 code uses (6-10): </span><strong>£20 each</strong></div>
+            <div class="earnings-row"><span>Every code use after that: </span><strong>£15 each</strong></div>
+            <div class="earnings-row"><span>20th / 50th uses: </span><strong>£50 / £100 bonus</strong></div>
           </div>
 
           <div class="login-box">
@@ -466,12 +502,12 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
           </div>
 
           <div class="ad-notice">
-            📢 <strong>One important thing:</strong> any content you post about Real Life Money (stories, posts, reels) needs to include <strong>#ad</strong> in the caption - it's a legal requirement for paid partnerships, so please don't forget it.
+            📢 <strong>One important thing:</strong> any content you post about Real Life Money (stories, posts, reels) needs to include <strong>ad</strong> in the caption - it's a legal requirement for paid partnerships, so please don't forget it.
           </div>
 
           <p style="margin-top: 30px; font-size: 15px;">You can track code uses and earnings any time from your partner dashboard. If you've got any questions, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
-          <p>Thanks again - excited to see what you do with it!<br><strong>Leo</strong></p>
+          <p>Thanks again - excited to see what you do with it!<br><br><strong>Leo</strong></p>
         </div>
 
         <div class="footer">
@@ -685,6 +721,22 @@ exports.vipPartnerSignup = onRequest(
         console.error("Error saving VIP partner to Supabase:", upsertError);
         return res.status(500).json({ error: upsertError.message });
       }
+
+      // --- Record their own free seat as a booking, so the workshop's
+      // participant list / capacity in the admin dashboard includes them ---
+      const vipBookingRef = db.collection("bookings").doc(`vip_${Date.now()}`);
+      await vipBookingRef.set({
+        sessionId: vipBookingRef.id,
+        email: emailKey,
+        fullName: fullName,
+        courseDate: chosenDate,
+        workshop: chosenDate,
+        referralCode: "",
+        paymentIntent: null,
+        amountTotal: 0,
+        vipPartner: true,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
 
       // --- Create a live Stripe promo code so followers can use it right
       // away - it stays hidden in the partner's dashboard until attended.
@@ -955,7 +1007,7 @@ exports.vipPartnerDashboard = onRequest(
 
       const { data: referrals, error: referralsError } = await supabaseAdmin
         .from("referrals")
-        .select("created_at")
+        .select("created_at, workshop_date")
         .eq("partner_id", partner.id)
         .order("created_at", { ascending: false });
 
@@ -975,8 +1027,12 @@ exports.vipPartnerDashboard = onRequest(
         return res.status(500).json({ error: payoutsError.message });
       }
 
+      // Uses shown to the partner include everyone who's signed up with
+      // their code; earnings/payout only count referrals whose workshop
+      // date has passed, to make sure the person actually attended.
       const usageCount = referrals.length;
-      const totalEarned = calcEarnings(usageCount);
+      const payableCount = referrals.filter((r) => isWorkshopDatePassed(r.workshop_date)).length;
+      const totalEarned = calcEarnings(payableCount);
       const alreadyPaid = (payouts || []).reduce((sum, p) => sum + Number(p.amount || 0), 0);
       const nextPayoutAmount = Math.max(0, totalEarned - alreadyPaid);
 
@@ -1196,7 +1252,7 @@ exports.adminDashboard = onRequest(
 
       const { data: referrals, error: referralsError } = await supabaseAdmin
         .from("referrals")
-        .select("partner_id");
+        .select("partner_id, workshop_date");
 
       if (referralsError) {
         console.error("Error fetching referrals for admin dashboard:", referralsError);
@@ -1229,8 +1285,12 @@ exports.adminDashboard = onRequest(
       }));
 
       const usageByPartner = {};
+      const payableByPartner = {};
       (referrals || []).forEach((r) => {
         usageByPartner[r.partner_id] = (usageByPartner[r.partner_id] || 0) + 1;
+        if (isWorkshopDatePassed(r.workshop_date)) {
+          payableByPartner[r.partner_id] = (payableByPartner[r.partner_id] || 0) + 1;
+        }
       });
       const paidByPartner = {};
       (payouts || []).forEach((p) => {
@@ -1239,7 +1299,7 @@ exports.adminDashboard = onRequest(
 
       const vipPartners = (partners || []).map((p) => {
         const usageCount = usageByPartner[p.id] || 0;
-        const totalEarned = calcEarnings(usageCount);
+        const totalEarned = calcEarnings(payableByPartner[p.id] || 0);
         const alreadyPaid = paidByPartner[p.id] || 0;
         return {
           id: p.id,
@@ -1652,6 +1712,44 @@ exports.adminDeleteBooking = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error deleting booking:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * ADMIN - DELETE A VIP PARTNER
+ * Removing the partner row also cascades to their `referrals` and
+ * `payouts` rows (FK on delete cascade in supabase-schema.sql).
+ */
+exports.adminDeletePartner = onRequest(
+  { secrets: [supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      const supabaseAdmin = getSupabaseAdmin();
+      const { error } = await supabaseAdmin.from("partners").delete().eq("id", id);
+
+      if (error) {
+        console.error("Error deleting VIP partner:", error);
+        return res.status(500).json({ error: error.message });
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting VIP partner:", err);
       res.status(500).json({ error: err.message });
     }
   }
