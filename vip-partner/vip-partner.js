@@ -198,6 +198,28 @@ document.addEventListener("keydown", (e) => {
 });
 
 // =================================================================
+// Workshop disclaimer modal
+// =================================================================
+const openDisclaimerBtn = document.getElementById("openDisclaimerBtn");
+const disclaimerModal = document.getElementById("disclaimerModal");
+const disclaimerModalBackdrop = document.getElementById("disclaimerModalBackdrop");
+const disclaimerModalClose = document.getElementById("disclaimerModalClose");
+
+function openDisclaimerModal() {
+  disclaimerModal.hidden = false;
+}
+function closeDisclaimerModal() {
+  disclaimerModal.hidden = true;
+}
+
+openDisclaimerBtn.addEventListener("click", openDisclaimerModal);
+disclaimerModalBackdrop.addEventListener("click", closeDisclaimerModal);
+disclaimerModalClose.addEventListener("click", closeDisclaimerModal);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !disclaimerModal.hidden) closeDisclaimerModal();
+});
+
+// =================================================================
 // Sticky bar verify (guest path - verifying after entering as guest)
 // =================================================================
 const verifyBtn = document.getElementById("verifyBtn");

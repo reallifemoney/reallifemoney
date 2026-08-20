@@ -226,6 +226,13 @@ section{padding:80px 0;}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
 .field input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--rule);font-family:inherit;font-size:15px;background:#fff;}
 .field input:focus{outline:none;border-color:var(--purple);}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink);margin-bottom:20px;cursor:pointer;}
+.checkbox-row input{width:18px;height:18px;margin-top:2px;flex-shrink:0;}
+.checkbox-row .link-btn{background:none;border:none;padding:0;font:inherit;color:var(--purple);text-decoration:underline;cursor:pointer;}
+.disclaimer-box{position:relative;width:100%;max-width:560px;background:#fff;border-radius:16px;padding:32px;max-height:80vh;overflow-y:auto;}
+.disclaimer-box h3{margin-top:0;}
+.disclaimer-box ul{padding-left:20px;line-height:1.6;}
+.disclaimer-box .modal-close{position:absolute;top:10px;right:14px;color:var(--ink);font-size:26px;}
 .success-header{text-align:center;}
 .success-icon{width:64px;height:64px;border-radius:50%;background:#eafaea;color:var(--green);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;}
 .pay-options{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
@@ -550,6 +557,10 @@ footer a{color:#ddd;text-decoration:underline;}
   <label for="res-qty">Number of people</label>
   <input type="number" id="res-qty" min="1" max="12" value="1" required>
 </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="res-disclaimer" required>
+          <span>I agree to the <button type="button" class="link-btn" onclick="openDisclaimer(event)">workshop disclaimer</button></span>
+        </label>
         <button type="submit" class="select-btn" onclick="logbuttonclick()">Proceed to payment</button>
       </form>
     </div>
@@ -675,6 +686,20 @@ footer a{color:#ddd;text-decoration:underline;}
       <span>Only £75 to transform your financial future</span>
     </div>
     <button class="sticky-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Reserve your spot →</button>
+  </div>
+</div>
+
+<!-- WORKSHOP DISCLAIMER MODAL -->
+<div id="disclaimerModal" class="modal-overlay">
+  <div class="disclaimer-box">
+    <button class="modal-close" onclick="closeDisclaimer()" aria-label="Close">&times;</button>
+    <h3>Workshop disclaimer</h3>
+    <p>By attending this workshop and checking the box, you are confirming that:</p>
+    <ul>
+      <li>You understand that this workshop is for educational purposes only and is not giving financial advice</li>
+      <li>Any of the investments or investing platforms shown during this workshop are not being recommended to you</li>
+      <li>Any financial decisions you make are your own responsibility, and if you require specific recommendations then you should seek professional financial advice</li>
+    </ul>
   </div>
 </div>
 
@@ -814,6 +839,18 @@ function closeVideo() {
 window.addEventListener('click', function(event) {
   const modal = document.getElementById('videoModal');
   if (event.target === modal) closeVideo();
+});
+
+// ---- Workshop disclaimer modal ----
+function openDisclaimer(event) {
+  if (event) event.preventDefault();
+  document.getElementById('disclaimerModal').classList.add('active');
+}
+function closeDisclaimer() {
+  document.getElementById('disclaimerModal').classList.remove('active');
+}
+document.getElementById('disclaimerModal').addEventListener('click', function(event) {
+  if (event.target === this) closeDisclaimer();
 });
 
 async function loadWorkshops() {
