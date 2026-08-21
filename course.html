@@ -281,6 +281,91 @@ footer a{color:#ddd;text-decoration:underline;}
   .sticky-btn{padding:10px 18px;font-size:13px;}
 }
 
+.reviews-section{
+  max-width:720px;
+  margin:0 auto;
+  padding:40px 24px;
+}
+.reviews-header{
+  text-align:center;
+  margin-bottom:28px;
+}
+.reviews-header .eyebrow{
+  display:inline-block;
+  font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:#8c52ff;
+  margin-bottom:10px;
+}
+.reviews-header h2{
+  font-size:26px; font-weight:700; margin:0 0 12px;
+  color:#1F3A29;
+}
+.reviews-summary{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-size:14px; color:#3a5544;
+}
+.reviews-stars{color:#ffde59; font-size:16px; letter-spacing:1px;}
+
+.reviews-carousel-wrap{
+  display:flex; align-items:center; gap:12px;
+}
+.reviews-track-wrap{
+  overflow:hidden;
+  flex:1;
+}
+.reviews-track{
+  display:flex;
+  transition:transform 0.4s ease;
+}
+.review-card{
+  flex:0 0 100%;
+  background:#ffffff;
+  border-radius:16px;
+  border:2px solid #eef8eb;
+  padding:24px;
+  box-sizing:border-box;
+}
+.review-card-header{
+  display:flex; align-items:center; gap:12px; margin-bottom:12px;
+}
+.review-avatar{
+  width:44px; height:44px; border-radius:50%; object-fit:cover;
+  background:#eef8eb;
+}
+.review-avatar-fallback{
+  width:44px; height:44px; border-radius:50%;
+  background:#8c52ff; color:#fff; font-weight:700; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+}
+.review-author{font-weight:700; font-size:14px; color:#1F3A29;}
+.review-time{font-size:12px; color:#8a9a8f;}
+.review-stars{color:#ffde59; font-size:14px; margin-bottom:10px; letter-spacing:1px;}
+.review-text{
+  font-size:14px; line-height:1.6; color:#3a5544; margin:0;
+}
+
+.reviews-arrow{
+  flex:0 0 auto;
+  background:#ffffff; border:1.5px solid #1F3A29; border-radius:50%;
+  width:36px; height:36px; cursor:pointer; font-size:16px;
+  color:#1F3A29;
+}
+.reviews-arrow:hover{background:#1F3A29; color:#eef8eb;}
+
+.reviews-dots{
+  display:flex; justify-content:center; gap:8px; margin-top:16px;
+}
+.reviews-dots span{
+  width:8px; height:8px; border-radius:50%; background:#c6d9c9; display:inline-block;
+  cursor:pointer;
+}
+.reviews-dots span.active{background:#8c52ff;}
+
+@media(max-width:480px){
+  .reviews-header h2{font-size:22px;}
+  .review-card{padding:18px;}
+}
+
 /* RESPONSIVE */
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr;}
@@ -388,6 +473,33 @@ footer a{color:#ddd;text-decoration:underline;}
   </div>
 </section>
 
+
+<!-- Google reviews carousel - drop this section into your workshop page -->
+<section class="reviews-section">
+  <div class="reviews-header">
+    <span class="eyebrow">What people say</span>
+    <h2>Real reviews, straight from Google</h2>
+    <div class="reviews-summary" id="reviewsSummary" hidden>
+      <span class="reviews-stars" id="reviewsOverallStars"></span>
+      <span id="reviewsOverallText"></span>
+    </div>
+  </div>
+
+  <div class="reviews-carousel-wrap">
+    <button class="reviews-arrow reviews-arrow-prev" id="reviewsPrev" aria-label="Previous review">&#8592;</button>
+    <div class="reviews-track-wrap">
+      <div class="reviews-track" id="reviewsTrack">
+        <!-- review cards inserted here by JS -->
+      </div>
+    </div>
+    <button class="reviews-arrow reviews-arrow-next" id="reviewsNext" aria-label="Next review">&#8594;</button>
+  </div>
+
+  <div class="reviews-dots" id="reviewsDots"></div>
+</section>
+
+<link rel="stylesheet" href="google-reviews.css">
+<script src="google-reviews.js"></script>
 
 <!-- REVIEWS -->
 <section class="reviews">
@@ -1116,6 +1228,96 @@ async function handleWaitlist(event) {
     submitButton.style.background = originalBtnText;
   }
 }
+
+const REVIEWS_FUNCTION_URL = "https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/getGoogleReviews";
+
+function starString(rating) {
+  const full = Math.round(rating);
+  return "★".repeat(full) + "☆".repeat(5 - full);
+}
+
+function initial(name) {
+  return (name || "?").trim().charAt(0).toUpperCase();
+}
+
+async function loadReviews() {
+  const track = document.getElementById("reviewsTrack");
+  const dotsWrap = document.getElementById("reviewsDots");
+
+  try {
+    const res = await fetch(REVIEWS_FUNCTION_URL);
+    const data = await res.json();
+
+    if (data.overallRating) {
+      document.getElementById("reviewsOverallStars").textContent = starString(data.overallRating);
+      document.getElementById("reviewsOverallText").textContent =
+        `${data.overallRating.toFixed(1)} from ${data.totalReviews} reviews`;
+      document.getElementById("reviewsSummary").hidden = false;
+    }
+
+    if (!data.reviews || !data.reviews.length) return;
+
+    track.innerHTML = "";
+    dotsWrap.innerHTML = "";
+
+    data.reviews.forEach((r, i) => {
+      const card = document.createElement("div");
+      card.className = "review-card";
+      card.innerHTML = `
+        <div class="review-card-header">
+          ${r.authorPhoto
+            ? `<img class="review-avatar" src="${r.authorPhoto}" alt="${r.authorName}">`
+            : `<div class="review-avatar-fallback">${initial(r.authorName)}</div>`
+          }
+          <div>
+            <div class="review-author">${r.authorName}</div>
+            <div class="review-time">${r.relativeTime}</div>
+          </div>
+        </div>
+        <div class="review-stars">${starString(r.rating)}</div>
+        <p class="review-text">${r.text}</p>
+      `;
+      track.appendChild(card);
+
+      const dot = document.createElement("span");
+      dot.addEventListener("click", () => goToReview(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    renderReviewsPosition();
+  } catch (err) {
+    console.error("Error loading Google reviews:", err);
+  }
+}
+
+let currentReview = 0;
+
+function renderReviewsPosition() {
+  const track = document.getElementById("reviewsTrack");
+  const cards = track.children;
+  track.style.transform = `translateX(-${currentReview * 100}%)`;
+  Array.from(document.getElementById("reviewsDots").children).forEach((d, i) =>
+    d.classList.toggle("active", i === currentReview)
+  );
+}
+
+function goToReview(i) {
+  const track = document.getElementById("reviewsTrack");
+  const total = track.children.length;
+  currentReview = ((i % total) + total) % total;
+  renderReviewsPosition();
+}
+
+document.getElementById("reviewsPrev").addEventListener("click", () => goToReview(currentReview - 1));
+document.getElementById("reviewsNext").addEventListener("click", () => goToReview(currentReview + 1));
+
+// Auto-advance every 6 seconds
+setInterval(() => {
+  const track = document.getElementById("reviewsTrack");
+  if (track.children.length > 1) goToReview(currentReview + 1);
+}, 6000);
+
+loadReviews();
 </script>
 
 </body>

@@ -1795,3 +1795,83 @@ exports.adminDeletePartner = onRequest(
     }
   }
 );
+
+// Add this alongside your other functions. Requires the same
+// GOOGLE_PLACES_API_KEY secret as before, plus your existing
+// SUPABASE_SERVICE_ROLE_KEY secret (already bound elsewhere).
+
+const googlePlacesApiKey = defineSecret("GOOGLE_PLACES_API_KEY");
+const CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+exports.getGoogleReviews = onRequest(
+  { secrets: [googlePlacesApiKey, supabaseServiceRoleKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+
+    const PLACE_ID = "ChIJY_JkPDaQcUgRqATPd0cAOh4"; // from the Place ID Finder
+    const supabaseAdmin = getSupabaseAdmin();
+
+    try {
+      // --- Check the cache first ---
+      const { data: cached } = await supabaseAdmin
+        .from("google_reviews_cache")
+        .select("data, fetched_at")
+        .eq("id", "main")
+        .maybeSingle();
+
+      const cacheAge = cached ? Date.now() - new Date(cached.fetched_at).getTime() : Infinity;
+
+      if (cached && cacheAge < CACHE_MAX_AGE_MS) {
+        return res.json(cached.data);
+      }
+
+      // --- Cache missing or stale - fetch fresh from Google ---
+      const response = await fetch(
+        `https://places.googleapis.com/v1/places/${PLACE_ID}`,
+        {
+          headers: {
+            "X-Goog-Api-Key": googlePlacesApiKey.value(),
+            "X-Goog-FieldMask": "reviews,rating,userRatingCount",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errText = await response.text();
+        console.error("Places API error:", errText);
+
+        // If Google fails but we have ANY cached copy (even stale),
+        // serve that rather than a broken carousel.
+        if (cached) return res.json(cached.data);
+        return res.status(500).json({ error: "Failed to fetch reviews" });
+      }
+
+      const raw = await response.json();
+
+      const payload = {
+        overallRating: raw.rating || 0,
+        totalReviews: raw.userRatingCount || 0,
+        reviews: (raw.reviews || []).map((r) => ({
+          authorName: r.authorAttribution?.displayName || "Anonymous",
+          authorPhoto: r.authorAttribution?.photoUri || "",
+          rating: r.rating || 0,
+          text: r.text?.text || "",
+          relativeTime: r.relativePublishTimeDescription || "",
+        })),
+      };
+
+      // --- Update the cache for next time ---
+      await supabaseAdmin
+        .from("google_reviews_cache")
+        .upsert({ id: "main", data: payload, fetched_at: new Date().toISOString() });
+
+      res.json(payload);
+    } catch (err) {
+      console.error("Error fetching Google reviews:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
