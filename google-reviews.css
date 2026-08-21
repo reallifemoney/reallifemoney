@@ -1,0 +1,84 @@
+.reviews-section{
+  max-width:720px;
+  margin:0 auto;
+  padding:40px 24px;
+}
+.reviews-header{
+  text-align:center;
+  margin-bottom:28px;
+}
+.reviews-header .eyebrow{
+  display:inline-block;
+  font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+  color:#8c52ff;
+  margin-bottom:10px;
+}
+.reviews-header h2{
+  font-size:26px; font-weight:700; margin:0 0 12px;
+  color:#1F3A29;
+}
+.reviews-summary{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-size:14px; color:#3a5544;
+}
+.reviews-stars{color:#ffde59; font-size:16px; letter-spacing:1px;}
+
+.reviews-carousel-wrap{
+  display:flex; align-items:center; gap:12px;
+}
+.reviews-track-wrap{
+  overflow:hidden;
+  flex:1;
+}
+.reviews-track{
+  display:flex;
+  transition:transform 0.4s ease;
+}
+.review-card{
+  flex:0 0 100%;
+  background:#ffffff;
+  border-radius:16px;
+  border:2px solid #eef8eb;
+  padding:24px;
+  box-sizing:border-box;
+}
+.review-card-header{
+  display:flex; align-items:center; gap:12px; margin-bottom:12px;
+}
+.review-avatar{
+  width:44px; height:44px; border-radius:50%; object-fit:cover;
+  background:#eef8eb;
+}
+.review-avatar-fallback{
+  width:44px; height:44px; border-radius:50%;
+  background:#8c52ff; color:#fff; font-weight:700; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+}
+.review-author{font-weight:700; font-size:14px; color:#1F3A29;}
+.review-time{font-size:12px; color:#8a9a8f;}
+.review-stars{color:#ffde59; font-size:14px; margin-bottom:10px; letter-spacing:1px;}
+.review-text{
+  font-size:14px; line-height:1.6; color:#3a5544; margin:0;
+}
+
+.reviews-arrow{
+  flex:0 0 auto;
+  background:#ffffff; border:1.5px solid #1F3A29; border-radius:50%;
+  width:36px; height:36px; cursor:pointer; font-size:16px;
+  color:#1F3A29;
+}
+.reviews-arrow:hover{background:#1F3A29; color:#eef8eb;}
+
+.reviews-dots{
+  display:flex; justify-content:center; gap:8px; margin-top:16px;
+}
+.reviews-dots span{
+  width:8px; height:8px; border-radius:50%; background:#c6d9c9; display:inline-block;
+  cursor:pointer;
+}
+.reviews-dots span.active{background:#8c52ff;}
+
+@media(max-width:480px){
+  .reviews-header h2{font-size:22px;}
+  .review-card{padding:18px;}
+}
