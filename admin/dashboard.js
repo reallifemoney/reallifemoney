@@ -292,16 +292,19 @@ async function deleteWorkshop(id) {
 function openWorkshopForm(id) {
   const w = id ? allWorkshops.find((x) => x.id === id) : null;
 
-  document.getElementById("wsId").value = w ? w.id : "";
+  document.getElementById("wsId").value = w ? w.id || "" : "";
   document.getElementById("wsDateLabel").value = w ? w.dateLabel || "" : "";
   document.getElementById("wsSortDate").value = w ? w.sortDate || "" : "";
   document.getElementById("wsTimes").value = w ? w.times || "" : "";
-  document.getElementById("ws1Session").value = w ? w["1session"] || "" : "";
-  document.getElementById("ws1StartTime").value = w ? w["1start_time"] || "" : "";
-  document.getElementById("ws1EndTime").value = w ? w["1end_time"] || "" : "";
-  document.getElementById("ws2Session").value = w ? w["2session"] || "" : "";
-  document.getElementById("ws2StartTime").value = w ? w["2start_time"] || "" : "";
-  document.getElementById("ws2EndTime").value = w ? w["2end_time"] || "" : "";
+  
+  // Explicit bracket notation with string fallbacks
+  document.getElementById("ws1Session").value = w ? (w["1session"] || "") : "";
+  document.getElementById("ws1StartTime").value = w ? (w["1start_time"] || "") : "";
+  document.getElementById("ws1EndTime").value = w ? (w["1end_time"] || "") : "";
+  document.getElementById("ws2Session").value = w ? (w["2session"] || "") : "";
+  document.getElementById("ws2StartTime").value = w ? (w["2start_time"] || "") : "";
+  document.getElementById("ws2EndTime").value = w ? (w["2end_time"] || "") : "";
+
   wsCategory.value = w ? w.category || "online" : "online";
   document.getElementById("wsLocation").value = w ? w.location || "" : "";
   document.getElementById("wsVenueName").value = w ? w.venueName || "" : "";
@@ -333,12 +336,15 @@ workshopForm.addEventListener("submit", async (e) => {
     dateLabel: document.getElementById("wsDateLabel").value.trim(),
     sortDate: document.getElementById("wsSortDate").value.trim(),
     times: document.getElementById("wsTimes").value.trim(),
-    "1session": document.getElementById("ws1Session").value,
-    "1start_time": document.getElementById("ws1StartTime").value,
-    "1end_time": document.getElementById("ws1EndTime").value,
-    "2session": document.getElementById("ws2Session").value,
-    "2start_time": document.getElementById("ws2StartTime").value,
-    "2end_time": document.getElementById("ws2EndTime").value,
+    
+    // Explicit string trim to avoid passing whitespace/empty values
+    "1session": document.getElementById("ws1Session").value.trim(),
+    "1start_time": document.getElementById("ws1StartTime").value.trim(),
+    "1end_time": document.getElementById("ws1EndTime").value.trim(),
+    "2session": document.getElementById("ws2Session").value.trim(),
+    "2start_time": document.getElementById("ws2StartTime").value.trim(),
+    "2end_time": document.getElementById("ws2EndTime").value.trim(),
+    
     category: wsCategory.value,
     location: document.getElementById("wsLocation").value.trim(),
     venueName: document.getElementById("wsVenueName").value.trim(),
@@ -367,7 +373,6 @@ workshopForm.addEventListener("submit", async (e) => {
   submitBtn.disabled = false;
   submitBtn.textContent = "Save workshop";
 });
-
 // =================================================================
 // VIP Partners tab: table + invite form
 // =================================================================
