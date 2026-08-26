@@ -69,10 +69,10 @@ async function getWorkshopSortDateForLabel(label) {
 function workshopSessionFields(workshop) {
   if (!workshop) return {};
   return {
-    "1session": workshop["1session"] || "",
-    "2session": workshop["2session"] || "",
-    "1start_time": workshop["1start_time"] || "",
-    "1end_time": workshop["1end_time"] || "",
+    "session_one": workshop["1session"] || "",
+    "session_two": workshop["2session"] || "",
+    "one_start_time": workshop["1start_time"] || "",
+    "two_start_time": workshop["2start_time"] || "",
   };
 }
 
