@@ -39,18 +39,41 @@ function workshopLabelFor(w) {
 }
 
 /**
+ * HELPER: look up a workshop doc by its composite label (the same
+ * string used as a booking's courseDate/workshop field).
+ */
+async function getWorkshopByLabel(label) {
+  if (!label) return null;
+  const snap = await db.collection("workshops").get();
+  for (const doc of snap.docs) {
+    if (workshopLabelFor(doc.data()) === label) return doc.data();
+  }
+  return null;
+}
+
+/**
  * HELPER: look up a workshop's sortDate (YYYY-MM-DD) from its
  * composite label, so VIP partner referrals can record the date the
  * referred customer is actually attending - used to hold off payouts
  * until that date has passed.
  */
 async function getWorkshopSortDateForLabel(label) {
-  if (!label) return null;
-  const snap = await db.collection("workshops").get();
-  for (const doc of snap.docs) {
-    if (workshopLabelFor(doc.data()) === label) return doc.data().sortDate || null;
-  }
-  return null;
+  const workshop = await getWorkshopByLabel(label);
+  return workshop ? workshop.sortDate || null : null;
+}
+
+/**
+ * HELPER: pull the session dates/times off a workshop doc, in the
+ * shape Bigin CRM expects (same field names as Firestore).
+ */
+function workshopSessionFields(workshop) {
+  if (!workshop) return {};
+  return {
+    "1session": workshop["1session"] || "",
+    "2session": workshop["2session"] || "",
+    "1start_time": workshop["1start_time"] || "",
+    "1end_time": workshop["1end_time"] || "",
+  };
 }
 
 /**
@@ -245,6 +268,7 @@ try {
 }
 
         // --- STEP D: Add Contact to Bigin CRM ---
+        const workshopForBigin = await getWorkshopByLabel(courseDate);
         await createBiginContact(
   firstName,
   lastName,
@@ -253,7 +277,9 @@ try {
   courseDate,
   biginClientId.value(),
   biginClientSecret.value(),
-  biginRefreshToken.value()
+  biginRefreshToken.value(),
+  false,
+  workshopSessionFields(workshopForBigin)
 );
 
         // --- STEP E: Send Confirmation Email via Resend ---
@@ -538,7 +564,7 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
-async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false) {
+async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false, workshopFields = {}) {
   try {
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
@@ -577,6 +603,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             id: existingContact.id,
             Description: existingDescription + newNote,
             Course: courseDate,
+            ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
               : { referral_code: referralCode }),
@@ -602,6 +629,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
               ? `VIP Partner sign-up. Referral Code: ${referralCode}`
               : `Workshop attendee. Unique Referral Code: ${referralCode}`,
             Course: courseDate,
+            ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
               : { referral_code: referralCode }),
@@ -771,6 +799,7 @@ exports.vipPartnerSignup = onRequest(
       }
 
       // --- Add/update Contact in Bigin CRM, flagged as a VIP Partner ---
+      const vipWorkshop = await getWorkshopByLabel(chosenDate);
       await createBiginContact(
         firstName,
         lastName,
@@ -780,7 +809,8 @@ exports.vipPartnerSignup = onRequest(
         biginClientId.value(),
         biginClientSecret.value(),
         biginRefreshToken.value(),
-        true
+        true,
+        workshopSessionFields(vipWorkshop)
       );
 
       // --- Send confirmation email, bcc'd to Leo ---
@@ -1407,6 +1437,12 @@ exports.adminSaveWorkshop = onRequest(
         sortDate: String(fields.sortDate || "").trim(),
         active: fields.active !== false,
         soldOut: Boolean(fields.soldOut),
+        "1session": String(fields["1session"] || "").trim(),
+        "2session": String(fields["2session"] || "").trim(),
+        "1start_time": String(fields["1start_time"] || "").trim(),
+        "1end_time": String(fields["1end_time"] || "").trim(),
+        "2start_time": String(fields["2start_time"] || "").trim(),
+        "2end_time": String(fields["2end_time"] || "").trim(),
       };
 
       if (!workshop.dateLabel || !workshop.sortDate) {
@@ -1648,6 +1684,7 @@ exports.adminAddBooking = onRequest(
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
+      const manualWorkshop = await getWorkshopByLabel(chosenDate);
       await createBiginContact(
         firstName,
         lastName,
@@ -1656,7 +1693,9 @@ exports.adminAddBooking = onRequest(
         chosenDate,
         biginClientId.value(),
         biginClientSecret.value(),
-        biginRefreshToken.value()
+        biginRefreshToken.value(),
+        false,
+        workshopSessionFields(manualWorkshop)
       );
 
       if (sendEmail !== false) {
