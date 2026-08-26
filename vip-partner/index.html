@@ -83,8 +83,9 @@
           <span class="eyebrow">Why I am doing this</span>
           <h2>I would prefer money in your pocket than in Meta's</h2>
           <div class="video-frame" id="videoFrame">
-            <button class="watch-video-btn" id="watchVideoBtn">
-              <span class="watch-video-icon">&#9658;</span>
+            <button class="watch-video-btn" id="watchVideoBtn" aria-label="Watch the intro video">
+              <img class="watch-video-thumb" src="https://vumbnail.com/1221441376.jpg" alt="Watch the intro video">
+              <span class="watch-video-play"><span class="watch-video-icon">&#9658;</span></span>
               <span class="watch-video-text">
                 <strong>Watch the intro</strong>
                 <span>2 minutes, from me</span>
@@ -233,9 +234,9 @@
     <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
     <div class="video-modal-content">
       <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
-      <video controls id="problemVideo">
-        <source src="problem-video.mp4" type="video/mp4">
-      </video>
+      <div class="video-modal-embed">
+        <iframe id="problemVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="VIP Partner intro video"></iframe>
+      </div>
     </div>
   </div>
  

@@ -255,6 +255,7 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
  
 /* ---------- watch video button ---------- */
 .watch-video-btn{
+  position:relative;
   display:flex;
   align-items:center;
   gap:16px;
@@ -265,23 +266,39 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
   padding:22px 24px;
   cursor:pointer;
   text-align:left;
+  overflow:hidden;
 }
 .watch-video-btn:hover{background:#294d36;}
-.watch-video-icon{
+.watch-video-thumb{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.55;
+}
+.watch-video-play{
+  position:relative;
   flex:0 0 auto;
   width:48px;
   height:48px;
   border-radius:50%;
-  background:var(--orange);
-  color:var(--dark);
+  background:rgba(255,255,255,0.92);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:16px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.3);
+  transition:transform 0.2s ease;
 }
-.watch-video-text{display:flex; flex-direction:column; gap:2px;}
-.watch-video-text strong{color:#fff; font-size:16px;}
-.watch-video-text span:last-child{color:#b9d3c1; font-size:13px;}
+.watch-video-btn:hover .watch-video-play{transform:scale(1.08);}
+.watch-video-icon{
+  color:var(--dark);
+  font-size:16px;
+  margin-left:2px;
+}
+.watch-video-text{position:relative; display:flex; flex-direction:column; gap:2px;}
+.watch-video-text strong{color:#fff; font-size:16px; text-shadow:0 1px 4px rgba(0,0,0,0.5);}
+.watch-video-text span:last-child{color:#e6efe9; font-size:13px; text-shadow:0 1px 4px rgba(0,0,0,0.5);}
  
 /* ---------- video modal ---------- */
 .video-modal{
@@ -309,6 +326,8 @@ h2{font-size:26px; font-weight:700; line-height:1.25; margin:0 0 16px;}
   animation:fadeIn 0.3s ease;
 }
 .video-modal-content video{width:100%; display:block;}
+.video-modal-embed{position:relative; width:100%; padding-top:56.25%;}
+.video-modal-embed iframe{position:absolute; top:0; left:0; width:100%; height:100%; border:none;}
 .video-modal-close{
   position:absolute;
   top:10px; right:10px;

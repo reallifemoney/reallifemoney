@@ -156,10 +156,9 @@ document.getElementById("readInsteadBtn").addEventListener("click", (e) => {
     videoFrame.innerHTML = `
       <div class="read-instead">
         <p>Hey I'm Leo! I'm a maths teacher and qualified financial advisor on a mission to help normal people understand investing.<br><br>
-My ultimate goal is to help as many people as I can to feel confident with investing and managing their money.<br><br>
 I've written an investing workshop that is super engaging, that is incredibly practical but also has a nurturing and gentle environment.<br><br>
-I know my workshop is really amazing - I just need others to realise that too.<br><br>
-I've spent hundreds on meta ads but had no success since it's all down to trust.<br><br>
+Without tooting my own horn, I know my workshop is really amazing - I just need others to realise that too.<br><br>
+I've spent hundreds on meta ads but had no success since it's all down to trust and I know people are skeptical about what they see online - as I'm sure you are too reading this!<br><br>
 So I want you to experience my workshop first hand (at no cost) so that you trust me and can pass that trust onto your loyal followers.<br><br>
 The way I see it, everyone wins - I get more attendees, your followers get discounted investing confidence, and you get FREE investing confidence plus a side income.<br><br>
 I'd much rather the money in you and your followers' pockets than Meta or Google's.<br><br>
@@ -180,14 +179,15 @@ const videoModal = document.getElementById("videoModal");
 const videoModalBackdrop = document.getElementById("videoModalBackdrop");
 const videoModalClose = document.getElementById("videoModalClose");
 const problemVideo = document.getElementById("problemVideo");
+const problemVideoSrc = "https://player.vimeo.com/video/1221441376?badge=0&autopause=0&autoplay=1";
 
 function openVideoModal() {
   videoModal.hidden = false;
-  problemVideo.play();
+  problemVideo.src = problemVideoSrc;
 }
 function closeVideoModal() {
   videoModal.hidden = true;
-  problemVideo.pause();
+  problemVideo.src = ""; // stop playback
 }
 
 watchVideoBtn.addEventListener("click", openVideoModal);
