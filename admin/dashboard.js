@@ -295,18 +295,18 @@ function openWorkshopForm(id) {
   document.getElementById("wsId").value = w ? w.id || "" : "";
   document.getElementById("wsDateLabel").value = w ? w.dateLabel || "" : "";
   document.getElementById("wsSortDate").value = w ? w.sortDate || "" : "";
-  document.getElementById("wsTimes").value = w ? w.times || "" : "";
+  
   
   // Explicit bracket notation with string fallbacks
   document.getElementById("ws1Session").value = w ? (w["1session"] || "") : "";
-  document.getElementById("ws1StartTime").value = w ? (w["1start_time"] || "") : "";
-  document.getElementById("ws1EndTime").value = w ? (w["1end_time"] || "") : "";
+  document.getElementById("wsTimes").value = w ? w.times || "6:30pm - 8:00pm" : "6:30pm - 8:00pm";
+document.getElementById("ws1StartTime").value = w ? (w["1start_time"] || "18:30") : "18:30";
+document.getElementById("ws1EndTime").value = w ? (w["1end_time"] || "20:00") : "20:00";
+document.getElementById("ws2StartTime").value = w ? (w["2start_time"] || "18:30") : "18:30";
+document.getElementById("ws2EndTime").value = w ? (w["2end_time"] || "20:00") : "20:00";
+document.getElementById("wsLocation").value = w ? w.location || "🖥️ Live online" : "🖥️ Live online";
   document.getElementById("ws2Session").value = w ? (w["2session"] || "") : "";
-  document.getElementById("ws2StartTime").value = w ? (w["2start_time"] || "") : "";
-  document.getElementById("ws2EndTime").value = w ? (w["2end_time"] || "") : "";
-
   wsCategory.value = w ? w.category || "online" : "online";
-  document.getElementById("wsLocation").value = w ? w.location || "" : "";
   document.getElementById("wsVenueName").value = w ? w.venueName || "" : "";
   document.getElementById("wsVenueAddress").value = w ? w.venueAddress || "" : "";
   document.getElementById("wsPrice").value = w ? w.price || 75 : 75;
