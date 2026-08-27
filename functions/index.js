@@ -73,6 +73,7 @@ function workshopSessionFields(workshop) {
     "session_two": workshop["2session"] || "",
     "one_start_time": workshop["1start_time"] || "",
     "two_start_time": workshop["2start_time"] || "",
+     "course_times": workshop["times"] || "",
   };
 }
 
