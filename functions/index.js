@@ -447,7 +447,6 @@ exports.castleP16SignUp = onRequest(
           one_start_time: "15:30",
           two_start_time: "15:30",
           course_times: "15:30 - 16:30",
-          year_group: year,
         }
       );
 
