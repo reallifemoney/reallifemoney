@@ -842,7 +842,7 @@ function attachVenuePopoverListeners() {
 async function handleReserve(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button');
-  btn.innerText = "Reserving your place...";
+  btn.innerText = "reserving your place...";
   btn.disabled = true;
 
   const name = document.getElementById('res-name').value;
