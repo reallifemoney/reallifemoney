@@ -184,6 +184,28 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             background: var(--purple);
         }
 
+        /* COMING SOON (disabled) CARD */
+        .course-card.disabled {
+            cursor: not-allowed;
+            opacity: .6;
+            filter: grayscale(0.4);
+        }
+        .course-card.disabled:hover {
+            transform: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            border-color: var(--rule);
+        }
+        .tag.tag-soon {
+            background: #999;
+        }
+        .course-card.disabled .btn-go {
+            background: #cfcfcf;
+            color: #666;
+        }
+        .course-card.disabled:hover .btn-go {
+            background: #cfcfcf;
+        }
+
         footer {
             padding: 40px;
             text-align: center;
@@ -229,21 +251,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1 class="home-title">Who's <span style="color: var(--purple)">learning?</span></h1>
 
         <div class="options-grid">
-            <a href="/schools/castle-staff" class="course-card">
-                <span class="card-icon">🧑‍🏫</span>
-                <span class="tag">Staff</span>
-                <h2 class="card-title">Staff</h2>
-                <p class="card-meta">Investing workshops for Castle School staff.</p>
-                <div class="btn-go">View details →</div>
-            </a>
-
-            <a href="/schools/castle-p16" class="course-card">
+<a href="/schools/castle-p16" class="course-card">
                 <span class="card-icon">🎓</span>
                 <span class="tag">Post-16</span>
                 <h2 class="card-title">Post-16 Students</h2>
                 <p class="card-meta">Investing workshops for post-16 students.</p>
                 <div class="btn-go">View details →</div>
             </a>
+
+            <div class="course-card disabled" aria-disabled="true">
+                <span class="card-icon">🧑‍🏫</span>
+                <span class="tag tag-soon">Coming Soon</span>
+                <h2 class="card-title">Staff</h2>
+                <p class="card-meta">Investing workshops for Castle School staff.</p>
+                <div class="btn-go">Coming soon</div>
+            </div>
+
+            
         </div>
     </section>
 
