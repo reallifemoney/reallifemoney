@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investing workshops for schools — Real Life Money</title>
-    <meta name="description" content="For either staff wanting to learn about investing and the teacher pension scheme, or for post-16 students looking to get started nice and early on their investing journey.">
+    <title>The Castle School — Real Life Money</title>
+    <meta name="description" content="Investing workshops for The Castle School — choose staff or post-16 students.">
     <link rel="icon" type="image/webp" href="/logo-circle.webp">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <!-- Google Tag Manager -->
@@ -109,16 +109,16 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
 
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
-            max-width: 1080px;
+            max-width: 720px;
             width: 100%;
         }
 
         .course-card {
             background: var(--white);
             border: 1px solid var(--rule);
-            padding: 28px 28px 28px;
+            padding: 36px 28px;
             border-radius: 24px;
             width: 100%;
             box-shadow: 0 20px 40px rgba(0,0,0,0.04);
@@ -135,19 +135,10 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             border-color: var(--purple);
         }
 
-        .card-image-wrap {
-            width: 100%;
-            height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-bottom: 18px;
-        }
-
-        .card-image-wrap img {
-            max-height: 100%;
-            max-width: 140px;
-            object-fit: contain;
+        .card-icon {
+            font-size: 32px;
+            margin-bottom: 14px;
+            display: block;
         }
 
         .tag {
@@ -193,28 +184,6 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             background: var(--purple);
         }
 
-        /* COMING SOON (disabled) CARD */
-        .course-card.disabled {
-            cursor: not-allowed;
-            opacity: .6;
-            filter: grayscale(0.4);
-        }
-        .course-card.disabled:hover {
-            transform: none;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-            border-color: var(--rule);
-        }
-        .tag.tag-soon {
-            background: #999;
-        }
-        .course-card.disabled .btn-go {
-            background: #cfcfcf;
-            color: #666;
-        }
-        .course-card.disabled:hover .btn-go {
-            background: #cfcfcf;
-        }
-
         footer {
             padding: 40px;
             text-align: center;
@@ -254,58 +223,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
     <section class="home-hero">
-        <a href="/" class="back-link">← Back to home</a>
-        <img src="/logo.webp" alt="Real Life Money Logo" class="logo-main">
+        <a href="/schools" class="back-link">← Back to schools</a>
+        <img src="/castle.png" alt="The Castle School Logo" class="logo-main">
 
-        <h1 class="home-title">Pick your <span style="color: var(--purple)">school</span></h1>
+        <h1 class="home-title">The Castle School — who's <span style="color: var(--purple)">learning?</span></h1>
+        <p class="home-subtitle">Choose your group to see the right investing workshop for you.</p>
+
         <div class="options-grid">
-            <a href="/castle-school" class="course-card">
-                <div class="card-image-wrap"><img src="/castle.png" alt="The Castle School logo"></div>
-                <span class="tag">Available</span>
-                <h2 class="card-title">The Castle School</h2>
-                <p class="card-meta">Workshops for staff and post-16 students.</p>
+            <a href="/castle-school-staff" class="course-card">
+                <span class="card-icon">🧑‍🏫</span>
+                <span class="tag">Staff</span>
+                <h2 class="card-title">Staff</h2>
+                <p class="card-meta">Investing workshops for Castle School staff.</p>
                 <div class="btn-go">View details →</div>
             </a>
 
-            <a href="/collegiate-school" class="course-card disabled">
-                <div class="card-image-wrap"><img src="/collegiate.png" alt="Collegiate School logo"></div>
-                <span class="tag">Coming soon</span>
-                <h2 class="card-title">Collegiate School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
+            <a href="/castle-school-post-16" class="course-card">
+                <span class="card-icon">🎓</span>
+                <span class="tag">Post-16</span>
+                <h2 class="card-title">Post-16 Students</h2>
+                <p class="card-meta">Investing workshops for post-16 students.</p>
+                <div class="btn-go">View details →</div>
             </a>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/downend.png" alt="Downend School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Downend School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/mangotsfield.png" alt="Mangotsfield School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Mangotsfield School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/bradley.png" alt="Bradley Stoke School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Bradley Stoke School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/winterbourne.png" alt="Winterbourne School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Winterbourne School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
         </div>
     </section>
 
