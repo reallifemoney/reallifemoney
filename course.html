@@ -9,9 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
-<script src="https://js.stripe.com/v3/"></script>
+<script src="https://js.stripe.com/v3/" defer></script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -85,7 +86,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 /* HERO */
 .hero{padding:20px 0 56px;position:relative;text-align:center;}
 .hero-grid{display:flex;flex-direction:column;align-items:center;gap:40px;max-width:760px;margin:0 auto;}
-.hero h1{font-size:48px;letter-spacing:-.01em;}
+.hero h1{font-size:38px;letter-spacing:-.01em;}
 .hero h1 span{color:var(--green);}
 .hero p.lede{font-size:19px;color:var(--text);max-width:52ch;margin:20px auto 28px;}
 .hero p span{color:var(--green);font-weight:bold;}
@@ -196,7 +197,6 @@ section{padding:80px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
 .select-btn:hover{opacity:.92;}
-.select-btn:disabled{background:#c6c6c6;cursor:not-allowed;opacity:1;}
 .filter-container {display: flex;justify-content: center;gap: 10px;margin-bottom: 30px;flex-wrap: wrap;}
 .filter-pill {background-color: #ffffff;color: #000000;border: 2px solid #000000;border-radius: 50px;padding: 8px 20px;font-size: 0.95rem;font-weight: 600;cursor: pointer;transition: all 0.2s ease-in-out;}
 .filter-pill:hover:not(.active) {border-color: var(--green, #2e7d32);color: var(--green, #2e7d32);}
@@ -227,6 +227,13 @@ section{padding:80px 0;}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
 .field input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--rule);font-family:inherit;font-size:15px;background:#fff;}
 .field input:focus{outline:none;border-color:var(--purple);}
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--ink);margin-bottom:20px;cursor:pointer;}
+.checkbox-row input{width:18px;height:18px;margin-top:2px;flex-shrink:0;}
+.checkbox-row .link-btn{background:none;border:none;padding:0;font:inherit;color:var(--purple);text-decoration:underline;cursor:pointer;}
+.disclaimer-box{position:relative;width:100%;max-width:560px;background:#fff;border-radius:16px;padding:32px;max-height:80vh;overflow-y:auto;}
+.disclaimer-box h3{margin-top:0;}
+.disclaimer-box ul{padding-left:20px;line-height:1.6;}
+.disclaimer-box .modal-close{position:absolute;top:10px;right:14px;color:var(--ink);font-size:26px;}
 .success-header{text-align:center;}
 .success-icon{width:64px;height:64px;border-radius:50%;background:#eafaea;color:var(--green);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;}
 .pay-options{display:flex;flex-direction:column;gap:12px;margin-top:24px;}
@@ -281,8 +288,6 @@ footer a{color:#ddd;text-decoration:underline;}
   .sticky-btn{padding:10px 18px;font-size:13px;}
 }
 
-
-
 /* RESPONSIVE */
 @media (max-width:860px){
   .hero-grid{grid-template-columns:1fr;}
@@ -318,8 +323,9 @@ footer a{color:#ddd;text-decoration:underline;}
     </a>
       <div>
         <span class="eyebrow">Investing workshop</span>
-        <h1>From beginner to clicking invest in two <span>engaging </span>and <span>nurturing </span>sessions.</h1>
-        <p class="lede">I'm a maths teacher and qualified financial advisor here to help you achieve your goals.</p>
+        <h1>Two sessions.<br>A lifetime of <span>investing confidence.</span></h1>
+        <p class="lede">Taught by a qualified financial advisor and maths teacher in a genuinely nurturing space where no question is too silly.
+        </p>
         <div class="date-card-hero" style="margin-bottom:25px">
     <div class="date-meta">
       <h2 style="padding-bottom:10px">Next online workshop:</h2>
@@ -372,6 +378,57 @@ footer a{color:#ddd;text-decoration:underline;}
   </div>
 </section>
 
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What people say</span>
+      <h2>Don't take my word for it</h2>
+      <p>Real feedback from people who've sat in the workshop.</p>
+    </div>
+     <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px;margin-bottom: 20px;">
+      <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-c8b4ed7a-5e65-496b-81b9-49718b5e0660" data-elfsight-app-lazy></div>
+       <!-- Old review grid 
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+        <svg width="36" height="36" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-9 20-20 0-1.3-.1-2.7-.4-4z"/>
+          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
+          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3-11.3-7.3l-6.6 5.1C9.6 39.6 16.3 44 24 44z"/>
+          <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.2-2.3 4-4.2 5.2l6.2 5.2C40.8 35.2 44 30 44 24c0-1.3-.1-2.7-.4-4z"/>
+        </svg>
+        <div>
+          <div style="font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px;">Real Life Money</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+            <div style="color: #fbbc04; font-size: 16px; letter-spacing: 1px;">★★★★★</div>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">5.0</span>
+            <span style="font-size: 12px; color: var(--muted);">Google Reviews</span>
+          </div>
+        </div>
+      </div> 
+    </div>
+  
+    <div class="rev-grid">
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"I'm not great with sitting in long meetings and taking in lot's of information, however Leo made this much easier through keeping information simple and using games to keep me actively engaged.<br><br>I would highly recommend this course to anyone, as it was simply brilliant."</p>
+        <div class="who"><div class="avatar">D</div><div><div class="who-name">Dan, Bristol</div></div></div>
+      </div>
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Having a course with an actual human who completely understands the world of investing, and being able to ask questions there and then, has been amazing to help me understand and build my confidence in the world of investing. Thank you."</p>
+        <div class="who"><div class="avatar">R</div><div><div class="who-name">Rachael</div></div></div>
+      </div>
+      <div class="cred">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"I had a great time doing Leo’s investment course. I found it really engaging and clear to understand.<br><br>I can’t fault the course and am really grateful for Leo delivering this - thank you!"</p>
+        <div class="who"><div class="avatar">L</div><div><div class="who-name">Lucy</div></div></div>
+      </div>
+    </div> -->
+  </div>
+</section>
+
 
 <!-- ABOUT -->
 <section class="about-sec">
@@ -393,56 +450,6 @@ footer a{color:#ddd;text-decoration:underline;}
 
 
 
-<!-- REVIEWS -->
-<section class="reviews">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">What people say</span>
-      <h2>Don't take my word for it</h2>
-      <p>Real feedback from people who've sat in the workshop.</p>
-    </div>
-    <div style="background: var(--white); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px;margin-bottom: 20px;">
-      <!-- Elfsight Google Reviews | Untitled Google Reviews -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-c8b4ed7a-5e65-496b-81b9-49718b5e0660" data-elfsight-app-lazy></div>
-      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
-        <!-- Google G logo SVG -->
-        <svg width="36" height="36" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 33 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-9 20-20 0-1.3-.1-2.7-.4-4z"/>
-          <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/>
-          <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.3 26.8 36 24 36c-5.2 0-9.7-3-11.3-7.3l-6.6 5.1C9.6 39.6 16.3 44 24 44z"/>
-          <path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.2-2.3 4-4.2 5.2l6.2 5.2C40.8 35.2 44 30 44 24c0-1.3-.1-2.7-.4-4z"/>
-        </svg>
-        <div>
-          <div style="font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px;">Real Life Money</div>
-          <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
-            <div style="color: #fbbc04; font-size: 16px; letter-spacing: 1px;">★★★★★</div>
-            <span style="font-size: 13px; font-weight: 600; color: var(--ink);">5.0</span>
-            <span style="font-size: 12px; color: var(--muted);">Google Reviews</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="rev-grid">
-      <div class="cred">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"I'm not great with sitting in long meetings and taking in lot's of information, however Leo made this much easier through keeping information simple and using games to keep me actively engaged.<br><br>I would highly recommend this course to anyone, as it was simply brilliant."</p>
-        <div class="who"><div class="avatar">D</div><div><div class="who-name">Dan, Bristol</div></div></div>
-      </div>
-      <div class="cred">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"Having a course with an actual human who completely understands the world of investing, and being able to ask questions there and then, has been amazing to help me understand and build my confidence in the world of investing. Thank you."</p>
-        <div class="who"><div class="avatar">R</div><div><div class="who-name">Rachael</div></div></div>
-      </div>
-      <div class="cred">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"I had a great time doing Leo’s investment course. I found it really engaging and clear to understand.<br><br>I can’t fault the course and am really grateful for Leo delivering this - thank you!"</p>
-        <div class="who"><div class="avatar">L</div><div><div class="who-name">Lucy</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- WHAT YOU GET -->
 <section class="get">
   <div class="wrap">
@@ -459,16 +466,18 @@ footer a{color:#ddd;text-decoration:underline;}
           <li>What the different types of investment actually are (with real-life examples)</li>
           <li>Risk, reward, and how to think about market ups and downs without panicking</li>
           <li>The mistakes almost every beginner makes — and how to avoid them</li>
+          <li>Test knowledge and nerve with an investing simulation game</li>
         </ul>
       </div>
       <div class="det-card">
         <span class="wk-label">Session 2</span>
-        <h3>Putting it into practice</h3>
+        <h3>Step-by-step guide</h3>
         <ul>
-          <li>How to actually choose funds — without needing to pick individual stocks</li>
-          <li>Building a portfolio that matches your goals and timeline</li>
-          <li>How to invest tax-efficiently</li>
-          <li>Do your own fund research with me there to assist</li>
+          <li>Understand your personal risk profile and how to invest in-line with it</li>
+          <li>Choose your investing platform - the pros and cons of each</li>
+          <li>How to invest tax-efficiently including ISAs and pensions</li>
+          <li>Understand funds better through a card game and start your own fund research</li>
+          <li>Fund ideas to get you started - including ethical investing options</li>
         </ul>
       </div>
     </div>
@@ -485,8 +494,8 @@ footer a{color:#ddd;text-decoration:underline;}
       </div>
       <div class="perk">
         <i class="fa-solid fa-file-lines"></i>
-        <h4>Notes after every session</h4>
-        <p>The key slides land in your inbox after each evening, so nothing gets forgotten.</p>
+        <h4>Valuable resources</h4>
+        <p>Simple step-by-step guide to investing and the key slides land in your inbox after each evening, so nothing gets forgotten.</p>
       </div>
     </div>
   </div>
@@ -558,6 +567,10 @@ footer a{color:#ddd;text-decoration:underline;}
   <label for="res-qty">Number of people</label>
   <input type="number" id="res-qty" min="1" max="12" value="1" required>
 </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="res-disclaimer" required>
+          <span>I agree to the <button type="button" class="link-btn" onclick="openDisclaimer(event)">workshop disclaimer</button></span>
+        </label>
         <button type="submit" class="select-btn" onclick="logbuttonclick()">Proceed to payment</button>
       </form>
     </div>
@@ -683,6 +696,20 @@ footer a{color:#ddd;text-decoration:underline;}
       <span>Only £75 to transform your financial future</span>
     </div>
     <button class="sticky-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Reserve your spot →</button>
+  </div>
+</div>
+
+<!-- WORKSHOP DISCLAIMER MODAL -->
+<div id="disclaimerModal" class="modal-overlay">
+  <div class="disclaimer-box">
+    <button class="modal-close" onclick="closeDisclaimer()" aria-label="Close">&times;</button>
+    <h3>Workshop disclaimer</h3>
+    <p>By attending this workshop and checking the box, you are confirming that:</p>
+    <ul>
+      <li>You understand that this workshop is for educational purposes only and is not giving financial advice</li>
+      <li>Any of the investments or investing platforms shown during this workshop are not being recommended to you</li>
+      <li>Any financial decisions you make are your own responsibility, and if you require specific recommendations then you should seek professional financial advice</li>
+    </ul>
   </div>
 </div>
 
@@ -824,6 +851,18 @@ window.addEventListener('click', function(event) {
   if (event.target === modal) closeVideo();
 });
 
+// ---- Workshop disclaimer modal ----
+function openDisclaimer(event) {
+  if (event) event.preventDefault();
+  document.getElementById('disclaimerModal').classList.add('active');
+}
+function closeDisclaimer() {
+  document.getElementById('disclaimerModal').classList.remove('active');
+}
+document.getElementById('disclaimerModal').addEventListener('click', function(event) {
+  if (event.target === this) closeDisclaimer();
+});
+
 async function loadWorkshops() {
   const grid = document.getElementById('sessGrid');
   try {
@@ -870,9 +909,7 @@ async function loadWorkshops() {
           ${locationHtml}
           <div class="time">🕙 ${w.times}</div>
           <div class="price">£${w.price}</div>
-          ${w.soldOut
-            ? `<button class="select-btn" disabled>Sold out</button>`
-            : `<button class="select-btn" onclick="selectDateStep('${w.dateLabel}', '${w.dateLabel}', '${w.times}', '${w.category === 'online' ? w.location : '📍 ' + w.venueName}'); logcourseselection();">Select this date</button>`}
+          <button class="select-btn" onclick="selectDateStep('${w.dateLabel}', '${w.dateLabel}', '${w.times}', '${w.category === 'online' ? w.location : '📍 ' + w.venueName}'); logcourseselection();">Select this date</button>
         </div>
       `;
     }).join('');
@@ -956,7 +993,7 @@ async function handleReserve(e) {
   } catch (error) {
     console.error(error);
     alert("Something went wrong starting checkout. Please WhatsApp me directly!");
-    btn.innerText = "Confirm Reservation";
+    btn.innerText = "Proceed to payment";
     btn.disabled = false;
   }
 }
@@ -1120,7 +1157,6 @@ async function handleWaitlist(event) {
     submitButton.style.background = originalBtnText;
   }
 }
-
 </script>
 
 </body>
