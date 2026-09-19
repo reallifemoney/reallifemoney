@@ -400,7 +400,7 @@ exports.getBookingDetails = onRequest(
  * session_one/session_two fields).
  */
 exports.castleP16SignUp = onRequest(
-  { secrets: [biginClientId, biginClientSecret, biginRefreshToken] },
+  { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
   async (req, res) => {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -450,6 +450,15 @@ exports.castleP16SignUp = onRequest(
           year_group: year,
         }
       );
+
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: schoolEmail,
+        bcc: "leo@reallifemoney.co.uk",
+        subject: "Castle School investing workshop confirmed",
+        html: castleP16ConfirmationEmailHtml(firstName, year),
+      });
 
       res.json({ success: true });
     } catch (err) {
@@ -525,6 +534,61 @@ function bookingConfirmationEmailHtml(firstName, courseDate, referralCode) {
           <p style="font-size: 11px; color: #666; text-align: center;">
             This is an automated booking confirmation from Real Life Money.
           </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
+  `;
+}
+
+/**
+ * HELPER: Confirmation email for the free Castle School P16 workshop.
+ */
+function castleP16ConfirmationEmailHtml(firstName, yearGroup) {
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
+      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
+      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
+      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
+      .content { padding: 0 25px 40px 25px; }
+      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
+      .details-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 16px; padding: 20px; margin: 25px 0; }
+      .details-box p { margin: 8px 0; }
+      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
+      @media only screen and (max-width: 480px) { .content { padding: 0 15px 30px 15px; } h1 { font-size: 22px; } .wrapper { padding: 10px 5px; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <img src="https://reallifemoney.co.uk/logo-circle.webp" alt="Real Life Money" style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
+        </div>
+        <div class="content">
+          <h1>Your place is confirmed, ${firstName}!</h1>
+          <p>Thanks for signing up. I'm looking forward to seeing you at the Castle School investing workshop.</p>
+          <div class="details-box">
+            <p><strong>School:</strong> Castle School</p>
+            <p><strong>Year group:</strong> ${yearGroup}</p>
+            <p><strong>Dates:</strong> Thursday 8th and Thursday 15th October 2026</p>
+            <p><strong>Time:</strong> 15:30 - 16:30</p>
+            <p><strong>Room:</strong> M9</p>
+            <p><strong>Session leader:</strong> Mr Dennis</p>
+            <p><strong>Cost:</strong> Free</p>
+          </div>
+          <p>These are two sessions, so please keep both dates free. The workshop is educational and is not financial advice, as covered by the disclaimer you accepted when signing up.</p>
+          <p>If you have any questions or can no longer attend, please reply to this email or speak to Mr Dennis.</p>
+          <p>See you soon!<br><strong>Leo</strong></p>
+        </div>
+        <div class="footer">
+          <p>© 2026 Real Life Money | Bristol, UK</p>
+          <p>This is an automated workshop confirmation from Real Life Money.</p>
         </div>
       </div>
     </div>
