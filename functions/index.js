@@ -393,6 +393,73 @@ exports.getBookingDetails = onRequest(
 );
 
 /**
+ * CASTLE SCHOOL P16 - FREE WORKSHOP SIGN-UP
+ * Simple, no-payment sign-up for the Y12/Y13 Castle School workshop.
+ * Saves the sign-up and syncs a contact to Bigin CRM (Course = "Castle
+ * School", with the fixed workshop dates recorded in the usual
+ * session_one/session_two fields).
+ */
+exports.castleP16SignUp = onRequest(
+  { secrets: [biginClientId, biginClientSecret, biginRefreshToken] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { fullName, yearGroup, email, disclaimerAccepted } = req.body;
+
+      const name = String(fullName || "").trim();
+      const year = String(yearGroup || "").trim();
+      const schoolEmail = String(email || "").trim().toLowerCase();
+
+      if (!name || !year || !schoolEmail || !disclaimerAccepted) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const firstName = name.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Student";
+      const lastName = name.split(" ").slice(1).join(" ") || year;
+
+      await db.collection("castleP16SignUps").add({
+        fullName: name,
+        yearGroup: year,
+        email: schoolEmail,
+        disclaimerAccepted: !!disclaimerAccepted,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      await createBiginContact(
+        firstName,
+        lastName,
+        schoolEmail,
+        "",
+        "Castle School",
+        biginClientId.value(),
+        biginClientSecret.value(),
+        biginRefreshToken.value(),
+        false,
+        {
+          session_one: "Thursday 8th October 2026",
+          session_two: "Thursday 15th October 2026",
+          one_start_time: "15:30",
+          two_start_time: "15:30",
+          course_times: "15:30 - 16:30",
+          year_group: year,
+        }
+      );
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing Castle School P16 sign-up:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
  * HELPER: HTML for the workshop booking confirmation email (shared by
  * the Stripe webhook and the admin manual-booking endpoint).
  */
