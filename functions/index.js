@@ -456,7 +456,7 @@ exports.castleP16SignUp = onRequest(
         from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
         to: schoolEmail,
         bcc: "leo@reallifemoney.co.uk",
-        subject: "Castle School investing workshop confirmed",
+        subject: "Castle School investing workshop",
         html: castleP16ConfirmationEmailHtml(firstName, year),
       });
 
@@ -572,7 +572,7 @@ function castleP16ConfirmationEmailHtml(firstName, yearGroup) {
         </div>
         <div class="content">
           <h1>Your place is confirmed, ${firstName}!</h1>
-          <p>Thanks for signing up. I'm looking forward to seeing you at the Castle School investing workshop.</p>
+          <p>Thanks so much for signing up. I'm looking forward to helping you learn to invest.</p>
           <div class="details-box">
             <p><strong>School:</strong> Castle School</p>
             <p><strong>Year group:</strong> ${yearGroup}</p>
@@ -583,8 +583,8 @@ function castleP16ConfirmationEmailHtml(firstName, yearGroup) {
             <p><strong>Cost:</strong> Free</p>
           </div>
           <p>These are two sessions, so please keep both dates free. The workshop is educational and is not financial advice, as covered by the disclaimer you accepted when signing up.</p>
-          <p>If you have any questions or can no longer attend, please reply to this email or speak to Mr Dennis.</p>
-          <p>See you soon!<br><strong>Leo</strong></p>
+          <p>If you have any questions or can no longer attend, please reply to this email or speak to me at school.</p>
+          <p>See you soon!<br><strong>Mr Dennis</strong></p>
         </div>
         <div class="footer">
           <p>© 2026 Real Life Money | Bristol, UK</p>
