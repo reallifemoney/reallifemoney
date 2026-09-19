@@ -442,8 +442,8 @@ exports.castleP16SignUp = onRequest(
         biginRefreshToken.value(),
         false,
         {
-          session_one: "Thursday 8th October 2026",
-          session_two: "Thursday 15th October 2026",
+          session_one: "2026-10-08",
+          session_two: "2026-10-15",
           one_start_time: "15:30",
           two_start_time: "15:30",
           course_times: "15:30 - 16:30",
