@@ -467,6 +467,201 @@ exports.castleP16SignUp = onRequest(
   }
 );
 
+const POST16_GAME_QUESTIONS = [
+  [
+    { question: "What does investing usually mean?", options: ["Putting money into something with the aim of growing it", "Spending money on a treat", "Keeping cash in your wallet"], answer: 0 },
+    { question: "Which statement about cash is usually true?", options: ["Its value can be reduced by inflation over time", "It always grows faster than investments", "It cannot be used to buy anything"], answer: 0 },
+    { question: "Why might someone keep some money in cash?", options: ["For easy access and short-term spending", "Because cash has no value", "To guarantee a high investment return"], answer: 0 },
+    { question: "What is inflation?", options: ["A general rise in prices over time", "A guaranteed investment profit", "A type of company share"], answer: 0 },
+  ],
+  [
+    { question: "What is a bond?", options: ["A loan made by an investor to a government or company", "A share in a company", "A bank current account"], answer: 0 },
+    { question: "What does a bond issuer generally promise?", options: ["To pay interest and repay the borrowed amount", "To double your money every year", "To give you company ownership"], answer: 0 },
+    { question: "Which usually describes bond risk?", options: ["It can vary depending on the issuer's ability to repay", "It is always risk-free", "It is exactly the same as cash"], answer: 0 },
+    { question: "What is a coupon in bond investing?", options: ["The interest payment made by a bond", "A discount on a share", "A stock market fee"], answer: 0 },
+  ],
+  [
+    { question: "What is an equity investment?", options: ["A share of ownership in a company", "A loan to a government", "A cash savings account"], answer: 0 },
+    { question: "What can happen to the price of a company share?", options: ["It can rise or fall", "It can only rise", "It never changes"], answer: 0 },
+    { question: "Which is a commodity?", options: ["Gold", "A company share", "A bond coupon"], answer: 0 },
+    { question: "Why might investors spread money across different assets?", options: ["To diversify and avoid relying on one investment", "To guarantee every investment wins", "To avoid learning what they own"], answer: 0 },
+  ],
+];
+
+function post16GameId() {
+  return crypto.randomBytes(4).toString("hex").toUpperCase();
+}
+
+function post16GameView(data, playerId = "") {
+  const section = Number(data.section || 0);
+  const questionIndex = Number(data.questionIndex || 0);
+  const currentQuestion = data.status === "question" && POST16_GAME_QUESTIONS[section]
+    ? POST16_GAME_QUESTIONS[section][questionIndex]
+    : null;
+  return {
+    gameId: data.gameId,
+    status: data.status,
+    section,
+    questionIndex,
+    currentQuestion: currentQuestion ? { question: currentQuestion.question, options: currentQuestion.options } : null,
+    sectionNames: ["Investing and cash", "Bonds", "Equities and commodities"],
+    spin: data.spin || { id: 0, result: null },
+    players: Object.entries(data.players || {}).map(([id, player]) => ({
+      id,
+      name: player.name,
+      total: player.total || 0,
+      sessionWinnings: player.sessionWinnings || 0,
+      choice: player.choice || null,
+      answered: player.answered || false,
+      isYou: id === playerId,
+    })),
+  };
+}
+
+/**
+ * POST-16 INVESTING GAME
+ * Admin actions are protected by the existing passwordless admin token.
+ * Players use a short game code and receive only the current question/state.
+ */
+exports.post16Game = onRequest(async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(204).send("");
+
+  try {
+    const body = req.body || {};
+    const action = String(req.query.action || body.action || "");
+    const gameId = String(req.query.gameId || body.gameId || "").trim().toUpperCase();
+
+    if (action === "create") {
+      if (!(await verifyAdminToken(body.token))) return res.status(401).json({ error: "Invalid or expired admin login link" });
+      let id = post16GameId();
+      while ((await db.collection("post16Games").doc(id).get()).exists) id = post16GameId();
+      await db.collection("post16Games").doc(id).set({
+        gameId: id, status: "lobby", section: 0, questionIndex: 0,
+        players: {}, spin: { id: 0, result: null }, createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+      return res.json({ gameId: id });
+    }
+
+    if (!gameId) return res.status(400).json({ error: "Missing game code" });
+    const gameRef = db.collection("post16Games").doc(gameId);
+
+    if (action === "state") {
+      const snapshot = await gameRef.get();
+      if (!snapshot.exists) return res.status(404).json({ error: "Game not found" });
+      return res.json(post16GameView(snapshot.data(), String(body.playerId || req.query.playerId || "")));
+    }
+
+    if (action === "join") {
+      const name = String(body.name || "").trim().slice(0, 40);
+      if (!name) return res.status(400).json({ error: "Enter your name" });
+      const playerId = crypto.randomBytes(8).toString("hex");
+      await db.runTransaction(async (transaction) => {
+        const snapshot = await transaction.get(gameRef);
+        if (!snapshot.exists || snapshot.data().status !== "lobby") throw new Error("This game is not accepting players");
+        const data = snapshot.data();
+        transaction.update(gameRef, { [`players.${playerId}`]: { name, total: 0, sessionWinnings: 0, choice: null, answered: false } });
+      });
+      return res.json({ playerId });
+    }
+
+    if (action === "answer") {
+      const playerId = String(body.playerId || "");
+      const answer = Number(body.answer);
+      await db.runTransaction(async (transaction) => {
+        const snapshot = await transaction.get(gameRef);
+        if (!snapshot.exists) throw new Error("Game not found");
+        const data = snapshot.data();
+        const question = POST16_GAME_QUESTIONS[data.section]?.[data.questionIndex];
+        const player = data.players?.[playerId];
+        if (data.status !== "question" || !question || !player || player.answered) throw new Error("Answer unavailable");
+        const correct = answer === question.answer;
+        const update = { [`players.${playerId}.answered`]: true };
+        if (correct) {
+          update[`players.${playerId}.total`] = (player.total || 0) + 100;
+          update[`players.${playerId}.sessionWinnings`] = (player.sessionWinnings || 0) + 100;
+        }
+        transaction.update(gameRef, update);
+      });
+      return res.json({ success: true });
+    }
+
+    if (action === "admin") {
+      if (!(await verifyAdminToken(body.token))) return res.status(401).json({ error: "Invalid or expired admin login link" });
+      await db.runTransaction(async (transaction) => {
+        const snapshot = await transaction.get(gameRef);
+        if (!snapshot.exists) throw new Error("Game not found");
+        const data = snapshot.data();
+        const command = String(body.command || "");
+        const update = {};
+        if (command === "start") {
+          update.status = "question";
+          update.section = 0;
+          update.questionIndex = 0;
+        } else if (command === "nextQuestion") {
+          const next = Number(data.questionIndex || 0) + 1;
+          if (next < 4) {
+            update.questionIndex = next;
+            for (const id of Object.keys(data.players || {})) {
+              update[`players.${id}.answered`] = false;
+            }
+          } else {
+            update.status = "decision";
+          }
+        } else if (command === "spin") {
+          if (data.status !== "decision") throw new Error("The spinner is only available after four questions");
+          if (data.spin?.result) throw new Error("The spinner has already been used for this session");
+          const result = crypto.randomInt(0, 2) === 0 ? "red" : "green";
+          update.spin = { id: (data.spin?.id || 0) + 1, result };
+          for (const [id, player] of Object.entries(data.players || {})) {
+            if (player.choice === "gamble") {
+              update[`players.${id}.total`] = result === "green" ? (player.total || 0) + (player.sessionWinnings || 0) : (player.total || 0) - (player.sessionWinnings || 0);
+            }
+          }
+        } else if (command === "continue") {
+          const nextSection = Number(data.section || 0) + 1;
+          if (nextSection >= POST16_GAME_QUESTIONS.length) {
+            update.status = "finished";
+          } else {
+            update.status = "question";
+            update.section = nextSection;
+            update.questionIndex = 0;
+            for (const id of Object.keys(data.players || {})) {
+              update[`players.${id}.sessionWinnings`] = 0;
+              update[`players.${id}.choice`] = null;
+              update[`players.${id}.answered`] = false;
+            }
+          }
+        } else if (command === "reset") {
+          update.status = "lobby";
+          update.section = 0;
+          update.questionIndex = 0;
+          update.players = {};
+          update.spin = { id: (data.spin?.id || 0) + 1, result: null };
+        } else {
+          throw new Error("Unknown admin command");
+        }
+        transaction.update(gameRef, update);
+      });
+      return res.json({ success: true });
+    }
+
+    if (action === "choice") {
+      const playerId = String(body.playerId || "");
+      if (!["bank", "gamble"].includes(body.choice)) return res.status(400).json({ error: "Choose bank or gamble" });
+      await gameRef.update({ [`players.${playerId}.choice`]: body.choice });
+      return res.json({ success: true });
+    }
+
+    return res.status(400).json({ error: "Unknown action" });
+  } catch (err) {
+    console.error("Post-16 game error:", err);
+    res.status(400).json({ error: err.message });
+  }
+});
+
 /**
  * HELPER: HTML for the workshop booking confirmation email (shared by
  * the Stripe webhook and the admin manual-booking endpoint).

@@ -56,6 +56,8 @@ async function loadDashboard() {
     return;
   }
 
+  document.getElementById("post16GameLink").href = `/investing-game-post16-admin.html?token=${encodeURIComponent(currentToken)}`;
+
   try {
     const res = await fetch(`${FUNCTIONS_BASE}/adminDashboard?token=${encodeURIComponent(currentToken)}`);
     if (!res.ok) {
