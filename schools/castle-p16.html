@@ -216,6 +216,7 @@ section{padding:80px 0;}
 .btn-copy.copied { color: #16a34a; }
 
 #step-2 { max-width: 560px; width: calc(100% - 20px); margin: 48px auto; background: #fff; border-radius: 20px; padding: 36px 20px; border: 1px solid var(--rule); box-sizing: border-box; }
+#step-2-soldout { max-width: 560px; width: calc(100% - 20px); margin: 48px auto; background: #fff; border-radius: 20px; padding: 36px 20px; border: 1px solid var(--rule); box-sizing: border-box; }
 #step-2 h3{font-size:22px;margin-bottom:6px;}
 #step-2 .step-sub{color:var(--muted);font-size:15px;margin-bottom:24px;}
 #step-2 .step-sub strong{color:var(--ink);}
@@ -1049,49 +1050,7 @@ function toggleHeroVenue() {
 }
 
 
-// Join waitlist
 
-async function handleWaitlist(event) {
-  // 1. Prevent the page from reloading on form submit
-  event.preventDefault();
-  
-  const emailInput = document.getElementById('waitlist-email');
-  const submitButton = event.target.querySelector('button[type="submit"]');
-  
-  const payload = {
-    email: emailInput.value,
-    url: window.location.href // Automatically grabs the current page URL
-  };
-
-  // Optimistically update the UI to feel lightning fast
-  const originalBtnText = submitButton.textContent;
-  submitButton.textContent = "Saving...";
-  submitButton.disabled = true;
-
-  try {
-    // 2. Send data to your specific Google Web App URL
-    await fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
-      method: 'POST',
-      mode: 'no-cors', // Crucial for handling Google Web App redirects seamlessly
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    // 3. Success state updates
-    submitButton.textContent = "Success! ✔";
-    submitButton.style.background = "#25D366"; // Success green highlight
-    emailInput.value = ""; // Clear the input field
-    
-  } catch (error) {
-    console.error("Waitlist error:", error);
-    submitButton.textContent = "Error, try again";
-    submitButton.disabled = false;
-    submitButton.style.background = originalBtnText;
-  }
-}
-</script>
 
 </body>
 </html>
