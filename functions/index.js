@@ -399,7 +399,7 @@ exports.getBookingDetails = onRequest(
  * School", with the fixed workshop dates recorded in the usual
  * session_one/session_two fields).
  */
-const CASTLE_P16_CAPACITY = 5;
+const CASTLE_P16_CAPACITY = 34;
 
 exports.castleP16SignUp = onRequest(
   { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
