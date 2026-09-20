@@ -443,7 +443,7 @@ exports.castleP16SignUp = onRequest(
         lastName,
         schoolEmail,
         "",
-        "Castle School",
+        "Castle P16",
         biginClientId.value(),
         biginClientSecret.value(),
         biginRefreshToken.value(),
@@ -816,7 +816,7 @@ function castleP16ConfirmationEmailHtml(firstName, yearGroup) {
           <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 16px; padding: 20px; margin: 25px 0;">
             <p style="margin: 8px 0;"><strong>School:</strong> Castle School</p>
             <p style="margin: 8px 0;"><strong>Year group:</strong> ${yearGroup}</p>
-            <p style="margin: 8px 0;"><strong>Dates:</strong> Thursday 8th and Thursday 15th October 2026</p>
+            <p style="margin: 8px 0;"><strong>Dates:</strong> Thursday 8th and 15th October 2026</p>
             <p style="margin: 8px 0;"><strong>Time:</strong> 15:30 - 16:30</p>
             <p style="margin: 8px 0;"><strong>Room:</strong> M9</p>
             <p style="margin: 8px 0;"><strong>Session leader:</strong> Mr Dennis</p>
