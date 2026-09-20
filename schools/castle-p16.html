@@ -912,7 +912,7 @@ async function handleWaitlist(e) {
 async function handleReserve(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button[type="submit"]');
-  btn.innerText = "reserving your place...";
+  btn.innerText = "Reserving your place...";
   btn.disabled = true;
 
   const name = document.getElementById('res-name').value;
