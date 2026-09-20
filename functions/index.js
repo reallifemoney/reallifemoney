@@ -747,47 +747,30 @@ function bookingConfirmationEmailHtml(firstName, courseDate, referralCode) {
   <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
-      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
-      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
-      .content { padding: 0 25px 40px 25px; }
-      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
-      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
-      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
-      @media only screen and (max-width: 480px) {
-        .content { padding: 0 15px 30px 15px; }
-        h1 { font-size: 22px; }
-        .wrapper { padding: 10px 5px; }
-      }
-    </style>
   </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="header">
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
+    <div style="background-color: #eef8eb; padding: 20px 10px;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%;">
+        <div style="padding: 30px 20px; text-align: center; background-color: #ffffff;">
           <img src="https://reallifemoney.co.uk/logo-circle.webp"
                alt="Real Life Money"
                style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
         </div>
 
-        <div class="content">
-          <h1>You're booked, ${firstName}! 🎉</h1>
-          <p>Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with investing.</p>
+        <div style="padding: 0 25px 40px 25px;">
+          <h1 style="color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center;">You're booked, ${firstName}! 🎉</h1>
+          <p style="margin: 0 0 16px 0;">Your payment's gone through and your spot is fully confirmed. I'm genuinely looking forward to helping you feel confident with investing.</p>
 
-          <div class="date-box">
+          <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
             <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${courseDate}</p>
           </div>
 
-          <p>You'll receive a payment invoice and receipt from Stripe separately for your records - no action needed there, it's just confirmation of your payment.</p>
+          <p style="margin: 0 0 16px 0;">You'll receive a payment invoice and receipt from Stripe separately for your records - no action needed there, it's just confirmation of your payment.</p>
 
-          <div class="code-box">
+          <div style="background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Personal Referral Code</p>
-            <div class="code-value">${referralCode}</div>
+            <div style="font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block;">${referralCode}</div>
             <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">
               Share this with friends or family - <strong>they get £10 off</strong> their workshop, and <strong>you get £10 back</strong> for every person who books with your code.
             </p>
@@ -795,12 +778,12 @@ function bookingConfirmationEmailHtml(firstName, courseDate, referralCode) {
 
           <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
-          <p>See you soon!<br><strong>Leo</strong></p>
+          <p style="margin: 0;">See you soon!<br><strong>Leo</strong></p>
         </div>
 
-        <div class="footer">
-          <p>© 2026 Real Life Money | Bristol, UK</p>
-          <p style="font-size: 11px; color: #666; text-align: center;">
+        <div style="padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9;">
+          <p style="margin: 0 0 6px 0;">© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center; margin: 0;">
             This is an automated booking confirmation from Real Life Money.
           </p>
         </div>
@@ -820,44 +803,32 @@ function castleP16ConfirmationEmailHtml(firstName, yearGroup) {
   <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
-      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
-      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
-      .content { padding: 0 25px 40px 25px; }
-      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
-      .details-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 16px; padding: 20px; margin: 25px 0; }
-      .details-box p { margin: 8px 0; }
-      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
-      @media only screen and (max-width: 480px) { .content { padding: 0 15px 30px 15px; } h1 { font-size: 22px; } .wrapper { padding: 10px 5px; } }
-    </style>
   </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="header">
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
+    <div style="background-color: #eef8eb; padding: 20px 10px;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%;">
+        <div style="padding: 30px 20px; text-align: center; background-color: #ffffff;">
           <img src="https://reallifemoney.co.uk/logo-circle.webp" alt="Real Life Money" style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
         </div>
-        <div class="content">
-          <h1>Your place is confirmed, ${firstName}!</h1>
-          <p>Thanks so much for signing up. I'm looking forward to helping you learn to invest.</p>
-          <div class="details-box">
-            <p><strong>School:</strong> Castle School</p>
-            <p><strong>Year group:</strong> ${yearGroup}</p>
-            <p><strong>Dates:</strong> Thursday 8th and Thursday 15th October 2026</p>
-            <p><strong>Time:</strong> 15:30 - 16:30</p>
-            <p><strong>Room:</strong> M9</p>
-            <p><strong>Session leader:</strong> Mr Dennis</p>
-            <p><strong>Cost:</strong> Free</p>
+        <div style="padding: 0 25px 40px 25px;">
+          <h1 style="color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center;">Your place is confirmed, ${firstName}!</h1>
+          <p style="margin: 0 0 16px 0;">Thanks so much for signing up. I'm looking forward to helping you learn to invest.</p>
+          <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 16px; padding: 20px; margin: 25px 0;">
+            <p style="margin: 8px 0;"><strong>School:</strong> Castle School</p>
+            <p style="margin: 8px 0;"><strong>Year group:</strong> ${yearGroup}</p>
+            <p style="margin: 8px 0;"><strong>Dates:</strong> Thursday 8th and Thursday 15th October 2026</p>
+            <p style="margin: 8px 0;"><strong>Time:</strong> 15:30 - 16:30</p>
+            <p style="margin: 8px 0;"><strong>Room:</strong> M9</p>
+            <p style="margin: 8px 0;"><strong>Session leader:</strong> Mr Dennis</p>
+            <p style="margin: 8px 0;"><strong>Cost:</strong> Free</p>
           </div>
-          <p>These are two sessions, so please keep both dates free. The workshop is educational and is not financial advice, as covered by the disclaimer you accepted when signing up.</p>
-          <p>If you have any questions or can no longer attend, please reply to this email or speak to me at school.</p>
-          <p>See you soon!<br><strong>Mr Dennis</strong></p>
+          <p style="margin: 0 0 16px 0;">These are two sessions, so please keep both dates free. The workshop is educational and is not financial advice, as covered by the disclaimer you accepted when signing up.</p>
+          <p style="margin: 0 0 16px 0;">If you have any questions or can no longer attend, please reply to this email or speak to me at school.</p>
+          <p style="margin: 0;">See you soon!<br><br><strong>Mr Dennis</strong></p>
         </div>
-        <div class="footer">
-          <p>© 2026 Real Life Money | Bristol, UK</p>
-          <p>This is an automated workshop confirmation from Real Life Money.</p>
+        <div style="padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9;">
+          <p style="margin: 0 0 6px 0;">© 2026 Real Life Money | Bristol, UK</p>
+          <p style="margin: 0;">This is an automated workshop confirmation from Real Life Money.</p>
         </div>
       </div>
     </div>
@@ -876,82 +847,55 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
   <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
-      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
-      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
-      .content { padding: 0 25px 40px 25px; }
-      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
-      .code-box { background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .code-value { font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block; }
-      .earnings-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 20px; margin: 25px 0; }
-      .earnings-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
-      .earnings-row strong { color: #8c52ff; }
-      .login-box { background: #eef8eb; border: 1px solid #71c558; border-radius: 24px; padding: 20px; margin: 25px 0; text-align: center; }
-      .login-box a { display: inline-block; margin-top: 8px; background: #8c52ff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: bold; }
-      .link-box { background: #f4f0ff; border-radius: 16px; padding: 18px; margin: 25px 0; text-align: center; }
-      .link-box a { color: #8c52ff; font-weight: bold; word-break: break-all; }
-      .ad-notice { background: #fff8e6; border: 1px solid #f0d878; border-radius: 16px; padding: 16px 18px; margin: 25px 0; font-size: 14px; }
-      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
-      @media only screen and (max-width: 480px) {
-        .content { padding: 0 15px 30px 15px; }
-        h1 { font-size: 22px; }
-        .wrapper { padding: 10px 5px; }
-      }
-    </style>
   </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="header">
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
+    <div style="background-color: #eef8eb; padding: 20px 10px;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%;">
+        <div style="padding: 30px 20px; text-align: center; background-color: #ffffff;">
           <img src="https://reallifemoney.co.uk/logo-circle.webp"
                alt="Real Life Money"
                style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
         </div>
 
-        <div class="content">
-          <h1>You're live, ${firstName}! 🎉</h1>
-          <p>Thanks so much for coming along to the workshop - it was great having you there.</p>
-          <p>Your VIP Partner discount code is now active, so you can start sharing it with friends, family and followers straight away.</p>
+        <div style="padding: 0 25px 40px 25px;">
+          <h1 style="color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center;">You're live, ${firstName}! 🎉</h1>
+          <p style="margin: 0 0 16px 0;">Thanks so much for coming along to the workshop - it was great having you there.</p>
+          <p style="margin: 0 0 16px 0;">Your VIP Partner discount code is now active, so you can start sharing it with friends, family and followers straight away.</p>
 
-          <div class="code-box">
+          <div style="background: #eef8eb; border: 2px dashed #71c558; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Live Discount Code</p>
-            <div class="code-value">${discountCode}</div>
+            <div style="font-size: 26px; font-weight: bold; letter-spacing: 3px; color: #1a1a1a; background: #ffffff; border-radius: 10px; padding: 12px 16px; margin: 10px 0; display: inline-block;">${discountCode}</div>
             <p style="margin: 10px 0 0 0; font-size: 14px; color: #2e2e2e;">Anyone who uses it gets <strong>£10 off</strong> their workshop booking.</p>
           </div>
 
-          <div class="earnings-box">
+          <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 20px; margin: 25px 0;">
             <p style="margin: 0 0 16px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">What you earn</p>
-            <div class="earnings-row"><span>First 5 code uses: </span><strong>£30 each</strong></div>
-            <div class="earnings-row"><span>Next 5 code uses (6-10): </span><strong>£20 each</strong></div>
-            <div class="earnings-row"><span>Every code use after that: </span><strong>£15 each</strong></div>
-            <div class="earnings-row"><span>20th / 50th uses: </span><strong>£50 / £100 bonus</strong></div>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding: 6px 0; font-size: 14px;">First 5 code uses:</td><td style="padding: 6px 0; font-size: 14px; text-align: right; color: #8c52ff;"><strong>£30 each</strong></td></tr><tr><td style="padding: 6px 0; font-size: 14px;">Next 5 code uses (6-10):</td><td style="padding: 6px 0; font-size: 14px; text-align: right; color: #8c52ff;"><strong>£20 each</strong></td></tr><tr><td style="padding: 6px 0; font-size: 14px;">Every code use after that:</td><td style="padding: 6px 0; font-size: 14px; text-align: right; color: #8c52ff;"><strong>£15 each</strong></td></tr><tr><td style="padding: 6px 0; font-size: 14px;">20th / 50th uses:</td><td style="padding: 6px 0; font-size: 14px; text-align: right; color: #8c52ff;"><strong>£50 / £100 bonus</strong></td></tr></table>
           </div>
 
-          <div class="login-box">
+          <div style="background: #eef8eb; border: 1px solid #71c558; border-radius: 24px; padding: 20px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Track your code uses &amp; earnings</p>
             <p style="margin: 0; font-size: 14px;">Log in any time to see your dashboard.</p>
-            <a href="https://reallifemoney.co.uk/vip-partner/login.html">Log in to my dashboard</a>
+            <a href="https://reallifemoney.co.uk/vip-partner/login.html" style="display: inline-block; margin-top: 8px; background: #8c52ff; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: bold;">Log in to my dashboard</a>
           </div>
 
-          <div class="link-box">
+          <div style="background: #f4f0ff; border-radius: 16px; padding: 18px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 6px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Send your followers here to book</p>
-            <a href="https://reallifemoney.co.uk/investing-course">reallifemoney.co.uk/investing-course</a>
+            <a href="https://reallifemoney.co.uk/investing-course" style="color: #8c52ff; font-weight: bold; word-break: break-all;">reallifemoney.co.uk/investing-course</a>
           </div>
 
-          <div class="ad-notice">
+          <div style="background: #fff8e6; border: 1px solid #f0d878; border-radius: 16px; padding: 16px 18px; margin: 25px 0; font-size: 14px;">
             📢 <strong>One important thing:</strong> any content you post about Real Life Money (stories, posts, reels) needs to include <strong>ad</strong> in the caption - it's a legal requirement for paid partnerships, so please don't forget it.
           </div>
 
           <p style="margin-top: 30px; font-size: 15px;">You can track code uses and earnings any time from your partner dashboard. If you've got any questions, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
-          <p>Thanks again - excited to see what you do with it!<br><br><strong>Leo</strong></p>
+          <p style="margin: 0;">Thanks again - excited to see what you do with it!<br><br><strong>Leo</strong></p>
         </div>
 
-        <div class="footer">
-          <p>© 2026 Real Life Money | Bristol, UK</p>
-          <p style="font-size: 11px; color: #666; text-align: center;">
+        <div style="padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9;">
+          <p style="margin: 0 0 6px 0;">© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center; margin: 0;">
             This is an automated VIP Partner update from Real Life Money.
           </p>
         </div>
@@ -1225,43 +1169,28 @@ exports.vipPartnerSignup = onRequest(
   <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; }
-      .wrapper { background-color: #eef8eb; padding: 20px 10px; }
-      .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%; }
-      .header { padding: 30px 20px; text-align: center; background-color: #ffffff; }
-      .content { padding: 0 25px 40px 25px; }
-      h1 { color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center; }
-      .date-box { background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center; }
-      .footer { padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9; }
-      @media only screen and (max-width: 480px) {
-        .content { padding: 0 15px 30px 15px; }
-        h1 { font-size: 22px; }
-        .wrapper { padding: 10px 5px; }
-      }
-    </style>
   </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="header">
+  <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #2e2e2e; margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
+    <div style="background-color: #eef8eb; padding: 20px 10px;">
+      <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #daecd6; width: 100%;">
+        <div style="padding: 30px 20px; text-align: center; background-color: #ffffff;">
           <img src="https://reallifemoney.co.uk/logo-circle.webp"
                alt="Real Life Money"
                style="width: 80px; height: 80px; background-color: #ffffff; border-radius: 50%; object-fit: cover;">
         </div>
 
-        <div class="content">
-          <h1>Welcome to the programme, ${firstName}! 🎉</h1>
-          <p>You're officially signed up as a VIP Partner - genuinely excited to have you on board. No payment needed for the workshop, you're coming along as my guest.</p>
+        <div style="padding: 0 25px 40px 25px;">
+          <h1 style="color: #1a1a1a; font-size: 24px; margin-bottom: 10px; text-align: center;">Welcome to the programme, ${firstName}! 🎉</h1>
+          <p style="margin: 0 0 16px 0;">You're officially signed up as a VIP Partner - genuinely excited to have you on board. No payment needed for the workshop, you're coming along as my guest.</p>
 
-          <div class="date-box">
+          <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Workshop</p>
             <p style="margin: 0; color: #8c52ff; font-weight: bold; font-size: 20px;">${chosenDate}</p>
           </div>
 
-          <p>Your personal discount code unlocks once you've attended - I'll send that over separately so your followers can start getting £10 off.</p>
+          <p style="margin: 0 0 16px 0;">Your personal discount code unlocks once you've attended - I'll send that over separately so your followers can start getting £10 off.</p>
 
-          <div class="date-box">
+          <div style="background: #eef8eb; border: 1px solid #8c52ff; border-radius: 24px; padding: 25px 15px; margin: 25px 0; text-align: center;">
             <p style="margin: 0 0 10px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6b6b6b; font-weight: bold;">Your Partner Dashboard</p>
             <p style="margin: 0 0 16px 0; font-size: 14px;">Track your referral code, sign-ups and earnings any time.</p>
             <a href="https://reallifemoney.co.uk/vip-partner/login.html" style="background:#8c52ff; color:#ffffff; text-decoration:none; padding:14px 28px; border-radius:12px; font-weight:bold; display:inline-block;">Log in to my dashboard</a>
@@ -1269,12 +1198,12 @@ exports.vipPartnerSignup = onRequest(
 
           <p style="margin-top: 30px; font-size: 15px;">I'll be in touch nearer the time with everything you need for the session. If you have any questions in the meantime, just hit reply or send me a WhatsApp at <strong>07939 887950</strong>.</p>
 
-          <p>See you soon!<br><strong>Leo</strong></p>
+          <p style="margin: 0;">See you soon!<br><strong>Leo</strong></p>
         </div>
 
-        <div class="footer">
-          <p>© 2026 Real Life Money | Bristol, UK</p>
-          <p style="font-size: 11px; color: #666; text-align: center;">
+        <div style="padding: 30px; text-align: center; font-size: 12px; color: #6b6b6b; background: #f9f9f9;">
+          <p style="margin: 0 0 6px 0;">© 2026 Real Life Money | Bristol, UK</p>
+          <p style="font-size: 11px; color: #666; text-align: center; margin: 0;">
             This is an automated VIP Partner sign-up confirmation from Real Life Money.
           </p>
         </div>
