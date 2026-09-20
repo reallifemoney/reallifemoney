@@ -878,8 +878,8 @@ checkSoldOutStatus();
 
 async function handleWaitlist(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.innerText = "joining waiting list...";
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.innerText = "Joining waiting list...";
   btn.disabled = true;
 
   const name = document.getElementById('wait-name').value;
@@ -911,7 +911,7 @@ async function handleWaitlist(e) {
 
 async function handleReserve(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
+  const btn = e.target.querySelector('button[type="submit"]');
   btn.innerText = "reserving your place...";
   btn.disabled = true;
 
