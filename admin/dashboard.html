@@ -56,6 +56,7 @@
       <nav class="admin-tabs" id="adminTabs">
         <button class="admin-tab active" data-tab="bookings">Bookings</button>
         <button class="admin-tab" data-tab="workshops">Workshops</button>
+        <button class="admin-tab" data-tab="castlep16">Castle P16</button>
         <button class="admin-tab" data-tab="partners">VIP Partners</button>
       </nav>
 
@@ -155,6 +156,41 @@
   <button type="submit" class="btn btn-primary" id="wsSubmit">Save workshop</button>
   <button type="button" class="btn btn-text" id="wsCancelBtn">Cancel</button>
 </form>
+      </section>
+
+      <!-- Castle School P16 tab: sign-ups, edit/delete/add manual -->
+      <section class="dash-card admin-panel" id="panel-castlep16">
+        <span class="dash-card-label">Castle School P16 sign-ups</span>
+        <p class="dash-card-note" id="castleP16Empty" hidden>No sign-ups yet.</p>
+        <p class="dash-card-note" id="castleP16Count"></p>
+        <div class="admin-table-wrap">
+          <table class="admin-table" id="castleP16Table">
+            <thead>
+              <tr><th>Name</th><th>Year group</th><th>Email</th><th>Date</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <button class="btn btn-outline" id="newCastleP16Btn">+ Add manual sign-up</button>
+
+        <form id="castleP16Form" class="bank-form admin-form" hidden>
+          <input type="hidden" id="cpId">
+          <label for="cpFullName">Full name</label>
+          <input type="text" id="cpFullName" required>
+
+          <label for="cpYearGroup">Year group</label>
+          <select id="cpYearGroup">
+            <option value="Year 12">Year 12</option>
+            <option value="Year 13">Year 13</option>
+          </select>
+
+          <label for="cpEmail">School email</label>
+          <input type="email" id="cpEmail" required>
+
+          <button type="submit" class="btn btn-primary" id="cpSubmit">Add sign-up</button>
+          <button type="button" class="btn btn-text" id="cpCancelBtn">Cancel</button>
+        </form>
       </section>
 
       <!-- VIP Partners tab: list + invite -->

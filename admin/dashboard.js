@@ -7,6 +7,8 @@ const dashboard = document.getElementById("dashboard");
 let currentToken = null;
 let allBookings = [];
 let allWorkshops = [];
+let allCastleP16SignUps = [];
+const CASTLE_P16_CAPACITY = 34;
 
 // =================================================================
 // Resolve the admin session token: prefer the URL (?token=) since
@@ -79,9 +81,11 @@ function renderDashboard(data) {
 
   allBookings = data.bookings || [];
   allWorkshops = data.workshops || [];
+  allCastleP16SignUps = data.castleP16SignUps || [];
 
   renderBookings();
   renderWorkshops();
+  renderCastleP16();
   renderPartners(data.vipPartners || []);
   renderInvitedPartners(data.invitedPartners || []);
 
@@ -375,6 +379,115 @@ workshopForm.addEventListener("submit", async (e) => {
   submitBtn.disabled = false;
   submitBtn.textContent = "Save workshop";
 });
+// =================================================================
+// Castle School P16 tab: sign-ups, add/edit/delete
+// =================================================================
+const castleP16Form = document.getElementById("castleP16Form");
+
+function renderCastleP16() {
+  const tbody = document.querySelector("#castleP16Table tbody");
+  const emptyNote = document.getElementById("castleP16Empty");
+  const countNote = document.getElementById("castleP16Count");
+
+  tbody.innerHTML = "";
+  emptyNote.hidden = allCastleP16SignUps.length > 0;
+  countNote.textContent = `${allCastleP16SignUps.length} / ${CASTLE_P16_CAPACITY} spaces taken`;
+
+  allCastleP16SignUps.forEach((c) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${c.fullName}</td>
+      <td>${c.yearGroup || "—"}</td>
+      <td>${c.email}</td>
+      <td>${formatDateTime(c.createdAt)}</td>
+      <td>
+        <button class="btn btn-text admin-castlep16-edit-btn" data-id="${c.id}">Edit</button>
+        <button class="btn btn-text admin-castlep16-delete-btn" data-id="${c.id}">Delete</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  tbody.querySelectorAll(".admin-castlep16-edit-btn").forEach((btn) =>
+    btn.addEventListener("click", () => openCastleP16Form(btn.dataset.id))
+  );
+  tbody.querySelectorAll(".admin-castlep16-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deleteCastleP16(btn.dataset.id))
+  );
+}
+
+async function deleteCastleP16(id) {
+  if (!confirm("Delete this sign-up? This can't be undone.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeleteCastleP16`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting Castle P16 sign-up:", err);
+    alert("Something went wrong deleting that sign-up - please try again.");
+  }
+}
+
+function openCastleP16Form(id) {
+  const c = id ? allCastleP16SignUps.find((x) => x.id === id) : null;
+
+  document.getElementById("cpId").value = c ? c.id : "";
+  document.getElementById("cpFullName").value = c ? c.fullName || "" : "";
+  document.getElementById("cpYearGroup").value = c ? c.yearGroup || "Year 12" : "Year 12";
+  document.getElementById("cpEmail").value = c ? c.email || "" : "";
+  document.getElementById("cpSubmit").textContent = c ? "Save changes" : "Add sign-up";
+
+  castleP16Form.hidden = false;
+  castleP16Form.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("newCastleP16Btn").addEventListener("click", () => openCastleP16Form(null));
+document.getElementById("cpCancelBtn").addEventListener("click", () => {
+  castleP16Form.hidden = true;
+  castleP16Form.reset();
+});
+
+castleP16Form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById("cpId").value;
+  const submitBtn = document.getElementById("cpSubmit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = id ? "Saving..." : "Adding...";
+
+  const payload = {
+    token: currentToken,
+    fullName: document.getElementById("cpFullName").value.trim(),
+    yearGroup: document.getElementById("cpYearGroup").value,
+    email: document.getElementById("cpEmail").value.trim(),
+  };
+  if (id) payload.id = id;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/${id ? "adminUpdateCastleP16" : "adminAddCastleP16"}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Request failed");
+
+    castleP16Form.hidden = true;
+    castleP16Form.reset();
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error saving Castle P16 sign-up:", err);
+    alert("Something went wrong saving that sign-up - please try again.");
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = id ? "Save changes" : "Add sign-up";
+});
+
 // =================================================================
 // VIP Partners tab: table + invite form
 // =================================================================

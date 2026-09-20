@@ -399,6 +399,8 @@ exports.getBookingDetails = onRequest(
  * School", with the fixed workshop dates recorded in the usual
  * session_one/session_two fields).
  */
+const CASTLE_P16_CAPACITY = 34;
+
 exports.castleP16SignUp = onRequest(
   { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
   async (req, res) => {
@@ -418,6 +420,11 @@ exports.castleP16SignUp = onRequest(
 
       if (!name || !year || !schoolEmail || !disclaimerAccepted) {
         return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const existingSnap = await db.collection("castleP16SignUps").get();
+      if (existingSnap.size >= CASTLE_P16_CAPACITY) {
+        return res.status(409).json({ error: "This workshop is fully booked", soldOut: true });
       }
 
       const firstName = name.split(" ")[0].replace(/[^a-zA-Z]/g, "") || "Student";
@@ -462,6 +469,74 @@ exports.castleP16SignUp = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error processing Castle School P16 sign-up:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * CASTLE SCHOOL P16 - SOLD OUT STATUS
+ * Lets the sign-up page check capacity before rendering the form,
+ * so it can show the sold-out / waitlist state straight away.
+ */
+exports.castleP16Status = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+
+  try {
+    const snap = await db.collection("castleP16SignUps").get();
+    const count = snap.size;
+    res.json({ count, capacity: CASTLE_P16_CAPACITY, soldOut: count >= CASTLE_P16_CAPACITY });
+  } catch (err) {
+    console.error("Error fetching Castle School P16 status:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * CASTLE SCHOOL P16 - WAITING LIST
+ * Once the workshop is full, students can leave their name/email so
+ * Leo has a record and can follow up about future sessions. Just
+ * saves the entry and emails Leo directly - no CRM sync needed.
+ */
+exports.castleP16Waitlist = onRequest(
+  { secrets: [resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { fullName, email } = req.body;
+      const name = String(fullName || "").trim();
+      const schoolEmail = String(email || "").trim().toLowerCase();
+
+      if (!name || !schoolEmail) {
+        return res.status(400).json({ error: "Missing name or email" });
+      }
+
+      await db.collection("castleP16Waitlist").add({
+        fullName: name,
+        email: schoolEmail,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: "leo@reallifemoney.co.uk",
+        subject: "Castle School P16 waiting list sign-up",
+        html: `<p><strong>${name}</strong> (${schoolEmail}) has joined the Castle School P16 waiting list for a future session.</p>`,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing Castle School P16 waitlist sign-up:", err);
       res.status(500).json({ error: err.message });
     }
   }
@@ -1632,6 +1707,19 @@ exports.adminDashboard = onRequest(
       const workshopsSnap = await db.collection("workshops").orderBy("sortDate", "asc").get();
       const workshops = workshopsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
+      // --- Castle School P16 sign-ups (Firestore) ---
+      const castleP16Snap = await db.collection("castleP16SignUps").orderBy("createdAt", "desc").get();
+      const castleP16SignUps = castleP16Snap.docs.map((doc) => {
+        const c = doc.data();
+        return {
+          id: doc.id,
+          fullName: c.fullName || "",
+          yearGroup: c.yearGroup || "",
+          email: c.email || "",
+          createdAt: c.createdAt ? c.createdAt.toDate().toISOString() : null,
+        };
+      });
+
       // --- VIP partners (Supabase) ---
       const supabaseAdmin = getSupabaseAdmin();
       const { data: partners, error: partnersError } = await supabaseAdmin
@@ -1721,6 +1809,7 @@ exports.adminDashboard = onRequest(
         },
         bookings,
         workshops,
+        castleP16SignUps,
         vipPartners,
         invitedPartners,
       });
@@ -2122,6 +2211,110 @@ exports.adminDeleteBooking = onRequest(
     }
   }
 );
+
+/**
+ * ADMIN - ADD A CASTLE SCHOOL P16 SIGN-UP MANUALLY
+ */
+exports.adminAddCastleP16 = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, fullName, yearGroup, email } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+
+    const name = String(fullName || "").trim();
+    const year = String(yearGroup || "").trim();
+    const schoolEmail = String(email || "").trim().toLowerCase();
+    if (!name || !schoolEmail) {
+      return res.status(400).json({ error: "Missing name or email" });
+    }
+
+    await db.collection("castleP16SignUps").add({
+      fullName: name,
+      yearGroup: year,
+      email: schoolEmail,
+      disclaimerAccepted: true,
+      manualEntry: true,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error adding Castle School P16 sign-up:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * ADMIN - EDIT A CASTLE SCHOOL P16 SIGN-UP
+ */
+exports.adminUpdateCastleP16 = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, id, fullName, yearGroup, email } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+    if (!id) return res.status(400).json({ error: "Missing id" });
+
+    const name = String(fullName || "").trim();
+    const year = String(yearGroup || "").trim();
+    const schoolEmail = String(email || "").trim().toLowerCase();
+    if (!name || !schoolEmail) {
+      return res.status(400).json({ error: "Missing name or email" });
+    }
+
+    await db.collection("castleP16SignUps").doc(String(id)).set(
+      { fullName: name, yearGroup: year, email: schoolEmail },
+      { merge: true }
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error updating Castle School P16 sign-up:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * ADMIN - DELETE A CASTLE SCHOOL P16 SIGN-UP
+ */
+exports.adminDeleteCastleP16 = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, id } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+    if (!id) return res.status(400).json({ error: "Missing id" });
+
+    await db.collection("castleP16SignUps").doc(String(id)).delete();
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Error deleting Castle School P16 sign-up:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 /**
  * ADMIN - DELETE A VIP PARTNER

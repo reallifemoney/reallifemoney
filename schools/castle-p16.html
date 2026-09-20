@@ -549,6 +549,25 @@ footer a{color:#ddd;text-decoration:underline;}
       </form>
     </div>
 
+    <!-- SOLD OUT / WAITING LIST (shown instead of step-2 when full) -->
+    <div id="step-2-soldout" hidden>
+      <div class="success-header">
+        <h2>This workshop is fully booked</h2>
+        <p style="color:var(--ink);margin-top:10px;">All 34 spaces for the 8th &amp; 15th October sessions have been taken. Pop your details below and I'll let you know as soon as a future session opens up.</p>
+      </div>
+      <form onsubmit="handleWaitlist(event)">
+        <div class="field">
+          <label for="wait-name">Full name</label>
+          <input type="text" id="wait-name" required>
+        </div>
+        <div class="field">
+          <label for="wait-email">School email address</label>
+          <input type="email" id="wait-email" required>
+        </div>
+        <button type="submit" class="select-btn">Join the waiting list</button>
+      </form>
+    </div>
+
   </div>
 </section>
 
@@ -840,6 +859,55 @@ function attachVenuePopoverListeners() {
 }
 
 // ---- Booking flow ----
+function showSoldOut() {
+  document.getElementById('step-2').hidden = true;
+  document.getElementById('step-2-soldout').hidden = false;
+}
+
+async function checkSoldOutStatus() {
+  try {
+    const response = await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/castleP16Status');
+    const data = await response.json();
+    if (data.soldOut) showSoldOut();
+  } catch (error) {
+    console.error('Error checking Castle P16 status:', error);
+  }
+}
+checkSoldOutStatus();
+
+async function handleWaitlist(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.innerText = "joining waiting list...";
+  btn.disabled = true;
+
+  const name = document.getElementById('wait-name').value;
+  const email = document.getElementById('wait-email').value;
+
+  try {
+    const response = await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/castleP16Waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fullName: name, email })
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Failed to join the waiting list');
+
+    document.getElementById('step-2-soldout').innerHTML = `
+      <div class="success-header">
+        <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+        <h2>You're on the list!</h2>
+        <p style="color:var(--ink);margin-top:10px;">I'll email you as soon as a future session opens up.</p>
+      </div>`;
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong joining the waiting list. Please try again or let Mr Dennis know.");
+    btn.innerText = "Join the waiting list";
+    btn.disabled = false;
+  }
+}
+
 async function handleReserve(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button');
@@ -859,7 +927,13 @@ async function handleReserve(e) {
     });
 
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'Failed to reserve your place');
+    if (!response.ok) {
+      if (data.soldOut) {
+        showSoldOut();
+        return;
+      }
+      throw new Error(data.error || 'Failed to reserve your place');
+    }
 
     document.getElementById('step-2').innerHTML = `
       <div class="success-header">
@@ -875,6 +949,7 @@ async function handleReserve(e) {
     btn.disabled = false;
   }
 }
+
 
 // ---- Logging / tracking (same pattern as existing site) ----
 let sent = false;
