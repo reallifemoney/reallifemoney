@@ -8,7 +8,7 @@ let currentToken = null;
 let allBookings = [];
 let allWorkshops = [];
 let allCastleP16SignUps = [];
-const CASTLE_P16_CAPACITY = 34;
+const CASTLE_P16_CAPACITY = 5;
 
 // =================================================================
 // Resolve the admin session token: prefer the URL (?token=) since
