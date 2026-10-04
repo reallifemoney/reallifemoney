@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Ask a question | Real Life Money</title>
+<link rel="icon" type="image/webp" href="../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ask/ask.css">
+</head>
+<body>
+<div class="wrap">
+  <img class="logo" src="/logo-circle.webp" alt="Real Life Money">
+
+  <section id="pickView">
+    <h1>Ask a question</h1>
+    <p class="sub">Which session are you joining?</p>
+    <div id="sessionList"></div>
+  </section>
+
+  <section id="askView" hidden>
+    <button class="back" id="backBtn">&larr; Change session</button>
+    <h1 id="sessionName"></h1>
+    <p class="sub">Your questions are anonymous and only you can see them here.</p>
+
+    <form id="askForm">
+      <textarea id="questionInput" maxlength="500" placeholder="Type your question..." required></textarea>
+      <button class="btn block" id="submitBtn" type="submit">Send question</button>
+    </form>
+
+    <h2>Your questions</h2>
+    <div id="myQuestions"></div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="/ask/ask.js"></script>
+</body>
+</html>

@@ -2246,6 +2246,176 @@ exports.adminDeleteCastleP16 = onRequest({}, async (req, res) => {
 });
 
 /**
+ * ASK - PARTICIPANT API (/ask)
+ * Anonymous Q&A. Participants are identified only by a random clientId
+ * generated in their browser; it's never returned to anyone else.
+ */
+exports.askPublic = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { action, sessionId, clientId, questionId } = req.body;
+    const cid = String(clientId || "");
+    const text = String(req.body.text || "").trim().slice(0, 500);
+    const sessionsCol = db.collection("askSessions");
+    const questionsCol = db.collection("askQuestions");
+
+    if (action === "listSessions") {
+      const snap = await sessionsCol.get();
+      const sessions = snap.docs
+        .map((d) => ({ id: d.id, name: d.data().name, createdAt: d.data().createdAt || 0 }))
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .map(({ id, name }) => ({ id, name }));
+      return res.json({ sessions });
+    }
+
+    if (cid.length < 16) return res.status(400).json({ error: "Missing clientId" });
+    if (!sessionId) return res.status(400).json({ error: "Missing sessionId" });
+
+    const sessionDoc = await sessionsCol.doc(String(sessionId)).get();
+    if (!sessionDoc.exists) return res.status(404).json({ error: "Session not found" });
+
+    if (action === "listMine") {
+      const snap = await questionsCol
+        .where("sessionId", "==", sessionDoc.id)
+        .where("clientId", "==", cid)
+        .get();
+      const questions = snap.docs
+        .map((d) => ({ id: d.id, text: d.data().text, answered: Boolean(d.data().answered), createdAt: d.data().createdAt || 0 }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+      return res.json({ session: { id: sessionDoc.id, name: sessionDoc.data().name }, questions });
+    }
+
+    if (action === "add") {
+      if (!text) return res.status(400).json({ error: "Question is empty" });
+      await questionsCol.add({
+        sessionId: sessionDoc.id,
+        clientId: cid,
+        text,
+        answered: false,
+        createdAt: Date.now(),
+      });
+      return res.json({ success: true });
+    }
+
+    if (action === "edit" || action === "delete") {
+      const qRef = questionsCol.doc(String(questionId || "_"));
+      const q = await qRef.get();
+      if (!q.exists || q.data().clientId !== cid || q.data().sessionId !== sessionDoc.id) {
+        return res.status(404).json({ error: "Question not found" });
+      }
+      if (action === "delete") {
+        await qRef.delete();
+      } else {
+        if (!text) return res.status(400).json({ error: "Question is empty" });
+        await qRef.update({ text });
+      }
+      return res.json({ success: true });
+    }
+
+    res.status(400).json({ error: "Unknown action" });
+  } catch (err) {
+    console.error("Error in askPublic:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * ASK - ADMIN API (/ask/admin)
+ * Create/edit/delete sessions and view/mark answered/delete questions.
+ */
+exports.askAdmin = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, action, id, sessionId, answered } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+    const name = String(req.body.name || "").trim().slice(0, 100);
+    const sessionsCol = db.collection("askSessions");
+    const questionsCol = db.collection("askQuestions");
+
+    if (action === "listSessions") {
+      const [sSnap, qSnap] = await Promise.all([sessionsCol.get(), questionsCol.get()]);
+      const counts = {};
+      qSnap.docs.forEach((d) => {
+        const q = d.data();
+        const c = (counts[q.sessionId] = counts[q.sessionId] || { total: 0, open: 0 });
+        c.total++;
+        if (!q.answered) c.open++;
+      });
+      const sessions = sSnap.docs
+        .map((d) => ({
+          id: d.id,
+          name: d.data().name,
+          createdAt: d.data().createdAt || 0,
+          total: (counts[d.id] || {}).total || 0,
+          open: (counts[d.id] || {}).open || 0,
+        }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+      return res.json({ sessions });
+    }
+
+    if (action === "saveSession") {
+      if (!name) return res.status(400).json({ error: "Missing name" });
+      if (id) {
+        await sessionsCol.doc(String(id)).update({ name });
+      } else {
+        await sessionsCol.add({ name, createdAt: Date.now() });
+      }
+      return res.json({ success: true });
+    }
+
+    if (action === "deleteSession") {
+      if (!id) return res.status(400).json({ error: "Missing id" });
+      const qSnap = await questionsCol.where("sessionId", "==", String(id)).get();
+      const batch = db.batch();
+      qSnap.docs.forEach((d) => batch.delete(d.ref));
+      batch.delete(sessionsCol.doc(String(id)));
+      await batch.commit();
+      return res.json({ success: true });
+    }
+
+    if (action === "listQuestions") {
+      if (!sessionId) return res.status(400).json({ error: "Missing sessionId" });
+      const snap = await questionsCol.where("sessionId", "==", String(sessionId)).get();
+      const questions = snap.docs
+        .map((d) => ({ id: d.id, text: d.data().text, answered: Boolean(d.data().answered), createdAt: d.data().createdAt || 0 }))
+        .sort((a, b) => b.createdAt - a.createdAt);
+      return res.json({ questions });
+    }
+
+    if (action === "markAnswered") {
+      if (!id) return res.status(400).json({ error: "Missing id" });
+      await questionsCol.doc(String(id)).update({ answered: answered !== false });
+      return res.json({ success: true });
+    }
+
+    if (action === "deleteQuestion") {
+      if (!id) return res.status(400).json({ error: "Missing id" });
+      await questionsCol.doc(String(id)).delete();
+      return res.json({ success: true });
+    }
+
+    res.status(400).json({ error: "Unknown action" });
+  } catch (err) {
+    console.error("Error in askAdmin:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
  * ADMIN - DELETE A VIP PARTNER
  * Removing the partner row also cascades to their `referrals` and
  * `payouts` rows (FK on delete cascade in supabase-schema.sql).

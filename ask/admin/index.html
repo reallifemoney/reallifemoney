@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Ask admin | Real Life Money</title>
+<link rel="icon" type="image/webp" href="../../logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/ask/ask.css">
+</head>
+<body>
+<div class="wrap wide">
+  <img class="logo" src="/logo-circle.webp" alt="Real Life Money">
+
+  <section id="loginView" hidden>
+    <h1>Ask admin</h1>
+    <p class="sub">You need to be logged in as admin.</p>
+    <p class="sub"><a href="/admin/login.html" style="color:var(--purple)">Go to admin login</a>, then return here.</p>
+  </section>
+
+  <section id="sessionsView" hidden>
+    <h1>Sessions</h1>
+    <p class="sub">Participants join at <strong>reallifemoney.co.uk/ask</strong></p>
+    <form id="newForm" class="row" style="margin:0 0 24px">
+      <input type="text" id="newName" placeholder="New session name" maxlength="100" required style="flex:1; min-width:200px">
+      <button class="btn" type="submit">Create</button>
+    </form>
+    <div id="sessionList"></div>
+  </section>
+
+  <section id="feedView" hidden>
+    <button class="back" id="backBtn">&larr; All sessions</button>
+    <div class="between">
+      <h1 id="feedTitle" style="margin:0; text-align:left"></h1>
+      <div class="row" style="margin:0">
+        <button class="btn small ghost" id="renameBtn">Rename</button>
+        <button class="btn small danger" id="deleteSessionBtn">Delete session</button>
+      </div>
+    </div>
+    <h2>Questions</h2>
+    <div id="feed"></div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="/ask/admin/admin.js"></script>
+</body>
+</html>
