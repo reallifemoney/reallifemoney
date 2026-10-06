@@ -1145,6 +1145,14 @@ async function handleWaitlist(event) {
   submitButton.disabled = true;
 
   try {
+    // Fire-and-forget to the Google Sheet (opaque response under no-cors)
+    fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.error('Sheet error:', err));
+
     await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/courseWaitlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
