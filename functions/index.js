@@ -542,6 +542,46 @@ exports.castleP16Waitlist = onRequest(
   }
 );
 
+/** Course "can't make these dates" sign-up - emails Leo the address. */
+exports.courseWaitlist = onRequest(
+  { secrets: [resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const email = String(req.body.email || "").trim().toLowerCase();
+      if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || email.length > 254) {
+        return res.status(400).json({ error: "Invalid email" });
+      }
+      const page = String(req.body.url || "").slice(0, 200).replace(/[<>]/g, "");
+
+      await db.collection("courseWaitlist").add({
+        email,
+        url: page,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: ADMIN_EMAIL,
+        subject: "Course waiting list sign-up",
+        html: `<p><strong>${email}</strong> can't make the current course dates and wants to hear about future dates.</p><p>Page: ${page}</p>`,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing course waitlist sign-up:", err);
+      res.status(500).json({ error: "Server error" });
+    }
+  }
+);
+
 const POST16_GAME_QUESTIONS = [
   [
     { question: "What does investing usually mean?", options: ["Putting money into something with the aim of growing it", "Spending money on a treat", "Keeping cash in your wallet"], answer: 0 },
