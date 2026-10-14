@@ -538,7 +538,7 @@ async function deletePartner(id) {
 }
 
 async function markPartnerAttended(id, btn) {
-  if (!confirm("Mark this partner as attended? This activates their discount code and emails them their welcome pack.")) return;
+  if (!confirm("Mark this partner as attended? This makes their discount code visible in their dashboard (no email is sent).")) return;
 
   btn.disabled = true;
   btn.textContent = "Sending...";

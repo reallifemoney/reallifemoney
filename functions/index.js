@@ -1954,9 +1954,8 @@ exports.adminDeleteInvitedPartner = onRequest(
 /**
  * ADMIN - MARK A VIP PARTNER AS ATTENDED
  * Flips `attended` to true on their Supabase row (this is what makes
- * their discount code visible/usable per the signup flow) and emails
- * them their now-live code plus the earnings tiers, booking link and
- * the #ad disclosure reminder.
+ * their discount code visible/usable per the signup flow). No email is
+ * sent - Leo emails partners from his CRM.
  */
 exports.adminMarkPartnerAttended = onRequest(
   { secrets: [supabaseServiceRoleKey, resendApiKey] },
@@ -1997,16 +1996,6 @@ exports.adminMarkPartnerAttended = onRequest(
         console.error("Error marking VIP partner attended:", updateError);
         return res.status(500).json({ error: updateError.message });
       }
-
-      const firstName = String(partner.name || "").trim().split(" ")[0] || "there";
-      const resend = new Resend(resendApiKey.value());
-      await resend.emails.send({
-        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
-        to: partner.email,
-        bcc: "leo@reallifemoney.co.uk",
-        subject: "Your VIP discount code is live! 🎉",
-        html: vipPartnerAttendedEmailHtml(firstName, partner.discount_code || ""),
-      });
 
       res.json({ success: true });
     } catch (err) {
