@@ -92,12 +92,15 @@ section{padding:70px 0}
 .perk p{color:#ccc;font-size:14.5px}
 
 /* DATES + BOOKING */
-.sess{background:#fff;border:2px solid var(--rule);border-radius:20px;padding:26px;text-align:center;transition:.15s}
+.sess,.sess-waitlist{background:var(--mint);border:2px solid var(--green);border-radius:20px;padding:26px;text-align:center;transition:.15s}
 .sess:hover{border-color:var(--purple);transform:translateY(-4px)}
 .sess .m{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
 .sess h3{font-size:20px;margin-bottom:8px}
 .sess .price{font-size:28px;font-weight:700;color:var(--ink);margin:16px 0}
-#step-2,#step-3{display:none;max-width:560px;width:calc(100% - 20px);margin:44px auto 0;background:#fff;border-radius:20px;padding:34px 22px;border:1px solid var(--rule)}
+#step-2,#step-3{display:none;max-width:560px;width:calc(100% - 20px);margin:44px auto 0;background:var(--mint);border-radius:20px;padding:34px 22px;border:2px solid var(--green)}
+.sess-waitlist h3{font-size:20px;margin-bottom:10px}
+.sess-waitlist p{font-size:15px;margin-bottom:14px}
+.sess-waitlist input[type=email]{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--rule);background:#fff;font-family:inherit;font-size:15px;margin-bottom:12px}
 #step-3{max-width:760px;background:var(--mint)}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px;color:var(--ink)}
@@ -333,7 +336,15 @@ document.getElementById('sessGrid').innerHTML = SESSIONS.map((s,i) => `
     <div class="row">Industry Bar &amp; Kitchen</div>
     <div class="price">£${PRICE}</div>
     <button class="pill" onclick="pick(${i})">Select these dates</button>
-  </div>`).join('');
+  </div>`).join('') + `
+  <div class="sess-waitlist">
+    <h3>Can't make these dates?</h3>
+    <p>Leave your email and I'll let you know when new dates are announced.</p>
+    <form onsubmit="handleWaitlist(event)">
+      <input type="email" id="waitlist-email" placeholder="Your email" required>
+      <button type="submit" class="pill" style="background:var(--green)">Notify me</button>
+    </form>
+  </div>`;
 
 document.getElementById('heroDate').innerText = "📅 " + SESSIONS[0].label;
 document.getElementById('heroTime').innerText = "🕖 " + SESSIONS[0].times;
@@ -354,6 +365,27 @@ function tg(h){
   const item = h.parentElement, ans = h.nextElementSibling, was = item.classList.contains('open');
   document.querySelectorAll('.fq').forEach(f => { f.classList.remove('open'); f.lastElementChild.style.maxHeight = 0; });
   if (!was){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+}
+
+async function handleWaitlist(event){
+  event.preventDefault();
+  const emailInput = document.getElementById('waitlist-email');
+  const btn = event.target.querySelector('button[type="submit"]');
+  const payload = { email: emailInput.value, url: window.location.href };
+  btn.textContent = "Saving..."; btn.disabled = true;
+  try {
+    fetch('https://script.google.com/macros/s/AKfycbzkHiROEY_O6a2sN035uPWVhw6DIIuVhvkcyKwvgfI6ZBBKuJiZu8tSE6JYwKdpe3wj/exec', {
+      method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    }).catch(err => console.error('Sheet error:', err));
+    await fetch('https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/courseWaitlist', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
+    }).then(r => { if (!r.ok) throw new Error('Request failed'); });
+    btn.textContent = "Success! ✔"; btn.style.background = "#25D366";
+    emailInput.value = "";
+  } catch (error) {
+    console.error("Waitlist error:", error);
+    btn.textContent = "Error, try again"; btn.disabled = false;
+  }
 }
 
 async function handleReserve(e){
