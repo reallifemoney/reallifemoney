@@ -354,6 +354,51 @@ exports.createCheckoutSession = onRequest(
   }
 );
 
+// Investing on Tap (£50) checkout - same flow as createCheckoutSession, different Price.
+const TAP_PRICE_ID = "price_1UU6POG1bVxXIBBZFUgjcp1n";
+
+exports.createCheckoutSessionTap = onRequest(
+  { secrets: [stripeSecretKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+    if (req.method !== "POST") {
+      return res.status(405).send("Method Not Allowed");
+    }
+
+    const stripe = new Stripe(stripeSecretKey.value());
+
+    try {
+      const { quantity, name, email, phone, courseDate } = req.body;
+      const qty = Math.max(1, Math.min(12, parseInt(quantity, 10) || 1));
+
+      const session = await stripe.checkout.sessions.create({
+        ui_mode: "embedded_page",
+        mode: "payment",
+        line_items: [{ price: TAP_PRICE_ID, quantity: qty }],
+        allow_promotion_codes: true,
+        customer_email: email,
+        metadata: {
+          full_name: name,
+          phone: phone,
+          course_date: courseDate || "",
+        },
+        return_url: "https://reallifemoney.co.uk/booking-confirmed?session_id={CHECKOUT_SESSION_ID}",
+      });
+
+      res.json({ clientSecret: session.client_secret });
+    } catch (err) {
+      console.error("Error creating checkout session:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
 exports.getBookingDetails = onRequest(
   {},
   async (req, res) => {
