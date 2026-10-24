@@ -163,6 +163,8 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
             letter-spacing: 1px;
         }
 
+        .card-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+
         .card-title {
             font-size: 22px;
             font-weight: 700;
@@ -243,7 +245,7 @@ src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"
         }
 
         @media (max-width: 760px) {
-            .options-grid { grid-template-columns: 1fr; }
+            .options-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -254,58 +256,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
     <section class="home-hero">
-        <a href="/" class="back-link">← Back to home</a>
+        <a href="/workshops" class="back-link">← Back</a>
         <img src="/logo.webp" alt="Real Life Money Logo" class="logo-main">
 
-        <h1 class="home-title">Pick your <span style="color: var(--purple)">school</span></h1>
-        <div class="options-grid">
-            <a href="/schools/castle" class="course-card">
-                <div class="card-image-wrap"><img src="/castle.png" alt="The Castle School logo"></div>
-                <span class="tag">Available</span>
-                <h2 class="card-title">The Castle School</h2>
-                <p class="card-meta">Workshops for staff and post-16 students.</p>
-                <div class="btn-go">View details →</div>
+        <h1 class="home-title">Are you a <span style="color: var(--purple)">student or teacher?</span></h1>
+        <div class="options-grid" style="grid-template-columns:repeat(2,1fr);max-width:720px">
+            <a href="/schools/students" class="course-card">
+                <span class="card-icon">🎓</span>
+                <span class="tag">Student</span>
+                <h2 class="card-title">I'm a student</h2>
+                <p class="card-meta">Investing workshops for post-16 students.</p>
+                <div class="btn-go">Choose your school →</div>
             </a>
 
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/collegiate.png" alt="Collegiate School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Collegiate School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/downend.png" alt="Downend School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Downend School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/mangotsfield.png" alt="Mangotsfield School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Mangotsfield School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/bradley.png" alt="Bradley Stoke School logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Bradley Stoke School</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
-
-            <div class="course-card disabled" aria-disabled="true">
-                <div class="card-image-wrap"><img src="/winterbourne.png" alt="Winterbourne Academy logo"></div>
-                <span class="tag tag-soon">Coming Soon</span>
-                <h2 class="card-title">Winterbourne Academy</h2>
-                <p class="card-meta">Workshops coming soon.</p>
-                <div class="btn-go">Coming soon</div>
-            </div>
+            <a href="/schools/teachers" class="course-card">
+                <span class="card-icon">🧑‍🏫</span>
+                <span class="tag">Teacher</span>
+                <h2 class="card-title">I'm a teacher</h2>
+                <p class="card-meta">Investing and pension workshops for school staff.</p>
+                <div class="btn-go">Choose your school →</div>
+            </a>
         </div>
     </section>
 
