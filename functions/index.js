@@ -44,9 +44,11 @@ function workshopLabelFor(w) {
  */
 async function getWorkshopByLabel(label) {
   if (!label) return null;
-  const snap = await db.collection("workshops").get();
-  for (const doc of snap.docs) {
-    if (workshopLabelFor(doc.data()) === label) return doc.data();
+  for (const col of ["workshops", "tapCourses"]) {
+    const snap = await db.collection(col).get();
+    for (const doc of snap.docs) {
+      if (workshopLabelFor(doc.data()) === label) return doc.data();
+    }
   }
   return null;
 }
@@ -1721,6 +1723,11 @@ exports.adminDashboard = onRequest(
       const workshopsSnap = await db.collection("workshops").orderBy("sortDate", "asc").get();
       const workshops = workshopsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
+      // --- Investing on Tap courses (Firestore) ---
+      await seedTapCoursesIfNeeded();
+      const tapCoursesSnap = await db.collection("tapCourses").orderBy("sortDate", "asc").get();
+      const tapCourses = tapCoursesSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
       // --- Castle School P16 sign-ups (Firestore) ---
       const castleP16Snap = await db.collection("castleP16SignUps").orderBy("createdAt", "desc").get();
       const castleP16SignUps = castleP16Snap.docs.map((doc) => {
@@ -1823,6 +1830,7 @@ exports.adminDashboard = onRequest(
         },
         bookings,
         workshops,
+        tapCourses,
         castleP16SignUps,
         vipPartners,
         invitedPartners,
@@ -1917,6 +1925,146 @@ exports.adminDeleteWorkshop = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error deleting workshop:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * INVESTING ON TAP COURSES - separate "tapCourses" collection, same
+ * fields as workshops so bookings sync session dates/times to Bigin.
+ */
+const TAP_DEFAULT_VENUE = "Industry Bar & Kitchen";
+const TAP_DEFAULT_ADDRESS = "Gloucester Road, Bristol";
+
+async function seedTapCoursesIfNeeded() {
+  const metaRef = db.collection("config").doc("tapCoursesSeed");
+  if ((await metaRef.get()).exists) return;
+  const existing = await db.collection("tapCourses").limit(1).get();
+  if (existing.empty) {
+    await db.collection("tapCourses").add({
+      dateLabel: "Tuesday 12th & 19th January",
+      times: "7:00pm – 8:30pm",
+      category: "in-person",
+      location: "",
+      venueName: TAP_DEFAULT_VENUE,
+      venueAddress: TAP_DEFAULT_ADDRESS,
+      price: 50,
+      sortDate: "2027-01-12",
+      active: true,
+      soldOut: false,
+      "1session": "2027-01-12",
+      "2session": "2027-01-19",
+      "1start_time": "19:00",
+      "1end_time": "20:30",
+      "2start_time": "19:00",
+      "2end_time": "20:30",
+    });
+  }
+  await metaRef.set({ seededAt: admin.firestore.FieldValue.serverTimestamp() });
+}
+
+exports.getTapCourses = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+
+    try {
+      await seedTapCoursesIfNeeded();
+      const snapshot = await db
+        .collection("tapCourses")
+        .where("active", "==", true)
+        .orderBy("sortDate", "asc")
+        .get();
+      const courses = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      res.json({ courses });
+    } catch (err) {
+      console.error("Error fetching tap courses:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+exports.adminSaveTapCourse = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id, ...fields } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const course = {
+        dateLabel: String(fields.dateLabel || "").trim(),
+        times: String(fields.times || "").trim(),
+        category: fields.category === "online" ? "online" : "in-person",
+        location: String(fields.location || "").trim(),
+        venueName: String(fields.venueName || "").trim() || TAP_DEFAULT_VENUE,
+        venueAddress: String(fields.venueAddress || "").trim() || TAP_DEFAULT_ADDRESS,
+        price: Number(fields.price) || 0,
+        sortDate: String(fields.sortDate || "").trim(),
+        active: fields.active !== false,
+        soldOut: Boolean(fields.soldOut),
+        "1session": String(fields["1session"] || "").trim(),
+        "2session": String(fields["2session"] || "").trim(),
+        "1start_time": String(fields["1start_time"] || "").trim(),
+        "1end_time": String(fields["1end_time"] || "").trim(),
+        "2start_time": String(fields["2start_time"] || "").trim(),
+        "2end_time": String(fields["2end_time"] || "").trim(),
+      };
+
+      if (!course.dateLabel || !course.sortDate) {
+        return res.status(400).json({ error: "Missing dateLabel or sortDate" });
+      }
+
+      await seedTapCoursesIfNeeded();
+      if (id) {
+        await db.collection("tapCourses").doc(String(id)).set(course, { merge: true });
+      } else {
+        await db.collection("tapCourses").add(course);
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error saving tap course:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+exports.adminDeleteTapCourse = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      await seedTapCoursesIfNeeded();
+      await db.collection("tapCourses").doc(String(id)).delete();
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting tap course:", err);
       res.status(500).json({ error: err.message });
     }
   }

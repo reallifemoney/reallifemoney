@@ -56,6 +56,7 @@
       <nav class="admin-tabs" id="adminTabs">
         <button class="admin-tab active" data-tab="bookings">Bookings</button>
         <button class="admin-tab" data-tab="workshops">Workshops</button>
+        <button class="admin-tab" data-tab="tap">Investing on Tap</button>
         <button class="admin-tab" data-tab="castlep16">Castle P16</button>
         <button class="admin-tab" data-tab="partners">VIP Partners</button>
       </nav>
@@ -155,6 +156,68 @@
 
   <button type="submit" class="btn btn-primary" id="wsSubmit">Save workshop</button>
   <button type="button" class="btn btn-text" id="wsCancelBtn">Cancel</button>
+</form>
+      </section>
+
+      <!-- Investing on Tap tab: in-person pub courses -->
+      <section class="dash-card admin-panel" id="panel-tap">
+        <span class="dash-card-label">Investing on Tap courses</span>
+        <div id="tapList"></div>
+
+        <button class="btn btn-outline" id="newTapBtn">+ Add new course</button>
+
+        <form id="tapForm" class="bank-form admin-form" hidden>
+  <input type="hidden" id="tapId">
+  <label for="tapDateLabel">Date label</label>
+  <input type="text" id="tapDateLabel" placeholder="Tuesday 12th &amp; 19th January" required>
+
+  <label for="tapSortDate">Sort date (YYYY-MM-DD)</label>
+  <input type="text" id="tapSortDate" placeholder="2027-01-12" required>
+
+  <label for="tapTimes">Times</label>
+  <input type="text" id="tapTimes" value="7:00pm – 8:30pm" placeholder="7:00pm – 8:30pm" required>
+
+  <label for="tap1Session">Session 1 date</label>
+  <input type="date" id="tap1Session">
+
+  <label for="tap1StartTime">Session 1 start time</label>
+  <input type="time" id="tap1StartTime" value="19:00">
+
+  <label for="tap1EndTime">Session 1 end time</label>
+  <input type="time" id="tap1EndTime" value="20:30">
+
+  <label for="tap2Session">Session 2 date</label>
+  <input type="date" id="tap2Session">
+
+  <label for="tap2StartTime">Session 2 start time</label>
+  <input type="time" id="tap2StartTime" value="19:00">
+
+  <label for="tap2EndTime">Session 2 end time</label>
+  <input type="time" id="tap2EndTime" value="20:30">
+
+  <label for="tapCategory">Category</label>
+  <select id="tapCategory">
+    <option value="in-person">In-person</option>
+    <option value="online">Online</option>
+  </select>
+
+  <label for="tapLocation">Location (online only)</label>
+  <input type="text" id="tapLocation" placeholder="🖥️ Live online">
+
+  <label for="tapVenueName">Venue name (in-person only)</label>
+  <input type="text" id="tapVenueName" value="Industry Bar &amp; Kitchen">
+
+  <label for="tapVenueAddress">Venue address (in-person only)</label>
+  <input type="text" id="tapVenueAddress" value="Gloucester Road, Bristol">
+
+  <label for="tapPrice">Price (£)</label>
+  <input type="number" id="tapPrice" value="50" required>
+
+  <label class="checkbox-row"><input type="checkbox" id="tapActive" checked><span>Active (visible to customers)</span></label>
+  <label class="checkbox-row"><input type="checkbox" id="tapSoldOut"><span>Sold out</span></label>
+
+  <button type="submit" class="btn btn-primary" id="tapSubmit">Save course</button>
+  <button type="button" class="btn btn-text" id="tapCancelBtn">Cancel</button>
 </form>
       </section>
 

@@ -7,6 +7,7 @@ const dashboard = document.getElementById("dashboard");
 let currentToken = null;
 let allBookings = [];
 let allWorkshops = [];
+let allTapCourses = [];
 let allCastleP16SignUps = [];
 const CASTLE_P16_CAPACITY = 34;
 
@@ -79,10 +80,12 @@ function renderDashboard(data) {
 
   allBookings = data.bookings || [];
   allWorkshops = data.workshops || [];
+  allTapCourses = data.tapCourses || [];
   allCastleP16SignUps = data.castleP16SignUps || [];
 
   renderBookings();
   renderWorkshops();
+  renderTapCourses();
   renderCastleP16();
   renderPartners(data.vipPartners || []);
   renderInvitedPartners(data.invitedPartners || []);
@@ -377,6 +380,155 @@ workshopForm.addEventListener("submit", async (e) => {
   submitBtn.disabled = false;
   submitBtn.textContent = "Save workshop";
 });
+// =================================================================
+// Investing on Tap tab: list, participants, edit, delete
+// =================================================================
+const tapForm = document.getElementById("tapForm");
+
+function renderTapCourses() {
+  const list = document.getElementById("tapList");
+  list.innerHTML = "";
+
+  allTapCourses.forEach((c) => {
+    const label = workshopLabel(c);
+    const participants = allBookings.filter((b) => (b.workshop || b.courseDate) === label);
+
+    const card = document.createElement("div");
+    card.className = "admin-workshop";
+    card.innerHTML = `
+      <div class="admin-workshop-header">
+        <div>
+          <strong>${c.dateLabel}</strong> - ${c.times}
+          ${c.soldOut ? '<span class="admin-badge admin-badge-warning">Sold out</span>' : ""}
+          ${c.active === false ? '<span class="admin-badge">Inactive</span>' : ""}
+        </div>
+        <div class="admin-workshop-actions">
+          <button class="btn btn-text tap-edit-btn" data-id="${c.id}">Edit</button>
+          <button class="btn btn-text tap-participants-btn" data-id="${c.id}">Participants (${participants.length})</button>
+          <button class="btn btn-text tap-delete-btn" data-id="${c.id}">Delete</button>
+        </div>
+      </div>
+      <ul class="admin-participants-list" id="tap-participants-${c.id}" hidden>
+        ${participants.length
+          ? participants.map((p) => `<li>${p.fullName} - ${p.email}</li>`).join("")
+          : "<li>No one's booked yet.</li>"}
+      </ul>
+    `;
+    list.appendChild(card);
+  });
+
+  list.querySelectorAll(".tap-edit-btn").forEach((btn) =>
+    btn.addEventListener("click", () => openTapForm(btn.dataset.id))
+  );
+  list.querySelectorAll(".tap-participants-btn").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const el = document.getElementById(`tap-participants-${btn.dataset.id}`);
+      el.hidden = !el.hidden;
+    })
+  );
+  list.querySelectorAll(".tap-delete-btn").forEach((btn) =>
+    btn.addEventListener("click", () => deleteTapCourse(btn.dataset.id))
+  );
+}
+
+async function deleteTapCourse(id) {
+  if (!confirm("Delete this course? This can't be undone.")) return;
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminDeleteTapCourse`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, id }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error deleting tap course:", err);
+    alert("Something went wrong deleting that course - please try again.");
+  }
+}
+
+function openTapForm(id) {
+  const c = id ? allTapCourses.find((x) => x.id === id) : null;
+  const val = (el, v) => { document.getElementById(el).value = v; };
+
+  val("tapId", c ? c.id || "" : "");
+  val("tapDateLabel", c ? c.dateLabel || "" : "");
+  val("tapSortDate", c ? c.sortDate || "" : "");
+  val("tapTimes", c ? c.times || "" : "7:00pm – 8:30pm");
+  val("tap1Session", c ? c["1session"] || "" : "");
+  val("tap1StartTime", c ? c["1start_time"] || "19:00" : "19:00");
+  val("tap1EndTime", c ? c["1end_time"] || "20:30" : "20:30");
+  val("tap2Session", c ? c["2session"] || "" : "");
+  val("tap2StartTime", c ? c["2start_time"] || "19:00" : "19:00");
+  val("tap2EndTime", c ? c["2end_time"] || "20:30" : "20:30");
+  val("tapCategory", c ? c.category || "in-person" : "in-person");
+  val("tapLocation", c ? c.location || "" : "");
+  val("tapVenueName", c ? c.venueName || "Industry Bar & Kitchen" : "Industry Bar & Kitchen");
+  val("tapVenueAddress", c ? c.venueAddress || "Gloucester Road, Bristol" : "Gloucester Road, Bristol");
+  val("tapPrice", c ? c.price || 50 : 50);
+  document.getElementById("tapActive").checked = c ? c.active !== false : true;
+  document.getElementById("tapSoldOut").checked = c ? Boolean(c.soldOut) : false;
+
+  tapForm.hidden = false;
+  tapForm.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+document.getElementById("newTapBtn").addEventListener("click", () => openTapForm(null));
+document.getElementById("tapCancelBtn").addEventListener("click", () => {
+  tapForm.hidden = true;
+  tapForm.reset();
+});
+
+tapForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById("tapSubmit");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Saving...";
+
+  const get = (el) => document.getElementById(el).value.trim();
+  const payload = {
+    token: currentToken,
+    id: get("tapId") || undefined,
+    dateLabel: get("tapDateLabel"),
+    sortDate: get("tapSortDate"),
+    times: get("tapTimes"),
+    "1session": get("tap1Session"),
+    "1start_time": get("tap1StartTime"),
+    "1end_time": get("tap1EndTime"),
+    "2session": get("tap2Session"),
+    "2start_time": get("tap2StartTime"),
+    "2end_time": get("tap2EndTime"),
+    category: get("tapCategory"),
+    location: get("tapLocation"),
+    venueName: get("tapVenueName"),
+    venueAddress: get("tapVenueAddress"),
+    price: Number(get("tapPrice")),
+    active: document.getElementById("tapActive").checked,
+    soldOut: document.getElementById("tapSoldOut").checked,
+  };
+
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminSaveTapCourse`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Request failed");
+
+    tapForm.hidden = true;
+    tapForm.reset();
+    await loadDashboard();
+  } catch (err) {
+    console.error("Error saving tap course:", err);
+    alert("Something went wrong saving the course - please try again.");
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Save course";
+});
+
 // =================================================================
 // Castle School P16 tab: sign-ups, add/edit/delete
 // =================================================================

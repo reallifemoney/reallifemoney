@@ -350,35 +350,28 @@ footer a{color:#ddd;text-decoration:underline}
 </div>
 
 <script>
-// ===== EDIT YOUR DATES HERE =====
-const PRICE = 50;
-const VENUE = "📍 Industry Bar & Kitchen, Gloucester Road, Bristol";
-const SESSIONS = [
-  { label: "Tuesday 12th & 19th January", times: "7:00pm – 8:30pm" }
-];
-// ================================
+const FN_BASE = 'https://us-central1-workshop-booking-system-b791e.cloudfunctions.net';
+const FALLBACK_PRICE = 50;
+let SESSIONS = [];
+let PRICE = FALLBACK_PRICE;
 
 let sel = {};
 function pick(i){
   const s = SESSIONS[i];
-  sel = { label: s.label, times: s.times, loc: VENUE };
+  const venueLine = "📍 " + s.venue;
+  sel = { label: s.label, times: s.times, loc: venueLine };
   document.getElementById('d-times').innerText = "📅 " + s.label;
   document.getElementById('d-timings').innerText = s.times;
-  document.getElementById('d-loc').innerText = VENUE;
+  document.getElementById('d-loc').innerText = venueLine + (s.address ? ", " + s.address : "");
   document.getElementById('step-3').style.display = 'none';
   const el = document.getElementById('step-2');
   el.style.display = 'block';
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
 }
-document.getElementById('sessGrid').innerHTML = SESSIONS.map((s,i) => `
-  <div class="sess">
-    <div class="m">In person · Gloucester Road</div>
-    <h3>${s.label}</h3>
-    <div class="row">🕖 ${s.times}</div>
-    <div class="row">Industry Bar &amp; Kitchen</div>
-    <div class="price">£${PRICE}</div>
-    <button class="pill" onclick="pick(${i})">Select these dates</button>
-  </div>`).join('') + `
+
+function esc(t){ const d = document.createElement('div'); d.textContent = t == null ? '' : t; return d.innerHTML; }
+
+const WAITLIST_HTML = `
   <div class="sess-waitlist">
     <h3>Can't make these dates?</h3>
     <p>Leave your email and I'll let you know when new dates are announced.</p>
@@ -388,10 +381,47 @@ document.getElementById('sessGrid').innerHTML = SESSIONS.map((s,i) => `
     </form>
   </div>`;
 
-document.getElementById('heroDate').innerText = "📅 " + SESSIONS[0].label;
-document.getElementById('heroTime').innerText = "🕖 " + SESSIONS[0].times;
-document.getElementById('heroPrice').innerText = "💷 £" + PRICE + " per person for both evenings";
-document.getElementById('heroBtn').onclick = () => pick(0);
+async function loadCourses(){
+  const grid = document.getElementById('sessGrid');
+  try {
+    const res = await fetch(FN_BASE + '/getTapCourses');
+    const data = await res.json();
+    SESSIONS = (data.courses || []).map(c => ({
+      label: c.dateLabel, times: c.times, venue: c.venueName || 'Industry Bar & Kitchen',
+      address: c.venueAddress || '', price: c.price || FALLBACK_PRICE, soldOut: !!c.soldOut
+    }));
+  } catch (err) {
+    console.error('Error loading courses:', err);
+    grid.innerHTML = '<p style="text-align:center">Sorry, we couldn\'t load the dates. Please refresh or <a href="https://wa.me/447939887950">WhatsApp me</a>.</p>';
+    return;
+  }
+
+  grid.innerHTML = SESSIONS.map((s,i) => `
+    <div class="sess">
+      <div class="m">In person · Gloucester Road</div>
+      <h3>${esc(s.label)}</h3>
+      <div class="row">🕖 ${esc(s.times)}</div>
+      <div class="row">${esc(s.venue)}</div>
+      <div class="price">£${s.price}</div>
+      ${s.soldOut ? '<button class="pill" disabled>Sold out</button>' : `<button class="pill" onclick="pick(${i})">Select these dates</button>`}
+    </div>`).join('') + WAITLIST_HTML;
+
+  const next = SESSIONS.findIndex(s => !s.soldOut);
+  if (next >= 0) {
+    const s = SESSIONS[next];
+    PRICE = s.price;
+    document.getElementById('heroDate').innerText = "📅 " + s.label;
+    document.getElementById('heroTime').innerText = "🕖 " + s.times;
+    document.getElementById('heroPrice').innerText = "💷 £" + s.price + " per person for both evenings";
+    document.getElementById('heroBtn').onclick = () => pick(next);
+  } else {
+    document.getElementById('heroDate').innerText = "📅 New dates coming soon";
+    document.getElementById('heroTime').innerText = "";
+    document.getElementById('heroPrice').innerText = "";
+    document.getElementById('heroBtn').onclick = () => document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+loadCourses();
 
 function openVideo(){
   const f = document.getElementById('vFrame');
