@@ -8,6 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','248586408143097');fbq('track','PageView');
+</script>
 <style>
 :root{--purple:#8c52ff;--orange:#ff914d;--yellow:#ffde59;--green:#71c558;--mint:#eef8eb;--ink:#1F3A29;--muted:#5d7466}
 *{box-sizing:border-box;margin:0}
@@ -225,6 +230,7 @@ $("cta").onclick=async()=>{
     const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({email,consentAccepted:true,source:"facebook-ad",params:location.search})});
     if(!r.ok) throw 0;
+    if(window.fbq) fbq("track","Lead",{content_name:"Free taster session"});
     sent=true; $("formWrap").hidden=true; $("doneWrap").hidden=false;
   }catch(e){ err.textContent="Something went wrong. Please try again."; }
   $("cta").disabled=false; show(2);
