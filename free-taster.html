@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Free investing taster | Real Life Money</title>
+ <link rel="icon" type="image/webp" href="/logo-circle.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,6 +56,12 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .stars{color:#f5b301;font-size:17px;letter-spacing:1px;line-height:1}
 .badge small{font-size:13px;color:var(--muted);display:block;margin-top:3px}
 .course-label{align-self:flex-start;background:#f2e9ff;color:var(--purple);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+.invite{position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;background:linear-gradient(120deg,#8c52ff,#7040d8);color:#fff;padding:18px 22px;border-radius:22px;margin-top:18px;box-shadow:0 8px 24px rgba(112,64,216,.2)}
+.invite::after{content:"";position:absolute;width:130px;height:130px;border:1px solid rgba(255,255,255,.16);border-radius:50%;right:-34px;top:-72px;box-shadow:0 0 0 18px rgba(255,255,255,.06),0 0 0 38px rgba(255,255,255,.04)}
+.invite-icon{flex:none;width:48px;height:48px;display:grid;place-items:center;background:rgba(255,255,255,.16);border-radius:16px;font-size:25px}
+.invite h2{font-size:18px;font-weight:700;line-height:1.2;color:#fff}
+.invite p{font-size:13px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:5px}
+.invite-next{font-weight:600;color:#ffde59!important;margin-top:8px!important}
 .points{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;margin-top:18px}
 .pt{display:flex;gap:14px;align-items:flex-start}
 .tick{flex:none;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-weight:700;color:var(--ink);background:var(--green)}
@@ -75,9 +82,10 @@ input[type=email]:focus{outline:none;border-color:var(--purple)}
 .consent{display:flex;gap:10px;font-size:12px;line-height:1.4;color:var(--muted);font-weight:300;margin-top:14px}
 .consent input{width:20px;height:20px;flex:none;accent-color:var(--purple);margin-top:1px}
 .err{color:#c0392b;font-size:13px;margin-top:10px;min-height:18px}
+[hidden]{display:none!important}
 .done{text-align:center;align-items:center;justify-content:center}
 .done .big{width:84px;height:84px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-size:42px;color:#fff;margin-bottom:18px}
-@media (min-width:700px){.app{max-width:1024px;padding:32px 56px 28px}h1{font-size:clamp(32px,3.5vw,44px)}.lead{font-size:18px}.pt h2{font-size:19px}.pt p{font-size:15px}.points{gap:20px;margin-top:24px}.tick{width:40px;height:40px}.result{margin-top:20px;padding:20px 24px 14px}.total{font-size:54px}.ctrls{gap:14px;margin-top:18px}.ctrl label{font-size:15px}.small{font-size:12px}.badge{margin-top:20px}}
+@media (min-width:700px){.app{max-width:1024px;padding:32px 56px 28px}h1{font-size:clamp(32px,3.5vw,44px)}.lead{font-size:18px}.pt h2{font-size:19px}.pt p{font-size:15px}.points{gap:20px;margin-top:24px}.tick{width:40px;height:40px}.result{margin-top:20px;padding:20px 24px 14px}.total{font-size:54px}.ctrls{gap:14px;margin-top:18px}.ctrl label{font-size:15px}.small{font-size:12px}.badge{margin-top:20px}.invite{padding:22px 26px;margin-top:22px}.invite h2{font-size:21px}.invite p{font-size:15px}.invite-icon{width:56px;height:56px;font-size:28px}}
 @media (max-height:640px){.small,.lead{display:none}.ctrls{gap:4px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -92,8 +100,7 @@ input[type=email]:focus{outline:none;border-color:var(--purple)}
   <div class="stage">
     <!-- 1: calculator -->
     <section class="step on">
-      <h1>See what your money could become</h1>
-      <p class="lead">Drag the sliders and watch it grow.</p>
+      <h1>Your money's potential</h1>
       <div class="result">
         <div class="total" id="total">£0</div>
         <div class="split">
@@ -120,14 +127,22 @@ input[type=email]:focus{outline:none;border-color:var(--purple)}
     <!-- 2: course -->
     <section class="step">
       <div class="course-label">The full course</div>
-      <h1>Investing, minus the jargon, plus the fun</h1>
+      <h1>Investing, minus the jargon, plus the fun.</h1>
+      <div class="invite">
+        <div class="invite-icon" aria-hidden="true">✉</div>
+        <div>
+          <h2>You’re invited to my free taster session!</h2>
+          <p>Get a relaxed, no-pressure taste of the course and see how enjoyable learning about investing can be.</p>
+          <p class="invite-next">Your free seat is just one tap away ↓</p>
+        </div>
+      </div>
       <div class="badge">
         <div class="g">G</div>
         <div><div class="stars">★★★★★</div><small><span id="rating">5.0</span> on Google reviews</small></div>
       </div>
       <div class="points">
-        <div class="pt"><div class="tick">✓</div><div><h2>Taught by a former financial adviser</h2><p>Now a maths teacher, so clear explanations and no sales pitch.</p></div></div>
-        <div class="pt"><div class="tick">✓</div><div><h2>Small, hands-on groups</h2><p>Three 60-minute sessions with no more than 15 people.</p></div></div>
+        <div class="pt"><div class="tick">✓</div><div><h2>Taught by a qualified financial adviser</h2><p>Now a maths teacher, so clear explanations and no sales pitch.</p></div></div>
+        <div class="pt"><div class="tick">✓</div><div><h2>Small, hands-on groups</h2><p>Two 90-minute sessions with no more than 15 people.</p></div></div>
         <div class="pt"><div class="tick">✓</div><div><h2>Learn through interactive games</h2><p>Hands-on activities that make investing click, instead of a lecture.</p></div></div>
         <div class="pt"><div class="tick">✓</div><div><h2>Leave with the confidence to get started</h2><p>Everyone gets my Steps to Invest PDF to follow at their own pace.</p></div></div>
       </div>
@@ -159,7 +174,7 @@ input[type=email]:focus{outline:none;border-color:var(--purple)}
     </section>
   </div>
 
-  <button class="cta" id="cta">See my free taster session</button>
+  <button class="cta" id="cta">About the workshops</button>
 </div>
 
 <script>
@@ -196,7 +211,7 @@ let cur=0, sent=false;
 function show(n){
   cur=n; steps.forEach((s,k)=>s.classList.toggle("on",k===n)); dots.forEach((d,k)=>d.classList.toggle("on",k<=n));
   $("back").classList.toggle("on",n>0&&!sent);
-  $("cta").textContent = sent ? "Back to Real Life Money" : ["See my free taster session","Reserve my free taster seat","Send me my free taster link"][n];
+  $("cta").textContent = sent ? "Back to Real Life Money" : ["About the workshops","Reserve my free taster seat","Send me my free taster link"][n];
   if(n===2&&!sent) setTimeout(()=>$("email").focus({preventScroll:true}),150);
 }
 $("back").onclick=()=>show(cur-1);
