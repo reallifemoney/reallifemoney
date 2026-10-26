@@ -75,7 +75,8 @@ function workshopSessionFields(workshop) {
     "session_two": workshop["2session"] || "",
     "one_start_time": workshop["1start_time"] || "",
     "two_start_time": workshop["2start_time"] || "",
-     "course_times": workshop["times"] || "",
+    "course_times": workshop["times"] || "",
+    "Location": workshop.category === "online" ? "Online" : (workshop.venueName || ""),
   };
 }
 
@@ -1974,12 +1975,12 @@ exports.getTapCourses = onRequest(
 
     try {
       await seedTapCoursesIfNeeded();
-      const snapshot = await db
-        .collection("tapCourses")
-        .where("active", "==", true)
-        .orderBy("sortDate", "asc")
-        .get();
-      const courses = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      // Sorted/filtered in code to avoid needing a composite index
+      const snapshot = await db.collection("tapCourses").get();
+      const courses = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((c) => c.active !== false)
+        .sort((a, b) => String(a.sortDate || "").localeCompare(String(b.sortDate || "")));
       res.json({ courses });
     } catch (err) {
       console.error("Error fetching tap courses:", err);
