@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free investing taster | Real Life Money</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#8c52ff;--orange:#ff914d;--yellow:#ffde59;--green:#71c558;--mint:#eef8eb;--ink:#1F3A29;--muted:#5d7466}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:'Lexend',system-ui,sans-serif;background:var(--mint);color:var(--ink);overflow:hidden;-webkit-text-size-adjust:100%}
+.app{height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 20px max(16px,env(safe-area-inset-bottom))}
+.top{display:flex;align-items:center;gap:12px;height:32px;flex:none}
+.back{width:32px;height:32px;border:0;border-radius:50%;background:#fff;color:var(--ink);font:600 16px 'Lexend';cursor:pointer;visibility:hidden}
+.back.on{visibility:visible}
+.bar{flex:1;display:flex;gap:6px}
+.bar i{flex:1;height:6px;border-radius:3px;background:#d3e8cc;transition:background .3s}
+.bar i.on{background:var(--purple)}
+.stage{flex:1;min-height:0;position:relative;margin-top:10px}
+.step{position:absolute;inset:0;display:none;flex-direction:column;min-height:0}
+.step.on{display:flex}
+h1{font-size:clamp(22px,6.4vw,29px);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.lead{font-size:14px;color:var(--muted);font-weight:300;margin-top:6px;line-height:1.4}
+.cta{flex:none;width:100%;border:0;border-radius:16px;padding:17px;background:var(--orange);color:var(--ink);font:600 17px 'Lexend';cursor:pointer;margin-top:12px;box-shadow:0 4px 0 #e0762f;transition:transform .1s,box-shadow .1s}
+.cta:active{transform:translateY(3px);box-shadow:0 1px 0 #e0762f}
+.cta:disabled{opacity:.6}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+
+/* step 1 */
+.result{background:#fff;border-radius:20px;padding:14px 16px 10px;margin-top:12px;flex:1;min-height:90px;display:flex;flex-direction:column}
+.total{font-size:clamp(34px,10.5vw,46px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--purple)}
+.split{font-size:12px;color:var(--muted);margin-top:6px;display:flex;gap:14px;flex-wrap:wrap}
+.split b{font-weight:600;color:var(--ink)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.chart{flex:1;min-height:0;position:relative;margin-top:8px}
+.chart svg{position:absolute;inset:0;width:100%;height:100%}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+.ctrls{flex:none;margin-top:12px;display:grid;gap:10px}
+.ctrl label{display:flex;justify-content:space-between;font-size:13px;font-weight:500}
+.ctrl label span{font-weight:700;color:var(--purple)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer;--p:30%}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--purple) var(--p),#d3e8cc var(--p))}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#d3e8cc}
+input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--purple)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-10px;border-radius:50%;background:#fff;border:4px solid var(--purple);box-shadow:0 2px 6px rgba(31,58,41,.25)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--purple)}
+.small{font-size:10.5px;line-height:1.4;color:var(--muted);font-weight:300;margin-top:8px;flex:none}
+
+/* step 2 */
+.badge{align-self:flex-start;display:flex;align-items:center;gap:10px;background:#fff;border-radius:999px;padding:8px 16px 8px 10px;margin-top:14px;box-shadow:0 2px 0 #d3e8cc}
+.g{width:28px;height:28px;border-radius:50%;background:#fff;border:1px solid #e3e3e3;display:grid;place-items:center;font:700 17px 'Lexend';background:conic-gradient(#ea4335 0 25%,#fbbc05 0 50%,#34a853 0 75%,#4285f4 0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stars{color:#f5b301;font-size:14px;letter-spacing:1px;line-height:1}
+.badge small{font-size:11px;color:var(--muted);display:block;margin-top:2px}
+.points{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;margin-top:18px}
+.pt{display:flex;gap:14px;align-items:flex-start}
+.tick{flex:none;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-weight:700;color:var(--ink);background:var(--green)}
+.pt h2{font-size:16px;font-weight:600;line-height:1.2}
+.pt p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.4;margin-top:3px}
+
+/* step 3 */
+.when{background:var(--purple);color:#fff;border-radius:22px;padding:16px 20px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.when b{font-size:clamp(20px,6vw,26px);font-weight:700;line-height:1.1;display:block}
+.when span{font-size:13px;font-weight:300;opacity:.9}
+.when .pill{background:var(--yellow);color:var(--ink);font-weight:600;font-size:13px;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.wrap{flex:1;min-height:0;display:flex;flex-direction:column}.learn{flex:none;margin-top:14px;gap:12px}.wrap input[type=email]{margin-top:14px;padding:14px 16px}.wrap .consent{margin-top:10px}.wrap .err{margin-top:6px;min-height:16px}
+
+/* step 4 */
+.form{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
+input[type=email]{width:100%;font:500 16px 'Lexend';padding:17px 16px;border-radius:16px;border:2px solid #d3e8cc;background:#fff;color:var(--ink);margin-top:18px}
+input[type=email]:focus{outline:none;border-color:var(--purple)}
+.consent{display:flex;gap:10px;font-size:12px;line-height:1.4;color:var(--muted);font-weight:300;margin-top:14px}
+.consent input{width:20px;height:20px;flex:none;accent-color:var(--purple);margin-top:1px}
+.err{color:#c0392b;font-size:13px;margin-top:10px;min-height:18px}
+.done{text-align:center;align-items:center;justify-content:center}
+.done .big{width:84px;height:84px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-size:42px;color:#fff;margin-bottom:18px}
+@media (max-height:640px){.small,.lead{display:none}.ctrls{gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <button class="back" id="back" aria-label="Back">&larr;</button>
+    <div class="bar" id="bar"><i></i><i></i><i></i></div>
+  </div>
+
+  <div class="stage">
+    <!-- 1: calculator -->
+    <section class="step on">
+      <h1>See what your money could become</h1>
+      <p class="lead">Drag the sliders and watch it grow.</p>
+      <div class="result">
+        <div class="total" id="total">£0</div>
+        <div class="split">
+          <span><i class="dot" style="background:var(--purple)"></i>You put in <b id="put">£0</b></span>
+          <span><i class="dot" style="background:var(--green)"></i>Growth <b id="grow">£0</b></span>
+        </div>
+        <div class="chart">
+          <svg viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+            <path id="aGrow" fill="#71c558"/>
+            <path id="aPut" fill="#8c52ff"/>
+            <path id="lGrow" fill="none" stroke="#4fa23a" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="axis"><span>Today</span><span id="mid"></span><span id="end"></span></div>
+      </div>
+      <div class="ctrls">
+        <div class="ctrl"><label for="s1">Starting amount <span id="v1"></span></label><input type="range" id="s1" min="0" max="50000" step="500" value="5000"></div>
+        <div class="ctrl"><label for="s2">Added each month <span id="v2"></span></label><input type="range" id="s2" min="0" max="1000" step="10" value="200"></div>
+        <div class="ctrl"><label for="s3">For how long <span id="v3"></span></label><input type="range" id="s3" min="1" max="40" step="1" value="20"></div>
+      </div>
+      <p class="small">Illustration only, not a forecast or advice. Assumes 8% growth a year. Over the long term that is a realistic return for a medium-risk investment, but returns vary and are not guaranteed. Your money can go down as well as up, and past performance is no guide to the future. Figures are before fees and inflation.</p>
+    </section>
+
+    <!-- 2: course -->
+    <section class="step">
+      <h1>Investing, minus the jargon, plus the fun</h1>
+      <div class="badge">
+        <div class="g">G</div>
+        <div><div class="stars">★★★★★</div><small><span id="rating">5.0</span> on Google reviews</small></div>
+      </div>
+      <div class="points">
+        <div class="pt"><div class="tick">✓</div><div><h2>Taught by a former financial adviser</h2><p>Now a maths teacher, so clear explanations and no sales pitch.</p></div></div>
+        <div class="pt"><div class="tick">✓</div><div><h2>Small, hands-on groups</h2><p>Three 60-minute sessions with no more than 15 people.</p></div></div>
+        <div class="pt"><div class="tick">✓</div><div><h2>Learn through interactive games</h2><p>Hands-on activities that make investing click, instead of a lecture.</p></div></div>
+        <div class="pt"><div class="tick">✓</div><div><h2>Leave with the confidence to get started</h2><p>Everyone gets my Steps to Invest PDF to follow at their own pace.</p></div></div>
+      </div>
+    </section>
+
+    <!-- 3: taster + sign up -->
+    <section class="step">
+      <div class="wrap" id="formWrap">
+        <h1>Try it free, online</h1>
+        <p class="lead">A 30-minute taster of the course, from your sofa.</p>
+        <div class="when">
+          <div><b>Wed 18 Nov</b><span>8pm on Zoom</span></div>
+          <div class="pill">Free</div>
+        </div>
+        <div class="points learn">
+          <div class="pt"><div class="tick">✓</div><div><h2>Meet me and get a feel for the course</h2><p>See how I teach before you commit to anything.</p></div></div>
+          <div class="pt"><div class="tick">✓</div><div><h2>Get your first insight into investing</h2><p>Plain English, starting from zero.</p></div></div>
+          <div class="pt"><div class="tick">✓</div><div><h2>Leave with a free gift</h2><p>Everyone who stays to the end gets one.</p></div></div>
+        </div>
+        <input type="email" id="email" placeholder="Your email for the Zoom link" autocomplete="email" inputmode="email" aria-label="Email address">
+        <label class="consent"><input type="checkbox" id="ok"><span>I'm happy for Real Life Money to email me the joining link and details about the course. I can unsubscribe at any time.</span></label>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+      <div class="form done" id="doneWrap" hidden>
+        <div class="big">✓</div>
+        <h1>You're in!</h1>
+        <p class="lead">Check your inbox for your joining link.<br>See you Wednesday 18 Nov at 8pm.<br>(Not there? Check your spam folder.)</p>
+      </div>
+    </section>
+  </div>
+
+  <button class="cta" id="cta">See my free taster session</button>
+</div>
+
+<script>
+// ---- Settings ----
+const ENDPOINT = "https://REGION-PROJECT.cloudfunctions.net/tasterSignup"; // your Firebase function URL
+const RATE = 0.08;           // assumed annual growth
+const GOOGLE_RATING = "5.0"; // update to your real Google rating
+
+// ---- Calculator ----
+const $ = id => document.getElementById(id);
+const gbp = n => "£" + Math.round(n).toLocaleString("en-GB");
+const bal = (i, m, t) => { const r = Math.pow(1+RATE,1/12)-1; return i*Math.pow(1+RATE,t) + (r ? m*(Math.pow(1+r,12*t)-1)/r : 0); };
+$("rating").textContent = GOOGLE_RATING;
+
+function draw(){
+  const i=+$("s1").value, m=+$("s2").value, y=+$("s3").value;
+  [["s1",50000],["s2",1000],["s3",40]].forEach(([id,max])=>{const e=$(id); e.style.setProperty("--p",(e.value-e.min)/(max-e.min)*100+"%")});
+  $("v1").textContent=gbp(i); $("v2").textContent=gbp(m); $("v3").textContent=y+(y===1?" year":" years");
+  const end=bal(i,m,y), put=i+m*12*y, top=Math.max(end,1);
+  $("total").textContent=gbp(end); $("put").textContent=gbp(put); $("grow").textContent=gbp(end-put);
+  const N=Math.max(y*2,2); let g=[],p=[];
+  for(let k=0;k<=N;k++){const t=y*k/N,x=300*k/N; g.push([x,150-bal(i,m,t)/top*146]); p.push([x,150-(i+m*12*t)/top*146]);}
+  const line=a=>a.map((q,k)=>(k?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" ");
+  $("aGrow").setAttribute("d",line(g)+" L300 150 L0 150Z");
+  $("aPut").setAttribute("d",line(p)+" L300 150 L0 150Z");
+  $("lGrow").setAttribute("d",line(g));
+  $("mid").textContent=y>1?Math.round(y/2)+" yrs":""; $("end").textContent=y+(y===1?" yr":" yrs");
+}
+["s1","s2","s3"].forEach(id=>$(id).addEventListener("input",draw)); draw();
+
+// ---- Steps ----
+const steps=[...document.querySelectorAll(".step")], dots=[...$("bar").children];
+let cur=0, sent=false;
+function show(n){
+  cur=n; steps.forEach((s,k)=>s.classList.toggle("on",k===n)); dots.forEach((d,k)=>d.classList.toggle("on",k<=n));
+  $("back").classList.toggle("on",n>0&&!sent);
+  $("cta").textContent = sent ? "Back to Real Life Money" : ["See my free taster session","Reserve my free taster seat","Send me my free taster link"][n];
+  if(n===2&&!sent) setTimeout(()=>$("email").focus({preventScroll:true}),150);
+}
+$("back").onclick=()=>show(cur-1);
+$("cta").onclick=async()=>{
+  if(sent){location.href="https://reallifemoney.co.uk";return}
+  if(cur<2) return show(cur+1);
+  const email=$("email").value.trim(), err=$("err");
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent="Please enter a valid email address.";
+  if(!$("ok").checked) return err.textContent="Please tick the box so we can email you the link.";
+  err.textContent=""; $("cta").disabled=true; $("cta").textContent="Saving your seat…";
+  try{
+    const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({email,source:"facebook-ad",params:location.search})});
+    if(!r.ok) throw 0;
+    sent=true; $("formWrap").hidden=true; $("doneWrap").hidden=false;
+  }catch(e){ err.textContent="Something went wrong. Please try again."; }
+  $("cta").disabled=false; show(2);
+};
+show(0);
+</script>
+</body>
+</html>
