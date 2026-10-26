@@ -997,7 +997,7 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
-async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false, workshopFields = {}) {
+async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false, workshopFields = {}, contactDescription = null, preserveReferralCode = false) {
   try {
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
@@ -1028,7 +1028,9 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
       const existingDescription = existingContact.Description || "";
       const newNote = vipPartner
         ? `\nVIP Partner sign-up. Course date: ${courseDate} (${new Date().toISOString()})`
-        : `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
+        : contactDescription
+          ? `\n${contactDescription} Course date: ${courseDate} (${new Date().toISOString()})`
+          : `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
 
       const updatePayload = {
         data: [
@@ -1039,7 +1041,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
-              : { referral_code: referralCode }),
+              : preserveReferralCode ? {} : { referral_code: referralCode }),
           },
         ],
       };
@@ -1058,14 +1060,14 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             First_Name: firstName,
             Last_Name: lastName,
             Email: email,
-            Description: vipPartner
+            Description: contactDescription || (vipPartner
               ? `VIP Partner sign-up. Referral Code: ${referralCode}`
-              : `Workshop attendee. Unique Referral Code: ${referralCode}`,
+              : `Workshop attendee. Unique Referral Code: ${referralCode}`),
             Course: courseDate,
             ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
-              : { referral_code: referralCode }),
+              : preserveReferralCode ? {} : { referral_code: referralCode }),
           },
         ],
       };
@@ -1102,6 +1104,99 @@ async function getBiginAccessToken(clientId, clientSecret, refreshToken) {
     return null;
   }
 }
+
+/**
+ * FREE TASTER SIGN-UP
+ * Saves the attendee, syncs the one-off session to Bigin, and emails the Zoom link.
+ */
+exports.tasterSignup = onRequest(
+  { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const body = req.body || {};
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || email.length > 254) {
+        return res.status(400).json({ error: "Invalid email" });
+      }
+      if (body.consentAccepted !== true) {
+        return res.status(400).json({ error: "Email consent is required" });
+      }
+
+      const firstName = email.slice(0, email.indexOf("@")) || "Taster";
+      const course = "Taster session";
+      const sessionFields = {
+        session_one: "2026-11-18",
+        session_two: "",
+        one_start_time: "20:00",
+        two_start_time: "",
+        course_times: "20:00 - 20:30",
+        Location: "Taster session",
+      };
+      const source = String(body.source || "free-taster").slice(0, 80).replace(/[<>]/g, "");
+      const params = String(body.params || "").slice(0, 500).replace(/[<>]/g, "");
+
+      await db.collection("tasterSignUps").add({
+        email,
+        firstName,
+        course,
+        source,
+        params,
+        consentAccepted: true,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      await createBiginContact(
+        firstName,
+        "Taster",
+        email,
+        "",
+        course,
+        biginClientId.value(),
+        biginClientSecret.value(),
+        biginRefreshToken.value(),
+        false,
+        sessionFields,
+        "Free taster session sign-up.",
+        true
+      );
+
+      const resend = new Resend(resendApiKey.value());
+      const emailResult = await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: email,
+        bcc: "leo@reallifemoney.co.uk",
+        subject: "You're booked for the free investing taster",
+        html: `
+          <div style="font-family:Arial,sans-serif;line-height:1.6;color:#2e2e2e;max-width:600px;margin:0 auto;padding:24px">
+            <h1 style="font-size:24px;color:#1F3A29">You're in!</h1>
+            <p>Thanks for signing up for the free investing taster session.</p>
+            <p><strong>Wednesday 18 November 2026 at 8:00pm</strong><br>Join on Zoom using the link below:</p>
+            <p style="margin:28px 0"><a href="https://us06web.zoom.us/j/7080726938" style="background:#8c52ff;color:#fff;text-decoration:none;padding:14px 22px;border-radius:10px;font-weight:bold">Join the Zoom session</a></p>
+            <p>If the button doesn't work, use this link:<br><a href="https://us06web.zoom.us/j/7080726938">https://us06web.zoom.us/j/7080726938</a></p>
+            <p>Looking forward to seeing you!</p>
+            <p>Leo<br>Real Life Money</p>
+          </div>
+        `,
+      });
+      if (emailResult.error) {
+        console.error("Error sending free taster confirmation email:", emailResult.error);
+        return res.status(502).json({ error: "Unable to send confirmation email" });
+      }
+
+      return res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing free taster sign-up:", err);
+      return res.status(500).json({ error: "Unable to complete sign-up" });
+    }
+  }
+);
 
 exports.getWorkshops = onRequest(
   {},
