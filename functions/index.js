@@ -1106,6 +1106,68 @@ async function getBiginAccessToken(clientId, clientSecret, refreshToken) {
 }
 
 /**
+ * HELPER: Free taster confirmation email
+ */
+function tasterConfirmationEmailHtml(firstName) {
+  const name = String(firstName || "there").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const zoomUrl = "https://us06web.zoom.us/j/7080726938";
+  return `
+<div style="background-color: rgb(238, 248, 235); padding: 20px 10px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: rgb(46, 46, 46); margin: 0">
+  <table style="max-width: 600px; background-color: rgb(255, 255, 255); border-radius: 24px; overflow: hidden; border: 1px solid rgb(218, 236, 214); margin: 0 auto" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tbody>
+    <tr>
+      <td style="padding: 30px 20px; text-align: center; background-color: rgb(255, 255, 255)">
+        <img style="width: 80px; height: 80px; background-color: rgb(255, 255, 255); border-radius: 50%; object-fit: cover; display: block; margin: 0 auto; border: 0" height="80" width="80" alt="Real Life Money" src="https://reallifemoney.co.uk/logo-circle.webp">
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0 25px 10px 25px">
+        <h1 style="color: rgb(26, 26, 26); font-size: 24px; margin: 0 0 10px 0; text-align: center; font-weight: bold">You're in, ${name}! 🎉</h1>
+
+        <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">Thanks so much for signing up to my free taster session. I'm really looking forward to meeting you!</p>
+
+        <div style="background-color: rgb(226, 242, 220); border: 1px solid rgb(196, 226, 187); border-radius: 24px; padding: 24px 20px; margin: 24px 0">
+          <h2 style="color: rgb(26, 26, 26); font-size: 18px; margin: 0 0 10px 0; font-weight: bold">Your session details 📅</h2>
+          <p style="margin: 0 0 6px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>When:</strong> Wednesday 18th November at 8pm</p>
+          <p style="margin: 0 0 6px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>How long:</strong> 30 minutes</p>
+          <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>Where:</strong> Online, on Zoom</p>
+          <div style="text-align: center; margin: 20px 0 10px 0">
+            <a style="background-color: rgb(255, 145, 77); color: rgb(255, 255, 255) !important; text-decoration: none; padding: 14px 28px; border-radius: 999px; font-weight: bold; font-size: 15px; display: inline-block" target="_blank" href="${zoomUrl}" rel="noopener noreferrer">Join the session on Zoom</a>
+          </div>
+          <p style="margin: 10px 0 0 0; color: rgb(107, 107, 107); font-size: 12px; line-height: 1.5; text-align: center">Button not working? Copy this link into your browser:<br><a style="color: rgb(107, 107, 107); word-break: break-all" href="${zoomUrl}" target="_blank" rel="noopener noreferrer">${zoomUrl}</a></p>
+        </div>
+
+        <div style="text-align: center; margin: 0 0 24px 0">
+          <a style="color: rgb(46, 46, 46); font-size: 14px; font-weight: bold; text-decoration: underline" target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Real+Life+Money+-+Free+Taster+Session&amp;dates=20261118T200000Z/20261118T203000Z&amp;details=Join+on+Zoom%3A+https%3A%2F%2Fus06web.zoom.us%2Fj%2F7080726938&amp;location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F7080726938">📆 Add to your calendar</a>
+        </div>
+
+        <p style="margin: 0 0 8px 0; color: rgb(46, 46, 46); font-size: 15px; font-weight: bold; line-height: 1.6">A few things to know:</p>
+        <ul style="margin: 0 0 16px 0; padding-left: 20px; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">
+          <li style="margin-bottom: 6px">No experience needed, and no jargon. Just bring yourself.</li>
+          <li style="margin-bottom: 6px">Join from a phone, tablet or computer. It's worth clicking the link a few minutes early.</li>
+          <li style="margin-bottom: 6px">Stay until the end to receive your gift. 🎁</li>
+        </ul>
+
+        <p style="margin: 20px 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">If anything comes up and you can't make it, just reply to this email and let me know.</p>
+
+        <p style="margin: 0 0 4px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">See you on Wednesday!</p>
+        <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; font-weight: bold">Leo</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 30px; text-align: center; font-size: 12px; color: rgb(107, 107, 107); background-color: rgb(249, 249, 249)">
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)"><strong>Leo | Real Life Money</strong></p>
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)">07939 887950 · leo@reallifemoney.co.uk</p>
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)">© 2026 Real Life Money | Bristol, UK</p>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+`;
+}
+
+/**
  * FREE TASTER SIGN-UP
  * Saves the attendee, syncs the one-off session to Bigin, and emails the Zoom link.
  */
@@ -1172,18 +1234,8 @@ exports.tasterSignup = onRequest(
         from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
         to: email,
         bcc: "leo@reallifemoney.co.uk",
-        subject: "You're booked for the free investing taster",
-        html: `
-          <div style="font-family:Arial,sans-serif;line-height:1.6;color:#2e2e2e;max-width:600px;margin:0 auto;padding:24px">
-            <h1 style="font-size:24px;color:#1F3A29">You're in!</h1>
-            <p>Thanks for signing up for the free investing taster session.</p>
-            <p><strong>Wednesday 18 November 2026 at 8:00pm</strong><br>Join on Zoom using the link below:</p>
-            <p style="margin:28px 0"><a href="https://us06web.zoom.us/j/7080726938" style="background:#8c52ff;color:#fff;text-decoration:none;padding:14px 22px;border-radius:10px;font-weight:bold">Join the Zoom session</a></p>
-            <p>If the button doesn't work, use this link:<br><a href="https://us06web.zoom.us/j/7080726938">https://us06web.zoom.us/j/7080726938</a></p>
-            <p>Looking forward to seeing you!</p>
-            <p>Leo<br>Real Life Money</p>
-          </div>
-        `,
+        subject: "Learn to invest - FREE taster session",
+        html: tasterConfirmationEmailHtml(firstName),
       });
       if (emailResult.error) {
         console.error("Error sending free taster confirmation email:", emailResult.error);

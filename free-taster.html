@@ -210,12 +210,12 @@ let cur=0, sent=false;
 function show(n){
   cur=n; steps.forEach((s,k)=>s.classList.toggle("on",k===n)); dots.forEach((d,k)=>d.classList.toggle("on",k<=n));
   $("back").classList.toggle("on",n>0&&!sent);
-  $("cta").textContent = sent ? "Back to Real Life Money" : ["About the workshops","Reserve my free taster seat","Send me my free taster link"][n];
+  $("cta").textContent = sent ? "View workshop page" : ["About the workshops","Reserve my free taster seat","Send me my free taster link"][n];
   if(n===2&&!sent) setTimeout(()=>$("email").focus({preventScroll:true}),150);
 }
 $("back").onclick=()=>show(cur-1);
 $("cta").onclick=async()=>{
-  if(sent){location.href="https://reallifemoney.co.uk";return}
+  if(sent){location.href="https://reallifemoney.co.uk/investing-course";return}
   if(cur<2) return show(cur+1);
   const email=$("email").value.trim(), err=$("err");
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent="Please enter a valid email address.";
