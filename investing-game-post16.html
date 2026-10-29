@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Investing Game | Real Life Money</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/webp" href="/logo-circle.webp">
   <style>
     * {
@@ -23,15 +24,38 @@
       border: none;
       display: block;
     }
+    [hidden] { display: none !important; }
+    #lock { display: flex; align-items: center; justify-content: center; height: 100%; background: #eef8eb; font-family: 'Lexend', system-ui, sans-serif; text-align: center; padding: 24px; }
+    .lock-box h1 { font-size: 28px; color: #1a1a1a; margin-bottom: 12px; }
+    .lock-box p { color: #66706a; }
   </style>
 </head>
 <body>
+  <div id="lock" hidden>
+    <div class="lock-box">
+      <h1>This page is locked 🔒</h1>
+      <p>It's only available during live sessions. Please check with your host.</p>
+    </div>
+  </div>
+  <iframe id="game" allow="fullscreen" title="Game Display" hidden></iframe>
+  <script>
+    (async function () {
+      try {
+        const r = await fetch("https://us-central1-workshop-booking-system-b791e.cloudfunctions.net/pageLockStatus", { cache: "no-store" });
+        const d = await r.json();
+        const p = d.pages && d.pages["investing-game-post16"];
+        if (p && p.unlocked) {
+          const f = document.getElementById("game");
+          f.src = "https://investing-simulation.vercel.app/post16.html";
+          f.hidden = false;
+          setTimeout(() => location.reload(), Math.max(1000, p.unlockedUntil - Date.now()));
+          return;
+        }
+      } catch (e) {}
+      document.getElementById("lock").hidden = false;
+    })();
+  </script>
 
-  <iframe 
-    src="https://investing-simulation.vercel.app/post16.html" 
-    allow="fullscreen"
-    title="Game Display">
-  </iframe>
 
 </body>
 </html>

@@ -2616,6 +2616,61 @@ exports.adminDeleteCastleP16 = onRequest({}, async (req, res) => {
 });
 
 /**
+ * PAGE LOCKS
+ * Top funds / investing game pages stay locked unless an admin unlocks
+ * them for an hour. State lives in Firestore pageLocks/{page}.unlockedUntil.
+ */
+const LOCKABLE_PAGES = ["topfunds", "investing-game", "investing-game-post16"];
+const PAGE_UNLOCK_MS = 60 * 60 * 1000;
+
+exports.pageLockStatus = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+  if (req.method === "OPTIONS") return res.status(204).send("");
+
+  try {
+    const snaps = await Promise.all(
+      LOCKABLE_PAGES.map((p) => db.collection("pageLocks").doc(p).get())
+    );
+    const now = Date.now();
+    const pages = {};
+    LOCKABLE_PAGES.forEach((p, i) => {
+      const until = snaps[i].exists ? snaps[i].data().unlockedUntil || 0 : 0;
+      pages[p] = { unlocked: until > now, unlockedUntil: until > now ? until : 0 };
+    });
+    res.set("Cache-Control", "no-store");
+    res.json({ pages });
+  } catch (err) {
+    console.error("Error fetching page locks:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+exports.adminSetPageLock = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, page, action } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+    if (!LOCKABLE_PAGES.includes(page)) return res.status(400).json({ error: "Unknown page" });
+    if (action !== "unlock" && action !== "lock") return res.status(400).json({ error: "Invalid action" });
+
+    const unlockedUntil = action === "unlock" ? Date.now() + PAGE_UNLOCK_MS : 0;
+    await db.collection("pageLocks").doc(page).set({ unlockedUntil });
+    res.json({ success: true, unlockedUntil });
+  } catch (err) {
+    console.error("Error setting page lock:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
  * ASK - PARTICIPANT API (/ask)
  * Anonymous Q&A. Participants are identified only by a random clientId
  * generated in their browser; it's never returned to anyone else.

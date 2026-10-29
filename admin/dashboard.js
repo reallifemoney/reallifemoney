@@ -781,4 +781,62 @@ inviteForm.addEventListener("submit", async (e) => {
   inviteSubmit.textContent = "Add to invite list";
 });
 
+// =================================================================
+// Page locks tab: unlock top funds / investing game pages for an hour
+// =================================================================
+const LOCK_PAGES = [
+  { key: "topfunds", label: "Top funds (/topfunds)" },
+  { key: "investing-game", label: "Investing game (/investing-game)" },
+  { key: "investing-game-post16", label: "Investing game post-16 (/investing-game-post16)" },
+];
+let lockStatus = {};
+
+async function loadLocks() {
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/pageLockStatus`, { cache: "no-store" });
+    lockStatus = (await res.json()).pages || {};
+  } catch (err) {
+    console.error("Error loading page locks:", err);
+  }
+  renderLocks();
+}
+
+function renderLocks() {
+  const tbody = document.querySelector("#locksTable tbody");
+  tbody.innerHTML = "";
+  LOCK_PAGES.forEach(({ key, label }) => {
+    const st = lockStatus[key] || {};
+    const unlocked = st.unlocked && st.unlockedUntil > Date.now();
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${label}</td>
+      <td>${unlocked ? `🔓 Unlocked until ${new Date(st.unlockedUntil).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}` : "🔒 Locked"}</td>
+      <td>
+        <button class="btn btn-primary lock-btn" data-page="${key}" data-action="unlock">${unlocked ? "Extend 1 hour" : "Unlock for 1 hour"}</button>
+        ${unlocked ? `<button class="btn btn-text lock-btn" data-page="${key}" data-action="lock">Lock now</button>` : ""}
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+document.querySelector("#locksTable").addEventListener("click", async (e) => {
+  const btn = e.target.closest(".lock-btn");
+  if (!btn) return;
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${FUNCTIONS_BASE}/adminSetPageLock`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: currentToken, page: btn.dataset.page, action: btn.dataset.action }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    await loadLocks();
+  } catch (err) {
+    console.error("Error updating page lock:", err);
+    alert("Something went wrong updating that lock - please try again.");
+    btn.disabled = false;
+  }
+});
+
 loadDashboard();
+loadLocks();
