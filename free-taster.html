@@ -236,6 +236,30 @@ $("cta").onclick=async()=>{
   $("cta").disabled=false; show(2);
 };
 show(0);
+
+// ---- Visit logging to Google Sheet (same script/columns as the other pages) ----
+// Column mapping: sneakPeekClicked = used a slider, courseSelected = reached step 2 (course),
+// ctaClicked = reached step 3 (taster sign-up), nameFieldFocused = clicked into email, videoClicked = signed up
+const pageEntryTime=Date.now();
+const log={sneakPeekClicked:"No",courseSelected:"No",ctaClicked:"No",nameFieldFocused:"No",videoClicked:"No"};
+let logSent=false;
+["s1","s2","s3"].forEach(id=>$(id).addEventListener("input",()=>{log.sneakPeekClicked="Yes"}));
+$("email").addEventListener("focus",()=>{log.nameFieldFocused="Yes"});
+const baseShow=show;
+show=function(n){
+  baseShow(n);
+  if(n>=1) log.courseSelected="Yes";
+  if(n>=2) log.ctaClicked="Yes";
+  if(sent) log.videoClicked="Yes";
+};
+function sendFinalData(){
+  if(logSent) return;
+  logSent=true;
+  const data={timeSpent:Math.floor((Date.now()-pageEntryTime)/1000),scrollDepth:"0%",...log,url:location.href};
+  navigator.sendBeacon("https://script.google.com/macros/s/AKfycbw2bKAmSfnZCJlrm0WmWP5ygXiE1BO2GAFCyA4aUmQwK3BTRmGTAIYp8lxfXXiRgq6S4Q/exec",JSON.stringify(data));
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"){sendFinalData();logSent=false}});
+window.addEventListener("pagehide",sendFinalData);
 </script>
 </body>
 </html>
