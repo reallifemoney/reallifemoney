@@ -590,6 +590,54 @@ exports.castleP16Waitlist = onRequest(
   }
 );
 
+/** Post-16 schools page enquiry form - saves it and emails Leo. */
+exports.schoolEnquiry = onRequest(
+  { secrets: [resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const clean = (v, max) => String(v || "").trim().slice(0, max);
+      const esc = (v) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const name = clean(req.body.name, 120);
+      const school = clean(req.body.school, 160);
+      const email = clean(req.body.email, 160).toLowerCase();
+      const pricing = clean(req.body.pricing, 60);
+      const message = clean(req.body.message, 2000);
+
+      if (!name || !school || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: "Missing or invalid details" });
+      }
+
+      await db.collection("schoolEnquiries").add({
+        name, school, email, pricing, message,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: "leo@reallifemoney.co.uk",
+        replyTo: email,
+        subject: `Post-16 enquiry: ${school}`,
+        html: `<p><strong>${esc(name)}</strong> from <strong>${esc(school)}</strong> (${esc(email)}) enquired about post-16 workshops.</p>
+<p>Pricing interest: ${esc(pricing) || "not specified"}</p>
+<p>${esc(message).replace(/\n/g, "<br>") || "<em>No message</em>"}</p>`,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing school enquiry:", err);
+      res.status(500).json({ error: "Something went wrong" });
+    }
+  }
+);
+
 /** Course "can't make these dates" sign-up - emails Leo the address. */
 exports.courseWaitlist = onRequest(
   { secrets: [resendApiKey] },
