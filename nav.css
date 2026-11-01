@@ -21,3 +21,7 @@
 .rlm-nav .rlm-menu hr{border:0;height:2px;background:#eef8eb;margin:6px 14px}
 .rlm-band{background:#1F3A29;border-radius:0 0 40px 40px;padding:1px 0 0;display:flow-root}
 .rlm-band .rlm-nav{margin-bottom:14px}
+/* Keep menu text dark regardless of page-level link/colour rules */
+.rlm-nav,.rlm-nav .rlm-brand,.rlm-nav .rlm-brand span,.rlm-nav .rlm-menu,.rlm-nav .rlm-menu a,.rlm-nav .rlm-menu a:visited,.rlm-nav .rlm-sub a,.rlm-nav .rlm-row{color:#1F3A29!important;-webkit-text-fill-color:#1F3A29!important;text-shadow:none!important;opacity:1!important}
+.rlm-nav .rlm-menu a,.rlm-nav .rlm-row{text-transform:none!important;letter-spacing:normal!important}
+[data-nav-host]{display:flow-root}
