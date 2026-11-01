@@ -23,7 +23,9 @@
       +'<button class="rlm-burger" aria-label="Open menu" aria-expanded="false"><i></i><i></i><i></i></button>'
       +'<div class="rlm-menu" role="navigation" aria-label="Main" hidden>'+MENU+'</div>';
     var host=document.querySelector('[data-nav-host]');
-    if(host)host.appendChild(h);else document.body.insertBefore(h,document.body.firstChild);
+    if(host)host.appendChild(h);
+    else{var band=document.createElement('div');band.className='rlm-band';band.appendChild(h);document.body.insertBefore(band,document.body.firstChild);
+      var cs=getComputedStyle(document.body);band.style.margin='-'+cs.marginTop+' -'+cs.marginRight+' 0 -'+cs.marginLeft}
     // hide any older fixed/sticky nav bars the page still has
     document.querySelectorAll('nav').forEach(function(n){
       if(h.contains(n))return;
