@@ -6,6 +6,9 @@
 <title>Investing workshop — Real Life Money</title>
 <meta name="description" content="Learn to invest with confidence from your own sofa. My live online workshop breaks investing down into 2 simple evenings — ISAs, funds, and building wealth without the jargon. £75. Book your spot.">
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="stylesheet" href="/nav.css">
+<link rel="stylesheet" href="/compare.css">
+<script src="/nav.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -314,12 +317,9 @@ footer a{color:#ddd;text-decoration:underline;}
   
   <div class="wrap">
     <div class="hero-grid">
-      <a class="nav-logo" href="/">
-      <img src="/logo.webp" alt="Real Life Money" style="height:80px;width:auto;">
-    </a>
       <div>
-        <span class="eyebrow">Investing workshop</span>
-        <h1>Two sessions.<br>A lifetime of <span>investing confidence.</span></h1>
+        <span class="eyebrow">💻 Live on Zoom</span>
+        <h1>Learn to invest, <span>live online</span></h1>
         <p class="lede">Taught by a qualified financial advisor and maths teacher in a genuinely nurturing space where no question is too silly.
         </p>
         <div class="date-card-hero" style="margin-bottom:25px">
@@ -333,46 +333,30 @@ footer a{color:#ddd;text-decoration:underline;}
     <button class="view-other-dates" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button>
 </div>
 </div>
-        <div class="video-trigger" onclick="openVideo();logvideoclick();">
-      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
-      <div class="play-btn"><i class="fa-solid fa-play"></i></div>
-    </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DOES THIS SOUND FAMILIAR -->
-<section class="relate">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Sound familiar?</span>
-      <h2>You know you should be investing. You just don't know where to start.</h2>
-      <p>I hear some version of this from almost everyone who joins the workshop.</p>
-    </div>
-    <div class="relate-grid">
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"I've got savings just sitting in the bank losing value to inflation, but investing feels like a different language."</p>
-        <p class="resolve">We will start from zero. No assumed knowledge. No jargon left unexplained.</p>
-      </div>
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"Every website and video tells me something different. I don't know who to trust."</p>
-        <p class="resolve">I'm a qualified financial advisor and maths teacher, I'll show you what advisors do for their clients.</p>
-      </div>
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"I'm scared of losing money because I don't understand what I'm doing."</p>
-        <p class="resolve">By the end of session two, you'll know exactly how to open an ISA, what to put in it, and why.</p>
-      </div>
-    </div>
-    <div class="relate-flip">
-      <h3>Two evenings. That's genuinely all it takes.</h3>
-      <p>You'll leave with a clear, personal plan you understand and actually trust - built live, on screen, with me.</p>
-    </div>
-  </div>
-</section>
+<!-- WHAT IT IS / ISN'T -->
+<section class="rlm-cmp" data-compare></section>
+<script>
+window.RLM_COMPARE={title:'Investing, from your sofa',tabs:[
+{label:'What it is',heading:'The online workshop is…',mark:'✓',stars:true,items:[
+['Live and interactive on Zoom','Ask questions as we go and get answers there and then.'],
+['Jargon-free','Plain English, no finance-speak.'],
+['Run by a financial adviser turned maths teacher','Someone who knows the industry and how to explain it.'],
+['Great for beginners','No experience or lump sum needed.'],
+['Fun and engaging','Games and real-life examples to keep you switched on.'],
+['Easy to fit in','Two evenings from home, no travel needed.']]},
+{label:'What it isn\'t',heading:'The online workshop is not…',mark:'✕',items:[
+['A pre-recorded video course','You get me, live, in a small friendly group.'],
+['A sales pitch','No pushing you towards specific schemes or products.'],
+['Led by a finance bro with a Lambo','Just a teacher who wants you to understand your money.'],
+['A get-rich-quick scheme','Investing is slow, steady and sensible.'],
+['Full of jargon','If a term needs explaining, we explain it.']]}]};
+</script>
+<script src="/compare.js" defer></script>
 
 <!-- REVIEWS -->
 <section class="reviews">
@@ -438,6 +422,10 @@ footer a{color:#ddd;text-decoration:underline;}
         <img src="leo-help.webp" alt="Leo Dennis" class="about-photo">
         <p>Most people don't have the luxury of a financial advisor. We should learn financial literacy in school. These are the reasons why I built Real Life Money.</p>
         <p>I'm a big believer in learning through enjoyment. These are serious topics, but I want you to learn with a smile on your face. This is no boring lecture, it's a genuinely interactive workshop.</p>
+    <div class="video-trigger" style="margin-top:28px" onclick="openVideo();logvideoclick();">
+  <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
+  <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+</div>
       </div>
     </div>
   </div>
@@ -493,6 +481,38 @@ footer a{color:#ddd;text-decoration:underline;}
         <h4>Valuable resources</h4>
         <p>Simple step-by-step guide to investing and the key slides land in your inbox after each evening, so nothing gets forgotten.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOES THIS SOUND FAMILIAR -->
+<section class="relate">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>You know you should be investing. You just don't know where to start.</h2>
+      <p>I hear some version of this from almost everyone who joins the workshop.</p>
+    </div>
+    <div class="relate-grid">
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"I've got savings just sitting in the bank losing value to inflation, but investing feels like a different language."</p>
+        <p class="resolve">We will start from zero. No assumed knowledge. No jargon left unexplained.</p>
+      </div>
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"Every website and video tells me something different. I don't know who to trust."</p>
+        <p class="resolve">I'm a qualified financial advisor and maths teacher, I'll show you what advisors do for their clients.</p>
+      </div>
+      <div class="tc">
+        <i class="fa-solid fa-circle-question"></i>
+        <p class="quote">"I'm scared of losing money because I don't understand what I'm doing."</p>
+        <p class="resolve">By the end of session two, you'll know exactly how to open an ISA, what to put in it, and why.</p>
+      </div>
+    </div>
+    <div class="relate-flip">
+      <h3>Two evenings. That's genuinely all it takes.</h3>
+      <p>You'll leave with a clear, personal plan you understand and actually trust - built live, on screen, with me.</p>
     </div>
   </div>
 </section>

@@ -1,0 +1,25 @@
+.rlm-cmp{background:#1F3A29;padding:64px 0;font-family:'Lexend',system-ui,sans-serif}
+.rlm-cmp *{box-sizing:border-box}
+.rlm-cmp-in{max-width:640px;margin:0 auto;padding:0 18px;text-align:center}
+.rlm-cmp-title{color:#fff;font-size:clamp(26px,6vw,36px);line-height:1.15;font-weight:700;letter-spacing:-.02em;margin:0 0 24px}
+.rlm-tg{position:relative;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.12);border-radius:999px;padding:5px;max-width:420px;margin:0 auto 22px}
+.rlm-thumb{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:#71c558;transition:transform .35s cubic-bezier(.5,1.4,.5,1),background .3s}
+.rlm-tg[data-s="1"] .rlm-thumb{transform:translateX(100%);background:#ff914d}
+.rlm-tg button{position:relative;z-index:1;border:0;background:none;cursor:pointer;font:600 15px 'Lexend',sans-serif;color:#fff;padding:13px 8px;border-radius:999px;transition:color .3s;box-shadow:none}
+.rlm-tg button[aria-pressed=true]{color:#1F3A29}
+.rlm-tg button:focus-visible{outline:3px solid #ffde59;outline-offset:2px}
+.rlm-card{display:none;text-align:left;color:#1F3A29;background:#fff;border-radius:28px;padding:28px 24px;box-shadow:0 10px 34px rgba(0,0,0,.25);border-top:8px solid #71c558;animation:rlm-pop .4s ease both}
+.rlm-card[data-t="1"]{border-top-color:#ff914d}
+.rlm-card.show{display:block}
+@keyframes rlm-pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rlm-card h3{font-size:20px;font-weight:700;margin:0 0 18px;color:#1F3A29}
+.rlm-card ul{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.rlm-card li{display:flex;gap:14px;align-items:flex-start;font-size:15px;line-height:1.45;padding:0;margin:0;color:#1F3A29}
+.rlm-card li::before{content:none}
+.rlm-card li b{font-weight:600;display:block;color:#1F3A29}
+.rlm-card li span:last-child{opacity:.8}
+.rlm-ic{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:#eef8eb;color:#3f9a28}
+.rlm-card[data-t="1"] .rlm-ic{background:#fff1e8;color:#e8741f}
+.rlm-stars{margin-top:22px;padding-top:18px;border-top:1px dashed #cfe3c8;font-size:14px;display:flex;gap:10px;align-items:center}
+.rlm-stars em{font-style:normal;color:#f5b700;font-size:19px;letter-spacing:2px}
+@media(prefers-reduced-motion:reduce){.rlm-card,.rlm-thumb{animation:none;transition:none}}

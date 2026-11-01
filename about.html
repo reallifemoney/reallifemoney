@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About me | Real Life Money</title>
+<meta name="description" content="About Leo, the financial adviser turned maths teacher behind Real Life Money.">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nav.css">
+<script src="/nav.js" defer></script>
+<style>
+:root{--purple:#8c52ff;--orange:#ff914d;--yellow:#ffde59;--green:#71c558;--pale:#eef8eb;--dark:#1F3A29}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Lexend',system-ui,sans-serif;color:var(--dark);background:#fff}
+body{background:var(--pale)}
+.hero{position:relative;background:var(--dark);color:#fff;border-radius:0 0 48px 48px;padding:0 18px 56px}
+.nav{background:#fff;color:var(--dark);border-radius:999px;padding:7px 10px 7px 18px;margin-top:14px;box-shadow:0 6px 22px rgba(0,0,0,.25)}
+.wrap{max-width:1080px;margin:0 auto}
+.intro{display:grid;gap:32px;padding-top:44px;align-items:center}
+h1{font-size:clamp(42px,10vw,68px);line-height:1.04;font-weight:700;letter-spacing:-.03em}
+.lead{margin-top:18px;font-size:clamp(17px,2.4vw,20px);line-height:1.55;opacity:.85;max-width:480px}
+.photo{margin:0;aspect-ratio:4/5;border-radius:32px;overflow:hidden;background:rgba(255,255,255,.08);border:3px dashed rgba(255,255,255,.35);display:grid;place-items:center;text-align:center;font-size:14px;line-height:1.5;padding:16px}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo:has(img){border:0;padding:0}
+.main{padding:44px 18px 64px}
+.panel{background:#fff;border-radius:28px;padding:30px 26px;box-shadow:0 10px 34px rgba(31,58,41,.1)}
+.main .wrap{display:grid;gap:22px}
+h2{font-size:clamp(23px,4vw,30px);line-height:1.2;font-weight:700;letter-spacing:-.015em;margin-bottom:12px}
+.panel p{font-size:17px;line-height:1.7;max-width:62ch}
+.panel p+p{margin-top:14px}
+.story{display:grid;gap:28px}
+.story section{border-left:6px solid var(--c);padding-left:20px}
+.facts{display:grid;gap:12px;grid-template-columns:1fr 1fr;margin-top:20px}
+.fact{background:var(--pale);border-radius:20px;padding:16px}
+.fact b{display:flex;align-items:center;gap:10px;font-size:16px}
+.fact b::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--c);border:2.5px solid var(--dark);flex:none}
+.fact span{display:block;margin-top:6px;font-size:14px;line-height:1.45;opacity:.8}
+.personal{display:grid;gap:24px;align-items:center}
+.personal .photo{background:var(--pale);border-color:#b9d9af;color:var(--dark);aspect-ratio:1/1}
+.video{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:22px;overflow:hidden;cursor:pointer;background:var(--dark) center/cover no-repeat;margin-top:18px;padding:0}
+.video .play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 26px rgba(0,0,0,.35);transition:transform .25s}
+.video:hover .play{transform:scale(1.08)}
+.play::after{content:"";margin-left:6px;border-style:solid;border-width:15px 0 15px 25px;border-color:transparent transparent transparent var(--purple)}
+.video:focus-visible,.btn:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.vlabel{position:absolute;left:16px;bottom:14px;background:var(--yellow);color:var(--dark);font-weight:600;font-size:14px;padding:8px 14px;border-radius:999px}
+.interview{background:var(--dark);color:#fff}
+.interview p{opacity:.88}
+.btn{display:inline-block;margin-top:20px;padding:15px 26px;border-radius:999px;background:var(--yellow);color:var(--dark);font-weight:600;font-size:16px;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:var(--green)}
+.btn.line{background:none;border:2.5px solid var(--dark)}
+.note{font-size:14px;opacity:.7;text-align:center;max-width:56ch;margin:0 auto;line-height:1.55}
+.cta{text-align:center}
+.cta p{margin:0 auto}
+.cta .btn{margin:20px 6px 0}
+dialog{border:0;padding:0;background:none;width:min(960px,94vw);max-width:none;overflow:visible}
+dialog::backdrop{background:rgba(15,30,20,.82)}
+dialog .frame{position:relative;aspect-ratio:16/9;background:#000;border-radius:20px;overflow:hidden}
+dialog iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+dialog .x{position:absolute;right:0;top:-52px;border:0;border-radius:999px;background:#fff;color:var(--dark);font:600 15px 'Lexend',sans-serif;padding:10px 18px;cursor:pointer}
+dialog .miss{position:absolute;inset:0;display:grid;place-items:center;color:#fff;padding:24px;text-align:center}
+@media(min-width:860px){
+.intro{grid-template-columns:1.15fr .85fr;gap:64px;padding-top:64px}
+.personal{grid-template-columns:.8fr 1.2fr;gap:40px}
+.panel{padding:40px 44px}
+.facts{grid-template-columns:repeat(4,1fr)}
+.story{gap:34px}
+}
+@media(prefers-reduced-motion:reduce){.btn,.play{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div data-nav-host></div>
+  <div class="wrap intro">
+    <div>
+      <h1>Hi, I'm Leo</h1>
+      <p class="lead">A former financial adviser turned maths teacher, on a mission to make investing make sense for everyone.</p>
+    </div>
+    <figure class="photo">
+      <img src="/leo-dennis.webp" alt="Leo Dennis">
+    </figure>
+  </div>
+</div>
+
+<main class="main">
+  <div class="wrap">
+
+    <article class="panel">
+      <h2>My story</h2>
+      <div class="story">
+        <section style="--c:var(--purple)">
+          <h2 style="font-size:20px">Where I started</h2>
+          <p>I've always loved numbers, and I've always loved working with people. I studied Maths with Business at university, and financial advice looked like the perfect way to bring it all together. I qualified as a financial adviser and worked in the industry, helping people plan for their futures.</p>
+        </section>
+        <section style="--c:var(--orange)">
+          <h2 style="font-size:20px">Why I left</h2>
+          <p>The longer I stayed, the more I felt that it wasn't reaching the people who needed help most, and it wasn't fulfilling me either. So much of it is wrapped in jargon that keeps ordinary people out. Helping people has always been my passion, so I made a big decision: I left to become a teacher.</p>
+        </section>
+        <section style="--c:var(--green)">
+          <h2 style="font-size:20px">Teaching, and Real Life Money</h2>
+          <p>Teaching felt right straight away. I teach maths by day, and through Real Life Money I teach investing in plain English: no jargon, no pressure and no selling. My workshops are education, not financial advice, so I'll never push you towards a particular product. I just want you to leave feeling confident and ready to take the first step.</p>
+        </section>
+      </div>
+    </article>
+
+    <article class="panel personal">
+      <figure class="photo">
+        <img src="/leo-help.webp" alt="Leo teaching" loading="lazy">
+      </figure>
+      <div>
+        <h2>Away from the classroom</h2>
+        <p>I live in Bristol with my wife and our cat, Paddy. I come from a big family, so there's rarely a quiet get-together, and when there's cricket on, you'll find me watching.</p>
+        <div class="facts">
+          <div class="fact" style="--c:var(--purple)"><b>Bristol</b><span>Home, and where I teach</span></div>
+          <div class="fact" style="--c:var(--orange)"><b>Big family</b><span>Lots of us, lots of noise</span></div>
+          <div class="fact" style="--c:var(--yellow)"><b>Cricket</b><span>My favourite sport</span></div>
+          <div class="fact" style="--c:var(--green)"><b>Paddy</b><span>Our cat</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>Hear it from me</h2>
+      <p>A short video where I tell you a little about myself and what the workshops cover.</p>
+      <button class="video" id="vbtn" aria-label="Play my introduction video"><span class="play"></span><span class="vlabel">Watch my intro</span></button>
+    </article>
+
+    <article class="panel interview">
+      <h2>Read my interview</h2>
+      <p>I sat down with Wealth Goblin, a friend I met in Nepal many years ago, to talk about leaving financial advice for teaching, and why clicking "invest" is the easiest part.</p>
+      <a class="btn" href="https://wealthgoblin.com/interviews/clicking-invest-is-the-easiest-part/" target="_blank" rel="noopener">Read the interview</a>
+    </article>
+
+    <article class="panel cta">
+      <h2>Come and learn with me</h2>
+      <p>Whether you've never invested or just want to feel surer of yourself, there's a workshop for you.</p>
+      <a class="btn alt" href="/workshops">Investing workshops</a><a class="btn line" href="/contact">Contact me</a>
+    </article>
+
+    <p class="note">Real Life Money workshops are for education only and do not constitute financial advice. Investments can fall as well as rise.</p>
+  </div>
+</main>
+
+<dialog id="vd" aria-label="Introduction video">
+  <button class="x" id="vx">Close</button><div class="frame"></div>
+</dialog>
+
+<script>
+var VIMEO_URL='https://vimeo.com/1181290406';
+(function(){
+  var m=VIMEO_URL.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([a-z0-9]+))?/i);
+  var vb=document.getElementById('vbtn'),vd=document.getElementById('vd'),fr=vd.querySelector('.frame');
+  if(m){
+    fetch('https://vimeo.com/api/oembed.json?width=960&url='+encodeURIComponent(VIMEO_URL))
+      .then(function(r){return r.json()})
+      .then(function(d){if(d.thumbnail_url)vb.style.backgroundImage='url('+d.thumbnail_url+')'})
+      .catch(function(){});
+  }
+  vb.onclick=function(){
+    var old=fr.querySelector('iframe,.miss');if(old)old.remove();
+    var el;
+    if(m){el=document.createElement('iframe');el.allow='autoplay; fullscreen; picture-in-picture';el.allowFullscreen=true;el.title='Introduction video';
+      el.src='https://player.vimeo.com/video/'+m[1]+'?autoplay=1&dnt=1'+(m[2]?'&h='+m[2]:'')}
+    else{el=document.createElement('div');el.className='miss';el.textContent='Add your Vimeo link to VIMEO_URL in the code to play your video here.'}
+    fr.appendChild(el);vd.showModal();
+  };
+  function close(){vd.close()}
+  vd.addEventListener('close',function(){var f=fr.querySelector('iframe,.miss');if(f)f.remove()});
+  document.getElementById('vx').onclick=close;
+  vd.addEventListener('click',function(e){if(e.target===vd)close()});
+})();
+</script>
+</body>
+</html>

@@ -6,6 +6,9 @@
 <title>Investing workshops for post-16 students | Real Life Money</title>
 <meta name="description" content="Interactive in-person investing workshops for sixth forms and colleges. Strengthen Gatsby evidence with 2 x 1 hour sessions. £30 per head (3 free pupil premium places) or £750 flat fee.">
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="stylesheet" href="/nav.css">
+<link rel="stylesheet" href="/compare.css">
+<script src="/nav.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <!-- Google Tag Manager -->
@@ -120,46 +123,24 @@ footer{padding-bottom:100px}
 <!-- HERO -->
 <section class="hero">
   <div class="wrap"><div class="in">
-    <span class="eyebrow">🎓 School &amp; sixth form leaders</span>
-    <h1>Investing workshops <span>for post-16</span></h1>
-    <p class="slogan">Two interactive in-person sessions that give your students real-world investing skills, delivered by a qualified financial adviser turned maths teacher.</p>
+    <span class="eyebrow">🎓 Schools &amp; sixth forms</span>
+    <h1>Investing for <span>post-16 students</span></h1>
+    <p class="slogan">Two interactive in-person sessions that give your students real-world investing skills.</p>
     <div class="cta"><a class="btn" href="#pricing">See pricing</a></div>
     <div class="badge"><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-ca87489d-f483-42b5-9d26-1bf5c0ed5666" data-elfsight-app-lazy></div></div>
   </div></div>
 </section>
 
-<!-- BENEFITS -->
-<section class="white">
-  <div class="wrap">
-    <div class="head"><span class="eyebrow">Why it works</span><h2>Benefits for your school and your students</h2></div>
-    <div class="benefits">
-      <div class="box">
-        <h3>Benefits for schools</h3>
-        <ul>
-          <li>Strengthen Gatsby evidence</li>
-          <li>Unique enrichment offer</li>
-          <li>Delivered by an expert</li>
-          <li>Prospective student appeal</li>
-          <li>Flexible pricing models</li>
-        </ul>
-      </div>
-      <div class="box stu">
-        <h3>Benefits for students</h3>
-        <ul>
-          <li><span>🐣</span>Ideal for beginners</li>
-          <li><span>🎲</span>Interactive games</li>
-          <li><span>🛠️</span>Practical life skills</li>
-          <li><span>🌿</span>Gain tax knowledge</li>
-        </ul>
-      </div>
-    </div>
-    <div class="stats">
-      <div><strong>5.0 ★</strong><span>Google rating</span></div>
-      <div><strong>Over 40</strong><span>Google reviews</span></div>
-      <div><strong>2 x 1hr</strong><span>in-person sessions</span></div>
-    </div>
-  </div>
-</section>
+<!-- BENEFITS TOGGLE -->
+<section class="rlm-cmp" data-compare></section>
+<script>
+window.RLM_COMPARE={title:'Why it works',tabs:[
+{label:'For your school',heading:'Benefits for your school',mark:'✓',stars:true,items:[
+['Strengthen Gatsby evidence'],['Unique enrichment offer'],['Delivered by an expert'],['Prospective student appeal'],['Flexible pricing models']]},
+{label:'For your students',heading:'Benefits for your students',mark:'✓',items:[
+['Ideal for beginners'],['Interactive games'],['Practical life skills'],['Gain tax knowledge']]}]};
+</script>
+<script src="/compare.js" defer></script>
 
 <!-- REVIEWS -->
 <section class="reviews" style="background:var(--mint)">
@@ -185,17 +166,11 @@ footer{padding-bottom:100px}
         <h2 style="font-size:28px;margin-bottom:16px">“My passion is helping students have light bulb moments.”</h2>
         <p>I left financial advice because the part I loved most was explaining things and watching it click. Now, as a maths teacher, helping my students have those light bulb moments is what I’m most passionate about.</p>
         <p>Post-16 students have an incredible opportunity: they have time on their side to invest. Adults always tell me they wish they’d learned this at school, and this is their golden chance to do exactly that.</p>
+        <div class="vid" onclick="openVideo()" style="margin-top:28px">
+          <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing workshop can help you">
+          <div class="play"><svg width="28" height="28" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80v352c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9l288-176c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROMO VIDEO -->
-<section class="white" style="padding-top:0">
-  <div class="wrap">
-    <div class="vid" onclick="openVideo()" style="margin-top:0">
-      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing workshop can help you">
-      <div class="play"><svg width="28" height="28" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80v352c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9l288-176c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></div>
     </div>
   </div>
 </section>
