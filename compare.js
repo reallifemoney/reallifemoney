@@ -4,7 +4,7 @@
   var cfg=window.RLM_COMPARE,host=document.querySelector('[data-compare]');
   if(!cfg||!host)return;
   var tabs=cfg.tabs;
-  host.innerHTML='<div class="rlm-cmp-in"><h2 class="rlm-cmp-title">'+cfg.title+'</h2>'
+  host.innerHTML='<div class="rlm-cmp-in">'+(cfg.title?'<h2 class="rlm-cmp-title">'+cfg.title+'</h2>':'')
     +'<div class="rlm-tg" data-s="0"><div class="rlm-thumb"></div>'
     +tabs.map(function(t,i){return '<button type="button" aria-pressed="'+(i===0)+'">'+t.label+'</button>'}).join('')
     +'</div>'

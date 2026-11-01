@@ -8,6 +8,7 @@
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
 <link rel="stylesheet" href="/nav.css">
 <link rel="stylesheet" href="/compare.css">
+<link rel="stylesheet" href="/bookbar.css">
 <script src="/nav.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -121,20 +122,17 @@ footer{padding-bottom:100px}
 <body>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="wrap"><div class="in">
+<section class="rlm-top">
+  <div data-nav-host></div>
+  <div class="rlm-top-in">
     <span class="eyebrow">🎓 Schools &amp; sixth forms</span>
     <h1>Investing for <span>post-16 students</span></h1>
-    <p class="slogan">Two interactive in-person sessions that give your students real-world investing skills.</p>
-    <div class="cta"><a class="btn" href="#pricing">See pricing</a></div>
-    <div class="badge"><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-ca87489d-f483-42b5-9d26-1bf5c0ed5666" data-elfsight-app-lazy></div></div>
-  </div></div>
+    <p class="rlm-sub">Two interactive 1 hour sessions in school that give students real-world investing skills.</p>
+    <div class="rlm-cmp" data-compare></div>
+  </div>
 </section>
-
-<!-- BENEFITS TOGGLE -->
-<section class="rlm-cmp" data-compare></section>
 <script>
-window.RLM_COMPARE={title:'Why it works',tabs:[
+window.RLM_COMPARE={tabs:[
 {label:'For your school',heading:'Benefits for your school',mark:'✓',stars:true,items:[
 ['Strengthen Gatsby evidence'],['Unique enrichment offer'],['Delivered by an expert'],['Prospective student appeal'],['Flexible pricing models']]},
 {label:'For your students',heading:'Benefits for your students',mark:'✓',items:[
@@ -276,6 +274,12 @@ window.RLM_COMPARE={title:'Why it works',tabs:[
 </section>
 
 <footer><div class="wrap"><p>Real Life Money · Bristol · <a href="/contact">Contact</a></p></div></footer>
+
+<div class="rlm-book" data-hide="#pricing,#enquire"><div class="rlm-book-in">
+  <div class="rlm-book-info"><b>Post-16 investing workshops</b><span>2 x 1 hour in-person sessions</span><span>⭐ 5.0 on Google</span></div>
+  <div class="rlm-book-act"><a class="rlm-book-btn" href="#enquire">Enquire now</a><a class="rlm-book-link" href="#pricing">See pricing</a></div>
+</div></div>
+<script src="/bookbar.js" defer></script>
 
 <div id="vModal" onclick="if(event.target===this)closeVideo()">
   <div class="box2">
