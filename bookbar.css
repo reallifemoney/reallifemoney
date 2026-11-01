@@ -40,3 +40,9 @@ html,body{background:#1F3A29!important}
 footer{background:#1F3A29!important;color:rgba(255,255,255,.8)!important;border-top:1px solid rgba(255,255,255,.15)}
 footer a{color:#fff!important}
 [data-nav-host]{display:flow-root}
+.rlm-m{background:#eef8eb!important;color:#2e2e2e!important}
+.rlm-alt{display:inline-block;margin-top:18px;padding:12px 22px;border:2px solid #8c52ff;border-radius:999px;color:#8c52ff;font:600 15px 'Lexend',sans-serif;text-decoration:none;background:#fff}
+.rlm-alt:hover{background:#8c52ff;color:#fff}
+.rlm-cards .box{background:#eef8eb!important;border-color:#cfe3c8}
+.rlm-cards .perk{background:#1F3A29!important}
+.rlm-cards .perk h3,.rlm-cards .perk p{color:#fff!important}
