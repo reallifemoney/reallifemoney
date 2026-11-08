@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="/nav.css?v=5">
 <link rel="stylesheet" href="/compare.css?v=5">
 <link rel="stylesheet" href="/bookbar.css?v=5">
-<link rel="stylesheet" href="/trust-bar.css?v=1">
+<link rel="stylesheet" href="/trust-bar.css?v=2">
 <script src="/nav.js?v=5" defer></script>
-<script src="/trust-bar.js?v=1" defer></script>
+<script src="/trust-bar.js?v=2" defer></script>
 <script src="/scroll-reveal.js?v=1" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/" defer></script>
@@ -46,6 +46,13 @@ section{padding:88px 0}
 .pill{display:block;width:100%;background:var(--purple);color:#fff;font-family:inherit;font-weight:600;font-size:15px;padding:13px;border-radius:100px;border:none;cursor:pointer}
 
 /* HERO */
+.rlm-top .rlm-nav{background:#1F3A29;box-shadow:none}
+.rlm-top .rlm-nav .rlm-brand,.rlm-top .rlm-nav .rlm-brand span{color:#fff!important;-webkit-text-fill-color:#fff!important}
+.rlm-top .rlm-nav .rlm-burger i{background:#fff}
+.rlm-top .rlm-nav .rlm-burger:focus-visible{outline-color:#ffde59}
+.rlm-top .rlm-top-in{padding-top:56px}
+.rlm-top .rlm-top-in > .rlm-sub{margin:22px auto 44px}
+@media(max-width:820px){.rlm-top .rlm-top-in{padding-top:40px}.rlm-top .rlm-top-in > .rlm-sub{margin:18px auto 36px}}
 .hero{padding:40px 0 64px;text-align:center}
 .hero .in{max-width:720px;margin:0 auto}
 .hero img.logo{width:100%;max-width:400px;height:auto;margin:0 auto 32px;border-radius:24px}
@@ -165,7 +172,7 @@ body > .rlm-trust{padding-top:120px;padding-bottom:120px}
   <div data-nav-host></div>
   <div class="rlm-top-in">
     <h1>Learn to invest over a pint 🍺</h1>
-    <p class="rlm-sub">Two relaxed evenings in a Gloucester Road pub.</p>
+    <p class="rlm-sub">From beginner to clicking invest with two relaxed evenings in a Gloucester Road pub</p>
     <div class="rlm-cmp" data-compare></div>
   </div>
 </section>
@@ -295,7 +302,6 @@ window.RLM_COMPARE={tabs:[
     <div class="head"><span class="eyebrow">Questions</span><h2>Frequently asked questions</h2></div>
     <div class="faq">
       <div class="fq"><h3 onclick="tg(this)">Is this suitable for complete beginners?</h3><div><p>Absolutely. It’s designed for people who feel like they know nothing, and it’s still useful if you’ve dabbled before. No prior knowledge needed.</p></div></div>
-      <div class="fq"><h3 onclick="tg(this)">Do I have to drink alcohol?</h3><div><p>Not at all. The pub is just a relaxed setting, and soft drinks and hot drinks are just as welcome. Drinks are bought separately at the bar.</p></div></div>
       <div class="fq"><h3 onclick="tg(this)">How much does it cost?</h3><div><p><b>£50 per person</b> for two evenings of 90 minutes each, in a small group of no more than 12. No upsells and nothing to buy afterwards.</p></div></div>
       <div class="fq"><h3 onclick="tg(this)">Will you tell me what to invest in?</h3><div><p>No. This is financial <b>education</b>, not financial advice. I’ll give you the knowledge and tools to make your own decisions confidently, but I won’t recommend specific products.</p></div></div>
       <div class="fq"><h3 onclick="tg(this)">Is investing risky? Could I lose money?</h3><div><p>Yes, all investing carries risk, and the value of investments can fall as well as rise. <b>Risk is something you can understand and plan around</b>, and that’s a big part of the workshop.</p></div></div>

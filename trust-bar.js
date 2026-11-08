@@ -28,7 +28,7 @@
         </a>
         <div class="rlm-trust-cell">
           <span class="rlm-trust-cap">Employed by</span>
-          <span class="rlm-trust-logo"><img src="/pathways.png" alt="Pathways"></span>
+          <span class="rlm-trust-logo rlm-trust-pathways"><img src="/pathways.png" alt=""><span>Pathways Trust</span></span>
           <span class="rlm-trust-sub">Full-time teacher</span>
         </div>
         <button class="rlm-trust-cell" type="button" aria-haspopup="dialog" aria-controls="${dialogId}">
