@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="/nav.css?v=5">
 <link rel="stylesheet" href="/compare.css?v=5">
 <link rel="stylesheet" href="/bookbar.css?v=5">
+<link rel="stylesheet" href="/trust-bar.css?v=1">
 <script src="/nav.js?v=5" defer></script>
+<script src="/trust-bar.js?v=1" defer></script>
+<script src="/scroll-reveal.js?v=1" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/" defer></script>
 
@@ -56,35 +59,6 @@ section{padding:88px 0}
 .row{font-size:15px;color:var(--muted);margin:4px 0}
 .row b{color:var(--ink);font-weight:600}
 .link{display:block;background:none;border:none;font-family:inherit;font-size:15px;color:var(--ink);text-decoration:underline;margin:16px auto 0;cursor:pointer}
-
-/* TRUST BAR */
-section.trust-bar{padding:32px 0}
-.trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.trust-cell{display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-width:0;min-height:150px;padding:16px;background:#fff;border:2px solid #fff;border-radius:24px;box-shadow:0 6px 22px rgba(31,58,41,.08);color:#1f3a29;font:inherit;text-align:left}
-a.trust-cell,button.trust-cell{cursor:pointer;transition:transform .2s,box-shadow .2s}
-a.trust-cell:hover,button.trust-cell:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(31,58,41,.14)}
-.trust-cell:focus-visible,.guarantee-dialog button:focus-visible,.guarantee-dialog a:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
-.trust-cap{font-size:12px;font-weight:600;line-height:1.3}
-.trust-logo{display:flex;align-items:center;min-height:46px}
-.trust-logo img{max-height:54px;width:auto;object-fit:contain}
-.trust-logo img.trust-google{max-height:140px}
-.trust-sub{font-size:13px;font-weight:400;line-height:1.4}
-.trust-guarantee{background:var(--green);border-color:var(--green)}
-.trust-guarantee-title{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;line-height:1.2}
-.trust-guarantee-title svg{flex:none;width:40px;height:40px}
-.trust-more{font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.guarantee-dialog{width:min(440px,calc(100% - 32px));max-width:none;max-height:calc(100% - 32px);margin:auto;padding:0;border:0;border-radius:30px;background:#fff;color:#1f3a29}
-.guarantee-dialog::backdrop{background:rgba(31,58,41,.7)}
-.guarantee-pop{position:relative;padding:34px 28px 28px;border-top:10px solid var(--green);text-align:center}
-.guarantee-pop svg{width:68px;height:68px}
-.guarantee-pop h2{margin:12px 0 10px;font-size:24px}
-.guarantee-pop p{font-size:16px;line-height:1.6}
-.guarantee-pop a{color:var(--purple);font-weight:600;text-decoration:underline}
-.guarantee-close{position:absolute;right:14px;top:14px;width:38px;height:38px;border:0;border-radius:50%;background:var(--mint);color:#1f3a29;font-size:20px;cursor:pointer}
-.guarantee-ok{margin-top:22px;padding:14px 28px;border:0;border-radius:999px;background:var(--yellow);color:#1f3a29;font:600 16px 'Lexend',sans-serif;cursor:pointer}
-@media(min-width:860px){.trust-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}}
-@media(max-width:360px){.trust-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){a.trust-cell,button.trust-cell{transition:none}}
 
 /* VIDEO + WHATSAPP */
 .vid{position:relative;max-width:500px;margin:48px auto 0;border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:0 20px 50px rgba(0,0,0,.12)}
@@ -136,7 +110,7 @@ a.trust-cell:hover,button.trust-cell:hover{transform:translateY(-3px);box-shadow
 footer{padding-bottom:100px}
 
 /* DATES + BOOKING */
-.sess,.sess-waitlist{background:var(--mint);border:2px solid var(--green);border-radius:20px;padding:26px;text-align:center;transition:.15s}
+.sess,.sess-waitlist{background:#fff;border:2px solid var(--green);border-radius:20px;padding:26px;text-align:center;transition:.15s}
 .sess:hover{border-color:var(--purple);transform:translateY(-4px)}
 .sess .m{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
 .sess h3{font-size:20px;margin-bottom:8px}
@@ -174,6 +148,14 @@ footer a{color:#ddd;text-decoration:underline}
 @media(max-width:820px){.g3,.g2,.about{grid-template-columns:1fr}.hero h1{font-size:40px}.head h2{font-size:27px}section{padding:72px 0}.reviews{padding:64px 0}}
 @media(max-width:600px){#step-2,#step-3{width:calc(100% + 16px);padding:28px 16px}}
 @media(max-width:600px){.card .btn{width:100%;font-size:18px;padding:18px 20px}}
+body > section,body > section.reviews{padding-top:120px;padding-bottom:120px}
+body > section.rlm-top{padding-top:0}
+body > .rlm-trust{padding-top:120px;padding-bottom:120px}
+.fade-up{transition:opacity .65s ease,transform .65s ease}
+.fade-up-pending{opacity:0;transform:translateY(24px)}
+.fade-up-pending:focus-within{opacity:1;transform:none}
+@media(max-width:820px){body > section,body > section.reviews{padding-top:88px;padding-bottom:88px}body > section.rlm-top{padding-top:0}body > .rlm-trust{padding-top:88px;padding-bottom:88px}}
+@media(prefers-reduced-motion:reduce){.fade-up{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -188,51 +170,7 @@ footer a{color:#ddd;text-decoration:underline}
   </div>
 </section>
 
-<section class="trust-bar" aria-label="Why trust Real Life Money">
-  <div class="wrap trust-grid">
-    <a class="trust-cell" href="https://www.cii.co.uk/learning/qualifications/diploma-in-regulated-financial-planning-qualification" target="_blank" rel="noopener noreferrer">
-      <span class="trust-cap">Qualified with</span>
-      <span class="trust-logo"><img src="/cii.webp" alt="Chartered Insurance Institute"></span>
-      <span class="trust-sub">Diploma in Regulated Financial Planning</span>
-    </a>
-    <div class="trust-cell">
-      <span class="trust-cap">Employed by</span>
-      <span class="trust-logo"><img src="/pathways.png" alt="Pathways"></span>
-      <span class="trust-sub">Full-time teacher</span>
-    </div>
-    <button class="trust-cell trust-guarantee" type="button" id="guarantee-open" aria-haspopup="dialog" aria-controls="guarantee-dialog">
-      <span class="trust-cap">Our promise</span>
-      <span class="trust-guarantee-title">
-        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 4l16 6v12c0 10-6.5 18.5-16 22C14.5 40.5 8 32 8 22V10l16-6z" fill="#fff" stroke="#1F3A29" stroke-width="3" stroke-linejoin="round"/><path d="M16 24l6 6 11-12" stroke="#71c558" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Confidence guarantee</span>
-      </span>
-      <span class="trust-sub">Full refund if you're not more confident. <span class="trust-more">Tap to see how</span></span>
-    </button>
-    <a class="trust-cell" href="https://maps.app.goo.gl/HdFMCXXdQW5TEw8s9?g_st=ic" target="_blank" rel="noopener noreferrer">
-      <span class="trust-cap">Rated on Google</span>
-      <span class="trust-logo"><img class="trust-google" src="/google-reviews.png" alt="5.0, excellent on Google, five stars"></span>
-      <span class="trust-sub">Read my Google reviews</span>
-    </a>
-  </div>
-</section>
-
-<dialog class="guarantee-dialog" id="guarantee-dialog" aria-labelledby="guarantee-title" aria-describedby="guarantee-description">
-  <div class="guarantee-pop">
-    <button class="guarantee-close" type="button" aria-label="Close">&times;</button>
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 4l16 6v12c0 10-6.5 18.5-16 22C14.5 40.5 8 32 8 22V10l16-6z" fill="#eef8eb" stroke="#1F3A29" stroke-width="3" stroke-linejoin="round"/><path d="M16 24l6 6 11-12" stroke="#71c558" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h2 id="guarantee-title">The Confidence Guarantee</h2>
-    <p id="guarantee-description">If you don't come away feeling more confident about investing, you get a full refund. <a href="/contact">Let me know</a> within 14 days after your second session.</p>
-    <button class="guarantee-ok" type="button">Got it</button>
-  </div>
-</dialog>
-<script>
-const guaranteeDialog = document.getElementById('guarantee-dialog');
-document.getElementById('guarantee-open').addEventListener('click', () => guaranteeDialog.showModal());
-guaranteeDialog.querySelectorAll('button').forEach(button => button.addEventListener('click', () => guaranteeDialog.close()));
-guaranteeDialog.addEventListener('click', event => {
-  if (event.target === guaranteeDialog) guaranteeDialog.close();
-});
-</script>
+<div data-trust-bar></div>
 <script>
 window.RLM_COMPARE={tabs:[
 {label:'What it is',heading:'Investing on Tap is…',mark:'✓',stars:true,items:[
