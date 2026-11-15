@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz — Real Life Money</title>
+<meta name="description" content="Find out how much more your money could grow if you invested compared to leaving it in savings accounts.">
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TZ542GMS');</script>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','248586408143097');fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=248586408143097&ev=PageView&noscript=1"/></noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18128232153"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18128232153');
+</script>
+
+<style>
+:root{--mint:#eef8eb;--purple:#8c52ff;--orange:#ff914d;--yellow:#ffde59;--green:#71c558;--ink:#1a1a1a;--muted:#6b6b6b;--rule:#daecd6;--white:#ffffff}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Lexend',Helvetica,Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--mint);color:var(--ink);font-weight:300;line-height:1.7;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+
+.progress-container{width:100%;height:6px;background-color:var(--rule);position:fixed;top:0;left:0;z-index:100}
+.progress-bar{height:100%;width:0%;background-color:var(--purple);transition:width .4s ease}
+
+.quiz-box{max-width:650px;width:100%;margin-top:80px;padding:24px 6px;text-align:center}
+.step-card{display:none;animation:fadeIn .4s ease forwards}
+.step-card.active{display:block}
+h2{font-size:1.8rem;font-weight:600;margin-bottom:25px;line-height:1.3;color:var(--ink)}
+
+.options-list{display:flex;flex-direction:column;gap:12px}
+.option-btn{width:100%;padding:18px 24px;border:2px solid var(--rule);background:var(--white);border-radius:14px;font-size:1.1rem;font-weight:500;cursor:pointer;transition:all .2s ease;color:var(--ink);display:flex;align-items:center;justify-content:center;text-align:center}
+.option-btn:hover{border-color:var(--purple)}
+.amount-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}
+
+.currency-wrapper{position:relative;display:flex;align-items:center;margin-bottom:20px}
+.currency-symbol{position:absolute;left:20px;font-size:1.2rem;font-weight:500;color:var(--muted)}
+.text-input{width:100%;padding:16px 20px 16px 40px;border:2px solid var(--ink);border-radius:12px;font-size:1.1rem;font-weight:400;background:var(--white);color:var(--ink);outline:none}
+.text-input:focus{border-color:var(--purple)}
+.action-btn{width:100%;padding:18px;background-color:var(--purple);color:var(--white);border:none;border-radius:12px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.action-btn:hover{opacity:.9}
+.back-btn{display:block;margin-top:15px;background:none;border:none;color:#666;text-decoration:underline;cursor:pointer;font-size:.9rem;width:100%;text-align:center}
+.back-btn:hover{color:#333}
+
+/* Results */
+.results-box{text-align:center;padding:30px 4px}
+.big-money-headline{font-size:2.5rem;color:var(--green);font-weight:700;margin:8px 0;letter-spacing:-1px}
+.pre-header{font-size:.9rem;text-transform:uppercase;font-weight:600;color:var(--muted);letter-spacing:1px}
+.table-responsive{overflow-x:auto;margin-top:30px;margin-bottom:35px;border:1px solid #eef2ed;border-radius:12px}
+.projections-table{width:100%;border-collapse:collapse;text-align:left;font-size:.95rem}
+.projections-table th{background-color:#f7fbf6;padding:12px 14px;font-weight:600;border-bottom:2px solid #e2ece0}
+.projections-table td{padding:14px;border:1px solid #e0e6df}
+.row-label{font-weight:500;background-color:#fafdfa;width:28%}
+.row-label-gain{font-weight:500;background-color:var(--green);width:28%}
+.highlight-row{background-color:#f9fdf8}
+.difference-row{background-color:var(--green);color:var(--white)}
+.difference-row td{color:var(--white)!important;border:1px solid rgba(255,255,255,.15)}
+
+.realism-check-container{margin-top:30px;padding:20px 10px;background-color:#fff;border:1px solid #e0e6df;border-radius:12px}
+.realism-title{font-size:1.2rem;color:#1F3A29;margin-bottom:12px;font-weight:700}
+.realism-text{font-size:.95rem;color:#4a5448;line-height:1.6;margin-bottom:14px}
+
+.user-selections-summary{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:25px 0;padding:15px;background-color:#f7fbf6;border-radius:12px;border:1px solid #eef2ed}
+.selection-badge{flex:1;min-width:130px;background:var(--white);padding:10px 14px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.02);border:1px solid #e2ece0;text-align:center}
+.badge-label{display:block;font-size:.75rem;text-transform:uppercase;font-weight:600;color:#657362;margin-bottom:4px;letter-spacing:.5px}
+.badge-value{display:block;font-size:1rem;font-weight:700;color:#1c3d17}
+
+.compliance-footer{font-size:.78rem;color:#828c80;text-align:left;line-height:1.6;margin-top:35px;border-top:1px solid #eef2ed;padding-top:20px}
+.compliance-footer p.head{margin:0 0 8px;font-weight:700;color:#1F3A29;font-size:12px}
+.compliance-footer ul{margin:0 0 15px;padding-left:18px;color:#555}
+.compliance-footer li{margin-bottom:6px}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.fade-in-element{opacity:0;animation:fadeInUp 1.5s cubic-bezier(.25,1,.5,1) forwards}
+.delay-headline{animation-delay:.5s}
+.delay-1-5s{animation-delay:1.5s}
+.delay-2-5s{animation-delay:2.5s}
+.delay-3-5s{animation-delay:3.5s}
+.delay-rest{animation-delay:4s}
+
+@media (max-width:480px){.selection-badge{min-width:45%}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZ542GMS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="quiz-box">
+
+  <div class="step-card active" data-step="1">
+    <h2>How much cash do you have to invest now?</h2>
+    <div class="options-list amount-grid">
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 0)">£0</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 100)">£100</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 300)">£300</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 500)">£500</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 1000)">£1,000</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 3000)">£3,000</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 5000)">£5,000</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('lumpSum', 10000)">£10,000</button>
+      <button type="button" class="option-btn" onclick="revealCustomInput('lumpSum')">Other</button>
+    </div>
+    <div id="custom-lumpSum-container" style="display:none;margin-top:15px;">
+      <div class="currency-wrapper"><span class="currency-symbol">£</span><input type="number" id="lumpSumInput" class="text-input" placeholder="0" min="0"></div>
+      <button type="button" class="action-btn" style="margin-top:10px;" onclick="validateCustomInput('lumpSumInput','lumpSum')">Continue</button>
+    </div>
+  </div>
+
+  <div class="step-card" data-step="2">
+    <h2>Where is that cash sitting now?</h2>
+    <div class="options-list">
+      <button type="button" class="option-btn" onclick="handleLocationSelection('Current Account')">Current Account</button>
+      <button type="button" class="option-btn" onclick="handleLocationSelection('Savings Account')">Savings Account</button>
+      <button type="button" class="option-btn" onclick="handleLocationSelection('Premium Bonds')">Premium Bonds</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+  </div>
+
+  <div class="step-card" data-step="3">
+    <h2>How much extra could you invest per month?</h2>
+    <div class="options-list amount-grid">
+      <button type="button" class="option-btn" onclick="handlePillSelection('monthlySavings', 50)">£50</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('monthlySavings', 100)">£100</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('monthlySavings', 200)">£200</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('monthlySavings', 300)">£300</button>
+      <button type="button" class="option-btn" onclick="handlePillSelection('monthlySavings', 500)">£500</button>
+      <button type="button" class="option-btn" onclick="revealCustomInput('monthlySavings')">Other</button>
+    </div>
+    <div id="custom-monthlySavings-container" style="display:none;margin-top:15px;">
+      <div class="currency-wrapper"><span class="currency-symbol">£</span><input type="number" id="monthlyInput" class="text-input" placeholder="0" min="0"></div>
+      <button type="button" class="action-btn" style="margin-top:10px;" onclick="validateCustomInput('monthlyInput','monthlySavings')">Continue</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+  </div>
+
+  <div class="step-card" data-step="4">
+    <h2>With investing, do you consider yourself a risk taker?</h2>
+    <div class="options-list">
+      <button type="button" class="option-btn" onclick="finishQuiz('Low Risk')">Low risk (prefer stability and modest growth)</button>
+      <button type="button" class="option-btn" onclick="finishQuiz('Medium Risk')">Medium risk (comfortable with some up and downs)</button>
+      <button type="button" class="option-btn" onclick="finishQuiz('High Risk')">High risk (priority is to maximise growth)</button>
+    </div>
+    <button type="button" class="back-btn" onclick="goBackStep()">← Back</button>
+  </div>
+
+  <div class="step-card results-box" data-step="5">
+    <div class="headline-container">
+      <p class="pre-header fade-in-element delay-headline">By investing, you could have</p>
+      <h2 class="big-money-headline fade-in-element delay-1-5s">£<span id="displayDiff3"></span></h2><p class="fade-in-element delay-1-5s"> extra in 3 years</p>
+      <h2 class="big-money-headline fade-in-element delay-2-5s">£<span id="displayDiff10"></span></h2><p class="fade-in-element delay-2-5s"> extra in 10 years</p>
+      <h2 class="big-money-headline fade-in-element delay-3-5s">£<span id="displayDiff30"></span></h2><p class="fade-in-element delay-3-5s"> extra in 30 years</p>
+    </div>
+
+    <div class="fade-in-element delay-rest">
+      <div class="table-responsive">
+        <table class="projections-table">
+          <thead>
+            <tr><th>Time period</th><th>3 yrs</th><th>5 yrs</th><th>10 yrs</th><th>20 yrs</th><th>30 yrs</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Total put away</td>
+              <td>£<span id="putAway3"></span></td><td>£<span id="putAway5"></span></td><td>£<span id="putAway10"></span></td><td>£<span id="putAway20"></span></td><td>£<span id="putAway30"></span></td>
+            </tr>
+            <tr>
+              <td class="row-label">Left where it is</td>
+              <td>£<span id="savings3"></span></td><td>£<span id="savings5"></span></td><td>£<span id="savings10"></span></td><td>£<span id="savings20"></span></td><td>£<span id="savings30"></span></td>
+            </tr>
+            <tr class="highlight-row">
+              <td class="row-label">Total if invested</td>
+              <td>£<span id="invested3"></span></td><td>£<span id="invested5"></span></td><td>£<span id="invested10"></span></td><td>£<span id="invested20"></span></td><td>£<span id="invested30"></span></td>
+            </tr>
+            <tr class="difference-row">
+              <td class="row-label-gain">Gain from investing</td>
+              <td><strong>£<span id="diff3"></span></strong></td><td><strong>£<span id="diff5"></span></strong></td><td><strong>£<span id="diff10"></span></strong></td><td><strong>£<span id="diff20"></span></strong></td><td><strong>£<span id="diff30"></span></strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="realism-check-container">
+        <h3 class="realism-title">Are these figures realistic?</h3>
+        <p class="realism-text">Yes - and if anything, they are more on the conservative side.</p>
+        <p class="realism-text">Full details can be found at the bottom of the page.</p>
+        <p class="realism-text">It is worth noting that investing for the long-term (5 years or more) gives a much higher chance of success.</p>
+        <p class="realism-text"><strong>The Bottom Line:</strong> The massive difference you see is simply the power of compounding returns.</p>
+      </div>
+
+      <h3 style="padding-top:40px">Reminder of your selections:</h3>
+      <div class="user-selections-summary">
+        <div class="selection-badge"><span class="badge-label">Lump Sum</span><span class="badge-value" id="summaryLumpSum"></span></div>
+        <div class="selection-badge"><span class="badge-label">Cash Kept In</span><span class="badge-value" id="summaryLocation"></span></div>
+        <div class="selection-badge"><span class="badge-label">Monthly Savings</span><span class="badge-value" id="summaryMonthly"></span></div>
+        <div class="selection-badge"><span class="badge-label">Risk Profile</span><span class="badge-value" id="summaryRisk"></span></div>
+      </div>
+
+      <button type="button" class="action-btn" onclick="location.reload()">Start again</button>
+
+      <div class="compliance-footer">
+        <p class="head">How I worked out your figures:</p>
+        <ul>
+          <li><strong>Leaving it in cash:</strong> I assumed your bank pays on average <strong>3.5% interest a year</strong> in a savings account. You may be getting more than this now, but this is the average savings account interest from the last 30 years. If you used a standard current account, I assumed a tiny <strong>0.5% interest</strong>, and Premium Bonds were worked out at <strong>2.5%</strong>.</li>
+          <li><strong>Low Risk Investment:</strong> Worked out at <strong>4.5% growth a year</strong>. This is a very cautious mix made up mostly of secure government and company loans (bonds), with just a small splash of company shares. Actual long-term data shows this kind of portfolio has achieved 4-5% per year.</li>
+          <li><strong>Medium Risk Investment:</strong> Worked out at <strong>6% growth a year</strong>. This is a balanced, middle-of-the-road 50/50 split between secure loans and company shares. Actual long-term figures suggest this kind of portfolio has achieved 6-7% per year.</li>
+          <li><strong>High Risk Investment:</strong> Worked out at <strong>7.5% growth a year</strong>. This puts 100% of your money into company shares to chase maximum growth. Real figures for this are often higher (8-10% per year) but I decided to use conservative figures to be on the safe side.</li>
+          <li><strong>Why these are safe assumptions:</strong> To give you an idea of real life, a popular high-growth fund like the <em>Vanguard LifeStrategy 100% Fund</em> has actually made an average of roughly <strong>10.2% growth every year</strong> since it started in 2011. I intentionally used 7.5% instead of 10.2% because it is always safer to under-promise and over-deliver.</li>
+        </ul>
+        <p class="head">The Important Legal Bit:</p>
+        <ul style="margin:0">
+          <li>This calculator is just a helpful tool to show you how compound interest works. It is for educational purposes only and is <strong>not official financial advice</strong>.</li>
+          <li>Unlike a bank account, investments can go down as well as up. Your capital is at risk, meaning you could get back less money than you originally put in.</li>
+          <li style="margin-bottom:0">Just because the stock market has done brilliantly in the past does not completely guarantee it will do the exact same thing in the future.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+const answers = {};
+
+function updateProgressBar() {
+  const pct = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  document.getElementById('progressBar').style.width = Math.min(pct, 100) + '%';
+}
+function handlePillSelection(key, amount) { answers[key] = "£" + amount; advanceStep(); }
+function handleLocationSelection(loc) { answers.cashLocation = loc; advanceStep(); }
+function revealCustomInput(key) { document.getElementById('custom-' + key + '-container').style.display = 'block'; }
+function validateCustomInput(inputId, key) {
+  const el = document.getElementById(inputId);
+  if (!el.value || el.value < 0) { el.reportValidity(); return; }
+  answers[key] = "£" + el.value;
+  advanceStep();
+}
+function advanceStep() {
+  document.querySelector('[data-step="' + currentStep + '"]').classList.remove('active');
+  currentStep++;
+  document.querySelector('[data-step="' + currentStep + '"]').classList.add('active');
+  updateProgressBar();
+}
+function goBackStep() {
+  if (currentStep > 1) {
+    document.querySelector('[data-step="' + currentStep + '"]').classList.remove('active');
+    currentStep--;
+    document.querySelector('[data-step="' + currentStep + '"]').classList.add('active');
+    updateProgressBar();
+    ['lumpSum', 'monthlySavings'].forEach(k => {
+      const el = document.getElementById('custom-' + k + '-container');
+      if (el) el.style.display = 'none';
+    });
+  }
+}
+
+// Projection maths (unchanged from the original quiz)
+function calculateProjections(lumpSumRaw, monthlyRaw, riskChoice, years) {
+  const P = parseFloat(lumpSumRaw.replace(/[^\d.]/g, '')) || 0;
+  const PMT = parseFloat(monthlyRaw.replace(/[^\d.]/g, '')) || 0;
+
+  let investRate = 0.06;
+  if (riskChoice === "Low Risk") investRate = 0.045;
+  if (riskChoice === "High Risk") investRate = 0.075;
+
+  let cashRate = 0.035;
+  if (answers.cashLocation === "Current Account") cashRate = 0.005;
+  else if (answers.cashLocation === "Premium Bonds") cashRate = 0.025;
+
+  function fv(principal, monthly, annualRate, t) {
+    const r = annualRate / 12, n = t * 12;
+    return principal * Math.pow(1 + r, n) + monthly * ((Math.pow(1 + r, n) - 1) / r);
+  }
+  const put = P + PMT * 12 * years;
+  const sav = fv(P, PMT, cashRate, years);
+  const inv = fv(P, PMT, investRate, years);
+  return { putAway: Math.round(put), savings: Math.round(sav), invested: Math.round(inv), diff: Math.round(inv - sav) };
+}
+
+function finishQuiz(risk) {
+  answers.riskProfile = risk;
+  const set = (id, v) => { document.getElementById(id).textContent = v; };
+  const res = {};
+  [3, 5, 10, 20, 30].forEach(y => {
+    const r = calculateProjections(answers.lumpSum, answers.monthlySavings, risk, y);
+    res[y] = r;
+    set('putAway' + y, r.putAway.toLocaleString());
+    set('savings' + y, r.savings.toLocaleString());
+    set('invested' + y, r.invested.toLocaleString());
+    set('diff' + y, r.diff.toLocaleString());
+  });
+  set('displayDiff3', res[3].diff.toLocaleString());
+  set('displayDiff10', res[10].diff.toLocaleString());
+  set('displayDiff30', res[30].diff.toLocaleString());
+  set('summaryLumpSum', answers.lumpSum);
+  set('summaryLocation', answers.cashLocation);
+  set('summaryMonthly', answers.monthlySavings);
+  set('summaryRisk', risk);
+
+  advanceStep();
+  document.getElementById('progressBar').style.backgroundColor = 'var(--green)';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

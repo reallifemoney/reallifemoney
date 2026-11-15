@@ -44,9 +44,11 @@ function workshopLabelFor(w) {
  */
 async function getWorkshopByLabel(label) {
   if (!label) return null;
-  const snap = await db.collection("workshops").get();
-  for (const doc of snap.docs) {
-    if (workshopLabelFor(doc.data()) === label) return doc.data();
+  for (const col of ["workshops", "tapCourses"]) {
+    const snap = await db.collection(col).get();
+    for (const doc of snap.docs) {
+      if (workshopLabelFor(doc.data()) === label) return doc.data();
+    }
   }
   return null;
 }
@@ -73,7 +75,8 @@ function workshopSessionFields(workshop) {
     "session_two": workshop["2session"] || "",
     "one_start_time": workshop["1start_time"] || "",
     "two_start_time": workshop["2start_time"] || "",
-     "course_times": workshop["times"] || "",
+    "course_times": workshop["times"] || "",
+    "Location": workshop.category === "online" ? "Online" : (workshop.venueName || ""),
   };
 }
 
@@ -354,6 +357,51 @@ exports.createCheckoutSession = onRequest(
   }
 );
 
+// Investing on Tap (£50) checkout - same flow as createCheckoutSession, different Price.
+const TAP_PRICE_ID = "price_1UU6POG1bVxXIBBZFUgjcp1n";
+
+exports.createCheckoutSessionTap = onRequest(
+  { secrets: [stripeSecretKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).send("");
+    }
+    if (req.method !== "POST") {
+      return res.status(405).send("Method Not Allowed");
+    }
+
+    const stripe = new Stripe(stripeSecretKey.value());
+
+    try {
+      const { quantity, name, email, phone, courseDate } = req.body;
+      const qty = Math.max(1, Math.min(12, parseInt(quantity, 10) || 1));
+
+      const session = await stripe.checkout.sessions.create({
+        ui_mode: "embedded_page",
+        mode: "payment",
+        line_items: [{ price: TAP_PRICE_ID, quantity: qty }],
+        allow_promotion_codes: true,
+        customer_email: email,
+        metadata: {
+          full_name: name,
+          phone: phone,
+          course_date: courseDate || "",
+        },
+        return_url: "https://reallifemoney.co.uk/booking-confirmed?session_id={CHECKOUT_SESSION_ID}",
+      });
+
+      res.json({ clientSecret: session.client_secret });
+    } catch (err) {
+      console.error("Error creating checkout session:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
 exports.getBookingDetails = onRequest(
   {},
   async (req, res) => {
@@ -538,6 +586,54 @@ exports.castleP16Waitlist = onRequest(
     } catch (err) {
       console.error("Error processing Castle School P16 waitlist sign-up:", err);
       res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/** Post-16 schools page enquiry form - saves it and emails Leo. */
+exports.schoolEnquiry = onRequest(
+  { secrets: [resendApiKey] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const clean = (v, max) => String(v || "").trim().slice(0, max);
+      const esc = (v) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      const name = clean(req.body.name, 120);
+      const school = clean(req.body.school, 160);
+      const email = clean(req.body.email, 160).toLowerCase();
+      const pricing = clean(req.body.pricing, 60);
+      const message = clean(req.body.message, 2000);
+
+      if (!name || !school || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return res.status(400).json({ error: "Missing or invalid details" });
+      }
+
+      await db.collection("schoolEnquiries").add({
+        name, school, email, pricing, message,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      const resend = new Resend(resendApiKey.value());
+      await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: "leo@reallifemoney.co.uk",
+        replyTo: email,
+        subject: `Post-16 enquiry: ${school}`,
+        html: `<p><strong>${esc(name)}</strong> from <strong>${esc(school)}</strong> (${esc(email)}) enquired about post-16 workshops.</p>
+<p>Pricing interest: ${esc(pricing) || "not specified"}</p>
+<p>${esc(message).replace(/\n/g, "<br>") || "<em>No message</em>"}</p>`,
+      });
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing school enquiry:", err);
+      res.status(500).json({ error: "Something went wrong" });
     }
   }
 );
@@ -949,7 +1045,7 @@ function vipPartnerAttendedEmailHtml(firstName, discountCode) {
 /**
  * HELPER: Create Contact in Bigin CRM via OAuth / REST API
  */
-async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false, workshopFields = {}) {
+async function createBiginContact(firstName, lastName, email, referralCode, courseDate, clientId, clientSecret, refreshToken, vipPartner = false, workshopFields = {}, contactDescription = null, preserveReferralCode = false) {
   try {
     const accessToken = await getBiginAccessToken(clientId, clientSecret, refreshToken);
     if (!accessToken) return;
@@ -980,7 +1076,9 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
       const existingDescription = existingContact.Description || "";
       const newNote = vipPartner
         ? `\nVIP Partner sign-up. Course date: ${courseDate} (${new Date().toISOString()})`
-        : `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
+        : contactDescription
+          ? `\n${contactDescription} Course date: ${courseDate} (${new Date().toISOString()})`
+          : `\nRepeat booking. New Referral Code: ${referralCode} (${new Date().toISOString()})`;
 
       const updatePayload = {
         data: [
@@ -991,7 +1089,7 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
-              : { referral_code: referralCode }),
+              : preserveReferralCode ? {} : { referral_code: referralCode }),
           },
         ],
       };
@@ -1010,14 +1108,14 @@ async function createBiginContact(firstName, lastName, email, referralCode, cour
             First_Name: firstName,
             Last_Name: lastName,
             Email: email,
-            Description: vipPartner
+            Description: contactDescription || (vipPartner
               ? `VIP Partner sign-up. Referral Code: ${referralCode}`
-              : `Workshop attendee. Unique Referral Code: ${referralCode}`,
+              : `Workshop attendee. Unique Referral Code: ${referralCode}`),
             Course: courseDate,
             ...workshopFields,
             ...(vipPartner
               ? { vip_partner: "Yes", vip_code: referralCode }
-              : { referral_code: referralCode }),
+              : preserveReferralCode ? {} : { referral_code: referralCode }),
           },
         ],
       };
@@ -1054,6 +1152,151 @@ async function getBiginAccessToken(clientId, clientSecret, refreshToken) {
     return null;
   }
 }
+
+/**
+ * HELPER: Free taster confirmation email
+ */
+function tasterConfirmationEmailHtml(firstName) {
+  const name = String(firstName || "there").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const zoomUrl = "https://us06web.zoom.us/j/7080726938";
+  return `
+<div style="background-color: rgb(238, 248, 235); padding: 20px 10px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: rgb(46, 46, 46); margin: 0">
+  <table style="max-width: 600px; background-color: rgb(255, 255, 255); border-radius: 24px; overflow: hidden; border: 1px solid rgb(218, 236, 214); margin: 0 auto" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tbody>
+    <tr>
+      <td style="padding: 30px 20px; text-align: center; background-color: rgb(255, 255, 255)">
+        <img style="width: 80px; height: 80px; background-color: rgb(255, 255, 255); border-radius: 50%; object-fit: cover; display: block; margin: 0 auto; border: 0" height="80" width="80" alt="Real Life Money" src="https://reallifemoney.co.uk/logo-circle.webp">
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0 25px 10px 25px">
+        <h1 style="color: rgb(26, 26, 26); font-size: 24px; margin: 0 0 10px 0; text-align: center; font-weight: bold">You're in, ${name}! 🎉</h1>
+
+        <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">Thanks so much for signing up to my free taster session. I'm really looking forward to meeting you!</p>
+
+        <div style="background-color: rgb(226, 242, 220); border: 1px solid rgb(196, 226, 187); border-radius: 24px; padding: 24px 20px; margin: 24px 0">
+          <h2 style="color: rgb(26, 26, 26); font-size: 18px; margin: 0 0 10px 0; font-weight: bold">Your session details 📅</h2>
+          <p style="margin: 0 0 6px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>When:</strong> Wednesday 18th November at 8pm</p>
+          <p style="margin: 0 0 6px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>How long:</strong> 30 minutes</p>
+          <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6"><strong>Where:</strong> Online, on Zoom</p>
+          <div style="text-align: center; margin: 20px 0 10px 0">
+            <a style="background-color: rgb(255, 145, 77); color: rgb(255, 255, 255) !important; text-decoration: none; padding: 14px 28px; border-radius: 999px; font-weight: bold; font-size: 15px; display: inline-block" target="_blank" href="${zoomUrl}" rel="noopener noreferrer">Join the session on Zoom</a>
+          </div>
+          <p style="margin: 10px 0 0 0; color: rgb(107, 107, 107); font-size: 12px; line-height: 1.5; text-align: center">Button not working? Copy this link into your browser:<br><a style="color: rgb(107, 107, 107); word-break: break-all" href="${zoomUrl}" target="_blank" rel="noopener noreferrer">${zoomUrl}</a></p>
+        </div>
+
+        <div style="text-align: center; margin: 0 0 24px 0">
+          <a style="color: rgb(46, 46, 46); font-size: 14px; font-weight: bold; text-decoration: underline" target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Real+Life+Money+-+Free+Taster+Session&amp;dates=20261118T200000Z/20261118T203000Z&amp;details=Join+on+Zoom%3A+https%3A%2F%2Fus06web.zoom.us%2Fj%2F7080726938&amp;location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F7080726938">📆 Add to your calendar</a>
+        </div>
+
+        <p style="margin: 0 0 8px 0; color: rgb(46, 46, 46); font-size: 15px; font-weight: bold; line-height: 1.6">A few things to know:</p>
+        <ul style="margin: 0 0 16px 0; padding-left: 20px; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">
+          <li style="margin-bottom: 6px">No experience needed, and no jargon. Just bring yourself.</li>
+          <li style="margin-bottom: 6px">Join from a phone, tablet or computer. It's worth clicking the link a few minutes early.</li>
+          <li style="margin-bottom: 6px">Stay until the end to receive your gift. 🎁</li>
+        </ul>
+
+        <p style="margin: 20px 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">If anything comes up and you can't make it, just reply to this email and let me know.</p>
+
+        <p style="margin: 0 0 4px 0; color: rgb(46, 46, 46); font-size: 15px; line-height: 1.6">See you on Wednesday!</p>
+        <p style="margin: 0 0 16px 0; color: rgb(46, 46, 46); font-size: 15px; font-weight: bold">Leo</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 30px; text-align: center; font-size: 12px; color: rgb(107, 107, 107); background-color: rgb(249, 249, 249)">
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)"><strong>Leo | Real Life Money</strong></p>
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)">07939 887950 · leo@reallifemoney.co.uk</p>
+        <p style="margin: 4px 0; font-size: 12px; color: rgb(107, 107, 107)">© 2026 Real Life Money | Bristol, UK</p>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+`;
+}
+
+/**
+ * FREE TASTER SIGN-UP
+ * Saves the attendee, syncs the one-off session to Bigin, and emails the Zoom link.
+ */
+exports.tasterSignup = onRequest(
+  { secrets: [resendApiKey, biginClientId, biginClientSecret, biginRefreshToken] },
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const body = req.body || {};
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) || email.length > 254) {
+        return res.status(400).json({ error: "Invalid email" });
+      }
+      if (body.consentAccepted !== true) {
+        return res.status(400).json({ error: "Email consent is required" });
+      }
+
+      const firstName = email.slice(0, email.indexOf("@")) || "Taster";
+      const course = "Taster session";
+      const sessionFields = {
+        session_one: "2026-11-18",
+        session_two: "",
+        one_start_time: "20:00",
+        two_start_time: "",
+        course_times: "20:00 - 20:30",
+        Location: "Taster session",
+      };
+      const source = String(body.source || "free-taster").slice(0, 80).replace(/[<>]/g, "");
+      const params = String(body.params || "").slice(0, 500).replace(/[<>]/g, "");
+
+      await db.collection("tasterSignUps").add({
+        email,
+        firstName,
+        course,
+        source,
+        params,
+        consentAccepted: true,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+
+      await createBiginContact(
+        firstName,
+        "Taster",
+        email,
+        "",
+        course,
+        biginClientId.value(),
+        biginClientSecret.value(),
+        biginRefreshToken.value(),
+        false,
+        sessionFields,
+        "Free taster session sign-up.",
+        true
+      );
+
+      const resend = new Resend(resendApiKey.value());
+      const emailResult = await resend.emails.send({
+        from: "Leo | Real Life Money <leo@reallifemoney.co.uk>",
+        to: email,
+        bcc: "leo@reallifemoney.co.uk",
+        subject: "Learn to invest - FREE taster session",
+        html: tasterConfirmationEmailHtml(firstName),
+      });
+      if (emailResult.error) {
+        console.error("Error sending free taster confirmation email:", emailResult.error);
+        return res.status(502).json({ error: "Unable to send confirmation email" });
+      }
+
+      return res.json({ success: true });
+    } catch (err) {
+      console.error("Error processing free taster sign-up:", err);
+      return res.status(500).json({ error: "Unable to complete sign-up" });
+    }
+  }
+);
 
 exports.getWorkshops = onRequest(
   {},
@@ -1676,6 +1919,11 @@ exports.adminDashboard = onRequest(
       const workshopsSnap = await db.collection("workshops").orderBy("sortDate", "asc").get();
       const workshops = workshopsSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
+      // --- Investing on Tap courses (Firestore) ---
+      await seedTapCoursesIfNeeded();
+      const tapCoursesSnap = await db.collection("tapCourses").orderBy("sortDate", "asc").get();
+      const tapCourses = tapCoursesSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
       // --- Castle School P16 sign-ups (Firestore) ---
       const castleP16Snap = await db.collection("castleP16SignUps").orderBy("createdAt", "desc").get();
       const castleP16SignUps = castleP16Snap.docs.map((doc) => {
@@ -1778,6 +2026,7 @@ exports.adminDashboard = onRequest(
         },
         bookings,
         workshops,
+        tapCourses,
         castleP16SignUps,
         vipPartners,
         invitedPartners,
@@ -1872,6 +2121,146 @@ exports.adminDeleteWorkshop = onRequest(
       res.json({ success: true });
     } catch (err) {
       console.error("Error deleting workshop:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+/**
+ * INVESTING ON TAP COURSES - separate "tapCourses" collection, same
+ * fields as workshops so bookings sync session dates/times to Bigin.
+ */
+const TAP_DEFAULT_VENUE = "Industry Bar & Kitchen";
+const TAP_DEFAULT_ADDRESS = "Gloucester Road, Bristol";
+
+async function seedTapCoursesIfNeeded() {
+  const metaRef = db.collection("config").doc("tapCoursesSeed");
+  if ((await metaRef.get()).exists) return;
+  const existing = await db.collection("tapCourses").limit(1).get();
+  if (existing.empty) {
+    await db.collection("tapCourses").add({
+      dateLabel: "Tuesday 12th & 19th January",
+      times: "7:00pm – 8:30pm",
+      category: "in-person",
+      location: "",
+      venueName: TAP_DEFAULT_VENUE,
+      venueAddress: TAP_DEFAULT_ADDRESS,
+      price: 50,
+      sortDate: "2027-01-12",
+      active: true,
+      soldOut: false,
+      "1session": "2027-01-12",
+      "2session": "2027-01-19",
+      "1start_time": "19:00",
+      "1end_time": "20:30",
+      "2start_time": "19:00",
+      "2end_time": "20:30",
+    });
+  }
+  await metaRef.set({ seededAt: admin.firestore.FieldValue.serverTimestamp() });
+}
+
+exports.getTapCourses = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+
+    try {
+      await seedTapCoursesIfNeeded();
+      // Sorted/filtered in code to avoid needing a composite index
+      const snapshot = await db.collection("tapCourses").get();
+      const courses = snapshot.docs
+        .map((doc) => ({ id: doc.id, ...doc.data() }))
+        .filter((c) => c.active !== false)
+        .sort((a, b) => String(a.sortDate || "").localeCompare(String(b.sortDate || "")));
+      res.json({ courses });
+    } catch (err) {
+      console.error("Error fetching tap courses:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+exports.adminSaveTapCourse = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id, ...fields } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+
+      const course = {
+        dateLabel: String(fields.dateLabel || "").trim(),
+        times: String(fields.times || "").trim(),
+        category: fields.category === "online" ? "online" : "in-person",
+        location: String(fields.location || "").trim(),
+        venueName: String(fields.venueName || "").trim() || TAP_DEFAULT_VENUE,
+        venueAddress: String(fields.venueAddress || "").trim() || TAP_DEFAULT_ADDRESS,
+        price: Number(fields.price) || 0,
+        sortDate: String(fields.sortDate || "").trim(),
+        active: fields.active !== false,
+        soldOut: Boolean(fields.soldOut),
+        "1session": String(fields["1session"] || "").trim(),
+        "2session": String(fields["2session"] || "").trim(),
+        "1start_time": String(fields["1start_time"] || "").trim(),
+        "1end_time": String(fields["1end_time"] || "").trim(),
+        "2start_time": String(fields["2start_time"] || "").trim(),
+        "2end_time": String(fields["2end_time"] || "").trim(),
+      };
+
+      if (!course.dateLabel || !course.sortDate) {
+        return res.status(400).json({ error: "Missing dateLabel or sortDate" });
+      }
+
+      await seedTapCoursesIfNeeded();
+      if (id) {
+        await db.collection("tapCourses").doc(String(id)).set(course, { merge: true });
+      } else {
+        await db.collection("tapCourses").add(course);
+      }
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error saving tap course:", err);
+      res.status(500).json({ error: err.message });
+    }
+  }
+);
+
+exports.adminDeleteTapCourse = onRequest(
+  {},
+  async (req, res) => {
+    res.set("Access-Control-Allow-Origin", "*");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") return res.status(204).send("");
+    if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+    try {
+      const { token, id } = req.body;
+      if (!(await verifyAdminToken(token))) {
+        return res.status(401).json({ error: "Invalid or expired login link" });
+      }
+      if (!id) return res.status(400).json({ error: "Missing id" });
+
+      await seedTapCoursesIfNeeded();
+      await db.collection("tapCourses").doc(String(id)).delete();
+
+      res.json({ success: true });
+    } catch (err) {
+      console.error("Error deleting tap course:", err);
       res.status(500).json({ error: err.message });
     }
   }
@@ -2270,6 +2659,61 @@ exports.adminDeleteCastleP16 = onRequest({}, async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     console.error("Error deleting Castle School P16 sign-up:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * PAGE LOCKS
+ * Top funds / investing game pages stay locked unless an admin unlocks
+ * them for an hour. State lives in Firestore pageLocks/{page}.unlockedUntil.
+ */
+const LOCKABLE_PAGES = ["topfunds", "investing-game", "investing-game-post16"];
+const PAGE_UNLOCK_MS = 60 * 60 * 1000;
+
+exports.pageLockStatus = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "GET, OPTIONS");
+  if (req.method === "OPTIONS") return res.status(204).send("");
+
+  try {
+    const snaps = await Promise.all(
+      LOCKABLE_PAGES.map((p) => db.collection("pageLocks").doc(p).get())
+    );
+    const now = Date.now();
+    const pages = {};
+    LOCKABLE_PAGES.forEach((p, i) => {
+      const until = snaps[i].exists ? snaps[i].data().unlockedUntil || 0 : 0;
+      pages[p] = { unlocked: until > now, unlockedUntil: until > now ? until : 0 };
+    });
+    res.set("Cache-Control", "no-store");
+    res.json({ pages });
+  } catch (err) {
+    console.error("Error fetching page locks:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+exports.adminSetPageLock = onRequest({}, async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.set("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(204).send("");
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
+
+  try {
+    const { token, page, action } = req.body;
+    if (!(await verifyAdminToken(token))) {
+      return res.status(401).json({ error: "Invalid or expired login link" });
+    }
+    if (!LOCKABLE_PAGES.includes(page)) return res.status(400).json({ error: "Unknown page" });
+    if (action !== "unlock" && action !== "lock") return res.status(400).json({ error: "Invalid action" });
+
+    const unlockedUntil = action === "unlock" ? Date.now() + PAGE_UNLOCK_MS : 0;
+    await db.collection("pageLocks").doc(page).set({ unlockedUntil });
+    res.json({ success: true, unlockedUntil });
+  } catch (err) {
+    console.error("Error setting page lock:", err);
     res.status(500).json({ error: err.message });
   }
 });

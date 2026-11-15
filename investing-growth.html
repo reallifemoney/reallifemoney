@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your money's potential | Real Life Money</title>
+<link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','248586408143097');fbq('track','PageView');
+</script>
+<style>
+:root{--purple:#8c52ff;--orange:#ff914d;--yellow:#ffde59;--green:#71c558;--mint:#eef8eb;--ink:#1F3A29;--muted:#5d7466}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:'Lexend',system-ui,sans-serif;background:var(--mint);color:var(--ink);overflow:hidden;-webkit-text-size-adjust:100%}
+.app{height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 20px max(16px,env(safe-area-inset-bottom))}
+.stage{flex:1;min-height:0;display:flex;flex-direction:column}
+h1{font-size:clamp(22px,6.4vw,29px);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+
+.result{background:#fff;border-radius:20px;padding:14px 16px 10px;margin-top:12px;flex:1;min-height:90px;display:flex;flex-direction:column}
+.total{font-size:clamp(34px,10.5vw,46px);font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--purple)}
+.split{font-size:12px;color:var(--muted);margin-top:6px;display:flex;gap:14px;flex-wrap:wrap}
+.split b{font-weight:600;color:var(--ink)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.chart{flex:1;min-height:0;position:relative;margin-top:8px}
+.chart svg{position:absolute;inset:0;width:100%;height:100%}
+.axis{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+.ctrls{flex:none;margin-top:12px;display:grid;gap:10px}
+.ctrl label{display:flex;justify-content:space-between;font-size:13px;font-weight:500}
+.ctrl label span{font-weight:700;color:var(--purple)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer;--p:30%}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--purple) var(--p),#d3e8cc var(--p))}
+input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:#d3e8cc}
+input[type=range]::-moz-range-progress{height:8px;border-radius:4px;background:var(--purple)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-10px;border-radius:50%;background:#fff;border:4px solid var(--purple);box-shadow:0 2px 6px rgba(31,58,41,.25)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--purple)}
+.small{font-size:10.5px;line-height:1.4;color:var(--muted);font-weight:300;margin-top:8px;flex:none}
+
+@media (min-width:700px){.app{max-width:1024px;padding:32px 56px 28px}h1{font-size:clamp(32px,3.5vw,44px)}.ctrls{gap:14px;margin-top:18px}.ctrl label{font-size:15px}.small{font-size:12px}.result{margin-top:20px;padding:20px 24px 14px}.total{font-size:54px}}
+@media (max-height:640px){.small{display:none}.ctrls{gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <main class="stage">
+    <h1>Your money's potential</h1>
+    <div class="result">
+      <div class="total" id="total">£0</div>
+      <div class="split">
+        <span><i class="dot" style="background:var(--purple)"></i>You put in <b id="put">£0</b></span>
+        <span><i class="dot" style="background:var(--green)"></i>Growth <b id="grow">£0</b></span>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 300 150" preserveAspectRatio="none" aria-hidden="true">
+          <path id="aGrow" fill="#71c558"/>
+          <path id="aPut" fill="#8c52ff"/>
+          <path id="lGrow" fill="none" stroke="#4fa23a" stroke-width="2.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="axis"><span>Today</span><span id="mid"></span><span id="end"></span></div>
+    </div>
+    <div class="ctrls">
+      <div class="ctrl"><label for="s1">Starting amount <span id="v1"></span></label><input type="range" id="s1" min="0" max="50000" step="500" value="5000"></div>
+      <div class="ctrl"><label for="s2">Added each month <span id="v2"></span></label><input type="range" id="s2" min="0" max="1000" step="10" value="200"></div>
+      <div class="ctrl"><label for="s3">For how long <span id="v3"></span></label><input type="range" id="s3" min="1" max="40" step="1" value="20"></div>
+    </div>
+    <p class="small">Illustration only, not a forecast or advice. Assumes 8% growth a year. Over the long term that is a realistic return for a medium-risk investment, but returns vary and are not guaranteed. Your money can go down as well as up, and past performance is no guide to the future. Figures are before fees and inflation.</p>
+  </main>
+</div>
+
+<script>
+const RATE = 0.08; // assumed annual growth
+const $ = id => document.getElementById(id);
+const gbp = n => "£" + Math.round(n).toLocaleString("en-GB");
+const bal = (i, m, t) => { const r = Math.pow(1+RATE,1/12)-1; return i*Math.pow(1+RATE,t) + (r ? m*(Math.pow(1+r,12*t)-1)/r : 0); };
+
+function draw(){
+  const i=+$("s1").value, m=+$("s2").value, y=+$("s3").value;
+  [["s1",50000],["s2",1000],["s3",40]].forEach(([id,max])=>{const e=$(id); e.style.setProperty("--p",(e.value-e.min)/(max-e.min)*100+"%")});
+  $("v1").textContent=gbp(i); $("v2").textContent=gbp(m); $("v3").textContent=y+(y===1?" year":" years");
+  const end=bal(i,m,y), put=i+m*12*y, top=Math.max(end,1);
+  $("total").textContent=gbp(end); $("put").textContent=gbp(put); $("grow").textContent=gbp(end-put);
+  const N=Math.max(y*2,2); let g=[],p=[];
+  for(let k=0;k<=N;k++){const t=y*k/N,x=300*k/N; g.push([x,150-bal(i,m,t)/top*146]); p.push([x,150-(i+m*12*t)/top*146]);}
+  const line=a=>a.map((q,k)=>(k?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)).join(" ");
+  $("aGrow").setAttribute("d",line(g)+" L300 150 L0 150Z");
+  $("aPut").setAttribute("d",line(p)+" L300 150 L0 150Z");
+  $("lGrow").setAttribute("d",line(g));
+  $("mid").textContent=y>1?Math.round(y/2)+" yrs":""; $("end").textContent=y+(y===1?" yr":" yrs");
+}
+["s1","s2","s3"].forEach(id=>$(id).addEventListener("input",draw)); draw();
+</script>
+</body>
+</html>

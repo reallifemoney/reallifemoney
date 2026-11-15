@@ -6,6 +6,12 @@
 <title>Investing workshop — Real Life Money</title>
 <meta name="description" content="Learn to invest with confidence from your own sofa. My live online workshop breaks investing down into 2 simple evenings — ISAs, funds, and building wealth without the jargon. £75. Book your spot.">
 <link rel="icon" type="image/webp" href="/logo-circle.webp">
+<link rel="stylesheet" href="/nav.css?v=5">
+<link rel="stylesheet" href="/compare.css?v=5">
+<link rel="stylesheet" href="/bookbar.css?v=5">
+<link rel="stylesheet" href="/trust-bar.css?v=2">
+<script src="/trust-bar.js?v=2" defer></script>
+<script src="/nav.js?v=5" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -169,10 +175,10 @@ section{padding:80px 0;}
 .det-card li{position:relative;padding-left:26px;margin-bottom:10px;font-size:15.5px;color:var(--text);}
 .det-card li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700;}
 .perk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.perk{background:var(--ink);color:#fff;border-radius:20px;padding:30px;}
-.perk i{font-size:26px;color:var(--yellow);margin-bottom:14px;display:block;}
+.perk{background:#1F3A29;color:#fff;border-radius:20px;padding:30px;}
+.perk i{font-size:26px;color:#fff;margin-bottom:14px;display:block;}
 .perk h4{color:#fff;font-size:18px;margin-bottom:8px;}
-.perk p{color:#ccc;font-size:14.5px;}
+.perk p{color:#fff;font-size:14.5px;}
 
 /* OUTCOMES */
 .outcomes-sec{background:var(--mint);}
@@ -197,10 +203,6 @@ section{padding:80px 0;}
 .sess-card .spots{font-size:13px;color:var(--orange);font-weight:600;margin-bottom:18px;}
 .select-btn{display:block;width:100%;text-align:center;background:var(--purple);font-family:'Lexend',Helvetica,Arial,sans-serif;color:#fff;font-weight:600;padding:13px;border-radius:100px;cursor:pointer;border:none;font-size:15px;}
 .select-btn:hover{opacity:.92;}
-.filter-container {display: flex;justify-content: center;gap: 10px;margin-bottom: 30px;flex-wrap: wrap;}
-.filter-pill {background-color: #ffffff;color: #000000;border: 2px solid #000000;border-radius: 50px;padding: 8px 20px;font-size: 0.95rem;font-weight: 600;cursor: pointer;transition: all 0.2s ease-in-out;}
-.filter-pill:hover:not(.active) {border-color: var(--green, #2e7d32);color: var(--green, #2e7d32);}
-.filter-pill.active {background-color: var(--green, #2e7d32);color: #ffffff;border-color: var(--green, #2e7d32);}
 .sess-card.is-hidden {display: none !important;}
 .venue-trigger {display: inline-flex;align-items: center;gap: 6px;cursor: pointer;position: relative;color: #374151;font-size: 15px;text-decoration: underline;text-decoration-style: dotted;text-underline-offset: 3px;text-decoration-color: #9ca3af;border: none;background: none;padding: 0;font-family: inherit;}
 .venue-trigger .pin-icon {font-size: 15px;flex-shrink: 0;}
@@ -271,22 +273,6 @@ footer a{color:#ddd;text-decoration:underline;}
 .video-box iframe{width:100%;height:100%;border:none;}
 .modal-close{position:absolute;top:-42px;right:0;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;}
 
-/* STICKY BOTTOM BAR */
-.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--white);border-top:1.5px solid var(--rule);box-shadow:0 -10px 28px rgba(0,0,0,.08);transform:translateY(110%);transition:transform .35s ease;}
-.sticky-cta.show{transform:translateY(0);}
-.sticky-inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
-.sticky-text{text-align:center;}
-.sticky-text strong{display:block;font-size:14.5px;color:var(--ink);font-weight:600;}
-.sticky-text span{font-size:12.5px;color:var(--muted);}
-.sticky-btn{background:var(--green);color:#fff;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px;white-space:nowrap;cursor:pointer;border:none;}
-.sticky-btn:hover{opacity:.92;}
-.sticky-close{position:absolute;top:6px;right:10px;background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px;line-height:1;}
-@media (max-width:600px){
-  .sticky-inner{padding:10px 40px 10px 16px;gap:10px;}
-  .sticky-text strong{font-size:13.5px;}
-  .sticky-text span{font-size:11.5px;}
-  .sticky-btn{padding:10px 18px;font-size:13px;}
-}
 
 /* RESPONSIVE */
 @media (max-width:860px){
@@ -314,72 +300,35 @@ footer a{color:#ddd;text-decoration:underline;}
 </nav> -->
 
 <!-- HERO -->
-<section class="hero">
-  
-  <div class="wrap">
-    <div class="hero-grid">
-      <a class="nav-logo" href="/">
-      <img src="/logo.webp" alt="Real Life Money" style="height:80px;width:auto;">
-    </a>
-      <div>
-        <span class="eyebrow">Investing workshop</span>
-        <h1>Two sessions.<br>A lifetime of <span>investing confidence.</span></h1>
-        <p class="lede">Taught by a qualified financial advisor and maths teacher in a genuinely nurturing space where no question is too silly.
-        </p>
-        <div class="date-card-hero" style="margin-bottom:25px">
-    <div class="date-meta">
-      <h2 style="padding-bottom:10px">Next online workshop:</h2>
-<div class="date-meta-row" id="heroDate">📅 Loading next date...</div>
-<div class="date-meta-row" id="heroPrice">💷 —</div>
-</div>
-<div style="display: flex; flex-direction: column;">
-    <button class="btn btn-primary" id="heroRegisterBtn">Register</button>
-    <button class="view-other-dates" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button>
-</div>
-</div>
-        <div class="video-trigger" onclick="openVideo();logvideoclick();">
-      <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
-      <div class="play-btn"><i class="fa-solid fa-play"></i></div>
-    </div>
-      </div>
-    </div>
+<section class="rlm-top">
+  <div data-nav-host></div>
+  <div class="rlm-top-in">
+    <h1>Learn to invest, live online</h1>
+    <p class="rlm-sub">Two live evenings, from your sofa.</p>
+    <div class="rlm-cmp" data-compare></div>
   </div>
 </section>
-
-<!-- DOES THIS SOUND FAMILIAR -->
-<section class="relate">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Sound familiar?</span>
-      <h2>You know you should be investing. You just don't know where to start.</h2>
-      <p>I hear some version of this from almost everyone who joins the workshop.</p>
-    </div>
-    <div class="relate-grid">
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"I've got savings just sitting in the bank losing value to inflation, but investing feels like a different language."</p>
-        <p class="resolve">We will start from zero. No assumed knowledge. No jargon left unexplained.</p>
-      </div>
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"Every website and video tells me something different. I don't know who to trust."</p>
-        <p class="resolve">I'm a qualified financial advisor and maths teacher, I'll show you what advisors do for their clients.</p>
-      </div>
-      <div class="tc">
-        <i class="fa-solid fa-circle-question"></i>
-        <p class="quote">"I'm scared of losing money because I don't understand what I'm doing."</p>
-        <p class="resolve">By the end of session two, you'll know exactly how to open an ISA, what to put in it, and why.</p>
-      </div>
-    </div>
-    <div class="relate-flip">
-      <h3>Two evenings. That's genuinely all it takes.</h3>
-      <p>You'll leave with a clear, personal plan you understand and actually trust - built live, on screen, with me.</p>
-    </div>
-  </div>
-</section>
+<div data-trust-bar></div>
+<script>
+window.RLM_COMPARE={tabs:[
+{label:'What it is',heading:'The online workshop is…',mark:'✓',stars:true,items:[
+['Live and interactive on Zoom','Ask questions as we go and get answers there and then.'],
+['Jargon-free','Plain English, no finance-speak.'],
+['Run by a financial adviser turned maths teacher','Someone who knows the industry and how to explain it.'],
+['Great for beginners','No experience or lump sum needed.'],
+['Fun and engaging','Games and real-life examples to keep you switched on.'],
+['Easy to fit in','Two evenings from home, no travel needed.']]},
+{label:'What it isn\'t',heading:'The online workshop is not…',mark:'✕',items:[
+['A pre-recorded video course','You get me, live, in a small friendly group.'],
+['A sales pitch','No pushing you towards specific schemes or products.'],
+['Led by a finance bro with a Lambo','Just a teacher who wants you to understand your money.'],
+['A get-rich-quick scheme','Investing is slow, steady and sensible.'],
+['Full of jargon','If a term needs explaining, we explain it.']]}]};
+</script>
+<script src="/compare.js?v=5" defer></script>
 
 <!-- REVIEWS -->
-<section class="reviews">
+<section class="rlm-l reviews">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What people say</span>
@@ -431,7 +380,7 @@ footer a{color:#ddd;text-decoration:underline;}
 
 
 <!-- ABOUT -->
-<section class="about-sec">
+<section class="rlm-d about-sec">
   <div class="wrap">
     <div class="section-head" style="margin-bottom:40px;">
       <span class="eyebrow">About me</span>
@@ -442,6 +391,10 @@ footer a{color:#ddd;text-decoration:underline;}
         <img src="leo-help.webp" alt="Leo Dennis" class="about-photo">
         <p>Most people don't have the luxury of a financial advisor. We should learn financial literacy in school. These are the reasons why I built Real Life Money.</p>
         <p>I'm a big believer in learning through enjoyment. These are serious topics, but I want you to learn with a smile on your face. This is no boring lecture, it's a genuinely interactive workshop.</p>
+    <div class="video-trigger" style="margin-top:28px" onclick="openVideo();logvideoclick();">
+  <img src="https://vumbnail.com/1181290406.jpg" alt="Watch: how my investing course can help you">
+  <div class="play-btn"><i class="fa-solid fa-play"></i></div>
+</div>
       </div>
     </div>
   </div>
@@ -451,7 +404,7 @@ footer a{color:#ddd;text-decoration:underline;}
 
 
 <!-- WHAT YOU GET -->
-<section class="get">
+<section class="rlm-l get">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What's included</span>
@@ -502,7 +455,7 @@ footer a{color:#ddd;text-decoration:underline;}
 </section>
 
 <!-- OUTCOMES -->
-<section class="outcomes-sec">
+<section class="rlm-l outcomes-sec">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">What you'll walk away with</span>
@@ -523,19 +476,12 @@ footer a{color:#ddd;text-decoration:underline;}
 </section>
 
 <!-- COURSE SELECT -->
-<section class="select-sec" id="courses">
+<section class="rlm-m select-sec" id="courses">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Pick your dates</span>
       <h2>Choose your workshop</h2>
-      
-    </div>
-
-    <!-- Filter Pills -->
-    <div class="filter-container">
-      <button class="filter-pill active" onclick="filterWorkshops('all', this)">View all</button>
-      <button class="filter-pill" onclick="filterWorkshops('online', this)">Online</button>
-      <button class="filter-pill" onclick="filterWorkshops('in-person', this)">In-person (Bristol)</button>
+      <a class="rlm-alt" href="/investing-on-tap">Prefer in person in Bristol? Join Investing on Tap →</a>
     </div>
 
     <div class="sess-grid" id="sessGrid">
@@ -588,7 +534,7 @@ footer a{color:#ddd;text-decoration:underline;}
 </section>
 
 <!-- FAQ -->
-<section class="faq">
+<section class="rlm-d faq">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Questions</span>
@@ -687,17 +633,11 @@ footer a{color:#ddd;text-decoration:underline;}
   </div>
 </footer>
 
-<!-- STICKY BOTTOM BAR -->
-<div class="sticky-cta" id="stickyCta">
-  <button class="sticky-close" aria-label="Dismiss" onclick="dismissStickyCta()">&times;</button>
-  <div class="sticky-inner">
-    <div class="sticky-text">
-      <strong>Limited spaces available</strong>
-      <span>Only £75 to transform your financial future</span>
-    </div>
-    <button class="sticky-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">Reserve your spot →</button>
-  </div>
-</div>
+<div class="rlm-book hide" data-hide="#courses,#step-2,#step-3"><div class="rlm-book-in">
+  <div class="rlm-book-info"><b>Online workshop</b><span id="heroDate">📅 Loading next date...</span><span id="heroPrice">💷 —</span></div>
+  <div class="rlm-book-act"><button class="rlm-book-btn" id="heroRegisterBtn">Register</button><button class="rlm-book-link" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});logcourseselection();">View other dates</button></div>
+</div></div>
+<script src="/bookbar.js?v=5" defer></script>
 
 <!-- WORKSHOP DISCLAIMER MODAL -->
 <div id="disclaimerModal" class="modal-overlay">
@@ -770,75 +710,6 @@ document.querySelectorAll('.tc,.cred,.det-card,.sess-card,.outcome-card,.perk').
   obs.observe(el);
 });
 
-
-// ---- Sticky bottom bar ----
-(function(){
-  const bar = document.getElementById('stickyCta');
-  const heroEl = document.querySelector('.hero');
-  if (!bar || !heroEl) return;
- 
-  // Permanently hidden if dismissed in this or previous sessions
-  if (localStorage.getItem('stickyCtaDismissed') === 'true') return;
- 
-  let sectionVisible = false;
-
-  // Track if #courses, #step-2, or #step-3 are visible on screen
-  const targetSelectors = ['#courses', '#step-2', '#step-3'];
-  const targets = document.querySelectorAll(targetSelectors.join(','));
-
-  if (targets.length > 0) {
-    const io = new IntersectionObserver((entries) => {
-      // Re-evaluate if any tracked target is currently in view
-      sectionVisible = Array.from(targets).some(target => {
-        const rect = target.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-      });
-      updateBar();
-    }, { threshold: 0.1 });
-
-    targets.forEach(target => io.observe(target));
-  }
- 
-  function updateBar() {
-    // Check local storage again in case it was dismissed mid-session
-    if (localStorage.getItem('stickyCtaDismissed') === 'true') {
-      bar.classList.remove('show');
-      return;
-    }
-
-    // Trigger past 50% of hero height
-    const scrollThreshold = heroEl.offsetHeight * 0.5;
-    const pastHeroThreshold = window.scrollY > scrollThreshold;
-
-    // Show only past threshold AND when target sections are not visible
-    if (pastHeroThreshold && !sectionVisible) {
-      bar.classList.add('show');
-    } else {
-      bar.classList.remove('show');
-    }
-  }
-
-  // Smooth frame throttling for scroll events
-  let ticking = false;
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(function() {
-        updateBar();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-
-  window.addEventListener('load', updateBar);
-})();
-
-// Permanent Dismissal Function (call this on your 'X' button click)
-function dismissStickyCta() {
-  const bar = document.getElementById('stickyCta');
-  if (bar) bar.classList.remove('show');
-  localStorage.setItem('stickyCtaDismissed', 'true');
-}
 
 // ---- Video modal ----
 function openVideo() { document.getElementById('videoModal').style.display = 'flex'; }
@@ -1056,26 +927,6 @@ function sendFinalData() {
 }
 window.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sendFinalData(); });
 window.addEventListener('pagehide', sendFinalData);
-
-
-function filterWorkshops(category, element) {
-    // 1. Update Active Pill Styling
-    const pills = document.querySelectorAll('.filter-pill');
-    pills.forEach(pill => pill.classList.remove('active'));
-    element.classList.add('active');
-
-    // 2. Filter Cards
-    const cards = document.querySelectorAll('.sess-card');
-    cards.forEach(card => {
-      const cardCategory = card.getAttribute('data-category');
-      
-      if (category === 'all' || cardCategory === category) {
-        card.classList.remove('is-hidden');
-      } else {
-        card.classList.add('is-hidden');
-      }
-    });
-  }
 
 
   // Venue popovers
