@@ -3,6 +3,7 @@ const FUNCTIONS_BASE = "https://us-central1-workshop-booking-system-b791e.cloudf
 const loginForm = document.getElementById("loginForm");
 const loginSubmit = document.getElementById("loginSubmit");
 const loginSuccess = document.getElementById("loginSuccess");
+const loginError = document.getElementById("loginError");
 
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -12,17 +13,24 @@ loginForm.addEventListener("submit", async (e) => {
 
   loginSubmit.disabled = true;
   loginSubmit.textContent = "Sending...";
+  loginError.hidden = true;
 
   try {
-    await fetch(`${FUNCTIONS_BASE}/adminRequestLogin`, {
+    const response = await fetch(`${FUNCTIONS_BASE}/adminRequestLogin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     });
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    loginForm.hidden = true;
+    loginSuccess.hidden = false;
   } catch (err) {
     console.error("Error requesting admin login link:", err);
+    loginError.hidden = false;
+    loginSubmit.disabled = false;
+    loginSubmit.textContent = "Send me a login link";
   }
-
-  loginForm.hidden = true;
-  loginSuccess.hidden = false;
 });
