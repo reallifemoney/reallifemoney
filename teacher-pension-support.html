@@ -131,7 +131,7 @@ async function send(e){
     const r=await fetch('https://formsubmit.co/ajax/leo@reallifemoney.co.uk',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});
     if(!r.ok)throw new Error('failed');
     fbq('track','Lead');
-    document.getElementById('formbox').innerHTML='<div class="thanks"><h3>Thank you! 🎉</h3><p>I’ve got your details and will be in touch shortly. Leo</p></div>';
+    document.getElementById('formbox').innerHTML='<div class="thanks"><h3>Thank you! 🎉</h3><p>I’ve got your details and will be in touch shortly.</p></div>';
   }catch(err){
     b.disabled=false;b.innerText='Send my details';
     alert('Something went wrong sending that. Please WhatsApp me on 07939 887950 instead.');
